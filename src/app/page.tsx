@@ -18,6 +18,7 @@ export default function Home() {
           <div className="hidden items-center gap-7 sm:flex">
             {[
               { href: "/science", label: "The Science" },
+              { href: "/about", label: "About" },
               { href: "/test", label: "Sample Test" },
               { href: "/results", label: "Results" },
               { href: "/faq", label: "FAQ" },
@@ -54,9 +55,18 @@ export default function Home() {
             </h1>
 
             <p className="mx-auto mt-5 max-w-3xl text-pretty text-base leading-8 text-[#475569] sm:text-lg">
-              A free, scientifically-grounded IQ assessment measuring four core
-              cognitive abilities. No account. No payment. Instant results.
+              A free cognitive reasoning assessment inspired by established
+              cognitive science methodology and IQ-style question formats. No
+              account. No payment. Instant results.
             </p>
+
+            <div className="mt-5 flex justify-center">
+              <span className="inline-flex items-center border border-[#e2e8f0] bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.12em] text-[#475569]">
+                <span className="uppercase">
+                  Indicative assessment — not a clinical diagnosis
+                </span>
+              </span>
+            </div>
 
             <div className="mt-8 flex justify-center">
               <a
@@ -219,8 +229,8 @@ export default function Home() {
                 body: "Our question architecture follows principles established in the WAIS-IV — the gold standard in professional intelligence assessment.",
               },
               {
-                title: "Normed Against 50,000+ Results",
-                body: "Your score is statistically compared against a growing reference population, updated continuously.",
+                title: "Compared Against a Reference Population",
+                body: "Your score is reported on an interpretable IQ-style scale and compared against a reference population for context. BrainScale is an indicative tool — not a certified clinical instrument.",
               },
             ].map((c) => (
               <div key={c.title} className="pt-6 border-t border-[#e2e8f0]">
@@ -304,7 +314,8 @@ export default function Home() {
                 IQ scores follow a normal distribution with a mean of 100 and
                 standard deviation of 15. Approximately 68% of the population
                 scores between 85 and 115. BrainScale uses this same scale,
-                validated against thousands of results.
+                and provides an indicative estimate for self-discovery — not a
+                clinical diagnosis.
               </p>
             </div>
 
@@ -460,12 +471,12 @@ export default function Home() {
                 {
                   n: "02",
                   title: "Instant Scoring",
-                  body: "Your answers are scored against our normalized reference population.",
+                  body: "Your answers are converted into an indicative score on an interpretable, IQ-style scale and compared against a reference population.",
                 },
                 {
                   n: "03",
                   title: "Receive Your Report",
-                  body: "Full IQ estimate with cognitive domain breakdown. No login required.",
+                  body: "An indicative score estimate with a high-level cognitive domain breakdown. No login required.",
                 },
               ].map((s) => (
                 <div key={s.n} className="border-t border-[#e2e8f0] pt-6">
@@ -522,7 +533,7 @@ export default function Home() {
           <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
             <div className="text-center">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">From our users</span>
+                <span className="uppercase">Illustrative examples</span>
               </div>
             </div>
 
@@ -530,18 +541,18 @@ export default function Home() {
               {[
                 {
                   quote:
-                    "Finally a free IQ test that felt intellectually honest. The cognitive domain breakdown was more insightful than I expected.",
-                  who: "S.M., Score: 127",
+                    "A short reasoning assessment can be a useful baseline — especially if you repeat it under similar conditions and look for consistency over time.",
+                  who: "Example scenario (not a user testimonial)",
                 },
                 {
                   quote:
-                    "I was genuinely skeptical. But the questions were well-designed and the results rang true. Recommended it to colleagues.",
-                  who: "J.K., Score: 118",
+                    "Treat the number as an indicator, not a diagnosis. Small online tests have higher uncertainty than supervised clinical instruments.",
+                  who: "Example scenario (not a user testimonial)",
                 },
                 {
                   quote:
-                    "Used the detailed cognitive profile as a starting point for conversations with my academic advisor.",
-                  who: "P.S., Score: 134",
+                    "If you need a certified IQ assessment for academic, medical, or legal reasons, consult a licensed psychologist for a validated multi-hour evaluation.",
+                  who: "Example scenario (not a user testimonial)",
                 },
               ].map((t) => (
                 <div key={t.who} className="border border-[#e2e8f0] bg-white p-6">
@@ -572,6 +583,10 @@ export default function Home() {
                 {
                   q: "How is the IQ score calculated?",
                   a: "Your raw performance is converted to an estimate on a standardized IQ scale and compared against a reference population. The goal is interpretability and consistency: the same scale, updated norms, and clear ranges.",
+                },
+                {
+                  q: "What is IQ, and how should I interpret BrainScale’s score?",
+                  a: "IQ is typically reported on a standardized scale (mean 100, SD 15) and is intended to summarize performance across multiple cognitive tasks. Important: BrainScale provides an indicative score based on 20 questions. A full clinical IQ assessment requires several hours with a certified psychologist.",
                 },
                 {
                   q: "Is my data private?",
@@ -641,10 +656,10 @@ export default function Home() {
 
             <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-sm text-[#475569]">
               {[
-                { href: "/science", label: "The Science" },
-                { href: "/test", label: "Sample Test" },
-                { href: "/results", label: "Results" },
-                { href: "/faq", label: "FAQ" },
+                { href: "/privacy", label: "Privacy Policy" },
+                { href: "/terms", label: "Terms" },
+                { href: "/about", label: "About" },
+                { href: "mailto:brainscale@proton.me", label: "Contact" },
               ].map((l) => (
                 <a
                   key={l.href}
