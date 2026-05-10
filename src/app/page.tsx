@@ -300,10 +300,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer style={{ padding: "40px 24px", textAlign: "center" }}>
-        <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", marginBottom: "10px" }}>
+    {/* FOOTER */}
+    <footer style={{ padding: "40px 24px", textAlign: "center" }}>
+        <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", marginBottom: "12px" }}>
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+        </div>
+        <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "16px", flexWrap: "wrap" }}>
+          <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Terms of Service</Link>
+          <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>
           © 2025 BrainScale · Free psychometric test · No personal data collected
