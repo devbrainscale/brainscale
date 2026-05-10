@@ -6,7 +6,7 @@ import Link from "next/link";
 const faqs = [
   {
     q: "How long does the test take?",
-    a: "The test includes 25 questions and takes between 20 and 30 minutes. Take your time — accuracy matters more than speed.",
+    a: "The test includes 40 questions and takes between 30 and 45 minutes. Take your time — accuracy matters more than speed.",
   },
   {
     q: "Is the test really free?",
@@ -49,13 +49,13 @@ export default function HomePage() {
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px" }}>
             <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
-            Certified Test · 25 Questions · Instant Results
+            Certified Test · 40 Questions · Instant Results
           </div>
 
           <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
             Discover your{" "}
             <em style={{ color: "#5B4FCF", fontStyle: "italic", whiteSpace: "nowrap" }}>IQ score</em>
-            <br />in 25 minutes
+            <br />in 40 minutes
           </h1>
 
           <p style={{ fontSize: "18px", color: "#5C5A6E", lineHeight: 1.7, marginBottom: "40px", maxWidth: "520px", margin: "0 auto 40px" }}>
@@ -300,8 +300,8 @@ export default function HomePage() {
         </div>
       </section>
 
-    {/* FOOTER */}
-    <footer style={{ padding: "40px 24px", textAlign: "center" }}>
+      {/* FOOTER */}
+      <footer style={{ padding: "40px 24px", textAlign: "center" }}>
         <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", marginBottom: "12px" }}>
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
         </div>

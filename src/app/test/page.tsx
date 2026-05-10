@@ -29,6 +29,21 @@ const questions = [
   { id: 23, question: "Which comes next in the series: 2, 3, 5, 7, 11, 13, ?", options: ["15", "16", "17", "18"], answer: 2 },
   { id: 24, question: "A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball?", options: ["$0.10", "$0.05", "$0.15", "$0.20"], answer: 1 },
   { id: 25, question: "If you have a 3-liter and a 5-liter jug, how do you measure exactly 4 liters?", options: ["Fill 5L, pour into 3L, empty 3L, pour remainder", "Fill 3L twice into 5L", "Both A and B work", "It's impossible"], answer: 2 },
+  { id: 26, question: "What is the missing number: 2, 6, 12, 20, 30, ?", options: ["40", "42", "44", "46"], answer: 1 },
+  { id: 27, question: "Which word is the odd one out: Surgeon, Lawyer, Carpenter, Doctor?", options: ["Surgeon", "Lawyer", "Carpenter", "Doctor"], answer: 1 },
+  { id: 28, question: "If you count from 1 to 100, how many 7s will you encounter?", options: ["10", "11", "20", "21"], answer: 2 },
+  { id: 29, question: "Complete: 1, 2, 4, 7, 11, 16, ?", options: ["20", "21", "22", "23"], answer: 2 },
+  { id: 30, question: "A store reduces a $200 item by 20%, then increases it by 20%. Final price?", options: ["$200", "$192", "$184", "$196"], answer: 1 },
+  { id: 31, question: "Which shape has the fewest lines of symmetry: Square, Rectangle, Equilateral Triangle, Circle?", options: ["Square", "Rectangle", "Equilateral Triangle", "Circle"], answer: 1 },
+  { id: 32, question: "If THINK is coded as 58934, how is NIGHT coded?", options: ["93564", "39564", "93548", "34598"], answer: 0 },
+  { id: 33, question: "Two runners start at the same point. One runs at 8km/h, the other at 12km/h. After 3 hours, how far apart are they?", options: ["10km", "12km", "15km", "20km"], answer: 1 },
+  { id: 34, question: "What comes next: 1, 3, 6, 10, 15, 21, ?", options: ["25", "27", "28", "30"], answer: 2 },
+  { id: 35, question: "Which is not a prime number: 13, 17, 19, 21?", options: ["13", "17", "19", "21"], answer: 3 },
+  { id: 36, question: "If all roses are flowers and some flowers fade quickly, then:", options: ["All roses fade quickly", "Some roses may fade quickly", "No roses fade quickly", "All flowers are roses"], answer: 1 },
+  { id: 37, question: "A palindrome reads the same forwards and backwards. Which is a palindrome: LEVEL, RADAR, CIVIC, All of them?", options: ["LEVEL only", "RADAR only", "CIVIC only", "All of them"], answer: 3 },
+  { id: 38, question: "What is 15% of 240?", options: ["32", "36", "38", "42"], answer: 1 },
+  { id: 39, question: "Complete the analogy: Piano is to Music as Brush is to:", options: ["Canvas", "Art", "Paint", "Painting"], answer: 3 },
+  { id: 40, question: "How many faces does a dodecahedron have?", options: ["8", "10", "12", "20"], answer: 2 },
 ];
 
 function calculateIQ(correct: number): number {
