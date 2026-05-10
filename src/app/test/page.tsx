@@ -1,424 +1,200 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-type ChoiceKey = "A" | "B" | "C" | "D";
-
-type Question = {
-  id: string;
-  category:
-    | "Logical sequence"
-    | "Pattern recognition"
-    | "Analogy"
-    | "Spatial reasoning"
-    | "Numerical series";
-  prompt: string;
-  choices: { key: ChoiceKey; text: string }[];
-};
-
-const QUESTIONS: Question[] = [
-  {
-    id: "q1",
-    category: "Numerical series",
-    prompt: "Find the next number in the series: 2, 6, 12, 20, 30, ?",
-    choices: [
-      { key: "A", text: "40" },
-      { key: "B", text: "41" },
-      { key: "C", text: "42" },
-      { key: "D", text: "44" },
-    ],
-  },
-  {
-    id: "q2",
-    category: "Logical sequence",
-    prompt: "Which number completes the pattern? 1, 1, 2, 3, 5, 8, ?",
-    choices: [
-      { key: "A", text: "11" },
-      { key: "B", text: "12" },
-      { key: "C", text: "13" },
-      { key: "D", text: "15" },
-    ],
-  },
-  {
-    id: "q3",
-    category: "Pattern recognition",
-    prompt: "Choose the option that does NOT belong: Triangle, Square, Pentagon, Circle",
-    choices: [
-      { key: "A", text: "Triangle" },
-      { key: "B", text: "Square" },
-      { key: "C", text: "Pentagon" },
-      { key: "D", text: "Circle" },
-    ],
-  },
-  {
-    id: "q4",
-    category: "Analogy",
-    prompt: "Book is to Reading as Fork is to:",
-    choices: [
-      { key: "A", text: "Drawing" },
-      { key: "B", text: "Writing" },
-      { key: "C", text: "Stirring" },
-      { key: "D", text: "Eating" },
-    ],
-  },
-  {
-    id: "q5",
-    category: "Numerical series",
-    prompt: "Find the next number: 3, 9, 27, 81, ?",
-    choices: [
-      { key: "A", text: "162" },
-      { key: "B", text: "243" },
-      { key: "C", text: "324" },
-      { key: "D", text: "729" },
-    ],
-  },
-  {
-    id: "q6",
-    category: "Logical sequence",
-    prompt: "If ALL BLOPS are RIBS and ALL RIBS are NAPS, then ALL BLOPS are:",
-    choices: [
-      { key: "A", text: "NAPS" },
-      { key: "B", text: "BLOPS" },
-      { key: "C", text: "RIBS" },
-      { key: "D", text: "None of these" },
-    ],
-  },
-  {
-    id: "q7",
-    category: "Pattern recognition",
-    prompt: "Which letter comes next in the sequence? A, C, F, J, O, ?",
-    choices: [
-      { key: "A", text: "T" },
-      { key: "B", text: "U" },
-      { key: "C", text: "V" },
-      { key: "D", text: "W" },
-    ],
-  },
-  {
-    id: "q8",
-    category: "Analogy",
-    prompt: "Ice is to Water as Rock is to:",
-    choices: [
-      { key: "A", text: "Lava" },
-      { key: "B", text: "Stone" },
-      { key: "C", text: "Sand" },
-      { key: "D", text: "Metal" },
-    ],
-  },
-  {
-    id: "q9",
-    category: "Spatial reasoning",
-    prompt: "A cube is painted on all six faces and then cut into 27 equal smaller cubes. How many small cubes have paint on exactly one face?",
-    choices: [
-      { key: "A", text: "6" },
-      { key: "B", text: "8" },
-      { key: "C", text: "12" },
-      { key: "D", text: "18" },
-    ],
-  },
-  {
-    id: "q10",
-    category: "Numerical series",
-    prompt: "Find the missing number: 7, 10, 8, 11, 9, 12, ?",
-    choices: [
-      { key: "A", text: "9" },
-      { key: "B", text: "10" },
-      { key: "C", text: "11" },
-      { key: "D", text: "13" },
-    ],
-  },
-  {
-    id: "q11",
-    category: "Pattern recognition",
-    prompt: "Which option completes the series? 4, 9, 16, 25, 36, ?",
-    choices: [
-      { key: "A", text: "45" },
-      { key: "B", text: "49" },
-      { key: "C", text: "51" },
-      { key: "D", text: "64" },
-    ],
-  },
-  {
-    id: "q12",
-    category: "Analogy",
-    prompt: "Pilot is to Airplane as Captain is to:",
-    choices: [
-      { key: "A", text: "Ship" },
-      { key: "B", text: "Car" },
-      { key: "C", text: "Bicycle" },
-      { key: "D", text: "Train" },
-    ],
-  },
-  {
-    id: "q13",
-    category: "Logical sequence",
-    prompt: "In a race, you overtake the person in 2nd place. What position are you in now?",
-    choices: [
-      { key: "A", text: "1st" },
-      { key: "B", text: "2nd" },
-      { key: "C", text: "3rd" },
-      { key: "D", text: "4th" },
-    ],
-  },
-  {
-    id: "q14",
-    category: "Numerical series",
-    prompt: "Find the next number: 1, 4, 9, 16, 25, ?",
-    choices: [
-      { key: "A", text: "30" },
-      { key: "B", text: "32" },
-      { key: "C", text: "36" },
-      { key: "D", text: "49" },
-    ],
-  },
-  {
-    id: "q15",
-    category: "Pattern recognition",
-    prompt: "Which word is the odd one out? Apple, Banana, Carrot, Mango",
-    choices: [
-      { key: "A", text: "Apple" },
-      { key: "B", text: "Banana" },
-      { key: "C", text: "Carrot" },
-      { key: "D", text: "Mango" },
-    ],
-  },
-  {
-    id: "q16",
-    category: "Spatial reasoning",
-    prompt: "If you rotate the letter 'N' 90° clockwise, it most closely resembles:",
-    choices: [
-      { key: "A", text: "Z" },
-      { key: "B", text: "S" },
-      { key: "C", text: "H" },
-      { key: "D", text: "It stays the same" },
-    ],
-  },
-  {
-    id: "q17",
-    category: "Analogy",
-    prompt: "Key is to Lock as Password is to:",
-    choices: [
-      { key: "A", text: "Door" },
-      { key: "B", text: "Account" },
-      { key: "C", text: "Computer" },
-      { key: "D", text: "Internet" },
-    ],
-  },
-  {
-    id: "q18",
-    category: "Logical sequence",
-    prompt: "A bat and a ball cost $1.10 total. The bat costs $1.00 more than the ball. How much does the ball cost?",
-    choices: [
-      { key: "A", text: "$0.05" },
-      { key: "B", text: "$0.10" },
-      { key: "C", text: "$0.15" },
-      { key: "D", text: "$0.20" },
-    ],
-  },
-  {
-    id: "q19",
-    category: "Numerical series",
-    prompt: "Find the next number: 5, 7, 11, 19, 35, ?",
-    choices: [
-      { key: "A", text: "51" },
-      { key: "B", text: "67" },
-      { key: "C", text: "69" },
-      { key: "D", text: "71" },
-    ],
-  },
-  {
-    id: "q20",
-    category: "Pattern recognition",
-    prompt: "Which pair best completes the analogy? Hand : Glove :: Foot : ?",
-    choices: [
-      { key: "A", text: "Sock" },
-      { key: "B", text: "Shoe" },
-      { key: "C", text: "Boot" },
-      { key: "D", text: "Lace" },
-    ],
-  },
+const questions = [
+  { id: 1, question: "Which number comes next in the sequence: 2, 4, 8, 16, ?", options: ["24", "32", "28", "20"], answer: 1 },
+  { id: 2, question: "If all Bloops are Razzies, and all Razzies are Lazzies, then all Bloops are definitely:", options: ["Not Lazzies", "Lazzies", "Not Razzies", "None of these"], answer: 1 },
+  { id: 3, question: "Which shape completes the pattern? △ ○ □ △ ○ ?", options: ["△", "○", "□", "◇"], answer: 2 },
+  { id: 4, question: "A clock shows 3:15. What is the angle between the hour and minute hands?", options: ["0°", "7.5°", "15°", "22.5°"], answer: 1 },
+  { id: 5, question: "Which number is missing: 1, 1, 2, 3, 5, 8, ?, 21", options: ["11", "12", "13", "14"], answer: 2 },
+  { id: 6, question: "If you rearrange 'CIFAIPC', you get the name of a:", options: ["City", "Animal", "Ocean", "Country"], answer: 2 },
+  { id: 7, question: "Complete the analogy: Book is to Reading as Fork is to:", options: ["Kitchen", "Eating", "Cooking", "Spoon"], answer: 1 },
+  { id: 8, question: "What comes next: 3, 6, 11, 18, 27, ?", options: ["36", "38", "38", "40"], answer: 1 },
+  { id: 9, question: "If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?", options: ["100 min", "50 min", "5 min", "10 min"], answer: 2 },
+  { id: 10, question: "Which word does not belong: Apple, Mango, Carrot, Banana", options: ["Apple", "Mango", "Carrot", "Banana"], answer: 2 },
+  { id: 11, question: "A father is 4 times as old as his son. In 20 years, he'll be twice as old. How old is the son now?", options: ["5", "10", "15", "20"], answer: 1 },
+  { id: 12, question: "Which figure has the most sides: Pentagon, Heptagon, Hexagon, Octagon?", options: ["Pentagon", "Heptagon", "Hexagon", "Octagon"], answer: 3 },
+  { id: 13, question: "Complete the sequence: Z, X, V, T, ?", options: ["S", "R", "Q", "P"], answer: 1 },
+  { id: 14, question: "If ROAD is coded as 5231, how is DOOR coded?", options: ["1225", "2335", "1335", "2235"], answer: 0 },
+  { id: 15, question: "Which number is the odd one out: 16, 25, 36, 48, 64?", options: ["25", "36", "48", "64"], answer: 2 },
+  { id: 16, question: "A train travels 60 km in 45 minutes. What is its speed in km/h?", options: ["70", "75", "80", "85"], answer: 2 },
+  { id: 17, question: "How many squares are in a 3×3 grid (including overlapping squares)?", options: ["9", "12", "14", "16"], answer: 2 },
+  { id: 18, question: "What is the next number: 1, 4, 9, 16, 25, ?", options: ["30", "36", "40", "49"], answer: 1 },
+  { id: 19, question: "If you fold a piece of paper in half 3 times, how many layers are there?", options: ["6", "8", "9", "12"], answer: 1 },
+  { id: 20, question: "Complete: AZ, BY, CX, DW, ?", options: ["EV", "EU", "FV", "EW"], answer: 0 },
+  { id: 21, question: "Which is heaviest: 1kg of gold, 1kg of feathers, or 1kg of iron?", options: ["Gold", "Feathers", "Iron", "All equal"], answer: 3 },
+  { id: 22, question: "Solve: If 2+3=10, 3+4=21, 4+5=36, then 5+6=?", options: ["55", "56", "57", "60"], answer: 0 },
+  { id: 23, question: "Which comes next in the series: 2, 3, 5, 7, 11, 13, ?", options: ["15", "16", "17", "18"], answer: 2 },
+  { id: 24, question: "A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball?", options: ["$0.10", "$0.05", "$0.15", "$0.20"], answer: 1 },
+  { id: 25, question: "If you have a 3-liter and a 5-liter jug, how do you measure exactly 4 liters?", options: ["Fill 5L, pour into 3L, empty 3L, pour remainder", "Fill 3L twice into 5L", "Both A and B work", "It's impossible"], answer: 2 },
 ];
 
-const TOTAL_QUESTIONS = 20;
-const FADE_MS = 180;
-
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
-}
-
-function serializeAnswers(
-  questions: Question[],
-  selected: Record<string, ChoiceKey>,
-) {
-  return questions
-    .map((q) => selected[q.id] ?? "-")
-    .join("")
-    .slice(0, TOTAL_QUESTIONS);
+function calculateIQ(correct: number): number {
+  const pct = correct / questions.length;
+  if (pct >= 0.96) return 145;
+  if (pct >= 0.92) return 140;
+  if (pct >= 0.88) return 135;
+  if (pct >= 0.84) return 130;
+  if (pct >= 0.76) return 125;
+  if (pct >= 0.68) return 120;
+  if (pct >= 0.60) return 115;
+  if (pct >= 0.52) return 110;
+  if (pct >= 0.44) return 105;
+  if (pct >= 0.36) return 100;
+  if (pct >= 0.28) return 95;
+  if (pct >= 0.20) return 90;
+  if (pct >= 0.14) return 85;
+  if (pct >= 0.08) return 80;
+  return 75;
 }
 
 export default function TestPage() {
   const router = useRouter();
+  const [current, setCurrent] = useState(0);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<(number | null)[]>(Array(questions.length).fill(null));
 
-  const questions = useMemo(() => QUESTIONS.slice(0, TOTAL_QUESTIONS), []);
+  const q = questions[current];
+  const progress = ((current) / questions.length) * 100;
 
-  const [index, setIndex] = useState(0);
-  const [selected, setSelected] = useState<Record<string, ChoiceKey>>({});
-  const [isFading, setIsFading] = useState(false);
+  function handleSelect(i: number) {
+    setSelected(i);
+  }
 
-  const current = questions[index];
-  const selectedKey = current ? selected[current.id] : undefined;
-  const progress = clamp(((index + 1) / TOTAL_QUESTIONS) * 100, 0, 100);
+  function handleNext() {
+    if (selected === null) return;
+    const newAnswers = [...answers];
+    newAnswers[current] = selected;
+    setAnswers(newAnswers);
 
-  const onPick = (key: ChoiceKey) => {
-    if (!current) return;
-    setSelected((prev) => ({ ...prev, [current.id]: key }));
-  };
-
-  const goNext = () => {
-    if (!current || !selected[current.id]) return;
-    if (index >= TOTAL_QUESTIONS - 1) {
-      const ans = serializeAnswers(questions, selected);
-      router.push(`/results?ans=${encodeURIComponent(ans)}`);
-      return;
+    if (current + 1 < questions.length) {
+      setCurrent(current + 1);
+      setSelected(null);
+    } else {
+      const correct = newAnswers.filter((a, i) => a === questions[i].answer).length;
+      const iq = calculateIQ(correct);
+      router.push(`/results?score=${iq}&correct=${correct}&total=${questions.length}`);
     }
-    setIsFading(true);
-    window.setTimeout(() => {
-      setIndex((i) => i + 1);
-      setIsFading(false);
-    }, FADE_MS);
-  };
-
-  if (!current) {
-    return (
-      <div className="min-h-dvh bg-white text-[#0f172a]">
-        <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="border border-[#e2e8f0] bg-white p-6 text-[#475569]">
-            Test is unavailable.
-          </div>
-        </div>
-      </div>
-    );
   }
 
   return (
-    <div className="min-h-dvh bg-white text-[#0f172a]">
-      {/* NAVBAR */}
-      <header className="sticky top-0 z-20 border-b border-[#e2e8f0] bg-white">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-4">
-            <a
-              href="/"
-              className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
-              aria-label="BrainScale home"
-            >
-              <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
-              <span className="font-serif text-base font-semibold tracking-tight text-[#0f172a]">
-                BrainScale
-              </span>
-            </a>
-            <div className="text-sm text-[#475569]">
-              Question{" "}
-              <span className="font-semibold text-[#0f172a]">{index + 1}</span>
-              {" "}of{" "}
-              <span className="font-semibold text-[#0f172a]">{TOTAL_QUESTIONS}</span>
-            </div>
-          </div>
+    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
 
-          {/* Progress bar */}
-          <div className="h-1 w-full bg-[#e2e8f0]">
-            <div
-              className="h-1 bg-[#1d4ed8] transition-[width] duration-300"
-              style={{ width: `${progress}%` }}
-              aria-hidden="true"
-            />
-          </div>
+      {/* HEADER */}
+      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825" }}>
+            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          </span>
+          <span style={{ fontSize: "13px", color: "#9896A8", fontWeight: 500 }}>
+            Question {current + 1} of {questions.length}
+          </span>
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
-        <div
-          className={[
-            "transition-opacity duration-300",
-            isFading ? "opacity-0" : "opacity-100",
-          ].join(" ")}
-        >
-          {/* Question card */}
-          <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="inline-flex items-center border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#475569]">
-                {current.category}
-              </div>
-              <div className="text-xs text-[#94a3b8]">
-                Choose the best answer
-              </div>
-            </div>
+      {/* PROGRESS BAR */}
+      <div style={{ height: "3px", backgroundColor: "#E8E5DC" }}>
+        <div style={{ height: "100%", backgroundColor: "#5B4FCF", width: `${progress}%`, transition: "width 0.4s ease" }} />
+      </div>
 
-            <h1 className="mt-6 font-serif text-xl font-semibold leading-7 tracking-tight text-[#0f172a] sm:text-2xl">
-              {current.prompt}
-            </h1>
+      {/* QUESTION CARD */}
+      <main style={{ maxWidth: "760px", margin: "0 auto", padding: "48px 24px" }}>
 
-            <div className="mt-6 grid gap-3">
-              {current.choices.map((c) => {
-                const active = selectedKey === c.key;
-                return (
-                  <button
-                    key={c.key}
-                    type="button"
-                    onClick={() => onPick(c.key)}
-                    className={[
-                      "flex w-full items-center gap-4 border px-4 py-4 text-left transition",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40",
-                      active
-                        ? "border-[#1d4ed8] bg-[#eff6ff]"
-                        : "border-[#e2e8f0] bg-white hover:border-[#94a3b8] hover:bg-[#f8fafc]",
-                    ].join(" ")}
-                    aria-pressed={active}
-                  >
-                    <span
-                      className={[
-                        "grid h-8 w-8 shrink-0 place-items-center text-sm font-bold border",
-                        active
-                          ? "border-[#1d4ed8] bg-[#1d4ed8] text-white"
-                          : "border-[#e2e8f0] bg-white text-[#475569]",
-                      ].join(" ")}
-                    >
-                      {c.key}
-                    </span>
-                    <span className="text-sm leading-6 text-[#0f172a] sm:text-base">
-                      {c.text}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-xs text-[#94a3b8]">
-                Your selections are stored locally for this session.
-              </div>
-
-              <button
-                type="button"
-                onClick={goNext}
-                disabled={!selectedKey || isFading}
-                className={[
-                  "inline-flex items-center justify-center border px-6 py-3 text-sm font-semibold transition",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40",
-                  !selectedKey || isFading
-                    ? "cursor-not-allowed border-[#e2e8f0] bg-[#f8fafc] text-[#94a3b8]"
-                    : "border-[#1d4ed8] bg-[#1d4ed8] text-white hover:bg-[#1d4ed8]/90",
-                ].join(" ")}
-              >
-                {index === TOTAL_QUESTIONS - 1 ? "Finish →" : "Next →"}
-              </button>
-            </div>
+        {/* Question number badge */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "28px" }}>
+          <div style={{ backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "4px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "1px" }}>
+            Q{current + 1}
           </div>
+          <div style={{ flex: 1, height: "1px", backgroundColor: "#E8E5DC" }} />
+          <span style={{ fontSize: "12px", color: "#9896A8" }}>{Math.round(progress)}% complete</span>
+        </div>
 
-          {/* Tip */}
-          <div className="mt-4 border border-[#e2e8f0] bg-[#f9fafb] p-4 text-sm text-[#475569]">
-            Tip: Don't overthink — pick the most consistent pattern and move on.
-          </div>
+        {/* Question */}
+        <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(20px, 3vw, 28px)", fontWeight: 400, color: "#1A1825", lineHeight: 1.4, marginBottom: "40px" }}>
+          {q.question}
+        </h2>
+
+        {/* Options */}
+        <div style={{ display: "grid", gap: "12px", marginBottom: "40px" }}>
+          {q.options.map((opt, i) => (
+            <button
+              key={i}
+              onClick={() => handleSelect(i)}
+              style={{
+                width: "100%",
+                textAlign: "left",
+                padding: "20px 24px",
+                borderRadius: "16px",
+                border: selected === i ? "2px solid #5B4FCF" : "1px solid #E8E5DC",
+                backgroundColor: selected === i ? "#EDE9FF" : "#fff",
+                color: selected === i ? "#3D2FA8" : "#1A1825",
+                fontSize: "15px",
+                fontWeight: selected === i ? 600 : 400,
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "16px",
+                transition: "all 0.15s ease",
+                boxShadow: selected === i ? "0 0 0 1px #5B4FCF" : "0 1px 4px rgba(26,24,37,0.05)",
+              }}
+            >
+              <span style={{
+                width: "32px",
+                height: "32px",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "13px",
+                fontWeight: 700,
+                flexShrink: 0,
+                backgroundColor: selected === i ? "#5B4FCF" : "#F7F6F2",
+                color: selected === i ? "#fff" : "#9896A8",
+                border: selected === i ? "none" : "1px solid #E8E5DC",
+              }}>
+                {["A", "B", "C", "D"][i]}
+              </span>
+              {opt}
+            </button>
+          ))}
+        </div>
+
+        {/* Next button */}
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <button
+            onClick={handleNext}
+            disabled={selected === null}
+            style={{
+              backgroundColor: selected !== null ? "#5B4FCF" : "#D4D0C8",
+              color: "#fff",
+              padding: "16px 40px",
+              borderRadius: "999px",
+              fontSize: "15px",
+              fontWeight: 600,
+              border: "none",
+              cursor: selected !== null ? "pointer" : "not-allowed",
+              transition: "all 0.15s ease",
+              boxShadow: selected !== null ? "0 4px 20px rgba(91,79,207,0.35)" : "none",
+            }}
+          >
+            {current + 1 === questions.length ? "See My Results →" : "Next Question →"}
+          </button>
+        </div>
+
+        {/* Dots progress */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "48px", flexWrap: "wrap" }}>
+          {questions.map((_, i) => (
+            <div key={i} style={{
+              width: i === current ? "24px" : "8px",
+              height: "8px",
+              borderRadius: "999px",
+              backgroundColor: i < current ? "#5B4FCF" : i === current ? "#5B4FCF" : "#D4D0C8",
+              opacity: i < current ? 0.5 : 1,
+              transition: "all 0.3s ease",
+            }} />
+          ))}
         </div>
       </main>
     </div>

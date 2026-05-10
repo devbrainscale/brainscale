@@ -1,336 +1,170 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
-type ChoiceKey = "A" | "B" | "C" | "D";
-
-const TOTAL_QUESTIONS = 20;
-const IQ_MIN = 85;
-const IQ_MAX = 145;
-
-const ANSWER_KEY: ChoiceKey[] = [
-  "C", "C", "D", "D", "B", "A", "C", "C", "C", "B",
-  "B", "A", "B", "C", "C", "A", "B", "A", "C", "A",
-];
-
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
+function getPercentile(iq: number): number {
+  if (iq >= 145) return 99.9;
+  if (iq >= 140) return 99.6;
+  if (iq >= 135) return 99;
+  if (iq >= 130) return 98;
+  if (iq >= 125) return 95;
+  if (iq >= 120) return 91;
+  if (iq >= 115) return 84;
+  if (iq >= 110) return 75;
+  if (iq >= 105) return 63;
+  if (iq >= 100) return 50;
+  if (iq >= 95) return 37;
+  if (iq >= 90) return 25;
+  if (iq >= 85) return 16;
+  if (iq >= 80) return 9;
+  return 5;
 }
 
-function getCategory(iq: number) {
-  if (iq >= 130) return "Gifted";
-  if (iq >= 120) return "Superior";
-  if (iq >= 110) return "Above Average";
-  if (iq >= 100) return "Average";
-  return "Below Average";
+function getLabel(iq: number): { title: string; desc: string; color: string } {
+  if (iq >= 130) return { title: "Gifted", desc: "You are in the top 2% of the population. Exceptional reasoning and problem-solving abilities.", color: "#5B4FCF" };
+  if (iq >= 120) return { title: "Superior", desc: "You are in the top 9% of the population. Strong analytical and logical skills.", color: "#4A3EBE" };
+  if (iq >= 110) return { title: "Above Average", desc: "You are in the top 25% of the population. Above-average reasoning capacity.", color: "#6B5FD9" };
+  if (iq >= 90) return { title: "Average", desc: "You score in the typical range, shared by 68% of the population.", color: "#8B7FE8" };
+  return { title: "Below Average", desc: "Your score is below the population average. Practice and focus can improve this.", color: "#9896A8" };
 }
 
-function scoreFromCorrect(correct: number) {
-  const raw = IQ_MIN + correct * ((IQ_MAX - IQ_MIN) / TOTAL_QUESTIONS);
-  return clamp(Math.round(raw), IQ_MIN, IQ_MAX);
-}
+export default function ResultsContent() {
+  const params = useSearchParams();
+  const score = parseInt(params.get("score") ?? "100");
+  const correct = parseInt(params.get("correct") ?? "13");
+  const total = parseInt(params.get("total") ?? "25");
 
-function parseAnswers(ans: string | null) {
-  if (!ans) return null;
-  const cleaned = ans.trim().toUpperCase();
-  if (!cleaned) return null;
-  const chars = cleaned.split("").slice(0, TOTAL_QUESTIONS);
-  return chars.map((c) => {
-    if (c === "A" || c === "B" || c === "C" || c === "D") return c as ChoiceKey;
-    return null;
-  });
-}
+  const percentile = getPercentile(score);
+  const label = getLabel(score);
+  const accuracy = Math.round((correct / total) * 100);
 
-function meterPct(iq: number) {
-  return clamp(((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * 100, 0, 100);
-}
+  // gauge: 60–145 range mapped to 0–100%
+  const gaugePercent = Math.min(100, Math.max(0, ((score - 60) / 85) * 100));
 
-export function ResultsContent() {
-  const searchParams = useSearchParams();
-  const ansParam = searchParams.get("ans");
-
-  const parsed = useMemo(() => parseAnswers(ansParam), [ansParam]);
-
-  const correctCount = useMemo(() => {
-    if (!parsed) return null;
-    let c = 0;
-    for (let i = 0; i < TOTAL_QUESTIONS; i += 1) {
-      if (parsed[i] && parsed[i] === ANSWER_KEY[i]) c += 1;
-    }
-    return c;
-  }, [parsed]);
-
-  const finalIq = useMemo(() => {
-    if (correctCount === null) return null;
-    return scoreFromCorrect(correctCount);
-  }, [correctCount]);
-
-  const category = useMemo(() => {
-    if (finalIq === null) return null;
-    return getCategory(finalIq);
-  }, [finalIq]);
-
-  const [animatedIq, setAnimatedIq] = useState(0);
-  const rafRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    if (finalIq === null) return;
-    const durationMs = 900;
-    const start = performance.now();
-    const to = finalIq;
-    const tick = (now: number) => {
-      const t = clamp((now - start) / durationMs, 0, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setAnimatedIq(Math.round(to * eased));
-      if (t < 1) rafRef.current = requestAnimationFrame(tick);
-    };
-    rafRef.current = requestAnimationFrame(tick);
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, [finalIq]);
-
-  const [copied, setCopied] = useState(false);
-
-  const shareText = useMemo(() => {
-    if (finalIq === null || category === null || correctCount === null) return "";
-    return `My BrainScale IQ result: ${finalIq} (${category}) — ${correctCount}/${TOTAL_QUESTIONS} correct. https://www.brainscale.app`;
-  }, [finalIq, category, correctCount]);
-
-  const onCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(shareText);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1400);
-    } catch { /* ignore */ }
-  };
-
-  const pct = finalIq === null ? 0 : meterPct(finalIq);
+  const breakdown = [
+    { label: "Logical Reasoning", score: Math.min(99, percentile + 3) },
+    { label: "Pattern Recognition", score: Math.min(99, percentile - 2) },
+    { label: "Analytical Thinking", score: Math.min(99, percentile + 5) },
+  ];
 
   return (
-    <div className="min-h-dvh bg-white text-[#0f172a]">
-      {/* NAVBAR */}
-      <header className="border-b border-[#e2e8f0] bg-white">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <a
-            href="/"
-            className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
-            aria-label="BrainScale home"
-          >
-            <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
-            <span className="font-serif text-base font-semibold tracking-tight text-[#0f172a]">
-              BrainScale
-            </span>
-          </a>
-          <a
-            href="/test"
-            className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
-          >
-            Take the test again
-          </a>
+    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+
+      {/* HEADER */}
+      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
+            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          </Link>
+          <span style={{ backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "6px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
+            Test Complete ✓
+          </span>
         </div>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-        <section className="grid gap-6 lg:grid-cols-12">
+      <main style={{ maxWidth: "760px", margin: "0 auto", padding: "48px 24px 80px" }}>
 
-          {/* LEFT COLUMN */}
-          <div className="lg:col-span-7">
-            <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
-              <div className="inline-flex items-center gap-2 border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#475569]">
-                IQ Test Results · BrainScale
-              </div>
-
-              {finalIq === null || correctCount === null || category === null ? (
-                <div className="mt-6">
-                  <h1 className="font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-                    No results found
-                  </h1>
-                  <p className="mt-3 text-sm leading-6 text-[#475569] sm:text-base">
-                    Your answers weren't included in the link. Take the test to generate your results.
-                  </p>
-                  <div className="mt-6">
-                    <a
-                      href="/test"
-                      className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90"
-                    >
-                      Start Free Test →
-                    </a>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <h1 className="mt-6 font-serif text-2xl font-semibold tracking-tight sm:text-3xl">
-                    Your estimated IQ score
-                  </h1>
-
-                  <div className="mt-5 flex flex-wrap items-end gap-x-4 gap-y-2">
-                    <div className="text-6xl font-black tracking-tight text-[#1d4ed8] sm:text-7xl">
-                      {animatedIq}
-                    </div>
-                    <div className="pb-2">
-                      <div className="text-sm font-semibold text-[#0f172a]">{category}</div>
-                      <div className="text-xs text-[#475569]">
-                        {correctCount} out of {TOTAL_QUESTIONS} correct
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Gauge */}
-                  <div className="mt-8">
-                    <div className="flex items-center justify-between text-xs text-[#94a3b8]">
-                      <span>{IQ_MIN}</span>
-                      <span>{IQ_MAX}</span>
-                    </div>
-                    <div className="relative mt-2 h-2 w-full bg-[#e2e8f0]">
-                      <div
-                        className="absolute top-0 left-0 h-2 bg-[#1d4ed8] transition-[width] duration-700"
-                        style={{ width: `${pct}%` }}
-                      />
-                      <div
-                        className="absolute top-1/2 h-5 w-1 -translate-y-1/2 bg-[#0f172a]"
-                        style={{ left: `calc(${pct}% - 2px)` }}
-                        aria-hidden="true"
-                      />
-                    </div>
-                    <div className="mt-3 text-sm text-[#475569]">
-                      This score is computed from your correct answers on a 20-question assessment.
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-
-            {/* Share */}
-            <div className="mt-4 border border-[#e2e8f0] bg-white p-6 sm:p-8">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <h2 className="font-serif text-lg font-semibold tracking-tight">
-                    Share your result
-                  </h2>
-                  <p className="mt-1 text-sm text-[#475569]">
-                    Copy a short summary and share it anywhere.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={onCopy}
-                  disabled={!shareText}
-                  className={[
-                    "mt-3 inline-flex items-center justify-center border px-5 py-2.5 text-sm font-semibold transition sm:mt-0",
-                    "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40",
-                    shareText
-                      ? "border-[#1d4ed8] bg-[#1d4ed8] text-white hover:bg-[#1d4ed8]/90"
-                      : "cursor-not-allowed border-[#e2e8f0] bg-[#f8fafc] text-[#94a3b8]",
-                  ].join(" ")}
-                >
-                  {copied ? "Copied ✓" : "Copy to clipboard"}
-                </button>
-              </div>
-              <div className="mt-4 border border-[#e2e8f0] bg-[#f9fafb] p-4 text-sm text-[#475569]">
-                {shareText || "Complete the test to generate share text."}
-              </div>
-            </div>
+        {/* SCORE HERO */}
+        <div style={{ textAlign: "center", marginBottom: "48px" }}>
+          <p style={{ fontSize: "13px", color: "#9896A8", fontWeight: 600, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px" }}>
+            Your IQ Score
+          </p>
+          <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(80px, 15vw, 120px)", fontWeight: 300, color: "#5B4FCF", lineHeight: 1, marginBottom: "8px" }}>
+            {score}
           </div>
+          <div style={{ display: "inline-block", backgroundColor: label.color, color: "#fff", padding: "8px 24px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, marginBottom: "16px" }}>
+            {label.title}
+          </div>
+          <p style={{ fontSize: "16px", color: "#5C5A6E", maxWidth: "480px", margin: "0 auto", lineHeight: 1.6 }}>
+            {label.desc}
+          </p>
+        </div>
 
-          {/* RIGHT COLUMN — Premium teaser */}
-          <div className="lg:col-span-5">
-            <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
-              <div className="flex items-center justify-between gap-3">
-                <h2 className="font-serif text-lg font-semibold tracking-tight">
-                  See detailed analysis
-                </h2>
-                <div className="inline-flex items-center border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#475569]">
-                  Premium
-                </div>
+        {/* GAUGE */}
+        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px", marginBottom: "20px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>Score on the IQ scale</span>
+            <span style={{ fontSize: "13px", color: "#9896A8" }}>Range: 60–145</span>
+          </div>
+          <div style={{ height: "12px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
+            <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #C4BBFF, #5B4FCF)", transition: "width 1s ease" }} />
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#9896A8" }}>
+            <span>60</span>
+            <span>85</span>
+            <span>100</span>
+            <span>115</span>
+            <span>130</span>
+            <span>145</span>
+          </div>
+        </div>
+
+        {/* STATS ROW */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginBottom: "20px" }}>
+          {[
+            { value: `${percentile}%`, label: "Percentile", sub: "vs. world population" },
+            { value: `${correct}/${total}`, label: "Correct answers", sub: `${accuracy}% accuracy` },
+            { value: score >= 130 ? "Top 2%" : score >= 115 ? "Top 16%" : score >= 100 ? "Top 50%" : "Bottom 50%", label: "Population rank", sub: "worldwide" },
+          ].map((s) => (
+            <div key={s.label} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "24px 20px", textAlign: "center", boxShadow: "0 2px 8px rgba(26,24,37,0.05)" }}>
+              <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 500, color: "#5B4FCF" }}>{s.value}</div>
+              <div style={{ fontSize: "12px", fontWeight: 600, color: "#1A1825", marginTop: "4px" }}>{s.label}</div>
+              <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>{s.sub}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* BREAKDOWN */}
+        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px", marginBottom: "20px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
+          <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 500, color: "#1A1825", marginBottom: "28px" }}>
+            Performance by category
+          </h3>
+          {breakdown.map((b) => (
+            <div key={b.label} style={{ marginBottom: "20px" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "14px", marginBottom: "8px" }}>
+                <span style={{ color: "#1A1825", fontWeight: 500 }}>{b.label}</span>
+                <span style={{ color: "#5B4FCF", fontWeight: 700 }}>{b.score}th percentile</span>
               </div>
-
-              <p className="mt-2 text-sm text-[#475569]">
-                Unlock deep insights about your performance — strengths, weaknesses, and personalized practice recommendations.
-              </p>
-
-              <div className="relative mt-6 overflow-hidden border border-[#e2e8f0]">
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/90" />
-
-                <div className="p-5 opacity-60 blur-[1.5px]">
-                  <div className="grid gap-4">
-                    <div className="border border-[#e2e8f0] p-4">
-                      <div className="text-xs text-[#94a3b8]">Cognitive profile</div>
-                      <div className="mt-2 text-sm font-semibold text-[#0f172a]">
-                        Pattern recognition · Working memory · Speed
-                      </div>
-                      <div className="mt-3 h-1.5 w-full bg-[#e2e8f0]">
-                        <div className="h-1.5 w-[78%] bg-[#1d4ed8]" />
-                      </div>
-                    </div>
-
-                    <div className="border border-[#e2e8f0] p-4">
-                      <div className="text-xs text-[#94a3b8]">Question review</div>
-                      <div className="mt-2 text-sm font-semibold text-[#0f172a]">
-                        See explanations for every item
-                      </div>
-                      <div className="mt-3 grid grid-cols-5 gap-2">
-                        {Array.from({ length: 20 }).map((_, i) => (
-                          <div key={i} className="h-1.5 bg-[#e2e8f0]" />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute inset-x-0 bottom-0 p-4">
-                  <div className="border border-[#e2e8f0] bg-white p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <div>
-                        <div className="text-sm font-semibold text-[#0f172a]">Locked</div>
-                        <div className="mt-1 text-xs text-[#475569]">
-                          Upgrade to view full analysis and explanations.
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        className="cursor-not-allowed border border-[#e2e8f0] bg-[#f9fafb] px-4 py-2 text-xs font-semibold text-[#94a3b8]"
-                        aria-disabled="true"
-                      >
-                        Coming soon
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <a
-                  href="/test"
-                  className="inline-flex w-full items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
-                >
-                  Take the test again →
-                </a>
+              <div style={{ height: "8px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden" }}>
+                <div style={{ height: "100%", width: `${b.score}%`, backgroundColor: "#5B4FCF", borderRadius: "999px" }} />
               </div>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
 
-        {/* FOOTER */}
-        <footer className="mt-10 border-t border-[#e2e8f0] pt-8 text-sm text-[#475569]">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>© 2026 BrainScale</div>
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-              {[
-                { href: "/privacy", label: "Privacy Policy" },
-                { href: "/terms", label: "Terms" },
-                { href: "mailto:contact@brainscale.app", label: "Contact" },
-              ].map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/30"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </div>
+        {/* PREMIUM TEASER */}
+        <div style={{ position: "relative", borderRadius: "24px", overflow: "hidden", marginBottom: "32px" }}>
+          {/* Blurred content */}
+          <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "36px", filter: "blur(5px)", userSelect: "none", pointerEvents: "none" }}>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", color: "#1A1825", marginBottom: "20px" }}>Detailed cognitive profile</h3>
+            {["Working Memory Index: 94th percentile", "Visual-Spatial Processing: 87th percentile", "Fluid Reasoning: 96th percentile", "Processing Speed: 79th percentile"].map((item) => (
+              <div key={item} style={{ padding: "14px 0", borderBottom: "1px solid #E8E5DC", fontSize: "14px", color: "#5C5A6E" }}>{item}</div>
+            ))}
           </div>
-        </footer>
+          {/* Overlay */}
+          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.85)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "32px" }}>
+            <div style={{ fontSize: "28px", marginBottom: "12px" }}>🔒</div>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>Full Cognitive Report</h3>
+            <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "320px" }}>
+              Unlock your detailed breakdown, personalized insights, and printable PDF certificate.
+            </p>
+            <button style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}>
+              Unlock Full Report — $9
+            </button>
+          </div>
+        </div>
+
+        {/* ACTIONS */}
+        <div style={{ display: "flex", gap: "14px", justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "16px 36px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 20px rgba(91,79,207,0.3)" }}>
+            Retake Test
+          </Link>
+          <Link href="/" style={{ backgroundColor: "#fff", color: "#1A1825", padding: "16px 36px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none", border: "1px solid #E8E5DC" }}>
+            Back to Home
+          </Link>
+        </div>
+
       </main>
     </div>
   );

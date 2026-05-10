@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import { ResultsContent } from "./ResultsContent";
+import ResultsContent from "./ResultsContent";
 
 export const metadata = {
   title: "Your Cognitive Assessment Results — BrainScale",
