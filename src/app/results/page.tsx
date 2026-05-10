@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 type ChoiceKey = "A" | "B" | "C" | "D";
@@ -67,7 +67,7 @@ function meterPct(iq: number) {
   return clamp(((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * 100, 0, 100);
 }
 
-export default function ResultsPage() {
+function ResultsContent() {
   const searchParams = useSearchParams();
   const ansParam = searchParams.get("ans");
 
@@ -395,6 +395,20 @@ export default function ResultsPage() {
         </footer>
       </main>
     </div>
+  );
+}
+
+export default function ResultsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <p className="text-gray-500">Loading results...</p>
+        </div>
+      }
+    >
+      <ResultsContent />
+    </Suspense>
   );
 }
 
