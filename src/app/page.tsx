@@ -1,468 +1,668 @@
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-[#0a0f1e] text-white">
-      {/* Subtle background glow */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl" />
-        <div className="absolute top-28 right-[-160px] h-[520px] w-[520px] rounded-full bg-[#8b5cf6]/18 blur-3xl" />
-        <div className="absolute bottom-[-220px] left-[-160px] h-[520px] w-[520px] rounded-full bg-[#3b82f6]/12 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(1200px_700px_at_50%_10%,rgba(59,130,246,0.10),transparent_55%),radial-gradient(900px_600px_at_90%_35%,rgba(139,92,246,0.10),transparent_60%),radial-gradient(900px_600px_at_10%_80%,rgba(59,130,246,0.08),transparent_55%)]" />
-      </div>
-
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0f1e]/70 backdrop-blur">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+    <div className="min-h-dvh bg-white text-[#0f172a]">
+      {/* SECTION 1 — NAVBAR */}
+      <header className="border-b border-[#e2e8f0] bg-white">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
           <a
             href="/"
-            className="group inline-flex items-center gap-2 rounded-xl px-2 py-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
+            className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             aria-label="BrainScale home"
           >
-            <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
-              <span className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#3b82f6]/30 to-[#8b5cf6]/20 opacity-0 blur transition-opacity duration-300 group-hover:opacity-100" />
-              <span className="relative text-sm font-semibold tracking-tight text-white">
-                BS
-              </span>
-            </span>
-            <span className="text-lg font-semibold tracking-tight">
-              <span className="bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent">
-                BrainScale
-              </span>
+            <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
+            <span className="font-serif text-base font-semibold tracking-tight text-[#0f172a]">
+              BrainScale
             </span>
           </a>
 
+          <div className="hidden items-center gap-7 sm:flex">
+            {[
+              { href: "/science", label: "The Science" },
+              { href: "/test", label: "Sample Test" },
+              { href: "/results", label: "Results" },
+              { href: "/faq", label: "FAQ" },
+            ].map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-sm font-medium text-[#475569] transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+
           <a
             href="/test"
-            className="inline-flex items-center justify-center rounded-full bg-[#3b82f6] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(59,130,246,0.25),0_18px_40px_-18px_rgba(59,130,246,0.75)] transition hover:bg-[#3b82f6]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#1d4ed8] transition hover:text-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
           >
-            Start Test
+            Start Assessment <span aria-hidden="true">→</span>
           </a>
         </nav>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
-        {/* Hero */}
-        <section className="grid items-center gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/80">
-              <span className="h-2 w-2 rounded-full bg-[#3b82f6]" />
-              Free IQ & cognitive tests
-              <span className="text-white/40">•</span>
-              Instant results
+      {/* SECTION 2 — HERO */}
+      <main>
+        <section className="mx-auto max-w-6xl px-4 pb-14 pt-14 sm:px-6 sm:pb-16 sm:pt-16 lg:px-8 lg:pb-20">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#1d4ed8]">
+              <span className="uppercase">Cognitive Assessment Platform</span>
             </div>
 
-            <h1 className="mt-6 text-balance text-4xl font-black leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              <span className="block">Discover Your True Intelligence</span>
-              <span className="mt-3 block bg-gradient-to-r from-[#3b82f6] via-[#8b5cf6] to-[#3b82f6] bg-clip-text text-transparent">
-                In minutes, not months.
-              </span>
+            <h1 className="mt-5 text-balance font-serif text-5xl font-semibold tracking-tight sm:text-6xl">
+              Know Your Mind.
             </h1>
 
-            <p className="mt-6 max-w-2xl text-pretty text-base leading-7 text-white/75 sm:text-lg">
-              Take our scientifically-designed IQ test — free, instant results,
-              no registration required
+            <p className="mx-auto mt-5 max-w-3xl text-pretty text-base leading-8 text-[#475569] sm:text-lg">
+              A free, scientifically-grounded IQ assessment measuring four core
+              cognitive abilities. No account. No payment. Instant results.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex justify-center">
               <a
                 href="/test"
-                className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] px-6 py-3 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_26px_60px_-30px_rgba(59,130,246,0.85)] transition hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
+                className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
               >
-                Start Free Test <span className="ml-2">→</span>
+                Begin Assessment <span className="ml-2" aria-hidden="true">→</span>
               </a>
-              <div className="text-sm text-white/60">
-                No account. No tracking. Just your results.
-              </div>
             </div>
 
-            {/* Trust badges */}
-            <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="h-5 w-5 text-[#3b82f6]"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 2l3 7 7 .5-5.5 4.6 1.8 7.4L12 18l-6.3 3.5 1.8-7.4L2 9.5 9 9l3-7z"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold">50,000+ tests taken</div>
-                  <div className="text-xs text-white/60">Trusted globally</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="h-5 w-5 text-[#8b5cf6]"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 2l8 4v6c0 5-3.4 9.4-8 10-4.6-.6-8-5-8-10V6l8-4z"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M9.5 12l1.8 1.8L15 10"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold">Validated by experts</div>
-                  <div className="text-xs text-white/60">Designed for reliability</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
-                <span className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="h-5 w-5 text-[#3b82f6]"
-                    aria-hidden="true"
-                  >
-                    <path
-                      d="M12 2a7 7 0 00-7 7v4a5 5 0 0010 0V9a3 3 0 00-6 0v4"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      d="M8 21h8"
-                      stroke="currentColor"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </span>
-                <div className="min-w-0">
-                  <div className="text-sm font-semibold">100% free & anonymous</div>
-                  <div className="text-xs text-white/60">Privacy-first by default</div>
-                </div>
-              </div>
+            <div className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-[#475569] sm:flex-row">
+              <span>20 Questions</span>
+              <span className="hidden h-4 w-px bg-[#e2e8f0] sm:block" />
+              <span>~15 Minutes</span>
+              <span className="hidden h-4 w-px bg-[#e2e8f0] sm:block" />
+              <span>Instant Report</span>
             </div>
+
+            <div className="mt-10 h-px w-full bg-[#e2e8f0]" />
           </div>
 
-          {/* Right panel / visual */}
-          <div className="lg:col-span-5">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
-              <div className="absolute inset-0 bg-[radial-gradient(700px_300px_at_40%_20%,rgba(59,130,246,0.18),transparent_60%),radial-gradient(700px_300px_at_60%_80%,rgba(139,92,246,0.14),transparent_60%)]" />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-semibold text-white/85">
-                    Today’s snapshot
-                  </div>
-                  <div className="rounded-full bg-white/5 px-3 py-1 text-xs text-white/60 ring-1 ring-white/10">
-                    Live
-                  </div>
-                </div>
+          {/* Scientific bell curve */}
+          <div className="mx-auto mt-12 max-w-6xl">
+            <div className="overflow-hidden border border-[#e2e8f0] bg-white">
+              <svg
+                viewBox="0 0 1200 380"
+                className="h-auto w-full"
+                role="img"
+                aria-label="Normal distribution graph with IQ zones and population mean"
+              >
+                {/* Plot area */}
+                <rect x="0" y="0" width="1200" height="380" fill="#ffffff" />
 
-                <div className="mt-6 grid grid-cols-2 gap-4">
-                  <div className="rounded-2xl border border-white/10 bg-[#0a0f1e]/40 p-4">
-                    <div className="text-xs text-white/60">Average time</div>
-                    <div className="mt-2 text-2xl font-bold tracking-tight">
-                      11m
-                    </div>
-                    <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                      <div className="h-2 w-[72%] rounded-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6]" />
-                    </div>
-                  </div>
+                {/* Axes */}
+                <line x1="80" y1="300" x2="1120" y2="300" stroke="#e2e8f0" strokeWidth="2" />
+                <line x1="80" y1="60" x2="80" y2="300" stroke="#e2e8f0" strokeWidth="2" />
 
-                  <div className="rounded-2xl border border-white/10 bg-[#0a0f1e]/40 p-4">
-                    <div className="text-xs text-white/60">Completion rate</div>
-                    <div className="mt-2 text-2xl font-bold tracking-tight">
-                      93%
-                    </div>
-                    <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                      <div className="h-2 w-[93%] rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#3b82f6]" />
-                    </div>
-                  </div>
-                </div>
+                {/* Zone fills (subtle) */}
+                <g>
+                  <rect x="80" y="60" width="208" height="240" fill="#0f172a" opacity="0.06" />
+                  <rect x="288" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.07" />
+                  <rect x="528" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.12" />
+                  <rect x="768" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.16" />
+                  <rect x="1008" y="60" width="112" height="240" fill="#0f172a" opacity="0.10" />
+                </g>
 
-                <div className="mt-5 rounded-2xl border border-white/10 bg-[#0a0f1e]/40 p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm font-semibold">Your strengths</div>
-                    <div className="text-xs text-white/60">Sample preview</div>
-                  </div>
-                  <div className="mt-3 space-y-3">
-                    {[
-                      { label: "Pattern recognition", value: 86, color: "from-[#3b82f6] to-[#8b5cf6]" },
-                      { label: "Working memory", value: 78, color: "from-[#8b5cf6] to-[#3b82f6]" },
-                      { label: "Processing speed", value: 72, color: "from-[#3b82f6] to-[#3b82f6]" },
-                    ].map((item) => (
-                      <div key={item.label}>
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-white/70">{item.label}</span>
-                          <span className="font-medium text-white/70">
-                            {item.value}%
-                          </span>
-                        </div>
-                        <div className="mt-2 h-2 w-full rounded-full bg-white/10">
-                          <div
-                            className={`h-2 rounded-full bg-gradient-to-r ${item.color}`}
-                            style={{ width: `${item.value}%` }}
-                          />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-3 text-xs text-white/65">
-                    Results are generated instantly after you finish—no signup required.
-                  </div>
+                {/* Zone dividers */}
+                {[80, 288, 528, 768, 1008, 1120].map((x) => (
+                  <line key={x} x1={x} y1="60" x2={x} y2="300" stroke="#e2e8f0" strokeWidth="2" />
+                ))}
+
+                {/* Gaussian curve */}
+                <path
+                  d="M80 300
+                     C 160 300, 210 292, 260 274
+                     C 340 245, 410 160, 600 96
+                     C 790 160, 860 245, 940 274
+                     C 990 292, 1040 300, 1120 300"
+                  fill="none"
+                  stroke="#1d4ed8"
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                />
+
+                {/* Population mean at 100 (dashed) */}
+                <line
+                  x1="528"
+                  y1="60"
+                  x2="528"
+                  y2="300"
+                  stroke="#0f172a"
+                  strokeOpacity="0.55"
+                  strokeWidth="2"
+                  strokeDasharray="7 7"
+                />
+                <g>
+                  <rect x="454" y="68" width="148" height="26" fill="#ffffff" />
+                  <text
+                    x="528"
+                    y="88"
+                    textAnchor="middle"
+                    fontSize="12"
+                    fill="#0f172a"
+                    fillOpacity="0.75"
+                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                  >
+                    Population Mean
+                  </text>
+                </g>
+
+                {/* X-axis ticks and labels */}
+                {[
+                  { x: 80, label: "70" },
+                  { x: 288, label: "85" },
+                  { x: 528, label: "100" },
+                  { x: 768, label: "115" },
+                  { x: 1008, label: "130" },
+                  { x: 1120, label: "145" },
+                ].map((t) => (
+                  <g key={t.label}>
+                    <line x1={t.x} y1="300" x2={t.x} y2="312" stroke="#94a3b8" strokeOpacity="0.55" strokeWidth="2" />
+                    <text
+                      x={t.x}
+                      y="336"
+                      textAnchor={t.x === 80 ? "start" : t.x === 1120 ? "end" : "middle"}
+                      fontSize="12"
+                      fill="#475569"
+                      fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                    >
+                      {t.label}
+                    </text>
+                  </g>
+                ))}
+
+                {/* Zone labels */}
+                {[
+                  { x: 184, label: "Below Average" },
+                  { x: 408, label: "Average" },
+                  { x: 648, label: "High Average" },
+                  { x: 888, label: "Superior" },
+                  { x: 1064, label: "Gifted" },
+                ].map((z) => (
+                  <text
+                    key={z.label}
+                    x={z.x}
+                    y="366"
+                    textAnchor="middle"
+                    fontSize="12"
+                    fill="#0f172a"
+                    fillOpacity="0.72"
+                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                  >
+                    {z.label}
+                  </text>
+                ))}
+              </svg>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 3 — SCIENTIFIC CREDIBILITY */}
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+              <span className="uppercase">Methodology</span>
+            </div>
+            <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Built on a Century of Intelligence Research
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-10 md:grid-cols-3">
+            {[
+              {
+                title: "Cattell-Horn-Carroll Theory",
+                body: "The CHC model is the most empirically supported framework in cognitive psychology, used by clinical psychologists worldwide.",
+              },
+              {
+                title: "Wechsler-Inspired Design",
+                body: "Our question architecture follows principles established in the WAIS-IV — the gold standard in professional intelligence assessment.",
+              },
+              {
+                title: "Normed Against 50,000+ Results",
+                body: "Your score is statistically compared against a growing reference population, updated continuously.",
+              },
+            ].map((c) => (
+              <div key={c.title} className="pt-6 border-t border-[#e2e8f0]">
+                <div className="font-serif text-lg font-semibold tracking-tight">
+                  {c.title}
                 </div>
+                <p className="mt-3 text-sm leading-7 text-[#475569]">
+                  {c.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 4 — WHAT WE MEASURE */}
+        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">Cognitive Domains</span>
+              </div>
+              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Four Abilities. One Complete Picture.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#475569]">
+                Unlike single-score IQ tests, BrainScale measures the distinct
+                cognitive systems that together form general intelligence.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  n: "01",
+                  title: "Fluid Reasoning",
+                  body: "Abstract problem-solving and logical pattern recognition, independent of learned knowledge.",
+                },
+                {
+                  n: "02",
+                  title: "Working Memory",
+                  body: "Capacity to hold and manipulate information in real time — a strong predictor of academic performance.",
+                },
+                {
+                  n: "03",
+                  title: "Processing Speed",
+                  body: "Mental efficiency: how quickly and accurately you process and respond to new information.",
+                },
+                {
+                  n: "04",
+                  title: "Verbal Comprehension",
+                  body: "Language-based reasoning, vocabulary depth, and crystallized knowledge acquisition.",
+                },
+              ].map((d) => (
+                <div key={d.title} className="border border-[#e2e8f0] bg-white p-6">
+                  <div className="text-3xl font-light tracking-tight text-[#e2e8f0]">
+                    {d.n}
+                  </div>
+                  <div className="mt-4 font-serif text-lg font-semibold tracking-tight">
+                    {d.title}
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[#475569]">
+                    {d.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 5 — IQ SCORE DISTRIBUTION */}
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
+            <div className="lg:col-span-5">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">Score Interpretation</span>
+              </div>
+              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Where Does the Population Fall?
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#475569]">
+                IQ scores follow a normal distribution with a mean of 100 and
+                standard deviation of 15. Approximately 68% of the population
+                scores between 85 and 115. BrainScale uses this same scale,
+                validated against thousands of results.
+              </p>
+            </div>
+
+            <div className="lg:col-span-7">
+              <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
+                <svg
+                  viewBox="0 0 860 300"
+                  className="h-auto w-full"
+                  role="img"
+                  aria-label="Horizontal bar chart of IQ category distribution"
+                >
+                  <rect x="0" y="0" width="860" height="300" fill="#ffffff" />
+                  <line x1="20" y1="24" x2="840" y2="24" stroke="#e2e8f0" strokeWidth="2" />
+
+                  {[
+                    { y: 60, label: "130+ Gifted", pct: "2.2%", w: 26, fill: "#93c5fd" },
+                    { y: 102, label: "120–129 Superior", pct: "6.7%", w: 78, fill: "#60a5fa" },
+                    { y: 144, label: "110–119 High Average", pct: "16.1%", w: 188, fill: "#3b82f6" },
+                    { y: 186, label: "90–109 Average", pct: "50.0%", w: 584, fill: "#1d4ed8" },
+                    { y: 228, label: "80–89 Low Average", pct: "16.1%", w: 188, fill: "#3b82f6" },
+                    { y: 270, label: "<80 Below Average", pct: "9.0%", w: 105, fill: "#60a5fa" },
+                  ].map((r) => (
+                    <g key={r.label}>
+                      <text
+                        x="20"
+                        y={r.y}
+                        fontSize="13"
+                        fill="#0f172a"
+                        fillOpacity="0.85"
+                        fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                      >
+                        {r.label}
+                      </text>
+                      <rect
+                        x="320"
+                        y={r.y - 14}
+                        width={r.w}
+                        height="16"
+                        fill={r.fill}
+                        opacity="0.95"
+                      />
+                      <text
+                        x={320 + r.w + 12}
+                        y={r.y}
+                        fontSize="13"
+                        fill="#475569"
+                        fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                      >
+                        {r.pct}
+                      </text>
+                    </g>
+                  ))}
+                </svg>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Features */}
-        <section className="mt-14 sm:mt-16 lg:mt-20">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              Choose your test
+        {/* SECTION 6 — SAMPLE QUESTION */}
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+              <span className="uppercase">Sample Item</span>
+            </div>
+            <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              What to Expect
             </h2>
-            <p className="max-w-2xl text-sm leading-6 text-white/65 sm:text-base">
-              Three short, focused assessments designed to measure core cognitive
-              abilities—fast, fair, and easy to complete.
+            <p className="mt-4 text-base leading-8 text-[#475569]">
+              Each question is carefully calibrated to measure a specific
+              cognitive ability. Here is one example from our fluid reasoning
+              module.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
-            <a
-              href="/test/iq"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
-            >
-              <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className="absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[#3b82f6]/25 blur-3xl" />
+          <div className="mx-auto mt-10 max-w-3xl border border-[#e2e8f0] bg-white p-6 sm:p-8">
+            <div className="font-serif text-xl font-semibold tracking-tight">
+              Which number completes the series: 2, 6, 12, 20, 30, ?
+            </div>
+
+            <div className="mt-6 space-y-2">
+              <div className="border border-[#e2e8f0] px-4 py-3 text-sm font-medium text-[#0f172a]">
+                A) 40
               </div>
-              <div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center rounded-full bg-[#3b82f6]/15 px-3 py-1 text-xs font-semibold text-[#3b82f6] ring-1 ring-[#3b82f6]/25">
-                      Most popular
-                    </div>
-                    <h3 className="mt-3 text-lg font-bold tracking-tight">
-                      Certified IQ Test
-                    </h3>
-                  </div>
-                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white/5 ring-1 ring-white/10">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="h-5 w-5 text-white/80"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 2h8v3h3v17H5V5h3V2z"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M9 12h6M9 16h6M9 8h6"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  </div>
-                </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/70">
-                  A balanced, comprehensive IQ assessment optimized for clarity
-                  and consistency.
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    15 min
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    40 questions
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    Instant score
-                  </span>
-                </div>
-
-                <div className="mt-7 inline-flex items-center text-sm font-semibold text-white">
-                  Start <span className="ml-2 text-white/60">→</span>
-                </div>
-              </div>
-            </a>
-
-            <a
-              href="/test/memory-logic"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8b5cf6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
-            >
-              <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className="absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[#8b5cf6]/22 blur-3xl" />
-              </div>
-              <div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center rounded-full bg-[#8b5cf6]/15 px-3 py-1 text-xs font-semibold text-[#8b5cf6] ring-1 ring-[#8b5cf6]/25">
-                      Cognitive skills
-                    </div>
-                    <h3 className="mt-3 text-lg font-bold tracking-tight">
-                      Memory &amp; Logic
-                    </h3>
-                  </div>
-                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white/5 ring-1 ring-white/10">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="h-5 w-5 text-white/80"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M8 7a4 4 0 118 0v1h1a2 2 0 012 2v9a2 2 0 01-2 2H7a2 2 0 01-2-2v-9a2 2 0 012-2h1V7z"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M10 12h4"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+              {[
+                { label: "B) 42" },
+                { label: "C) 44" },
+                { label: "D) 48" },
+              ].map((o) => (
+                <div
+                  key={o.label}
+                  className="relative overflow-hidden border border-[#e2e8f0] px-4 py-3 text-sm font-medium text-[#0f172a]"
+                >
+                  <div className="blur-[2px] select-none">{o.label}</div>
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-end pr-3">
+                    <span className="inline-flex items-center gap-2 border border-[#e2e8f0] bg-white px-2 py-1 text-[11px] font-semibold text-[#475569]">
+                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
+                        <path
+                          d="M8 11V8a4 4 0 118 0v3"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M7 11h10v10H7V11z"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      Locked
+                    </span>
                   </div>
                 </div>
+              ))}
+            </div>
 
-                <p className="mt-4 text-sm leading-6 text-white/70">
-                  A fast set of challenges to evaluate recall, reasoning, and
-                  structured thinking.
-                </p>
+            <div className="mt-6 text-sm leading-7 text-[#475569]">
+              The full assessment contains 20 calibrated items across all four
+              cognitive domains.
+            </div>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    10 min
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    Logic puzzles
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    Memory drills
-                  </span>
-                </div>
+            <div className="mt-5">
+              <a
+                href="/test"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-[#1d4ed8] transition hover:text-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              >
+                Take the full assessment <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </section>
 
-                <div className="mt-7 inline-flex items-center text-sm font-semibold text-white">
-                  Start <span className="ml-2 text-white/60">→</span>
-                </div>
+        {/* SECTION 7 — PROCESS */}
+        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+            <div className="max-w-3xl">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">How it works</span>
               </div>
-            </a>
+              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Simple. Private. Rigorous.
+              </h2>
+            </div>
 
-            <a
-              href="/test/processing-speed"
-              className="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 transition hover:border-white/20 hover:bg-white/[0.07] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
-            >
-              <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <div className="absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full bg-[#3b82f6]/20 blur-3xl" />
-              </div>
-              <div className="relative">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-white/75 ring-1 ring-white/10">
-                      Quick &amp; focused
-                    </div>
-                    <h3 className="mt-3 text-lg font-bold tracking-tight">
-                      Processing Speed
-                    </h3>
+            <div className="mt-12 grid gap-10 md:grid-cols-3">
+              {[
+                {
+                  n: "01",
+                  title: "Complete the Assessment",
+                  body: "Answer 20 questions at your own pace. No time pressure.",
+                },
+                {
+                  n: "02",
+                  title: "Instant Scoring",
+                  body: "Your answers are scored against our normalized reference population.",
+                },
+                {
+                  n: "03",
+                  title: "Receive Your Report",
+                  body: "Full IQ estimate with cognitive domain breakdown. No login required.",
+                },
+              ].map((s) => (
+                <div key={s.n} className="border-t border-[#e2e8f0] pt-6">
+                  <div className="text-4xl font-extralight tracking-tight text-[#94a3b8]">
+                    {s.n}
                   </div>
-                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white/5 ring-1 ring-white/10">
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="h-5 w-5 text-white/80"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M12 22a9 9 0 119-9"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                      <path
-                        d="M12 7v5l4 2"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M21 12h-3"
-                        stroke="currentColor"
-                        strokeWidth="1.8"
-                        strokeLinecap="round"
-                      />
-                    </svg>
+                  <div className="mt-3 font-serif text-lg font-semibold tracking-tight">
+                    {s.title}
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-[#475569]">
+                    {s.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 8 — PRIVACY / TRUST */}
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">Privacy</span>
+              </div>
+              <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                Completely Anonymous
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#475569]">
+                BrainScale collects no personal data. No account, no email, no
+                tracking cookies. Your results exist only in your browser
+                session. We cannot identify you.
+              </p>
+            </div>
+
+            <div className="lg:col-span-6">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">Independence</span>
+              </div>
+              <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+                No Upsells. No Tricks.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-[#475569]">
+                The full assessment and complete results are free. We do not ask
+                for payment before showing results, require email to unlock
+                scores, or sell your data to third parties.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 9 — TESTIMONIALS */}
+        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
+          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
+                <span className="uppercase">From our users</span>
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  quote:
+                    "Finally a free IQ test that felt intellectually honest. The cognitive domain breakdown was more insightful than I expected.",
+                  who: "S.M., Score: 127",
+                },
+                {
+                  quote:
+                    "I was genuinely skeptical. But the questions were well-designed and the results rang true. Recommended it to colleagues.",
+                  who: "J.K., Score: 118",
+                },
+                {
+                  quote:
+                    "Used the detailed cognitive profile as a starting point for conversations with my academic advisor.",
+                  who: "P.S., Score: 134",
+                },
+              ].map((t) => (
+                <div key={t.who} className="border border-[#e2e8f0] bg-white p-6">
+                  <p className="font-serif text-base italic leading-7 text-[#0f172a]">
+                    “{t.quote}”
+                  </p>
+                  <div className="mt-5 text-sm font-medium text-[#475569]">
+                    — {t.who}
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                <p className="mt-4 text-sm leading-6 text-white/70">
-                  Timed tasks designed to measure how quickly you recognize,
-                  compare, and decide.
-                </p>
+        {/* SECTION 10 — FAQ */}
+        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-10 divide-y divide-[#e2e8f0] border-y border-[#e2e8f0]">
+              {[
+                {
+                  q: "How accurate is BrainScale compared to a professional assessment?",
+                  a: "BrainScale provides an evidence-informed estimate on the same interpretive scale (mean 100, SD 15). A clinician-administered instrument (e.g., WAIS) remains the gold standard because it includes controlled administration, supervision, and broader subtest coverage.",
+                },
+                {
+                  q: "How is the IQ score calculated?",
+                  a: "Your raw performance is converted to an estimate on a standardized IQ scale and compared against a reference population. The goal is interpretability and consistency: the same scale, updated norms, and clear ranges.",
+                },
+                {
+                  q: "Is my data private?",
+                  a: "Yes. BrainScale is designed to run without accounts or identity collection. Results are presented instantly and are intended to remain within your browser session.",
+                },
+                {
+                  q: "Can I retake the test?",
+                  a: "Yes. You can retake the assessment at any time. For the most meaningful comparison, retake under similar conditions and allow some time between attempts.",
+                },
+                {
+                  q: "What is the Cattell-Horn-Carroll theory?",
+                  a: "CHC is a widely supported framework describing intelligence as a hierarchy of abilities, including broad domains (like fluid reasoning and working memory) that together contribute to general cognitive performance.",
+                },
+              ].map((item) => (
+                <details key={item.q} className="group py-5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-base font-medium text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white">
+                    <span>{item.q}</span>
+                    <span className="ml-auto text-[#475569] transition group-open:rotate-45" aria-hidden="true">
+                      +
+                    </span>
+                  </summary>
+                  <div className="mt-3 text-sm leading-7 text-[#475569]">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                <div className="mt-6 flex flex-wrap gap-2">
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    8 min
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    Timed rounds
-                  </span>
-                  <span className="rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs text-white/70">
-                    Focus metrics
-                  </span>
-                </div>
-
-                <div className="mt-7 inline-flex items-center text-sm font-semibold text-white">
-                  Start <span className="ml-2 text-white/60">→</span>
-                </div>
+        {/* SECTION 11 — FINAL CTA */}
+        <section className="bg-[#0f172a] text-white">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl text-center">
+              <h2 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
+                Understand Your Cognitive Profile.
+              </h2>
+              <p className="mt-4 text-base leading-8 text-white/75 sm:text-lg">
+                Free. Anonymous. Takes 15 minutes.
+              </p>
+              <div className="mt-8 flex justify-center">
+                <a
+                  href="/test"
+                  className="inline-flex items-center justify-center border border-white bg-white px-7 py-3.5 text-sm font-semibold text-[#0f172a] transition hover:bg-white/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
+                >
+                  Start Assessment <span className="ml-2" aria-hidden="true">→</span>
+                </a>
               </div>
-            </a>
+              <div className="mt-6 text-sm text-white/70">
+                No registration. No payment. Results in under 15 minutes.
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
-      <footer className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-10 text-sm text-white/60 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-          <div>© 2026 BrainScale</div>
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <a
-              href="/privacy"
-              className="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e] rounded"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="/terms"
-              className="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e] rounded"
-            >
-              Terms
-            </a>
-            <a
-              href="/contact"
-              className="transition hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e] rounded"
-            >
-              Contact
-            </a>
+      {/* SECTION 12 — FOOTER */}
+      <footer className="border-t border-[#e2e8f0] bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
+              <span className="font-serif text-sm font-semibold tracking-tight text-[#0f172a]">
+                BrainScale
+              </span>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-sm text-[#475569]">
+              {[
+                { href: "/science", label: "The Science" },
+                { href: "/test", label: "Sample Test" },
+                { href: "/results", label: "Results" },
+                { href: "/faq", label: "FAQ" },
+              ].map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="hidden sm:block" />
+          </div>
+
+          <div className="mt-8 text-sm leading-7 text-[#475569]">
+            © 2026 BrainScale — Independent cognitive assessment platform.
+            BrainScale is not affiliated with any academic institution. CHC
+            Theory references are to published scientific literature.
           </div>
         </div>
       </footer>
