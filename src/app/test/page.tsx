@@ -43,8 +43,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q3",
     category: "Pattern recognition",
-    prompt:
-      "Choose the option that does NOT belong: Triangle, Square, Pentagon, Circle",
+    prompt: "Choose the option that does NOT belong: Triangle, Square, Pentagon, Circle",
     choices: [
       { key: "A", text: "Triangle" },
       { key: "B", text: "Square" },
@@ -88,8 +87,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q7",
     category: "Pattern recognition",
-    prompt:
-      "Which letter comes next in the sequence? A, C, F, J, O, ?",
+    prompt: "Which letter comes next in the sequence? A, C, F, J, O, ?",
     choices: [
       { key: "A", text: "T" },
       { key: "B", text: "U" },
@@ -111,8 +109,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q9",
     category: "Spatial reasoning",
-    prompt:
-      "A cube is painted on all six faces and then cut into 27 equal smaller cubes. How many small cubes have paint on exactly one face?",
+    prompt: "A cube is painted on all six faces and then cut into 27 equal smaller cubes. How many small cubes have paint on exactly one face?",
     choices: [
       { key: "A", text: "6" },
       { key: "B", text: "8" },
@@ -134,8 +131,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q11",
     category: "Pattern recognition",
-    prompt:
-      "Which option completes the series? 4, 9, 16, 25, 36, ?",
+    prompt: "Which option completes the series? 4, 9, 16, 25, 36, ?",
     choices: [
       { key: "A", text: "45" },
       { key: "B", text: "49" },
@@ -157,8 +153,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q13",
     category: "Logical sequence",
-    prompt:
-      "In a race, you overtake the person in 2nd place. What position are you in now?",
+    prompt: "In a race, you overtake the person in 2nd place. What position are you in now?",
     choices: [
       { key: "A", text: "1st" },
       { key: "B", text: "2nd" },
@@ -180,8 +175,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q15",
     category: "Pattern recognition",
-    prompt:
-      "Which word is the odd one out? Apple, Banana, Carrot, Mango",
+    prompt: "Which word is the odd one out? Apple, Banana, Carrot, Mango",
     choices: [
       { key: "A", text: "Apple" },
       { key: "B", text: "Banana" },
@@ -192,8 +186,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q16",
     category: "Spatial reasoning",
-    prompt:
-      "If you rotate the letter 'N' 90° clockwise, it most closely resembles:",
+    prompt: "If you rotate the letter 'N' 90° clockwise, it most closely resembles:",
     choices: [
       { key: "A", text: "Z" },
       { key: "B", text: "S" },
@@ -215,8 +208,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q18",
     category: "Logical sequence",
-    prompt:
-      "A bat and a ball cost $1.10 total. The bat costs $1.00 more than the ball. How much does the ball cost?",
+    prompt: "A bat and a ball cost $1.10 total. The bat costs $1.00 more than the ball. How much does the ball cost?",
     choices: [
       { key: "A", text: "$0.05" },
       { key: "B", text: "$0.10" },
@@ -238,8 +230,7 @@ const QUESTIONS: Question[] = [
   {
     id: "q20",
     category: "Pattern recognition",
-    prompt:
-      "Which pair best completes the analogy? Hand : Glove :: Foot : ?",
+    prompt: "Which pair best completes the analogy? Hand : Glove :: Foot : ?",
     choices: [
       { key: "A", text: "Sock" },
       { key: "B", text: "Shoe" },
@@ -269,10 +260,7 @@ function serializeAnswers(
 export default function TestPage() {
   const router = useRouter();
 
-  const questions = useMemo(() => {
-    // Defensive: ensure we always have exactly 20 questions rendered.
-    return QUESTIONS.slice(0, TOTAL_QUESTIONS);
-  }, []);
+  const questions = useMemo(() => QUESTIONS.slice(0, TOTAL_QUESTIONS), []);
 
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<Record<string, ChoiceKey>>({});
@@ -280,7 +268,6 @@ export default function TestPage() {
 
   const current = questions[index];
   const selectedKey = current ? selected[current.id] : undefined;
-
   const progress = clamp(((index + 1) / TOTAL_QUESTIONS) * 100, 0, 100);
 
   const onPick = (key: ChoiceKey) => {
@@ -289,15 +276,12 @@ export default function TestPage() {
   };
 
   const goNext = () => {
-    if (!current) return;
-    if (!selected[current.id]) return;
-
+    if (!current || !selected[current.id]) return;
     if (index >= TOTAL_QUESTIONS - 1) {
       const ans = serializeAnswers(questions, selected);
       router.push(`/results?ans=${encodeURIComponent(ans)}`);
       return;
     }
-
     setIsFading(true);
     window.setTimeout(() => {
       setIndex((i) => i + 1);
@@ -307,9 +291,9 @@ export default function TestPage() {
 
   if (!current) {
     return (
-      <div className="min-h-dvh bg-[#0a0f1e] text-white">
+      <div className="min-h-dvh bg-white text-[#0f172a]">
         <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white/70">
+          <div className="border border-[#e2e8f0] bg-white p-6 text-[#475569]">
             Test is unavailable.
           </div>
         </div>
@@ -318,40 +302,33 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-[#0a0f1e] text-white">
-      {/* Background glow */}
-      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-        <div className="absolute -top-28 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#3b82f6]/18 blur-3xl" />
-        <div className="absolute top-28 right-[-170px] h-[520px] w-[520px] rounded-full bg-[#8b5cf6]/16 blur-3xl" />
-        <div className="absolute bottom-[-240px] left-[-180px] h-[520px] w-[520px] rounded-full bg-[#3b82f6]/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[radial-gradient(1100px_650px_at_50%_0%,rgba(59,130,246,0.10),transparent_55%),radial-gradient(900px_600px_at_90%_35%,rgba(139,92,246,0.10),transparent_60%)]" />
-      </div>
-
-      {/* Top progress */}
-      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0f1e]/70 backdrop-blur">
-        <div className="mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between gap-4">
-            <a
+    <div className="min-h-dvh bg-white text-[#0f172a]">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-20 border-b border-[#e2e8f0] bg-white">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between py-4">
+            
               href="/"
-              className="inline-flex items-center gap-2 rounded-xl px-2 py-1 text-sm font-semibold tracking-tight text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
-              aria-label="Back to BrainScale"
+              className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
+              aria-label="BrainScale home"
             >
-              <span className="grid h-8 w-8 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
-                BS
+              <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
+              <span className="font-serif text-base font-semibold tracking-tight text-[#0f172a]">
+                BrainScale
               </span>
-              BrainScale
             </a>
-
-            <div className="text-sm text-white/70">
+            <div className="text-sm text-[#475569]">
               Question{" "}
-              <span className="font-semibold text-white">{index + 1}</span> of{" "}
-              <span className="font-semibold text-white">{TOTAL_QUESTIONS}</span>
+              <span className="font-semibold text-[#0f172a]">{index + 1}</span>
+              {" "}of{" "}
+              <span className="font-semibold text-[#0f172a]">{TOTAL_QUESTIONS}</span>
             </div>
           </div>
 
-          <div className="mt-4 h-2 w-full rounded-full bg-white/10">
+          {/* Progress bar */}
+          <div className="h-1 w-full bg-[#e2e8f0]">
             <div
-              className="h-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] transition-[width] duration-300"
+              className="h-1 bg-[#1d4ed8] transition-[width] duration-300"
               style={{ width: `${progress}%` }}
               aria-hidden="true"
             />
@@ -366,17 +343,18 @@ export default function TestPage() {
             isFading ? "opacity-0" : "opacity-100",
           ].join(" ")}
         >
-          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] sm:p-8">
+          {/* Question card */}
+          <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="inline-flex items-center rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs font-semibold text-white/75">
+              <div className="inline-flex items-center border border-[#e2e8f0] px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#475569]">
                 {current.category}
               </div>
-              <div className="text-xs text-white/55">
+              <div className="text-xs text-[#94a3b8]">
                 Choose the best answer
               </div>
             </div>
 
-            <h1 className="mt-5 text-pretty text-xl font-bold leading-7 tracking-tight sm:text-2xl">
+            <h1 className="mt-6 font-serif text-xl font-semibold leading-7 tracking-tight text-[#0f172a] sm:text-2xl">
               {current.prompt}
             </h1>
 
@@ -389,36 +367,34 @@ export default function TestPage() {
                     type="button"
                     onClick={() => onPick(c.key)}
                     className={[
-                      "group flex w-full items-start gap-3 rounded-2xl border px-4 py-4 text-left transition",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]",
+                      "flex w-full items-center gap-4 border px-4 py-4 text-left transition",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40",
                       active
-                        ? "border-[#3b82f6]/60 bg-[#3b82f6]/10"
-                        : "border-white/10 bg-[#0a0f1e]/20 hover:border-white/20 hover:bg-white/[0.06]",
+                        ? "border-[#1d4ed8] bg-[#eff6ff]"
+                        : "border-[#e2e8f0] bg-white hover:border-[#94a3b8] hover:bg-[#f8fafc]",
                     ].join(" ")}
                     aria-pressed={active}
                   >
                     <span
                       className={[
-                        "mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl text-sm font-bold ring-1",
+                        "grid h-8 w-8 shrink-0 place-items-center text-sm font-bold border",
                         active
-                          ? "bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] text-white ring-white/10"
-                          : "bg-white/5 text-white/80 ring-white/10 group-hover:bg-white/10",
+                          ? "border-[#1d4ed8] bg-[#1d4ed8] text-white"
+                          : "border-[#e2e8f0] bg-white text-[#475569]",
                       ].join(" ")}
                     >
                       {c.key}
                     </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm leading-6 text-white/90 sm:text-base">
-                        {c.text}
-                      </span>
+                    <span className="text-sm leading-6 text-[#0f172a] sm:text-base">
+                      {c.text}
                     </span>
                   </button>
                 );
               })}
             </div>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="text-xs text-white/55">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-xs text-[#94a3b8]">
                 Your selections are stored locally for this session.
               </div>
 
@@ -427,12 +403,11 @@ export default function TestPage() {
                 onClick={goNext}
                 disabled={!selectedKey || isFading}
                 className={[
-                  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white transition",
-                  "shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_26px_60px_-30px_rgba(59,130,246,0.75)]",
+                  "inline-flex items-center justify-center border px-6 py-3 text-sm font-semibold transition",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40",
                   !selectedKey || isFading
-                    ? "cursor-not-allowed bg-white/10 text-white/50 shadow-none"
-                    : "bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] hover:opacity-95",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]",
+                    ? "cursor-not-allowed border-[#e2e8f0] bg-[#f8fafc] text-[#94a3b8]"
+                    : "border-[#1d4ed8] bg-[#1d4ed8] text-white hover:bg-[#1d4ed8]/90",
                 ].join(" ")}
               >
                 {index === TOTAL_QUESTIONS - 1 ? "Finish →" : "Next →"}
@@ -440,12 +415,12 @@ export default function TestPage() {
             </div>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            Tip: Don’t overthink—pick the most consistent pattern and move on.
+          {/* Tip */}
+          <div className="mt-4 border border-[#e2e8f0] bg-[#f9fafb] p-4 text-sm text-[#475569]">
+            Tip: Don't overthink — pick the most consistent pattern and move on.
           </div>
         </div>
       </main>
     </div>
   );
 }
-
