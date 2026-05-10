@@ -111,7 +111,7 @@ export function ResultsContent() {
       {/* NAVBAR */}
       <header className="border-b border-[#e2e8f0] bg-white">
         <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          
+          <a
             href="/"
             className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
             aria-label="BrainScale home"
@@ -121,7 +121,7 @@ export function ResultsContent() {
               BrainScale
             </span>
           </a>
-          
+          <a
             href="/test"
             className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
           >
@@ -149,7 +149,7 @@ export function ResultsContent() {
                     Your answers weren't included in the link. Take the test to generate your results.
                   </p>
                   <div className="mt-6">
-                    
+                    <a
                       href="/test"
                       className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90"
                     >
@@ -299,7 +299,7 @@ export function ResultsContent() {
               </div>
 
               <div className="mt-6">
-                
+                <a
                   href="/test"
                   className="inline-flex w-full items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
                 >
@@ -320,7 +320,7 @@ export function ResultsContent() {
                 { href: "/terms", label: "Terms" },
                 { href: "mailto:contact@brainscale.app", label: "Contact" },
               ].map((l) => (
-                
+                <a
                   key={l.href}
                   href={l.href}
                   className="transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/30"
