@@ -44,31 +44,27 @@ export default function Home() {
 
       {/* SECTION 2 — HERO */}
       <main>
-        <section className="mx-auto max-w-6xl px-4 pb-14 pt-14 sm:px-6 sm:pb-16 sm:pt-16 lg:px-8 lg:pb-20">
-          <div className="mx-auto max-w-4xl text-center">
+        <section className="mx-auto max-w-6xl px-4 py-10 lg:px-8 lg:py-16">
+          <div className="mx-auto flex max-w-2xl flex-col gap-4 text-center">
             <div className="text-[11px] font-semibold tracking-[0.28em] text-[#1d4ed8]">
               <span className="uppercase">Cognitive Assessment Platform</span>
             </div>
 
-            <h1 className="mt-5 text-balance font-serif text-5xl font-semibold tracking-tight sm:text-6xl">
+            <h1 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-6xl">
               Know Your Mind.
             </h1>
 
-            <p className="mx-auto mt-5 max-w-3xl text-pretty text-base leading-8 text-[#475569] sm:text-lg">
+            <p className="mx-auto max-w-2xl text-pretty text-base leading-7 text-[#475569]">
               A free cognitive reasoning assessment inspired by established
               cognitive science methodology and IQ-style question formats. No
               account. No payment. Instant results.
             </p>
 
-            <div className="mt-5 flex justify-center">
-              <span className="inline-flex items-center border border-[#e2e8f0] bg-white px-3 py-1 text-[11px] font-semibold tracking-[0.12em] text-[#475569]">
-                <span className="uppercase">
-                  Indicative assessment — not a clinical diagnosis
-                </span>
-              </span>
+            <div className="mx-auto inline-flex items-center px-3 py-1 border border-gray-300 text-[10px] sm:text-xs tracking-widest text-gray-500 uppercase whitespace-nowrap">
+              Indicative Assessment — Not a Clinical Diagnosis
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="flex justify-center">
               <a
                 href="/test"
                 className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
@@ -77,129 +73,129 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="mt-6 flex flex-col items-center justify-center gap-3 text-sm text-[#475569] sm:flex-row">
+            <div className="flex items-center justify-center gap-6 text-sm text-gray-500 mt-4 flex-row flex-nowrap whitespace-nowrap">
               <span>20 Questions</span>
-              <span className="hidden h-4 w-px bg-[#e2e8f0] sm:block" />
+              <span className="text-gray-300">|</span>
               <span>~15 Minutes</span>
-              <span className="hidden h-4 w-px bg-[#e2e8f0] sm:block" />
+              <span className="text-gray-300">|</span>
               <span>Instant Report</span>
             </div>
 
-            <div className="mt-10 h-px w-full bg-[#e2e8f0]" />
+            <div className="h-px w-full bg-[#e2e8f0]" />
           </div>
 
           {/* Scientific bell curve */}
-          <div className="mx-auto mt-12 max-w-6xl">
-            <div className="overflow-hidden border border-[#e2e8f0] bg-white">
+          <div className="mx-auto mt-8 w-full max-w-4xl">
+            <div className="w-full overflow-hidden rounded-lg border border-gray-100 bg-white">
               <svg
-                viewBox="0 0 1200 380"
+                viewBox="0 0 900 280"
                 className="h-auto w-full"
+                preserveAspectRatio="xMidYMid meet"
                 role="img"
                 aria-label="Normal distribution graph with IQ zones and population mean"
               >
-                {/* Plot area */}
-                <rect x="0" y="0" width="1200" height="380" fill="#ffffff" />
-
-                {/* Axes */}
-                <line x1="80" y1="300" x2="1120" y2="300" stroke="#e2e8f0" strokeWidth="2" />
-                <line x1="80" y1="60" x2="80" y2="300" stroke="#e2e8f0" strokeWidth="2" />
-
-                {/* Zone fills (subtle) */}
-                <g>
-                  <rect x="80" y="60" width="208" height="240" fill="#0f172a" opacity="0.06" />
-                  <rect x="288" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.07" />
-                  <rect x="528" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.12" />
-                  <rect x="768" y="60" width="240" height="240" fill="#1d4ed8" opacity="0.16" />
-                  <rect x="1008" y="60" width="112" height="240" fill="#0f172a" opacity="0.10" />
-                </g>
+                <defs>
+                  <linearGradient id="bellFill" x1="0" y1="35" x2="0" y2="240" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#dbeafe" />
+                    <stop offset="100%" stopColor="#ffffff" />
+                  </linearGradient>
+                </defs>
 
                 {/* Zone dividers */}
-                {[80, 288, 528, 768, 1008, 1120].map((x) => (
-                  <line key={x} x1={x} y1="60" x2={x} y2="300" stroke="#e2e8f0" strokeWidth="2" />
+                {[150, 300, 450, 600, 750].map((x) => (
+                  <line
+                    key={x}
+                    x1={x}
+                    y1="0"
+                    x2={x}
+                    y2="240"
+                    stroke="#e2e8f0"
+                    strokeWidth="1"
+                    strokeDasharray="4 6"
+                  />
                 ))}
 
-                {/* Gaussian curve */}
+                {/* Mean line */}
+                <line
+                  x1="450"
+                  y1="0"
+                  x2="450"
+                  y2="240"
+                  stroke="#1d4ed8"
+                  strokeWidth="1"
+                  strokeDasharray="5 6"
+                  opacity="0.85"
+                />
+                <text
+                  x="450"
+                  y="30"
+                  textAnchor="middle"
+                  fontSize="11"
+                  fill="#1d4ed8"
+                  fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                >
+                  μ = 100
+                </text>
+
+                {/* Filled bell curve area */}
                 <path
-                  d="M80 300
-                     C 160 300, 210 292, 260 274
-                     C 340 245, 410 160, 600 96
-                     C 790 160, 860 245, 940 274
-                     C 990 292, 1040 300, 1120 300"
+                  d="M 0,240 C 50,240 100,238 150,230 C 200,220 230,190 270,150 C 310,110 340,60 380,45 C 400,38 420,35 450,35 C 480,35 500,38 520,45 C 560,60 590,110 630,150 C 670,190 700,220 750,230 C 800,238 850,240 900,240 Z"
+                  fill="url(#bellFill)"
+                />
+
+                {/* Curve outline */}
+                <path
+                  d="M 0,240 C 50,240 100,238 150,230 C 200,220 230,190 270,150 C 310,110 340,60 380,45 C 400,38 420,35 450,35 C 480,35 500,38 520,45 C 560,60 590,110 630,150 C 670,190 700,220 750,230 C 800,238 850,240 900,240"
                   fill="none"
                   stroke="#1d4ed8"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                />
-
-                {/* Population mean at 100 (dashed) */}
-                <line
-                  x1="528"
-                  y1="60"
-                  x2="528"
-                  y2="300"
-                  stroke="#0f172a"
-                  strokeOpacity="0.55"
                   strokeWidth="2"
-                  strokeDasharray="7 7"
                 />
-                <g>
-                  <rect x="454" y="68" width="148" height="26" fill="#ffffff" />
-                  <text
-                    x="528"
-                    y="88"
-                    textAnchor="middle"
-                    fontSize="12"
-                    fill="#0f172a"
-                    fillOpacity="0.75"
-                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                  >
-                    Population Mean
-                  </text>
-                </g>
 
-                {/* X-axis ticks and labels */}
-                {[
-                  { x: 80, label: "70" },
-                  { x: 288, label: "85" },
-                  { x: 528, label: "100" },
-                  { x: 768, label: "115" },
-                  { x: 1008, label: "130" },
-                  { x: 1120, label: "145" },
-                ].map((t) => (
-                  <g key={t.label}>
-                    <line x1={t.x} y1="300" x2={t.x} y2="312" stroke="#94a3b8" strokeOpacity="0.55" strokeWidth="2" />
-                    <text
-                      x={t.x}
-                      y="336"
-                      textAnchor={t.x === 80 ? "start" : t.x === 1120 ? "end" : "middle"}
-                      fontSize="12"
-                      fill="#475569"
-                      fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                    >
-                      {t.label}
-                    </text>
-                  </g>
-                ))}
+                {/* X-axis */}
+                <line x1="0" y1="240" x2="900" y2="240" stroke="#cbd5e1" strokeWidth="1.5" />
 
-                {/* Zone labels */}
+                {/* Category labels */}
                 {[
-                  { x: 184, label: "Below Average" },
-                  { x: 408, label: "Average" },
-                  { x: 648, label: "High Average" },
-                  { x: 888, label: "Superior" },
-                  { x: 1064, label: "Gifted" },
+                  { x: 75, label: "Below Avg", bold: false },
+                  { x: 225, label: "Average", bold: false },
+                  { x: 450, label: "High Avg", bold: true },
+                  { x: 675, label: "Superior", bold: false },
+                  { x: 825, label: "Gifted", bold: false },
                 ].map((z) => (
                   <text
                     key={z.label}
                     x={z.x}
-                    y="366"
+                    y="20"
                     textAnchor="middle"
-                    fontSize="12"
-                    fill="#0f172a"
-                    fillOpacity="0.72"
+                    fontSize="11"
+                    fill={z.bold ? "#1d4ed8" : "#64748b"}
+                    fontWeight={z.bold ? "700" : "400"}
                     fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
                   >
                     {z.label}
+                  </text>
+                ))}
+
+                {/* X-axis labels */}
+                {[
+                  { x: 75, label: "70" },
+                  { x: 225, label: "85" },
+                  { x: 375, label: "100", bold: true },
+                  { x: 525, label: "115" },
+                  { x: 675, label: "130" },
+                  { x: 825, label: "145" },
+                ].map((t) => (
+                  <text
+                    key={t.label}
+                    x={t.x}
+                    y="260"
+                    textAnchor="middle"
+                    fontSize="11"
+                    fill={t.bold ? "#1d4ed8" : "#64748b"}
+                    fontWeight={t.bold ? "700" : "400"}
+                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+                  >
+                    {t.label}
                   </text>
                 ))}
               </svg>
@@ -208,17 +204,17 @@ export default function Home() {
         </section>
 
         {/* SECTION 3 — SCIENTIFIC CREDIBILITY */}
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-3xl text-left sm:text-center">
             <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
               <span className="uppercase">Methodology</span>
             </div>
-            <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
               Built on a Century of Intelligence Research
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
+          <div className="mt-10 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {[
               {
                 title: "Cattell-Horn-Carroll Theory",
@@ -237,7 +233,7 @@ export default function Home() {
                 <div className="font-serif text-lg font-semibold tracking-tight">
                   {c.title}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-[#475569]">
+                <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
                   {c.body}
                 </p>
               </div>
@@ -247,21 +243,21 @@ export default function Home() {
 
         {/* SECTION 4 — WHAT WE MEASURE */}
         <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
             <div className="max-w-3xl">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">Cognitive Domains</span>
               </div>
-              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
                 Four Abilities. One Complete Picture.
               </h2>
-              <p className="mt-4 text-base leading-8 text-[#475569]">
+              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
                 Unlike single-score IQ tests, BrainScale measures the distinct
                 cognitive systems that together form general intelligence.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 {
                   n: "01",
@@ -291,7 +287,7 @@ export default function Home() {
                   <div className="mt-4 font-serif text-lg font-semibold tracking-tight">
                     {d.title}
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-[#475569]">
+                  <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
                     {d.body}
                   </p>
                 </div>
@@ -301,16 +297,16 @@ export default function Home() {
         </section>
 
         {/* SECTION 5 — IQ SCORE DISTRIBUTION */}
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
             <div className="lg:col-span-5">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">Score Interpretation</span>
               </div>
-              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
                 Where Does the Population Fall?
               </h2>
-              <p className="mt-4 text-base leading-8 text-[#475569]">
+              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
                 IQ scores follow a normal distribution with a mean of 100 and
                 standard deviation of 15. Approximately 68% of the population
                 scores between 85 and 115. BrainScale uses this same scale,
@@ -375,15 +371,15 @@ export default function Home() {
         </section>
 
         {/* SECTION 6 — SAMPLE QUESTION */}
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-3xl text-left sm:text-center">
             <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
               <span className="uppercase">Sample Item</span>
             </div>
-            <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
               What to Expect
             </h2>
-            <p className="mt-4 text-base leading-8 text-[#475569]">
+            <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
               Each question is carefully calibrated to measure a specific
               cognitive ability. Here is one example from our fluid reasoning
               module.
@@ -451,17 +447,17 @@ export default function Home() {
 
         {/* SECTION 7 — PROCESS */}
         <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
             <div className="max-w-3xl">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">How it works</span>
               </div>
-              <h2 className="mt-4 text-balance font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
                 Simple. Private. Rigorous.
               </h2>
             </div>
 
-            <div className="mt-12 grid gap-10 md:grid-cols-3">
+            <div className="mt-10 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
                   n: "01",
@@ -486,7 +482,7 @@ export default function Home() {
                   <div className="mt-3 font-serif text-lg font-semibold tracking-tight">
                     {s.title}
                   </div>
-                  <p className="mt-3 text-sm leading-7 text-[#475569]">
+                  <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
                     {s.body}
                   </p>
                 </div>
@@ -496,16 +492,16 @@ export default function Home() {
         </section>
 
         {/* SECTION 8 — PRIVACY / TRUST */}
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-6">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">Privacy</span>
               </div>
-              <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
                 Completely Anonymous
               </h2>
-              <p className="mt-4 text-base leading-8 text-[#475569]">
+              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
                 BrainScale collects no personal data. No account, no email, no
                 tracking cookies. Your results exist only in your browser
                 session. We cannot identify you.
@@ -516,10 +512,10 @@ export default function Home() {
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">Independence</span>
               </div>
-              <h2 className="mt-4 font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
                 No Upsells. No Tricks.
               </h2>
-              <p className="mt-4 text-base leading-8 text-[#475569]">
+              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
                 The full assessment and complete results are free. We do not ask
                 for payment before showing results, require email to unlock
                 scores, or sell your data to third parties.
@@ -530,14 +526,14 @@ export default function Home() {
 
         {/* SECTION 9 — TESTIMONIALS */}
         <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="text-center">
+          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
+            <div className="text-left sm:text-center">
               <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
                 <span className="uppercase">Illustrative examples</span>
               </div>
             </div>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-3">
+            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
                   quote:
@@ -554,8 +550,11 @@ export default function Home() {
                     "If you need a certified IQ assessment for academic, medical, or legal reasons, consult a licensed psychologist for a validated multi-hour evaluation.",
                   who: "Example scenario (not a user testimonial)",
                 },
-              ].map((t) => (
-                <div key={t.who} className="border border-[#e2e8f0] bg-white p-6">
+              ].map((t, i) => (
+                <div
+                  key={`${t.who}-${i}`}
+                  className="border border-[#e2e8f0] bg-white p-6"
+                >
                   <p className="font-serif text-base italic leading-7 text-[#0f172a]">
                     “{t.quote}”
                   </p>
@@ -569,9 +568,9 @@ export default function Home() {
         </section>
 
         {/* SECTION 10 — FAQ */}
-        <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 lg:px-8">
+        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-3xl">
-            <h2 className="font-serif text-3xl font-semibold tracking-tight sm:text-4xl">
+            <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
               Frequently Asked Questions
             </h2>
             <div className="mt-10 divide-y divide-[#e2e8f0] border-y border-[#e2e8f0]">
@@ -608,7 +607,7 @@ export default function Home() {
                       +
                     </span>
                   </summary>
-                  <div className="mt-3 text-sm leading-7 text-[#475569]">
+                  <div className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
                     {item.a}
                   </div>
                 </details>

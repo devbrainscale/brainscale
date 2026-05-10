@@ -307,9 +307,9 @@ export default function TestPage() {
 
   if (!current) {
     return (
-      <div className="min-h-dvh bg-white text-[#0f172a]">
+      <div className="min-h-dvh bg-[#0a0f1e] text-white">
         <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-          <div className="rounded-2xl border border-[#e2e8f0] bg-white p-6 text-sm text-slate-600">
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-6 text-white/70">
             Test is unavailable.
           </div>
         </div>
@@ -318,68 +318,69 @@ export default function TestPage() {
   }
 
   return (
-    <div className="min-h-dvh bg-white text-[#0f172a] font-sans">
-      {/* Top bar */}
-      <header className="sticky top-0 z-20 border-b border-[#e2e8f0] bg-white">
-        <div className="mx-auto flex max-w-[900px] items-center justify-between gap-4 px-4 py-4 sm:px-6">
-          <a
-            href="/"
-            className="rounded-md px-1 py-1 font-serif text-base font-semibold tracking-tight text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/30"
-            aria-label="Back to BrainScale"
-          >
-            BrainScale
-          </a>
+    <div className="min-h-dvh bg-[#0a0f1e] text-white">
+      {/* Background glow */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-28 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[#3b82f6]/18 blur-3xl" />
+        <div className="absolute top-28 right-[-170px] h-[520px] w-[520px] rounded-full bg-[#8b5cf6]/16 blur-3xl" />
+        <div className="absolute bottom-[-240px] left-[-180px] h-[520px] w-[520px] rounded-full bg-[#3b82f6]/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(1100px_650px_at_50%_0%,rgba(59,130,246,0.10),transparent_55%),radial-gradient(900px_600px_at_90%_35%,rgba(139,92,246,0.10),transparent_60%)]" />
+      </div>
 
-          <div className="text-center text-[11px] font-semibold tracking-[0.14em] text-slate-500">
-            <span className="uppercase">Question</span>{" "}
-            <span className="text-slate-600">{index + 1}</span>{" "}
-            <span className="text-slate-400">of</span>{" "}
-            <span className="text-slate-600">{TOTAL_QUESTIONS}</span>
+      {/* Top progress */}
+      <header className="sticky top-0 z-20 border-b border-white/10 bg-[#0a0f1e]/70 backdrop-blur">
+        <div className="mx-auto max-w-3xl px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between gap-4">
+            <a
+              href="/"
+              className="inline-flex items-center gap-2 rounded-xl px-2 py-1 text-sm font-semibold tracking-tight text-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]"
+              aria-label="Back to BrainScale"
+            >
+              <span className="grid h-8 w-8 place-items-center rounded-xl bg-white/5 ring-1 ring-white/10">
+                BS
+              </span>
+              BrainScale
+            </a>
+
+            <div className="text-sm text-white/70">
+              Question{" "}
+              <span className="font-semibold text-white">{index + 1}</span> of{" "}
+              <span className="font-semibold text-white">{TOTAL_QUESTIONS}</span>
+            </div>
           </div>
 
-          <div
-            className="h-1 w-[140px] overflow-hidden rounded-full bg-[#e2e8f0]"
-            aria-hidden="true"
-          >
+          <div className="mt-4 h-2 w-full rounded-full bg-white/10">
             <div
-              className="h-1 bg-[#1d4ed8] transition-[width] duration-300"
+              className="h-2 rounded-full bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] transition-[width] duration-300"
               style={{ width: `${progress}%` }}
+              aria-hidden="true"
             />
           </div>
         </div>
-
-        {/* Progress bar */}
-        <div className="h-1 w-full bg-[#e2e8f0]" aria-hidden="true">
-          <div
-            className="h-1 bg-[#1d4ed8] transition-[width] duration-300"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
       </header>
 
-      <main className="mx-auto max-w-[900px] px-4 py-10 sm:px-6">
+      <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
         <div
           className={[
             "transition-opacity duration-300",
             isFading ? "opacity-0" : "opacity-100",
           ].join(" ")}
         >
-          {/* Question card */}
-          <div className="mx-auto max-w-[680px] rounded-2xl border border-[#e2e8f0] bg-white p-6 sm:p-10">
-            <div className="flex flex-wrap items-start justify-between gap-4">
-              <div className="text-[11px] font-semibold tracking-[0.14em] text-slate-500">
-                <span className="uppercase">
-                  {current.category.toUpperCase()}
-                </span>
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex items-center rounded-full border border-white/10 bg-[#0a0f1e]/40 px-3 py-1 text-xs font-semibold text-white/75">
+                {current.category}
               </div>
-              <div className="text-xs text-slate-500">Choose the best answer</div>
+              <div className="text-xs text-white/55">
+                Choose the best answer
+              </div>
             </div>
 
-            <h1 className="mt-5 text-pretty font-serif text-2xl font-semibold leading-8 tracking-tight text-[#0f172a] sm:text-3xl">
+            <h1 className="mt-5 text-pretty text-xl font-bold leading-7 tracking-tight sm:text-2xl">
               {current.prompt}
             </h1>
 
-            <div className="mt-7 grid gap-3">
+            <div className="mt-6 grid gap-3">
               {current.choices.map((c) => {
                 const active = selectedKey === c.key;
                 return (
@@ -388,26 +389,26 @@ export default function TestPage() {
                     type="button"
                     onClick={() => onPick(c.key)}
                     className={[
-                      "group flex w-full items-start gap-4 rounded-xl border px-4 py-4 text-left transition-colors",
-                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/25",
+                      "group flex w-full items-start gap-3 rounded-2xl border px-4 py-4 text-left transition",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]",
                       active
-                        ? "border-[#1d4ed8] bg-[#eff6ff]"
-                        : "border-[#e2e8f0] bg-white hover:border-[#1d4ed8]",
+                        ? "border-[#3b82f6]/60 bg-[#3b82f6]/10"
+                        : "border-white/10 bg-[#0a0f1e]/20 hover:border-white/20 hover:bg-white/[0.06]",
                     ].join(" ")}
                     aria-pressed={active}
                   >
                     <span
                       className={[
-                        "mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm font-semibold transition-colors",
+                        "mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl text-sm font-bold ring-1",
                         active
-                          ? "bg-[#1d4ed8] text-white"
-                          : "bg-[#f1f5f9] text-slate-600 group-hover:bg-[#1d4ed8] group-hover:text-white",
+                          ? "bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] text-white ring-white/10"
+                          : "bg-white/5 text-white/80 ring-white/10 group-hover:bg-white/10",
                       ].join(" ")}
                     >
                       {c.key}
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-sm leading-6 text-[#0f172a] sm:text-base">
+                      <span className="block text-sm leading-6 text-white/90 sm:text-base">
                         {c.text}
                       </span>
                     </span>
@@ -415,33 +416,32 @@ export default function TestPage() {
                 );
               })}
             </div>
-          </div>
 
-          {/* Bottom bar */}
-          <div className="mx-auto mt-6 flex max-w-[680px] flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="text-xs text-slate-500">
-              Your answers are private and not stored
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-xs text-white/55">
+                Your selections are stored locally for this session.
+              </div>
+
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={!selectedKey || isFading}
+                className={[
+                  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white transition",
+                  "shadow-[0_0_0_1px_rgba(255,255,255,0.08),0_26px_60px_-30px_rgba(59,130,246,0.75)]",
+                  !selectedKey || isFading
+                    ? "cursor-not-allowed bg-white/10 text-white/50 shadow-none"
+                    : "bg-gradient-to-r from-[#3b82f6] to-[#8b5cf6] hover:opacity-95",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#3b82f6]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1e]",
+                ].join(" ")}
+              >
+                {index === TOTAL_QUESTIONS - 1 ? "Finish →" : "Next →"}
+              </button>
             </div>
-
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={!selectedKey || isFading}
-              className={[
-                "inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition-colors",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/25",
-                !selectedKey || isFading
-                  ? "cursor-not-allowed bg-[#e2e8f0] text-slate-500"
-                  : "bg-[#1d4ed8] text-white hover:bg-[#1d4ed8]/95",
-              ].join(" ")}
-            >
-              {index === TOTAL_QUESTIONS - 1 ? "Finish →" : "Next →"}
-            </button>
           </div>
 
-          {/* Footer tip */}
-          <div className="mx-auto mt-10 max-w-[680px] text-center text-xs text-slate-500">
-            Tip: Trust your instincts — don&apos;t overthink each question.
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm text-white/70">
+            Tip: Don’t overthink—pick the most consistent pattern and move on.
           </div>
         </div>
       </main>
