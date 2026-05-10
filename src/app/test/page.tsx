@@ -307,7 +307,7 @@ export default function TestPage() {
       <header className="sticky top-0 z-20 border-b border-[#e2e8f0] bg-white">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
-            
+            <a
               href="/"
               className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40"
               aria-label="BrainScale home"
