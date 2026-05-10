@@ -54,7 +54,7 @@ export default function HomePage() {
 
           <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
             Discover your{" "}
-            <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>IQ score</em>
+            <em style={{ color: "#5B4FCF", fontStyle: "italic", whiteSpace: "nowrap" }}>IQ score</em>
             <br />in 25 minutes
           </h1>
 
