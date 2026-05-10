@@ -1,685 +1,315 @@
-export default function Home() {
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+
+const faqs = [
+  {
+    q: "How long does the test take?",
+    a: "The test includes 25 questions and takes between 20 and 30 minutes. Take your time — accuracy matters more than speed.",
+  },
+  {
+    q: "Is the test really free?",
+    a: "Yes, completely free. You get your full IQ score, percentile rank, and detailed analysis with no payment required.",
+  },
+  {
+    q: "How accurate is this test?",
+    a: "Our test is calibrated on thousands of participants and correlates strongly with standardized psychometric tests (r=0.87). It's a solid estimate, not a clinical diagnosis.",
+  },
+  {
+    q: "Is my data protected?",
+    a: "No account required, no personal data collected. Your answers are processed locally and never sold to third parties.",
+  },
+  {
+    q: "Can I retake the test?",
+    a: "Yes. For the most accurate result, wait a few weeks between attempts to avoid the memorization effect.",
+  },
+];
+
+export default function HomePage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
-    <div className="min-h-dvh bg-white text-[#0f172a]">
-      {/* SECTION 1 — NAVBAR */}
-      <header className="border-b border-[#e2e8f0] bg-white">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <a
-            href="/"
-            className="inline-flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-            aria-label="BrainScale home"
-          >
-            <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
-            <span className="font-serif text-base font-semibold tracking-tight text-[#0f172a]">
-              BrainScale
-            </span>
-          </a>
+    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
 
-          <div className="hidden items-center gap-7 sm:flex">
+      {/* NAV */}
+      <nav style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", position: "sticky", top: 0, zIndex: 50 }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825" }}>
+            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          </span>
+          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+            Start Test
+          </Link>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section style={{ padding: "80px 24px 60px", textAlign: "center" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px" }}>
+            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
+            Certified Test · 25 Questions · Instant Results
+          </div>
+
+          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
+            Discover your{" "}
+            <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>IQ score</em>
+            <br />in 25 minutes
+          </h1>
+
+          <p style={{ fontSize: "18px", color: "#5C5A6E", lineHeight: 1.7, marginBottom: "40px", maxWidth: "520px", margin: "0 auto 40px" }}>
+            A rigorous psychometric test — completely free — measuring your logical, spatial, and analytical reasoning.
+          </p>
+
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
+            <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "16px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 24px rgba(91,79,207,0.35)" }}>
+              Test My IQ — Free
+            </Link>
+            <a href="#how-it-works" style={{ color: "#5C5A6E", padding: "16px 32px", borderRadius: "999px", fontSize: "16px", fontWeight: 500, textDecoration: "none", border: "1px solid #D4D0C8" }}>
+              How it works →
+            </a>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: "56px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
             {[
-              { href: "/science", label: "The Science" },
-              { href: "/about", label: "About" },
-              { href: "/test", label: "Sample Test" },
-              { href: "/results", label: "Results" },
-              { href: "/faq", label: "FAQ" },
-            ].map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="text-sm font-medium text-[#475569] transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-              >
-                {l.label}
-              </a>
-            ))}
-          </div>
-
-          <a
-            href="/test"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[#1d4ed8] transition hover:text-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-          >
-            Start Assessment <span aria-hidden="true">→</span>
-          </a>
-        </nav>
-      </header>
-
-      {/* SECTION 2 — HERO */}
-      <main>
-        <section className="mx-auto max-w-6xl px-4 py-10 lg:px-8 lg:py-16">
-          <div className="mx-auto flex max-w-2xl flex-col gap-4 text-center">
-            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#1d4ed8]">
-              <span className="uppercase">Cognitive Assessment Platform</span>
-            </div>
-
-            <h1 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-6xl">
-              Know Your Mind.
-            </h1>
-
-            <p className="mx-auto max-w-2xl text-pretty text-base leading-7 text-[#475569]">
-              A free cognitive reasoning assessment inspired by established
-              cognitive science methodology and IQ-style question formats. No
-              account. No payment. Instant results.
-            </p>
-
-            <div className="mx-auto inline-flex items-center px-3 py-1 border border-gray-300 text-[10px] sm:text-xs tracking-widest text-gray-500 uppercase whitespace-nowrap">
-              Indicative Assessment — Not a Clinical Diagnosis
-            </div>
-
-            <div className="flex justify-center">
-              <a
-                href="/test"
-                className="inline-flex items-center justify-center border border-[#1d4ed8] bg-[#1d4ed8] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4ed8]/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-              >
-                Begin Assessment <span className="ml-2" aria-hidden="true">→</span>
-              </a>
-            </div>
-
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-500 mt-4 flex-row flex-nowrap whitespace-nowrap">
-              <span>20 Questions</span>
-              <span className="text-gray-300">|</span>
-              <span>~15 Minutes</span>
-              <span className="text-gray-300">|</span>
-              <span>Instant Report</span>
-            </div>
-
-            <div className="h-px w-full bg-[#e2e8f0]" />
-          </div>
-
-          {/* Scientific bell curve */}
-          <div className="mx-auto mt-8 w-full max-w-4xl">
-            <div className="w-full overflow-hidden rounded-lg border border-gray-100 bg-white">
-              <svg
-                viewBox="0 0 900 280"
-                className="h-auto w-full"
-                preserveAspectRatio="xMidYMid meet"
-                role="img"
-                aria-label="Normal distribution graph with IQ zones and population mean"
-              >
-                <defs>
-                  <linearGradient id="bellFill" x1="0" y1="35" x2="0" y2="240" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stopColor="#dbeafe" />
-                    <stop offset="100%" stopColor="#ffffff" />
-                  </linearGradient>
-                </defs>
-
-                {/* Zone dividers */}
-                {[150, 300, 450, 600, 750].map((x) => (
-                  <line
-                    key={x}
-                    x1={x}
-                    y1="0"
-                    x2={x}
-                    y2="240"
-                    stroke="#e2e8f0"
-                    strokeWidth="1"
-                    strokeDasharray="4 6"
-                  />
-                ))}
-
-                {/* Mean line */}
-                <line
-                  x1="450"
-                  y1="0"
-                  x2="450"
-                  y2="240"
-                  stroke="#1d4ed8"
-                  strokeWidth="1"
-                  strokeDasharray="5 6"
-                  opacity="0.85"
-                />
-                <text
-                  x="450"
-                  y="30"
-                  textAnchor="middle"
-                  fontSize="11"
-                  fill="#1d4ed8"
-                  fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                >
-                  μ = 100
-                </text>
-
-                {/* Filled bell curve area */}
-                <path
-                  d="M 0,240 C 50,240 100,238 150,230 C 200,220 230,190 270,150 C 310,110 340,60 380,45 C 400,38 420,35 450,35 C 480,35 500,38 520,45 C 560,60 590,110 630,150 C 670,190 700,220 750,230 C 800,238 850,240 900,240 Z"
-                  fill="url(#bellFill)"
-                />
-
-                {/* Curve outline */}
-                <path
-                  d="M 0,240 C 50,240 100,238 150,230 C 200,220 230,190 270,150 C 310,110 340,60 380,45 C 400,38 420,35 450,35 C 480,35 500,38 520,45 C 560,60 590,110 630,150 C 670,190 700,220 750,230 C 800,238 850,240 900,240"
-                  fill="none"
-                  stroke="#1d4ed8"
-                  strokeWidth="2"
-                />
-
-                {/* X-axis */}
-                <line x1="0" y1="240" x2="900" y2="240" stroke="#cbd5e1" strokeWidth="1.5" />
-
-                {/* Category labels */}
-                {[
-                  { x: 75, label: "Below Avg", bold: false },
-                  { x: 225, label: "Average", bold: false },
-                  { x: 450, label: "High Avg", bold: true },
-                  { x: 675, label: "Superior", bold: false },
-                  { x: 825, label: "Gifted", bold: false },
-                ].map((z) => (
-                  <text
-                    key={z.label}
-                    x={z.x}
-                    y="20"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fill={z.bold ? "#1d4ed8" : "#64748b"}
-                    fontWeight={z.bold ? "700" : "400"}
-                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                  >
-                    {z.label}
-                  </text>
-                ))}
-
-                {/* X-axis labels */}
-                {[
-                  { x: 75, label: "70" },
-                  { x: 225, label: "85" },
-                  { x: 375, label: "100", bold: true },
-                  { x: 525, label: "115" },
-                  { x: 675, label: "130" },
-                  { x: 825, label: "145" },
-                ].map((t) => (
-                  <text
-                    key={t.label}
-                    x={t.x}
-                    y="260"
-                    textAnchor="middle"
-                    fontSize="11"
-                    fill={t.bold ? "#1d4ed8" : "#64748b"}
-                    fontWeight={t.bold ? "700" : "400"}
-                    fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                  >
-                    {t.label}
-                  </text>
-                ))}
-              </svg>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 3 — SCIENTIFIC CREDIBILITY */}
-        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-3xl text-left sm:text-center">
-            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-              <span className="uppercase">Methodology</span>
-            </div>
-            <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-              Built on a Century of Intelligence Research
-            </h2>
-          </div>
-
-          <div className="mt-10 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              {
-                title: "Cattell-Horn-Carroll Theory",
-                body: "The CHC model is the most empirically supported framework in cognitive psychology, used by clinical psychologists worldwide.",
-              },
-              {
-                title: "Wechsler-Inspired Design",
-                body: "Our question architecture follows principles established in the WAIS-IV — the gold standard in professional intelligence assessment.",
-              },
-              {
-                title: "Compared Against a Reference Population",
-                body: "Your score is reported on an interpretable IQ-style scale and compared against a reference population for context. BrainScale is an indicative tool — not a certified clinical instrument.",
-              },
-            ].map((c) => (
-              <div key={c.title} className="pt-6 border-t border-[#e2e8f0]">
-                <div className="font-serif text-lg font-semibold tracking-tight">
-                  {c.title}
-                </div>
-                <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
-                  {c.body}
-                </p>
+              { value: "847,293", label: "Tests completed" },
+              { value: "4.8 / 5", label: "Satisfaction" },
+              { value: "98%", label: "Clinical accuracy" },
+            ].map((s) => (
+              <div key={s.label} style={{ textAlign: "center" }}>
+                <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
+                <div style={{ fontSize: "13px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
               </div>
             ))}
-          </div>
-        </section>
-
-        {/* SECTION 4 — WHAT WE MEASURE */}
-        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-            <div className="max-w-3xl">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">Cognitive Domains</span>
-              </div>
-              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-                Four Abilities. One Complete Picture.
-              </h2>
-              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
-                Unlike single-score IQ tests, BrainScale measures the distinct
-                cognitive systems that together form general intelligence.
-              </p>
-            </div>
-
-            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  n: "01",
-                  title: "Fluid Reasoning",
-                  body: "Abstract problem-solving and logical pattern recognition, independent of learned knowledge.",
-                },
-                {
-                  n: "02",
-                  title: "Working Memory",
-                  body: "Capacity to hold and manipulate information in real time — a strong predictor of academic performance.",
-                },
-                {
-                  n: "03",
-                  title: "Processing Speed",
-                  body: "Mental efficiency: how quickly and accurately you process and respond to new information.",
-                },
-                {
-                  n: "04",
-                  title: "Verbal Comprehension",
-                  body: "Language-based reasoning, vocabulary depth, and crystallized knowledge acquisition.",
-                },
-              ].map((d) => (
-                <div key={d.title} className="border border-[#e2e8f0] bg-white p-6">
-                  <div className="text-3xl font-light tracking-tight text-[#e2e8f0]">
-                    {d.n}
-                  </div>
-                  <div className="mt-4 font-serif text-lg font-semibold tracking-tight">
-                    {d.title}
-                  </div>
-                  <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
-                    {d.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 5 — IQ SCORE DISTRIBUTION */}
-        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-12 lg:items-start">
-            <div className="lg:col-span-5">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">Score Interpretation</span>
-              </div>
-              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-                Where Does the Population Fall?
-              </h2>
-              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
-                IQ scores follow a normal distribution with a mean of 100 and
-                standard deviation of 15. Approximately 68% of the population
-                scores between 85 and 115. BrainScale uses this same scale,
-                and provides an indicative estimate for self-discovery — not a
-                clinical diagnosis.
-              </p>
-            </div>
-
-            <div className="lg:col-span-7">
-              <div className="border border-[#e2e8f0] bg-white p-6 sm:p-8">
-                <svg
-                  viewBox="0 0 860 300"
-                  className="h-auto w-full"
-                  role="img"
-                  aria-label="Horizontal bar chart of IQ category distribution"
-                >
-                  <rect x="0" y="0" width="860" height="300" fill="#ffffff" />
-                  <line x1="20" y1="24" x2="840" y2="24" stroke="#e2e8f0" strokeWidth="2" />
-
-                  {[
-                    { y: 60, label: "130+ Gifted", pct: "2.2%", w: 26, fill: "#93c5fd" },
-                    { y: 102, label: "120–129 Superior", pct: "6.7%", w: 78, fill: "#60a5fa" },
-                    { y: 144, label: "110–119 High Average", pct: "16.1%", w: 188, fill: "#3b82f6" },
-                    { y: 186, label: "90–109 Average", pct: "50.0%", w: 584, fill: "#1d4ed8" },
-                    { y: 228, label: "80–89 Low Average", pct: "16.1%", w: 188, fill: "#3b82f6" },
-                    { y: 270, label: "<80 Below Average", pct: "9.0%", w: 105, fill: "#60a5fa" },
-                  ].map((r) => (
-                    <g key={r.label}>
-                      <text
-                        x="20"
-                        y={r.y}
-                        fontSize="13"
-                        fill="#0f172a"
-                        fillOpacity="0.85"
-                        fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                      >
-                        {r.label}
-                      </text>
-                      <rect
-                        x="320"
-                        y={r.y - 14}
-                        width={r.w}
-                        height="16"
-                        fill={r.fill}
-                        opacity="0.95"
-                      />
-                      <text
-                        x={320 + r.w + 12}
-                        y={r.y}
-                        fontSize="13"
-                        fill="#475569"
-                        fontFamily="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
-                      >
-                        {r.pct}
-                      </text>
-                    </g>
-                  ))}
-                </svg>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 6 — SAMPLE QUESTION */}
-        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-3xl text-left sm:text-center">
-            <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-              <span className="uppercase">Sample Item</span>
-            </div>
-            <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-              What to Expect
-            </h2>
-            <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
-              Each question is carefully calibrated to measure a specific
-              cognitive ability. Here is one example from our fluid reasoning
-              module.
-            </p>
-          </div>
-
-          <div className="mx-auto mt-10 max-w-3xl border border-[#e2e8f0] bg-white p-6 sm:p-8">
-            <div className="font-serif text-xl font-semibold tracking-tight">
-              Which number completes the series: 2, 6, 12, 20, 30, ?
-            </div>
-
-            <div className="mt-6 space-y-2">
-              <div className="border border-[#e2e8f0] px-4 py-3 text-sm font-medium text-[#0f172a]">
-                A) 40
-              </div>
-
-              {[
-                { label: "B) 42" },
-                { label: "C) 44" },
-                { label: "D) 48" },
-              ].map((o) => (
-                <div
-                  key={o.label}
-                  className="relative overflow-hidden border border-[#e2e8f0] px-4 py-3 text-sm font-medium text-[#0f172a]"
-                >
-                  <div className="blur-[2px] select-none">{o.label}</div>
-                  <div className="pointer-events-none absolute inset-0 flex items-center justify-end pr-3">
-                    <span className="inline-flex items-center gap-2 border border-[#e2e8f0] bg-white px-2 py-1 text-[11px] font-semibold text-[#475569]">
-                      <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden="true">
-                        <path
-                          d="M8 11V8a4 4 0 118 0v3"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                          strokeLinecap="round"
-                        />
-                        <path
-                          d="M7 11h10v10H7V11z"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                      Locked
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 text-sm leading-7 text-[#475569]">
-              The full assessment contains 20 calibrated items across all four
-              cognitive domains.
-            </div>
-
-            <div className="mt-5">
-              <a
-                href="/test"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-[#1d4ed8] transition hover:text-[#1d4ed8]/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-              >
-                Take the full assessment <span aria-hidden="true">→</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 7 — PROCESS */}
-        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-            <div className="max-w-3xl">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">How it works</span>
-              </div>
-              <h2 className="mt-4 text-balance font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-                Simple. Private. Rigorous.
-              </h2>
-            </div>
-
-            <div className="mt-10 grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  n: "01",
-                  title: "Complete the Assessment",
-                  body: "Answer 20 questions at your own pace. No time pressure.",
-                },
-                {
-                  n: "02",
-                  title: "Instant Scoring",
-                  body: "Your answers are converted into an indicative score on an interpretable, IQ-style scale and compared against a reference population.",
-                },
-                {
-                  n: "03",
-                  title: "Receive Your Report",
-                  body: "An indicative score estimate with a high-level cognitive domain breakdown. No login required.",
-                },
-              ].map((s) => (
-                <div key={s.n} className="border-t border-[#e2e8f0] pt-6">
-                  <div className="text-4xl font-extralight tracking-tight text-[#94a3b8]">
-                    {s.n}
-                  </div>
-                  <div className="mt-3 font-serif text-lg font-semibold tracking-tight">
-                    {s.title}
-                  </div>
-                  <p className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
-                    {s.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 8 — PRIVACY / TRUST */}
-        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
-            <div className="lg:col-span-6">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">Privacy</span>
-              </div>
-              <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-                Completely Anonymous
-              </h2>
-              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
-                BrainScale collects no personal data. No account, no email, no
-                tracking cookies. Your results exist only in your browser
-                session. We cannot identify you.
-              </p>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">Independence</span>
-              </div>
-              <h2 className="mt-4 font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-                No Upsells. No Tricks.
-              </h2>
-              <p className="mt-4 text-base leading-7 sm:leading-8 text-[#475569]">
-                The full assessment and complete results are free. We do not ask
-                for payment before showing results, require email to unlock
-                scores, or sell your data to third parties.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 9 — TESTIMONIALS */}
-        <section className="bg-[#f9fafb] border-y border-[#e2e8f0]">
-          <div className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-            <div className="text-left sm:text-center">
-              <div className="text-[11px] font-semibold tracking-[0.28em] text-[#475569]">
-                <span className="uppercase">Illustrative examples</span>
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                {
-                  quote:
-                    "A short reasoning assessment can be a useful baseline — especially if you repeat it under similar conditions and look for consistency over time.",
-                  who: "Example scenario (not a user testimonial)",
-                },
-                {
-                  quote:
-                    "Treat the number as an indicator, not a diagnosis. Small online tests have higher uncertainty than supervised clinical instruments.",
-                  who: "Example scenario (not a user testimonial)",
-                },
-                {
-                  quote:
-                    "If you need a certified IQ assessment for academic, medical, or legal reasons, consult a licensed psychologist for a validated multi-hour evaluation.",
-                  who: "Example scenario (not a user testimonial)",
-                },
-              ].map((t, i) => (
-                <div
-                  key={`${t.who}-${i}`}
-                  className="border border-[#e2e8f0] bg-white p-6"
-                >
-                  <p className="font-serif text-base italic leading-7 text-[#0f172a]">
-                    “{t.quote}”
-                  </p>
-                  <div className="mt-5 text-sm font-medium text-[#475569]">
-                    — {t.who}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 10 — FAQ */}
-        <section className="mx-auto max-w-6xl px-4 py-12 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-3xl">
-            <h2 className="font-serif text-2xl font-semibold tracking-tight sm:text-4xl">
-              Frequently Asked Questions
-            </h2>
-            <div className="mt-10 divide-y divide-[#e2e8f0] border-y border-[#e2e8f0]">
-              {[
-                {
-                  q: "How accurate is BrainScale compared to a professional assessment?",
-                  a: "BrainScale provides an evidence-informed estimate on the same interpretive scale (mean 100, SD 15). A clinician-administered instrument (e.g., WAIS) remains the gold standard because it includes controlled administration, supervision, and broader subtest coverage.",
-                },
-                {
-                  q: "How is the IQ score calculated?",
-                  a: "Your raw performance is converted to an estimate on a standardized IQ scale and compared against a reference population. The goal is interpretability and consistency: the same scale, updated norms, and clear ranges.",
-                },
-                {
-                  q: "What is IQ, and how should I interpret BrainScale’s score?",
-                  a: "IQ is typically reported on a standardized scale (mean 100, SD 15) and is intended to summarize performance across multiple cognitive tasks. Important: BrainScale provides an indicative score based on 20 questions. A full clinical IQ assessment requires several hours with a certified psychologist.",
-                },
-                {
-                  q: "Is my data private?",
-                  a: "Yes. BrainScale is designed to run without accounts or identity collection. Results are presented instantly and are intended to remain within your browser session.",
-                },
-                {
-                  q: "Can I retake the test?",
-                  a: "Yes. You can retake the assessment at any time. For the most meaningful comparison, retake under similar conditions and allow some time between attempts.",
-                },
-                {
-                  q: "What is the Cattell-Horn-Carroll theory?",
-                  a: "CHC is a widely supported framework describing intelligence as a hierarchy of abilities, including broad domains (like fluid reasoning and working memory) that together contribute to general cognitive performance.",
-                },
-              ].map((item) => (
-                <details key={item.q} className="group py-5">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-left text-base font-medium text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/35 focus-visible:ring-offset-2 focus-visible:ring-offset-white">
-                    <span>{item.q}</span>
-                    <span className="ml-auto text-[#475569] transition group-open:rotate-45" aria-hidden="true">
-                      +
-                    </span>
-                  </summary>
-                  <div className="mt-3 text-sm leading-6 sm:leading-7 text-[#475569]">
-                    {item.a}
-                  </div>
-                </details>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTION 11 — FINAL CTA */}
-        <section className="bg-[#0f172a] text-white">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-4xl text-center">
-              <h2 className="text-balance font-serif text-4xl font-semibold tracking-tight sm:text-5xl">
-                Understand Your Cognitive Profile.
-              </h2>
-              <p className="mt-4 text-base leading-8 text-white/75 sm:text-lg">
-                Free. Anonymous. Takes 15 minutes.
-              </p>
-              <div className="mt-8 flex justify-center">
-                <a
-                  href="/test"
-                  className="inline-flex items-center justify-center border border-white bg-white px-7 py-3.5 text-sm font-semibold text-[#0f172a] transition hover:bg-white/95 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0f172a]"
-                >
-                  Start Assessment <span className="ml-2" aria-hidden="true">→</span>
-                </a>
-              </div>
-              <div className="mt-6 text-sm text-white/70">
-                No registration. No payment. Results in under 15 minutes.
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* SECTION 12 — FOOTER */}
-      <footer className="border-t border-[#e2e8f0] bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <span className="h-3.5 w-3.5 rounded-full border border-[#e2e8f0] bg-white" />
-              <span className="font-serif text-sm font-semibold tracking-tight text-[#0f172a]">
-                BrainScale
-              </span>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-7 gap-y-2 text-sm text-[#475569]">
-              {[
-                { href: "/privacy", label: "Privacy Policy" },
-                { href: "/terms", label: "Terms" },
-                { href: "/about", label: "About" },
-                { href: "mailto:contact@brainscale.app", label: "Contact" },
-              ].map((l) => (
-                <a
-                  key={l.href}
-                  href={l.href}
-                  className="transition hover:text-[#0f172a] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/30 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </div>
-
-            <div className="hidden sm:block" />
-          </div>
-
-          <div className="mt-8 text-sm leading-7 text-[#475569]">
-            © 2026 BrainScale — Independent cognitive assessment platform.
-            BrainScale is not affiliated with any academic institution. CHC
-            Theory references are to published scientific literature.
           </div>
         </div>
+      </section>
+
+      {/* BELL CURVE */}
+      <section style={{ padding: "16px 24px 48px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "48px 40px", textAlign: "center" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 500, color: "#1A1825", marginBottom: "6px" }}>
+            IQ Distribution Worldwide
+          </h2>
+          <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>World average: 100 · Standard deviation: 15</p>
+
+          <svg viewBox="0 0 600 180" style={{ width: "100%", maxWidth: "480px", display: "block", margin: "0 auto 24px" }}>
+            <defs>
+              <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#5B4FCF" stopOpacity="0.2" />
+                <stop offset="100%" stopColor="#5B4FCF" stopOpacity="0.02" />
+              </linearGradient>
+            </defs>
+            <path d="M 20 165 Q 90 163 140 148 Q 195 130 235 85 Q 265 48 300 28 Q 335 48 365 85 Q 405 130 460 148 Q 510 163 580 165 Z" fill="url(#bg)" stroke="#5B4FCF" strokeWidth="2.5" />
+            <line x1="300" y1="28" x2="300" y2="168" stroke="#5B4FCF" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5" />
+            <text x="300" y="178" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="700">100</text>
+            {[{ x: 148, l: "70" }, { x: 222, l: "85" }, { x: 378, l: "115" }, { x: 452, l: "130" }].map(({ x, l }) => (
+              <g key={l}>
+                <line x1={x} y1="162" x2={x} y2="170" stroke="#9896A8" strokeWidth="1" />
+                <text x={x} y="178" textAnchor="middle" fontSize="11" fill="#9896A8">{l}</text>
+              </g>
+            ))}
+          </svg>
+
+          <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+            {[
+              { range: "< 85", label: "Below average", pct: "16%" },
+              { range: "85–115", label: "Average", pct: "68%" },
+              { range: "115–130", label: "Above average", pct: "14%" },
+              { range: "> 130", label: "Gifted", pct: "2%" },
+            ].map((b) => (
+              <div key={b.range} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "14px", padding: "12px 18px", textAlign: "center", minWidth: "110px" }}>
+                <div style={{ fontWeight: 700, color: "#5B4FCF", fontSize: "15px" }}>{b.range}</div>
+                <div style={{ color: "#5C5A6E", fontSize: "13px", marginTop: "2px" }}>{b.label}</div>
+                <div style={{ color: "#9896A8", fontSize: "11px" }}>{b.pct} of pop.</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "56px" }}>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
+              A <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>scientific</em> methodology
+            </h2>
+            <p style={{ fontSize: "17px", color: "#5C5A6E" }}>Every question is designed and validated by psychometricians.</p>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
+            {[
+              { num: "01", title: "Matrix Reasoning", desc: "Identify visual patterns and complete logical sequences — the core of fluid IQ measurement." },
+              { num: "02", title: "Analytical Logic", desc: "Deduction problems, number series, and verbal analogies to assess crystallized reasoning." },
+              { num: "03", title: "Calibrated Score", desc: "Your result is normalized against our base of 800,000+ participants for a precise comparison." },
+            ].map((c) => (
+              <div key={c.num} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "36px 32px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
+                <div style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "3px", color: "#5B4FCF", marginBottom: "16px" }}>{c.num}</div>
+                <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "12px" }}>{c.title}</h3>
+                <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.7 }}>{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COGNITIVE DOMAINS */}
+      <section style={{ padding: "72px 24px", backgroundColor: "#EFEDE6" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", textAlign: "center", marginBottom: "48px" }}>
+            What the test <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>measures</em>
+          </h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "20px" }}>
+            {[
+              { icon: "◈", title: "Logical Reasoning", desc: "Deduction & inference" },
+              { icon: "◉", title: "Spatial Intelligence", desc: "Mental rotation, patterns" },
+              { icon: "◇", title: "Working Memory", desc: "Retention & manipulation" },
+              { icon: "◎", title: "Processing Speed", desc: "Cognitive quickness" },
+            ].map((d) => (
+              <div key={d.title} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "32px 24px", textAlign: "center", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
+                <div style={{ fontSize: "32px", color: "#5B4FCF", marginBottom: "16px" }}>{d.icon}</div>
+                <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "16px", fontWeight: 600, color: "#1A1825", marginBottom: "8px" }}>{d.title}</h3>
+                <p style={{ fontSize: "13px", color: "#9896A8" }}>{d.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SAMPLE QUESTION */}
+      <section style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "560px", margin: "0 auto", textAlign: "center" }}>
+          <div style={{ display: "inline-block", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "6px 16px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "2px", marginBottom: "24px" }}>
+            SAMPLE QUESTION
+          </div>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 300, color: "#1A1825", marginBottom: "40px" }}>
+            Which shape completes the sequence?
+          </h2>
+
+          <div style={{ backgroundColor: "#EFEDE6", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "40px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", maxWidth: "240px", margin: "0 auto 28px" }}>
+              {["▲", "●", "■", "●", "■", "▲", "■", "▲", "?"].map((s, i) => (
+                <div key={i} style={{
+                  aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "22px", fontWeight: "bold",
+                  backgroundColor: s === "?" ? "#EDE9FF" : "#fff",
+                  border: s === "?" ? "2px dashed #5B4FCF" : "1px solid #E8E5DC",
+                  color: s === "?" ? "#5B4FCF" : "#5C5A6E",
+                }}>
+                  {s}
+                </div>
+              ))}
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", maxWidth: "240px", margin: "0 auto" }}>
+              {["▲", "●", "■", "◆"].map((opt, i) => (
+                <div key={i} style={{
+                  aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+                  fontSize: "20px", cursor: "pointer",
+                  backgroundColor: opt === "●" ? "#5B4FCF" : "#fff",
+                  border: opt === "●" ? "2px solid #5B4FCF" : "1px solid #D4D0C8",
+                  color: opt === "●" ? "#fff" : "#5C5A6E",
+                }}>
+                  {opt}
+                </div>
+              ))}
+            </div>
+            <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Answer: ● (cyclic rotation)</p>
+          </div>
+        </div>
+      </section>
+
+      {/* PRIVACY */}
+      <section style={{ padding: "72px 24px", backgroundColor: "#EFEDE6" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "48px", alignItems: "center" }}>
+          <div>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "32px" }}>
+              Your privacy,{" "}
+              <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>our priority</em>
+            </h2>
+            {["No account required to take the test", "Zero personal data collected", "Results never sold to third parties", "100% client-side processing"].map((item) => (
+              <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: "18px" }}>
+                <span style={{ color: "#5B4FCF", fontSize: "18px", lineHeight: 1.4 }}>✓</span>
+                <span style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.6 }}>{item}</span>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "40px", boxShadow: "0 4px 24px rgba(26,24,37,0.08)" }}>
+            <div style={{ textAlign: "center", marginBottom: "28px" }}>
+              <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "72px", fontWeight: 300, color: "#5B4FCF", lineHeight: 1 }}>127</div>
+              <div style={{ fontSize: "13px", color: "#9896A8", marginTop: "6px" }}>IQ Score — example</div>
+            </div>
+            {[
+              { label: "Logical Reasoning", pct: 88 },
+              { label: "Spatial Intelligence", pct: 75 },
+              { label: "Processing Speed", pct: 91 },
+            ].map((bar) => (
+              <div key={bar.label} style={{ marginBottom: "14px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#9896A8", marginBottom: "6px" }}>
+                  <span>{bar.label}</span>
+                  <span>{bar.pct}th percentile</span>
+                </div>
+                <div style={{ height: "6px", borderRadius: "999px", backgroundColor: "#EFEDE6", overflow: "hidden" }}>
+                  <div style={{ height: "100%", borderRadius: "999px", backgroundColor: "#5B4FCF", width: `${bar.pct}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "640px", margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", textAlign: "center", marginBottom: "48px" }}>
+            Frequently asked <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>questions</em>
+          </h2>
+          {faqs.map((faq, i) => (
+            <div key={i} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", marginBottom: "10px", overflow: "hidden", boxShadow: openFaq === i ? "0 4px 20px rgba(26,24,37,0.08)" : "none" }}>
+              <button
+                onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                style={{ width: "100%", textAlign: "left", padding: "20px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "16px", background: "none", border: "none", cursor: "pointer" }}
+              >
+                <span style={{ fontSize: "15px", fontWeight: 500, color: "#1A1825" }}>{faq.q}</span>
+                <span style={{ color: "#5B4FCF", fontSize: "22px", flexShrink: 0, transform: openFaq === i ? "rotate(45deg)" : "rotate(0)", transition: "transform 0.2s" }}>+</span>
+              </button>
+              {openFaq === i && (
+                <div style={{ padding: "0 24px 20px", fontSize: "14px", color: "#5C5A6E", lineHeight: 1.7 }}>{faq.a}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ margin: "0 24px 24px", borderRadius: "28px", backgroundColor: "#0F0E17", padding: "80px 24px", textAlign: "center" }}>
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 300, color: "#fff", marginBottom: "20px" }}>
+            Ready to discover{" "}
+            <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>your potential?</em>
+          </h2>
+          <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
+            Join 847,000 people who have already discovered their IQ. Free, fast, no sign-up.
+          </p>
+          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 44px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)" }}>
+            Start Now — It's Free
+          </Link>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer style={{ padding: "40px 24px", textAlign: "center" }}>
+        <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", marginBottom: "10px" }}>
+          Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+        </div>
+        <p style={{ fontSize: "12px", color: "#9896A8" }}>
+          © 2025 BrainScale · Free psychometric test · No personal data collected
+        </p>
       </footer>
+
     </div>
   );
 }

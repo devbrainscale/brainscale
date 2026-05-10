@@ -1,4 +1,8 @@
 @import "tailwindcss";
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-fraunces);
+}
 
 /* ============================================
    BRAINSCALE DESIGN SYSTEM v2.0
