@@ -136,10 +136,10 @@ export default function TermsPage() {
               <p className="mt-3 text-sm leading-7 text-[#475569]">
                 For questions about these terms, contact{" "}
                 <a
-                  href="mailto:brainscale@proton.me"
+                  href="mailto:contact@brainscale.app"
                   className="font-semibold text-[#1d4ed8] underline-offset-4 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1d4ed8]/25"
                 >
-                  brainscale@proton.me
+                  contact@brainscale.app
                 </a>
                 .
               </p>
@@ -163,7 +163,7 @@ export default function TermsPage() {
                 { href: "/privacy", label: "Privacy Policy" },
                 { href: "/terms", label: "Terms" },
                 { href: "/about", label: "About" },
-                { href: "mailto:brainscale@proton.me", label: "Contact" },
+                { href: "mailto:contact@brainscale.app", label: "Contact" },
               ].map((l) => (
                 <a
                   key={l.href}

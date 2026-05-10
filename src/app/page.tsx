@@ -659,7 +659,7 @@ export default function Home() {
                 { href: "/privacy", label: "Privacy Policy" },
                 { href: "/terms", label: "Terms" },
                 { href: "/about", label: "About" },
-                { href: "mailto:brainscale@proton.me", label: "Contact" },
+                { href: "mailto:contact@brainscale.app", label: "Contact" },
               ].map((l) => (
                 <a
                   key={l.href}
