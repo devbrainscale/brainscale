@@ -64,7 +64,7 @@ export default function TermsPage() {
           },
           {
             title: "10. Governing Law",
-            content: "These terms are governed by the laws of France, without regard to conflict of law principles. Any disputes arising from these terms or your use of BrainScale shall be subject to the exclusive jurisdiction of the courts of France.",
+            content: "These terms are governed by the laws of Switzerland, without regard to conflict of law principles. Any disputes arising from these terms or your use of BrainScale shall be subject to the exclusive jurisdiction of the courts of Switzerland.",
           },
           {
             title: "11. Contact",
