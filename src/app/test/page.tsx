@@ -11,7 +11,7 @@ const questions = [
   { id: 5, question: "Which number is missing: 1, 1, 2, 3, 5, 8, ?, 21", options: ["11", "12", "13", "14"], answer: 2 },
   { id: 6, question: "If you rearrange 'CIFAIPC', you get the name of a:", options: ["City", "Animal", "Ocean", "Country"], answer: 2 },
   { id: 7, question: "Complete the analogy: Book is to Reading as Fork is to:", options: ["Kitchen", "Eating", "Cooking", "Spoon"], answer: 1 },
-  { id: 8, question: "What comes next: 3, 6, 11, 18, 27, ?", options: ["36", "38", "38", "40"], answer: 1 },
+  { id: 8, question: "What comes next: 3, 6, 11, 18, 27, ?", options: ["36", "38", "42", "40"], answer: 1 },
   { id: 9, question: "If it takes 5 machines 5 minutes to make 5 widgets, how long does it take 100 machines to make 100 widgets?", options: ["100 min", "50 min", "5 min", "10 min"], answer: 2 },
   { id: 10, question: "Which word does not belong: Apple, Mango, Carrot, Banana", options: ["Apple", "Mango", "Carrot", "Banana"], answer: 2 },
   { id: 11, question: "A father is 4 times as old as his son. In 20 years, he'll be twice as old. How old is the son now?", options: ["5", "10", "15", "20"], answer: 1 },
@@ -30,12 +30,12 @@ const questions = [
   { id: 24, question: "A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball?", options: ["$0.10", "$0.05", "$0.15", "$0.20"], answer: 1 },
   { id: 25, question: "If you have a 3-liter and a 5-liter jug, how do you measure exactly 4 liters?", options: ["Fill 5L, pour into 3L, empty 3L, pour remainder", "Fill 3L twice into 5L", "Both A and B work", "It's impossible"], answer: 2 },
   { id: 26, question: "What is the missing number: 2, 6, 12, 20, 30, ?", options: ["40", "42", "44", "46"], answer: 1 },
-  { id: 27, question: "Which word is the odd one out: Surgeon, Lawyer, Carpenter, Doctor?", options: ["Surgeon", "Lawyer", "Carpenter", "Doctor"], answer: 1 },
-  { id: 28, question: "If you count from 1 to 100, how many 7s will you encounter?", options: ["10", "11", "20", "21"], answer: 2 },
+  { id: 27, question: "Which does NOT belong in this group: Jupiter, Saturn, Earth, Moon?", options: ["Jupiter", "Saturn", "Earth", "Moon"], answer: 3 },
+  { id: 28, question: "If you count from 1 to 100, how many times does the digit 7 appear?", options: ["10", "11", "20", "21"], answer: 2 },
   { id: 29, question: "Complete: 1, 2, 4, 7, 11, 16, ?", options: ["20", "21", "22", "23"], answer: 2 },
   { id: 30, question: "A store reduces a $200 item by 20%, then increases it by 20%. Final price?", options: ["$200", "$192", "$184", "$196"], answer: 1 },
   { id: 31, question: "Which shape has the fewest lines of symmetry: Square, Rectangle, Equilateral Triangle, Circle?", options: ["Square", "Rectangle", "Equilateral Triangle", "Circle"], answer: 1 },
-  { id: 32, question: "If THINK is coded as 58934, how is NIGHT coded?", options: ["93564", "39564", "93548", "34598"], answer: 0 },
+  { id: 32, question: "What comes next in the sequence: 100, 50, 25, 12.5, ?", options: ["5", "6", "6.25", "7"], answer: 2 },
   { id: 33, question: "Two runners start at the same point. One runs at 8km/h, the other at 12km/h. After 3 hours, how far apart are they?", options: ["10km", "12km", "15km", "20km"], answer: 1 },
   { id: 34, question: "What comes next: 1, 3, 6, 10, 15, 21, ?", options: ["25", "27", "28", "30"], answer: 2 },
   { id: 35, question: "Which is not a prime number: 13, 17, 19, 21?", options: ["13", "17", "19", "21"], answer: 3 },
@@ -117,7 +117,6 @@ export default function TestPage() {
       {/* QUESTION CARD */}
       <main style={{ maxWidth: "760px", margin: "0 auto", padding: "48px 24px" }}>
 
-        {/* Question number badge */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "28px" }}>
           <div style={{ backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "4px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "1px" }}>
             Q{current + 1}
@@ -126,12 +125,10 @@ export default function TestPage() {
           <span style={{ fontSize: "12px", color: "#9896A8" }}>{Math.round(progress)}% complete</span>
         </div>
 
-        {/* Question */}
         <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(20px, 3vw, 28px)", fontWeight: 400, color: "#1A1825", lineHeight: 1.4, marginBottom: "40px" }}>
           {q.question}
         </h2>
 
-        {/* Options */}
         <div style={{ display: "grid", gap: "12px", marginBottom: "40px" }}>
           {q.options.map((opt, i) => (
             <button
@@ -176,7 +173,6 @@ export default function TestPage() {
           ))}
         </div>
 
-        {/* Next button */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
             onClick={handleNext}
@@ -198,7 +194,6 @@ export default function TestPage() {
           </button>
         </div>
 
-        {/* Dots progress */}
         <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "48px", flexWrap: "wrap" }}>
           {questions.map((_, i) => (
             <div key={i} style={{
