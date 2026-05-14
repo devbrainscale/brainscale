@@ -36,9 +36,9 @@ function SampleQuestion() {
               style={{
                 aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: "20px", cursor: "pointer", transition: "all 0.15s ease",
-                backgroundColor: isCorrect ? "#22C55E" : isWrong ? "#EF4444" : isSelected ? "#5B4FCF" : "#fff",
-                border: isCorrect ? "2px solid #22C55E" : isWrong ? "2px solid #EF4444" : isSelected ? "2px solid #5B4FCF" : "1px solid #D4D0C8",
-                color: isCorrect || isWrong || isSelected ? "#fff" : "#5C5A6E",
+                backgroundColor: isCorrect ? "#5B4FCF" : isWrong ? "#F0EDE4" : isSelected ? "#5B4FCF" : "#fff",
+                border: isCorrect ? "2px solid #5B4FCF" : isWrong ? "2px solid #C4A882" : isSelected ? "2px solid #5B4FCF" : "1px solid #D4D0C8",
+                color: isCorrect ? "#fff" : isWrong ? "#9896A8" : isSelected ? "#fff" : "#5C5A6E",
                 transform: isSelected ? "scale(1.08)" : "scale(1)",
               }}
             >
@@ -52,10 +52,10 @@ function SampleQuestion() {
         <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Try it — tap an answer</p>
       )}
       {selected !== null && selected === correct && (
-        <p style={{ fontSize: "13px", color: "#22C55E", fontWeight: 600, marginTop: "16px" }}>✓ Correct! Cyclic rotation pattern.</p>
+        <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600, marginTop: "16px" }}>✓ Correct — cyclic rotation pattern.</p>
       )}
       {selected !== null && selected !== correct && (
-        <p style={{ fontSize: "13px", color: "#EF4444", fontWeight: 600, marginTop: "16px" }}>✗ Not quite — the answer is ● (cyclic rotation).</p>
+        <p style={{ fontSize: "13px", color: "#9896A8", fontWeight: 500, marginTop: "16px" }}>Not quite — the answer is ● (cyclic rotation).</p>
       )}
     </div>
   );
