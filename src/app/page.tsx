@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "Is my data protected?",
-    a: "No account required, no personal data collected. Your answers are processed locally and never sold to third parties.",
+    a: "No account required. Your test answers are processed locally in your browser and never sent to our servers. If you choose to share your email, it is stored securely and never sold to third parties.",
   },
   {
     q: "Can I retake the test?",
@@ -229,7 +229,7 @@ export default function HomePage() {
               Your privacy,{" "}
               <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>our priority</em>
             </h2>
-            {["No account required to take the test", "Zero personal data collected", "Results never sold to third parties", "100% client-side processing"].map((item) => (
+            {["No account required to take the test", "No data collected without your consent", "Results never sold to third parties", "100% client-side test processing"].map((item) => (
               <div key={item} style={{ display: "flex", alignItems: "flex-start", gap: "14px", marginBottom: "18px" }}>
                 <span style={{ color: "#5B4FCF", fontSize: "18px", lineHeight: 1.4 }}>✓</span>
                 <span style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.6 }}>{item}</span>
@@ -311,7 +311,7 @@ export default function HomePage() {
           <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>
-          © 2025 BrainScale · Free psychometric test · No personal data collected
+          © 2026 BrainScale · Free psychometric test · Contact: contact@brainscale.app
         </p>
       </footer>
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
+import CookieConsent from "./CookieConsent";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -67,18 +67,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col antialiased">
         {children}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-ZTVB50WRWZ"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-ZTVB50WRWZ');
-          `}
-        </Script>
+        <CookieConsent />
       </body>
     </html>
   );

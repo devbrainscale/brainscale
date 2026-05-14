@@ -23,43 +23,51 @@ export default function PrivacyPage() {
         <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1A1825", marginBottom: "8px" }}>
           Privacy Policy
         </h1>
-        <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "48px" }}>Last updated: May 10, 2026</p>
+        <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "48px" }}>Last updated: May 14, 2026</p>
 
         {[
           {
             title: "Overview",
-            content: "BrainScale is designed with privacy as a default. We do not require registration, we do not sell your data, and your test answers are never stored on our servers. This policy explains the limited data we do collect and why.",
+            content: "BrainScale is designed with privacy as a default. We do not require registration to take the test, your test answers are never stored on our servers, and we never sell your data. This policy explains all data we collect and why.",
           },
           {
             title: "1. Data We Collect",
-            content: "We collect anonymous usage analytics via Google Analytics 4 (GA4). This includes: pages visited, time spent on the site, general geographic region (country/city level), device type and browser. This data is aggregated and anonymized — it cannot be used to identify you personally. We do not collect: your name, email address, IP address (IP anonymization is enabled), test answers, or any sensitive personal information.",
+            content: "We collect two types of data: (a) Anonymous analytics via Google Analytics 4 (GA4) — pages visited, time on site, geographic region, device type. This data is aggregated and anonymized. (b) Email address and IQ score — only if you voluntarily submit your email on the results page to receive your free improvement plan. This data is stored in Brevo, our email marketing platform, and is used solely to send you the requested content. We do not collect your name, test answers, or any other sensitive personal information.",
           },
           {
-            title: "2. Cookies",
-            content: "We use cookies solely for Google Analytics measurement. These are analytics cookies that help us understand how visitors use the site in aggregate. We do not use advertising, tracking, or profiling cookies. You can disable cookies in your browser settings at any time without affecting your ability to use BrainScale.",
+            title: "2. Email Marketing",
+            content: "If you provide your email address on the results page, you consent to receive emails from BrainScale including your results summary and cognitive improvement tips. You can unsubscribe at any time by clicking the 'Unsubscribe' link at the bottom of any email. Your email address is stored securely in Brevo and is never sold or shared with third parties.",
           },
           {
-            title: "3. How Your Test Works",
-            content: "Your answers during the test are processed entirely in your browser (client-side). They are not transmitted to or stored on our servers. Your IQ score is calculated locally and passed via URL parameters to the results page. Once you close the results page, no record of your score is retained by us.",
+            title: "3. Cookies",
+            content: "We use cookies for Google Analytics measurement only, subject to your consent. These are analytics cookies that help us understand how visitors use the site in aggregate. We do not use advertising, tracking, or profiling cookies. You can withdraw your cookie consent at any time via the cookie banner or by disabling cookies in your browser settings.",
           },
           {
-            title: "4. Third-Party Services",
-            content: "We use Google Analytics 4, operated by Google LLC. Google may process data in accordance with their own privacy policy (https://policies.google.com/privacy). We do not use any other third-party analytics, advertising networks, or data brokers.",
+            title: "4. How Your Test Works",
+            content: "Your answers during the test are processed entirely in your browser (client-side). They are not transmitted to or stored on our servers. Your IQ score is calculated locally and displayed on the results page. We do not retain any record of your test answers.",
           },
           {
-            title: "5. Your Rights (GDPR)",
-            content: "If you are located in the European Economic Area, you have the right to access, correct, or delete any personal data we hold about you. Since we collect only anonymized analytics data, there is generally no personal data to access or delete. For any privacy-related request, contact us at: contact@brainscale.app",
+            title: "5. Third-Party Services",
+            content: "We use: Google Analytics 4 (Google LLC) for anonymous usage analytics; Brevo (Sendinblue SAS) for email delivery if you subscribe. Both services process data under their respective privacy policies. We do not use advertising networks or data brokers.",
           },
           {
-            title: "6. Children's Privacy",
+            title: "6. Your Rights (GDPR)",
+            content: "If you are located in the European Economic Area, you have the right to: access, correct, or delete your personal data; withdraw consent to marketing emails at any time; lodge a complaint with your local data protection authority. To exercise your rights, contact us at: contact@brainscale.app. We will respond within 30 days.",
+          },
+          {
+            title: "7. Data Controller",
+            content: "The data controller for BrainScale is: BrainScale, Postfach, 2501 Biel/Bienne, Switzerland. Contact: contact@brainscale.app",
+          },
+          {
+            title: "8. Children's Privacy",
             content: "BrainScale is not directed at children under the age of 13. We do not knowingly collect any data from children under 13. If you believe a child has used the service, please contact us and we will take appropriate action.",
           },
           {
-            title: "7. Changes to This Policy",
+            title: "9. Changes to This Policy",
             content: "We may update this policy from time to time. Changes will be posted on this page with an updated date. Continued use of BrainScale after changes constitutes acceptance of the updated policy.",
           },
           {
-            title: "8. Contact",
+            title: "10. Contact",
             content: "For any privacy questions or concerns, contact us at: contact@brainscale.app",
           },
         ].map((section) => (

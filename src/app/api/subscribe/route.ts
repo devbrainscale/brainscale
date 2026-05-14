@@ -1,11 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Simple in-memory rate limiter: max 5 requests per IP per 10 minutes
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const windowMs = 10 * 60 * 1000; // 10 minutes
+  const maxRequests = 5;
+
+  const entry = rateLimitMap.get(ip);
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + windowMs });
+    return false;
+  }
+  if (entry.count >= maxRequests) return true;
+  entry.count += 1;
+  return false;
+}
+
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting
+    const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ success: false, error: 'Too many requests. Please try again later.' }, { status: 429 });
+    }
+
     const { email, score } = await request.json();
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ success: false, error: 'Invalid email' }, { status: 400 });
+    }
+
+    // Validate score is a reasonable IQ value
+    const numericScore = Number(score);
+    if (isNaN(numericScore) || numericScore < 40 || numericScore > 200) {
+      return NextResponse.json({ success: false, error: 'Invalid score' }, { status: 400 });
     }
 
     const apiKey = process.env.BREVO_API_KEY;
@@ -23,7 +53,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         email,
         attributes: {
-          IQ_SCORE: score,
+          IQ_SCORE: numericScore,
         },
         listIds: [5],
         updateEnabled: true,

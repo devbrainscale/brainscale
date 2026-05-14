@@ -70,6 +70,7 @@ export default function TestPage() {
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [answers, setAnswers] = useState<(number | null)[]>(Array(questions.length).fill(null));
+  const [submitting, setSubmitting] = useState(false);
 
   const q = questions[current];
   const progress = ((current) / questions.length) * 100;
@@ -78,7 +79,7 @@ export default function TestPage() {
     setSelected(i);
   }
 
-  function handleNext() {
+  async function handleNext() {
     if (selected === null) return;
     const newAnswers = [...answers];
     newAnswers[current] = selected;
@@ -89,8 +90,26 @@ export default function TestPage() {
       setSelected(null);
     } else {
       const correct = newAnswers.filter((a, i) => a === questions[i].answer).length;
-      const iq = calculateIQ(correct);
-      router.push(`/results?score=${iq}&correct=${correct}&total=${questions.length}`);
+      const total = questions.length;
+      setSubmitting(true);
+      try {
+        const res = await fetch('/api/sign-score', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ correct, total }),
+        });
+        if (res.ok) {
+          const data = await res.json();
+          router.push(`/results?score=${data.score}&correct=${data.correct}&total=${data.total}&sig=${data.sig}`);
+        } else {
+          // Fallback: use local calculation if API fails
+          const iq = calculateIQ(correct);
+          router.push(`/results?score=${iq}&correct=${correct}&total=${total}`);
+        }
+      } catch {
+        const iq = calculateIQ(correct);
+        router.push(`/results?score=${iq}&correct=${correct}&total=${total}`);
+      }
     }
   }
 
@@ -176,21 +195,21 @@ export default function TestPage() {
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <button
             onClick={handleNext}
-            disabled={selected === null}
+            disabled={selected === null || submitting}
             style={{
-              backgroundColor: selected !== null ? "#5B4FCF" : "#D4D0C8",
+              backgroundColor: selected !== null && !submitting ? "#5B4FCF" : "#D4D0C8",
               color: "#fff",
               padding: "16px 40px",
               borderRadius: "999px",
               fontSize: "15px",
               fontWeight: 600,
               border: "none",
-              cursor: selected !== null ? "pointer" : "not-allowed",
+              cursor: selected !== null && !submitting ? "pointer" : "not-allowed",
               transition: "all 0.15s ease",
-              boxShadow: selected !== null ? "0 4px 20px rgba(91,79,207,0.35)" : "none",
+              boxShadow: selected !== null && !submitting ? "0 4px 20px rgba(91,79,207,0.35)" : "none",
             }}
           >
-            {current + 1 === questions.length ? "See My Results →" : "Next Question →"}
+            {submitting ? "Calculating…" : current + 1 === questions.length ? "See My Results →" : "Next Question →"}
           </button>
         </div>
 

@@ -40,6 +40,7 @@ export default function ResultsContent() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [gdprConsent, setGdprConsent] = useState(false);
 
   const percentile = getPercentile(score);
   const label = getLabel(score);
@@ -50,6 +51,10 @@ export default function ResultsContent() {
     setEmailError("");
     if (!email || !email.includes("@")) {
       setEmailError("Please enter a valid email address.");
+      return;
+    }
+    if (!gdprConsent) {
+      setEmailError("Please accept the terms to continue.");
       return;
     }
     setLoading(true);
@@ -142,6 +147,19 @@ export default function ResultsContent() {
                 {loading ? "Sending…" : "Send my report →"}
               </button>
             </form>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", maxWidth: "440px", margin: "12px auto 0", textAlign: "left" }}>
+              <input
+                type="checkbox"
+                id="gdpr-consent"
+                checked={gdprConsent}
+                onChange={(e) => setGdprConsent(e.target.checked)}
+                style={{ marginTop: "2px", accentColor: "#5B4FCF", flexShrink: 0, cursor: "pointer" }}
+              />
+              <label htmlFor="gdpr-consent" style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.5, cursor: "pointer" }}>
+                I agree to receive my results and improvement tips by email. I can unsubscribe at any time. See our{" "}
+                <a href="/privacy" style={{ color: "#5B4FCF", textDecoration: "underline" }}>Privacy Policy</a>.
+              </label>
+            </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
             <button
               onClick={() => setSubmitted(true)}
