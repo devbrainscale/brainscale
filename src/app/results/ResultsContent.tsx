@@ -116,7 +116,7 @@ export default function ResultsContent() {
   ];
 
   return (
-    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", paddingBottom: "88px" }}>
 
       {/* HEADER */}
       <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
@@ -294,6 +294,50 @@ export default function ResultsContent() {
         </div>
 
       </main>
+
+      {/* STICKY BOTTOM CTA */}
+      <div style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: "rgba(247,246,242,0.95)",
+        backdropFilter: "blur(12px)",
+        borderTop: "1px solid #E8E5DC",
+        padding: "14px 24px",
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "16px",
+        flexWrap: "wrap",
+        boxShadow: "0 -4px 24px rgba(26,24,37,0.08)",
+      }}>
+        <div style={{ textAlign: "center" }}>
+          <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500 }}>
+            🔒 <strong style={{ color: "#1A1825" }}>Full Cognitive Report</strong> — detailed breakdown + PDF certificate
+          </span>
+        </div>
+        <button
+          onClick={handleUnlock}
+          disabled={checkoutLoading}
+          style={{
+            backgroundColor: checkoutLoading ? "#9896A8" : "#5B4FCF",
+            color: "#fff",
+            padding: "14px 32px",
+            borderRadius: "999px",
+            fontSize: "15px",
+            fontWeight: 700,
+            border: "none",
+            cursor: checkoutLoading ? "not-allowed" : "pointer",
+            whiteSpace: "nowrap",
+            boxShadow: checkoutLoading ? "none" : "0 4px 20px rgba(91,79,207,0.4)",
+            transition: "all 0.15s ease",
+          }}
+        >
+          {checkoutLoading ? "Redirecting…" : "Unlock Full Report — $9"}
+        </button>
+      </div>
     </div>
   );
 }
