@@ -118,13 +118,13 @@ export default function ResultsContent() {
         {!submitted ? (
           <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "36px", marginBottom: "20px", textAlign: "center" }}>
             <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>
-              📩 Get your results
+              🧠 Free improvement plan
             </p>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>
-              Send my cognitive report to my inbox
+              Save your results & get your free 7-day brain training plan
             </h3>
             <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "380px", margin: "0 auto 24px" }}>
-              Receive your score, percentile breakdown, and personalized tips to boost your cognitive performance.
+              We'll email you your score + a personalized plan to boost your weakest cognitive areas.
             </p>
             <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
               <input

@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
         attributes: {
           IQ_SCORE: score,
         },
+        listIds: [5],
         updateEnabled: true,
       }),
     });
