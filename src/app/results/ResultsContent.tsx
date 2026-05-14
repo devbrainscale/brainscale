@@ -46,6 +46,26 @@ export default function ResultsContent() {
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+
+  async function handleUnlock() {
+    setCheckoutLoading(true);
+    try {
+      const res = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ score, email: submitted ? email : undefined }),
+      });
+      const data = await res.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch {
+      // fallback silent
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }
 
   const percentile = getPercentile(score);
   const label = getLabel(score);
@@ -254,10 +274,11 @@ export default function ResultsContent() {
               Unlock your detailed breakdown, personalized insights, and printable PDF certificate.
             </p>
             <button
-              onClick={() => window.location.href = `mailto:contact@brainscale.app?subject=Full Report Request&body=My IQ score: ${score}`}
-              style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}
+              onClick={handleUnlock}
+              disabled={checkoutLoading}
+              style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading ? "not-allowed" : "pointer", opacity: checkoutLoading ? 0.7 : 1, boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}
             >
-              Unlock Full Report — $9
+              {checkoutLoading ? "Redirecting…" : "Unlock Full Report — $9"}
             </button>
           </div>
         </div>
