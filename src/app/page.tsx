@@ -3,6 +3,64 @@
 import { useState } from "react";
 import Link from "next/link";
 
+function SampleQuestion() {
+  const [selected, setSelected] = useState<number | null>(null);
+  const correct = 1; // ● is the correct answer (index 1)
+  const opts = ["▲", "●", "■", "◆"];
+
+  return (
+    <div style={{ backgroundColor: "#EFEDE6", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "40px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", maxWidth: "240px", margin: "0 auto 28px" }}>
+        {["▲", "●", "■", "●", "■", "▲", "■", "▲", "?"].map((s, i) => (
+          <div key={i} style={{
+            aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "22px", fontWeight: "bold",
+            backgroundColor: s === "?" ? "#EDE9FF" : "#fff",
+            border: s === "?" ? "2px dashed #5B4FCF" : "1px solid #E8E5DC",
+            color: s === "?" ? "#5B4FCF" : "#5C5A6E",
+          }}>
+            {s}
+          </div>
+        ))}
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", maxWidth: "240px", margin: "0 auto" }}>
+        {opts.map((opt, i) => {
+          const isSelected = selected === i;
+          const isCorrect = selected !== null && i === correct;
+          const isWrong = isSelected && i !== correct;
+          return (
+            <div
+              key={i}
+              onClick={() => setSelected(i)}
+              style={{
+                aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "20px", cursor: "pointer", transition: "all 0.15s ease",
+                backgroundColor: isCorrect ? "#22C55E" : isWrong ? "#EF4444" : isSelected ? "#5B4FCF" : "#fff",
+                border: isCorrect ? "2px solid #22C55E" : isWrong ? "2px solid #EF4444" : isSelected ? "2px solid #5B4FCF" : "1px solid #D4D0C8",
+                color: isCorrect || isWrong || isSelected ? "#fff" : "#5C5A6E",
+                transform: isSelected ? "scale(1.08)" : "scale(1)",
+              }}
+            >
+              {opt}
+            </div>
+          );
+        })}
+      </div>
+
+      {selected === null && (
+        <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Try it — tap an answer</p>
+      )}
+      {selected !== null && selected === correct && (
+        <p style={{ fontSize: "13px", color: "#22C55E", fontWeight: 600, marginTop: "16px" }}>✓ Correct! Cyclic rotation pattern.</p>
+      )}
+      {selected !== null && selected !== correct && (
+        <p style={{ fontSize: "13px", color: "#EF4444", fontWeight: 600, marginTop: "16px" }}>✗ Not quite — the answer is ● (cyclic rotation).</p>
+      )}
+    </div>
+  );
+}
+
 const faqs = [
   {
     q: "How long does the test take?",
@@ -188,36 +246,7 @@ export default function HomePage() {
             Which shape completes the sequence?
           </h2>
 
-          <div style={{ backgroundColor: "#EFEDE6", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "40px" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", maxWidth: "240px", margin: "0 auto 28px" }}>
-              {["▲", "●", "■", "●", "■", "▲", "■", "▲", "?"].map((s, i) => (
-                <div key={i} style={{
-                  aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "22px", fontWeight: "bold",
-                  backgroundColor: s === "?" ? "#EDE9FF" : "#fff",
-                  border: s === "?" ? "2px dashed #5B4FCF" : "1px solid #E8E5DC",
-                  color: s === "?" ? "#5B4FCF" : "#5C5A6E",
-                }}>
-                  {s}
-                </div>
-              ))}
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "10px", maxWidth: "240px", margin: "0 auto" }}>
-              {["▲", "●", "■", "◆"].map((opt, i) => (
-                <div key={i} style={{
-                  aspectRatio: "1", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                  fontSize: "20px", cursor: "pointer",
-                  backgroundColor: opt === "●" ? "#5B4FCF" : "#fff",
-                  border: opt === "●" ? "2px solid #5B4FCF" : "1px solid #D4D0C8",
-                  color: opt === "●" ? "#fff" : "#5C5A6E",
-                }}>
-                  {opt}
-                </div>
-              ))}
-            </div>
-            <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Answer: ● (cyclic rotation)</p>
-          </div>
+          <SampleQuestion />
         </div>
       </section>
 
