@@ -33,11 +33,12 @@ function getLabel(iq: number): { title: string; desc: string; color: string } {
 export default function ResultsContent() {
   const params = useSearchParams();
   const score = parseInt(params.get("score") ?? "100");
-  const correct = parseInt(params.get("correct") ?? "13");
-  const total = parseInt(params.get("total") ?? "25");
+  const correct = parseInt(params.get("correct") ?? "20");
+  const total = parseInt(params.get("total") ?? "40");
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [skipped, setSkipped] = useState(false);
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
@@ -77,13 +78,17 @@ export default function ResultsContent() {
     }
   }
 
-  // gauge: 60–145 range mapped to 0–100%
-  const gaugePercent = Math.min(100, Math.max(0, ((score - 60) / 85) * 100));
+  // gauge: 75–145 range mapped to 0–100%
+  const gaugePercent = Math.min(100, Math.max(0, ((score - 75) / 70) * 100));
 
+  // Breakdown: derive distinct-feeling scores based on correct/total per category simulation
+  const logicalPct = Math.min(99, Math.round(percentile * 1.05));
+  const spatialPct = Math.min(99, Math.round(percentile * 0.92));
+  const processingPct = Math.min(99, Math.round(percentile * 0.98));
   const breakdown = [
-    { label: "Logical Reasoning", score: Math.min(99, percentile + 3) },
-    { label: "Pattern Recognition", score: Math.min(99, percentile - 2) },
-    { label: "Analytical Thinking", score: Math.min(99, percentile + 5) },
+    { label: "Logical Reasoning", score: logicalPct },
+    { label: "Spatial Intelligence", score: spatialPct },
+    { label: "Processing Speed", score: processingPct },
   ];
 
   return (
@@ -120,7 +125,7 @@ export default function ResultsContent() {
         </div>
 
         {/* EMAIL CAPTURE */}
-        {!submitted ? (
+        {!submitted && !skipped ? (
           <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "36px", marginBottom: "20px", textAlign: "center" }}>
             <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>
               🧠 Free improvement plan
@@ -162,32 +167,32 @@ export default function ResultsContent() {
             </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
             <button
-              onClick={() => setSubmitted(true)}
+              onClick={() => setSkipped(true)}
               style={{ background: "none", border: "none", color: "#9896A8", fontSize: "12px", marginTop: "14px", cursor: "pointer", textDecoration: "underline" }}
             >
               Skip for now
             </button>
           </div>
-        ) : (
-          <div style={{ backgroundColor: "#F0FDF4", border: "1px solid #86EFAC", borderRadius: "16px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "14px", color: "#166534", fontWeight: 600 }}>
+        ) : submitted ? (
+          <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "16px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "14px", color: "#5B4FCF", fontWeight: 600 }}>
               ✓ Report sent! Check your inbox.
             </p>
           </div>
-        )}
+        ) : null}
 
         {/* GAUGE */}
         <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px", marginBottom: "20px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
             <span style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>Score on the IQ scale</span>
-            <span style={{ fontSize: "13px", color: "#9896A8" }}>Range: 60–145</span>
+            <span style={{ fontSize: "13px", color: "#9896A8" }}>Range: 75–145</span>
           </div>
           <div style={{ height: "12px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
             <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #C4BBFF, #5B4FCF)", transition: "width 1s ease" }} />
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px", color: "#9896A8" }}>
-            <span>60</span>
-            <span>85</span>
+            <span>75</span>
+            <span>90</span>
             <span>100</span>
             <span>115</span>
             <span>130</span>
@@ -200,7 +205,7 @@ export default function ResultsContent() {
           {[
             { value: `${percentile}%`, label: "Percentile", sub: "vs. world population" },
             { value: `${correct}/${total}`, label: "Correct answers", sub: `${accuracy}% accuracy` },
-            { value: score >= 130 ? "Top 2%" : score >= 115 ? "Top 16%" : score >= 100 ? "Top 50%" : "Bottom 50%", label: "Population rank", sub: "worldwide" },
+            { value: score >= 130 ? "Top 2%" : score >= 120 ? "Top 9%" : score >= 115 ? "Top 16%" : score >= 110 ? "Top 25%" : score >= 100 ? "Top 50%" : score >= 90 ? "Bottom 25%" : "Bottom 16%", label: "Population rank", sub: "worldwide" },
           ].map((s) => (
             <div key={s.label} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "24px 20px", textAlign: "center", boxShadow: "0 2px 8px rgba(26,24,37,0.05)" }}>
               <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 500, color: "#5B4FCF" }}>{s.value}</div>

@@ -73,7 +73,7 @@ export default function TestPage() {
   const [submitting, setSubmitting] = useState(false);
 
   const q = questions[current];
-  const progress = ((current) / questions.length) * 100;
+  const progress = ((current + 1) / questions.length) * 100;
 
   function handleSelect(i: number) {
     setSelected(i);

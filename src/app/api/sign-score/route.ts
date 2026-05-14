@@ -35,7 +35,11 @@ export async function POST(request: NextRequest) {
     }
 
     const score = calculateIQ(correct, total);
-    const secret = process.env.SCORE_SECRET ?? 'brainscale-default-secret-change-in-prod';
+    const secret = process.env.SCORE_SECRET;
+    if (!secret) {
+      console.error('SCORE_SECRET env var not set');
+      return NextResponse.json({ error: 'Server misconfiguration' }, { status: 500 });
+    }
     const payload = `${score}:${correct}:${total}`;
     const sig = createHmac('sha256', secret).update(payload).digest('hex').slice(0, 16);
 

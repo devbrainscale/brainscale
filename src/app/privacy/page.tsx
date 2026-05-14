@@ -44,7 +44,7 @@ export default function PrivacyPage() {
           },
           {
             title: "4. How Your Test Works",
-            content: "Your answers during the test are processed entirely in your browser (client-side). They are not transmitted to or stored on our servers. Your IQ score is calculated locally and displayed on the results page. We do not retain any record of your test answers.",
+            content: "Your individual test answers are processed entirely in your browser and are never stored on our servers. At the end of the test, only your total number of correct answers (not the individual answers themselves) is sent to our server to calculate and sign your IQ score. This score is then displayed on your results page. We do not retain any record of your test performance.",
           },
           {
             title: "5. Third-Party Services",

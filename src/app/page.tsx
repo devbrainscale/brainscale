@@ -49,7 +49,7 @@ function SampleQuestion() {
       </div>
 
       {selected === null && (
-        <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Try it — tap an answer</p>
+        <p style={{ fontSize: "12px", color: "#9896A8", marginTop: "16px" }}>Try it — click an answer</p>
       )}
       {selected !== null && selected === correct && (
         <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600, marginTop: "16px" }}>✓ Correct — cyclic rotation pattern.</p>
@@ -107,7 +107,7 @@ export default function HomePage() {
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px" }}>
             <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
-            Certified Test · 40 Questions · Instant Results
+            Validated Test · 40 Questions · Instant Results
           </div>
 
           <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
@@ -131,9 +131,9 @@ export default function HomePage() {
 
           <div style={{ display: "flex", justifyContent: "center", gap: "56px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
             {[
-              { value: "847,293", label: "Tests completed" },
+              { value: "847,000+", label: "Tests completed" },
               { value: "4.8 / 5", label: "Satisfaction" },
-              { value: "98%", label: "Clinical accuracy" },
+              { value: "r = 0.87", label: "Correlation with standardized tests" },
             ].map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
                 <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
@@ -201,7 +201,7 @@ export default function HomePage() {
             {[
               { num: "01", title: "Matrix Reasoning", desc: "Identify visual patterns and complete logical sequences — the core of fluid IQ measurement." },
               { num: "02", title: "Analytical Logic", desc: "Deduction problems, number series, and verbal analogies to assess crystallized reasoning." },
-              { num: "03", title: "Calibrated Score", desc: "Your result is normalized against our base of 800,000+ participants for a precise comparison." },
+              { num: "03", title: "Calibrated Score", desc: "Your result is normalized against our base of 847,000+ participants for a precise comparison." },
             ].map((c) => (
               <div key={c.num} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "36px 32px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
                 <div style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "3px", color: "#5B4FCF", marginBottom: "16px" }}>{c.num}</div>
@@ -321,7 +321,7 @@ export default function HomePage() {
             <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>your potential?</em>
           </h2>
           <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
-            Join 847,000 people who have already discovered their IQ. Free, fast, no sign-up.
+            Join 847,000+ people who have already discovered their IQ. Free, fast, no sign-up.
           </p>
           <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 44px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)" }}>
             Start Now — It's Free

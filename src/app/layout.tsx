@@ -27,13 +27,10 @@ export const metadata: Metadata = {
   authors: [{ name: "BrainScale" }],
   creator: "BrainScale",
   metadataBase: new URL("https://www.brainscale.app"),
-  alternates: {
-    canonical: "https://www.brainscale.app",
-  },
   openGraph: {
     title: "BrainScale — Free Cognitive Assessment",
     description:
-      "Measure your cognitive abilities for free. 20 questions, instant results, no registration.",
+      "Measure your cognitive abilities for free. 40 questions, instant results, no registration.",
     url: "https://www.brainscale.app",
     siteName: "BrainScale",
     type: "website",
@@ -43,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "BrainScale — Free Cognitive Assessment",
     description:
-      "Measure your cognitive abilities for free. 20 questions, instant results, no registration.",
+      "Measure your cognitive abilities for free. 40 questions, instant results, no registration.",
   },
   robots: {
     index: true,
