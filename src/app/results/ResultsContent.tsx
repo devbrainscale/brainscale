@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useState } from "react";
 
 function getPercentile(iq: number): number {
   if (iq >= 145) return 99.9;
@@ -35,9 +36,41 @@ export default function ResultsContent() {
   const correct = parseInt(params.get("correct") ?? "13");
   const total = parseInt(params.get("total") ?? "25");
 
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [emailError, setEmailError] = useState("");
+
   const percentile = getPercentile(score);
   const label = getLabel(score);
   const accuracy = Math.round((correct / total) * 100);
+
+  async function handleSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    setEmailError("");
+    if (!email || !email.includes("@")) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, score }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setEmailError("Something went wrong. Please try again.");
+      }
+    } catch {
+      setEmailError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   // gauge: 60–145 range mapped to 0–100%
   const gaugePercent = Math.min(100, Math.max(0, ((score - 60) / 85) * 100));
@@ -80,6 +113,50 @@ export default function ResultsContent() {
             {label.desc}
           </p>
         </div>
+
+        {/* EMAIL CAPTURE */}
+        {!submitted ? (
+          <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "36px", marginBottom: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>
+              📩 Get your results
+            </p>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>
+              Send my cognitive report to my inbox
+            </h3>
+            <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "380px", margin: "0 auto 24px" }}>
+              Receive your score, percentile breakdown, and personalized tips to boost your cognitive performance.
+            </p>
+            <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                style={{ flex: 1, minWidth: "200px", padding: "14px 20px", borderRadius: "999px", border: "1.5px solid #C4BBFF", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1A1825" }}
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 28px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}
+              >
+                {loading ? "Sending…" : "Send my report →"}
+              </button>
+            </form>
+            {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
+            <button
+              onClick={() => setSubmitted(true)}
+              style={{ background: "none", border: "none", color: "#9896A8", fontSize: "12px", marginTop: "14px", cursor: "pointer", textDecoration: "underline" }}
+            >
+              Skip for now
+            </button>
+          </div>
+        ) : (
+          <div style={{ backgroundColor: "#F0FDF4", border: "1px solid #86EFAC", borderRadius: "16px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "14px", color: "#166534", fontWeight: 600 }}>
+              ✓ Report sent! Check your inbox.
+            </p>
+          </div>
+        )}
 
         {/* GAUGE */}
         <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px", marginBottom: "20px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
