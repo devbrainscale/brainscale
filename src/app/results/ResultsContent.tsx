@@ -32,9 +32,13 @@ function getLabel(iq: number): { title: string; desc: string; color: string } {
 
 export default function ResultsContent() {
   const params = useSearchParams();
-  const score = parseInt(params.get("score") ?? "100");
-  const correct = parseInt(params.get("correct") ?? "20");
-  const total = parseInt(params.get("total") ?? "40");
+  const rawScore = parseInt(params.get("score") ?? "100");
+  const rawCorrect = parseInt(params.get("correct") ?? "20");
+  const rawTotal = parseInt(params.get("total") ?? "40");
+  // Clamp to valid ranges to prevent garbage display
+  const score = isNaN(rawScore) ? 100 : Math.min(145, Math.max(75, rawScore));
+  const total = isNaN(rawTotal) || rawTotal <= 0 ? 40 : rawTotal;
+  const correct = isNaN(rawCorrect) ? 0 : Math.min(total, Math.max(0, rawCorrect));
 
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -249,7 +253,10 @@ export default function ResultsContent() {
             <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "320px" }}>
               Unlock your detailed breakdown, personalized insights, and printable PDF certificate.
             </p>
-            <button style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}>
+            <button
+              onClick={() => window.location.href = `mailto:contact@brainscale.app?subject=Full Report Request&body=My IQ score: ${score}`}
+              style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: "pointer", boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}
+            >
               Unlock Full Report — $9
             </button>
           </div>
