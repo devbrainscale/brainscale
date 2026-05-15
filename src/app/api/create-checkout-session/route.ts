@@ -7,7 +7,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { score, email } = await request.json();
+    const { score, correct, total, email } = await request.json();
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -29,7 +29,9 @@ export async function POST(request: NextRequest) {
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/results?score=${score}`,
       customer_email: email || undefined,
       metadata: {
-        iq_score: String(score),
+        iq_score:   String(score),
+        correct:    String(correct ?? 20),
+        total:      String(total   ?? 40),
       },
     });
 
