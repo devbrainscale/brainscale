@@ -23,11 +23,11 @@ function getPercentile(iq: number): number {
 }
 
 function getLabel(iq: number): { title: string; desc: string; color: string } {
-  if (iq >= 130) return { title: "Surdoué", desc: "Vous faites partie du top 2 % de la population. Capacités de raisonnement et de résolution de problèmes exceptionnelles.", color: "#5B4FCF" };
-  if (iq >= 120) return { title: "Supérieur", desc: "Vous faites partie du top 9 % de la population. Solides compétences analytiques et logiques.", color: "#4A3EBE" };
-  if (iq >= 110) return { title: "Au-dessus de la moyenne", desc: "Vous faites partie du top 25 % de la population. Capacité de raisonnement supérieure à la moyenne.", color: "#6B5FD9" };
-  if (iq >= 90) return { title: "Dans la moyenne", desc: "Votre score se situe dans la plage typique, partagée par 68 % de la population.", color: "#8B7FE8" };
-  return { title: "En dessous de la moyenne", desc: "Votre score est en dessous de la moyenne. La pratique et la concentration peuvent l'améliorer.", color: "#9896A8" };
+  if (iq >= 130) return { title: "Surdoué", desc: "Je fais partie du top 2 % de la population.\nCapacités de raisonnement et de résolution de problèmes exceptionnelles.", color: "#5B4FCF" };
+  if (iq >= 120) return { title: "Supérieur", desc: "Je fais partie du top 9 % de la population.\nSolides compétences analytiques et logiques.", color: "#4A3EBE" };
+  if (iq >= 110) return { title: "Au-dessus de la moyenne", desc: "Je fais partie du top 25 % de la population.\nCapacité de raisonnement supérieure à la moyenne.", color: "#6B5FD9" };
+  if (iq >= 90) return { title: "Dans la moyenne", desc: "Mon score se situe dans la plage typique,\npartagée par 68 % de la population.", color: "#8B7FE8" };
+  return { title: "En dessous de la moyenne", desc: "Mon score est en dessous de la moyenne.\nLa pratique et la concentration peuvent l'améliorer.", color: "#9896A8" };
 }
 
 export default function FrResultsContent() {
@@ -234,18 +234,21 @@ export default function FrResultsContent() {
     ctx.fillStyle = "rgba(255,255,255,0.42)";
     ctx.fillText(`${percentile}e percentile mondial`, cx, percY);
 
-    // ── Description text (word-wrapped) ───────────────────────
+    // ── Description text (word-wrapped, \n-aware) ─────────────
     ctx.font = "300 15px system-ui,sans-serif";
     ctx.fillStyle = "rgba(255,255,255,0.26)";
-    const maxW = 520;
-    const words = label.desc.split(" ");
-    let line = "", lines: string[] = [];
-    for (const w of words) {
-      const test = line ? line + " " + w : w;
-      if (ctx.measureText(test).width > maxW) { lines.push(line); line = w; }
-      else line = test;
+    const maxW = 500;
+    const lines: string[] = [];
+    for (const segment of label.desc.split("\n")) {
+      const segWords = segment.split(" ");
+      let segLine = "";
+      for (const w of segWords) {
+        const test = segLine ? segLine + " " + w : w;
+        if (ctx.measureText(test).width > maxW) { lines.push(segLine); segLine = w; }
+        else segLine = test;
+      }
+      if (segLine) lines.push(segLine);
     }
-    if (line) lines.push(line);
     const descY0 = percY + 34;
     lines.forEach((l, i) => ctx.fillText(l, cx, descY0 + i * 24));
 
