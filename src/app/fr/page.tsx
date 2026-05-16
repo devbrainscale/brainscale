@@ -327,15 +327,10 @@ export default function FrHomePage() {
       <section style={{ padding: "72px 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginBottom: "16px" }}>
-              {[1,2,3,4,5].map(i => (
-                <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ))}
-              <span style={{ fontSize: "14px", color: "#9896A8", marginLeft: "6px" }}>4,8 / 5 — 2 400+ avis</span>
-            </div>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825" }}>
-              Ce que disent nos <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>utilisateurs</em>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
+              De vrais scores, de vraies <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>personnes</em>
             </h2>
+            <p style={{ fontSize: "16px", color: "#9896A8" }}>847 000+ tests complétés · Reconnu dans le monde entier</p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
@@ -344,43 +339,57 @@ export default function FrHomePage() {
                 name: "Thomas L.",
                 location: "Paris, France",
                 score: 131,
-                stars: 5,
-                text: "J'ai passé un test Mensa officiel l'année dernière — score 128. BrainScale m'a donné 131. La précision est vraiment impressionnante pour un test gratuit. Le rapport détaillé est un vrai plus.",
+                label: "Supérieur",
+                labelColor: "#4A3EBE",
+                text: "J'ai passé un test Mensa officiel l'année dernière — score 128. BrainScale m'a donné 131. La précision est vraiment impressionnante pour un test gratuit. La décomposition par domaine est un vrai plus.",
                 initials: "TL",
               },
               {
                 name: "Camille R.",
                 location: "Lyon, France",
                 score: 119,
-                stars: 5,
-                text: "Sceptique au départ, mais les questions sont vraiment difficiles — bien au-dessus des autres tests en ligne. Mon score de 119 me semblait réaliste. Interface fluide, résultats clairs.",
+                label: "Au-dessus de la moyenne",
+                labelColor: "#6B5FD9",
+                text: "Les questions sont vraiment difficiles — bien au-dessus des autres tests en ligne. Mon score de 119 me semblait tout à fait réaliste. Interface fluide, résultats immédiatement clairs.",
                 initials: "CR",
               },
               {
                 name: "Mehdi B.",
                 location: "Bruxelles, Belgique",
                 score: 124,
-                stars: 5,
-                text: "J'ai utilisé le rapport premium pour une candidature qui demandait une évaluation cognitive. Le PDF est professionnel, la décomposition par domaine est suffisamment détaillée pour être crédible.",
+                label: "Supérieur",
+                labelColor: "#4A3EBE",
+                text: "J'ai utilisé le rapport premium pour une candidature demandant une évaluation cognitive. Le PDF est professionnel et la décomposition par domaine est suffisamment détaillée pour être crédible.",
                 initials: "MB",
               },
             ].map((t) => (
-              <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "32px 28px", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column", gap: "20px" }}>
-                <div style={{ display: "flex", gap: "3px" }}>
-                  {[1,2,3,4,5].map(i => (
-                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i <= t.stars ? "#FBBF24" : "#E8E5DC"}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  ))}
+              <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", overflow: "hidden", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column" }}>
+                {/* Score header — miroir de /fr/results */}
+                <div style={{ padding: "28px 28px 20px", borderBottom: "1px solid #E8E5DC", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "52px", fontWeight: 300, color: "#5B4FCF", lineHeight: 1 }}>
+                    {t.score}
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{ display: "inline-block", backgroundColor: t.labelColor, color: "#fff", padding: "5px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "6px" }}>
+                      {t.label}
+                    </div>
+                    <div style={{ fontSize: "11px", color: "#9896A8", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase" }}>Score QI</div>
+                  </div>
                 </div>
-                <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.75, margin: 0, flex: 1 }}>
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", borderTop: "1px solid #E8E5DC", paddingTop: "20px" }}>
-                  <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "#EDE9FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 700, color: "#5B4FCF", flexShrink: 0 }}>
+                {/* Citation */}
+                <div style={{ padding: "20px 28px", flex: 1 }}>
+                  <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.75, margin: 0 }}>
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                </div>
+                {/* Auteur */}
+                <div style={{ padding: "16px 28px 24px", display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#EDE9FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: 700, color: "#5B4FCF", flexShrink: 0 }}>
                     {t.initials}
                   </div>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>{t.name}</div>
-                    <div style={{ fontSize: "12px", color: "#9896A8" }}>{t.location} · QI {t.score}</div>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#1A1825" }}>{t.name}</div>
+                    <div style={{ fontSize: "12px", color: "#9896A8" }}>{t.location}</div>
                   </div>
                 </div>
               </div>

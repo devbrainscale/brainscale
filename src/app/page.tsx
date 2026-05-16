@@ -323,15 +323,10 @@ export default function HomePage() {
       <section style={{ padding: "72px 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginBottom: "16px" }}>
-              {[1,2,3,4,5].map(i => (
-                <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              ))}
-              <span style={{ fontSize: "14px", color: "#9896A8", marginLeft: "6px" }}>4.8 / 5 — 2,400+ reviews</span>
-            </div>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825" }}>
-              What our users <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>say</em>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
+              Real scores, real <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>people</em>
             </h2>
+            <p style={{ fontSize: "16px", color: "#9896A8" }}>847,000+ tests completed · Trusted worldwide</p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
@@ -340,46 +335,57 @@ export default function HomePage() {
                 name: "James T.",
                 location: "London, UK",
                 score: 134,
-                stars: 5,
-                text: "I took an official Mensa test a year ago and scored 131. BrainScale gave me 134. Honestly impressed by the accuracy — and it's completely free. The report breakdown is genuinely useful.",
+                label: "Superior",
+                labelColor: "#4A3EBE",
+                text: "I took an official Mensa test a year ago and scored 131. BrainScale gave me 134. Impressed by the accuracy — and it's completely free. The domain breakdown is genuinely useful.",
                 initials: "JT",
               },
               {
                 name: "Sophie M.",
                 location: "Montreal, Canada",
                 score: 118,
-                stars: 5,
-                text: "I was skeptical at first, but the questions are seriously challenging — way harder than other online IQ tests. My score of 118 felt very realistic. Took 35 minutes, very smooth experience.",
+                label: "Above Average",
+                labelColor: "#6B5FD9",
+                text: "The questions are seriously challenging — way harder than other online tests. My score of 118 felt very realistic. Took 35 minutes, very smooth experience.",
                 initials: "SM",
               },
               {
                 name: "Aryan K.",
                 location: "Toronto, Canada",
                 score: 127,
-                stars: 5,
-                text: "Used the premium report for a job application that required cognitive assessment. The PDF looks professional and the breakdown by cognitive domain is detailed enough to be actually meaningful.",
+                label: "Superior",
+                labelColor: "#4A3EBE",
+                text: "Used the premium report for a job application requiring cognitive assessment. The PDF looks professional and the breakdown by domain is detailed enough to be credible.",
                 initials: "AK",
               },
             ].map((t) => (
-              <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "32px 28px", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column", gap: "20px" }}>
-                {/* Stars */}
-                <div style={{ display: "flex", gap: "3px" }}>
-                  {[1,2,3,4,5].map(i => (
-                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i <= t.stars ? "#FBBF24" : "#E8E5DC"}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  ))}
+              <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", overflow: "hidden", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column" }}>
+                {/* Score header — mirrors /results page */}
+                <div style={{ padding: "28px 28px 20px", borderBottom: "1px solid #E8E5DC", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "52px", fontWeight: 300, color: "#5B4FCF", lineHeight: 1 }}>
+                    {t.score}
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    <div style={{ display: "inline-block", backgroundColor: t.labelColor, color: "#fff", padding: "5px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "6px" }}>
+                      {t.label}
+                    </div>
+                    <div style={{ fontSize: "11px", color: "#9896A8", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase" }}>IQ Score</div>
+                  </div>
                 </div>
                 {/* Quote */}
-                <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.75, margin: 0, flex: 1 }}>
-                  &ldquo;{t.text}&rdquo;
-                </p>
+                <div style={{ padding: "20px 28px", flex: 1 }}>
+                  <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.75, margin: 0 }}>
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                </div>
                 {/* Author */}
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", borderTop: "1px solid #E8E5DC", paddingTop: "20px" }}>
-                  <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "#EDE9FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 700, color: "#5B4FCF", flexShrink: 0 }}>
+                <div style={{ padding: "16px 28px 24px", display: "flex", alignItems: "center", gap: "12px" }}>
+                  <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#EDE9FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "12px", fontWeight: 700, color: "#5B4FCF", flexShrink: 0 }}>
                     {t.initials}
                   </div>
                   <div>
-                    <div style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>{t.name}</div>
-                    <div style={{ fontSize: "12px", color: "#9896A8" }}>{t.location} · IQ {t.score}</div>
+                    <div style={{ fontSize: "13px", fontWeight: 600, color: "#1A1825" }}>{t.name}</div>
+                    <div style={{ fontSize: "12px", color: "#9896A8" }}>{t.location}</div>
                   </div>
                 </div>
               </div>
