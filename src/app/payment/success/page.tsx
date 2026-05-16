@@ -12,7 +12,13 @@ export default function SuccessPage() {
     <>
       <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px" }}>
         <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "56px 48px", maxWidth: "480px", width: "100%", textAlign: "center", boxShadow: "0 4px 24px rgba(26,24,37,0.08)" }}>
-          <div style={{ fontSize: "48px", marginBottom: "20px" }}>🎉</div>
+          <div style={{ marginBottom: "24px", display: "flex", justifyContent: "center" }}>
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#EDE9FF"/>
+              <circle cx="32" cy="32" r="24" fill="#5B4FCF"/>
+              <polyline points="22,33 29,40 43,25" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
           <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 500, color: "#1A1825", marginBottom: "12px" }}>
             Payment successful!
           </h1>

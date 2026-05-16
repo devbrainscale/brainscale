@@ -111,7 +111,7 @@ export default async function ArticlePage({ params }: Props) {
         {/* INLINE CTA */}
         <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "16px", padding: "20px 24px", marginBottom: "40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <div>
-            <p style={{ fontSize: "13px", fontWeight: 700, color: "#5B4FCF", margin: 0 }}>🧠 Testez-vous maintenant</p>
+            <p style={{ fontSize: "13px", fontWeight: 700, color: "#5B4FCF", margin: 0 }}>Testez-vous maintenant</p>
             <p style={{ fontSize: "13px", color: "#5C5A6E", margin: 0 }}>Test de QI gratuit · 40 questions · Résultats instantanés</p>
           </div>
           <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "12px 24px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
