@@ -167,40 +167,51 @@ export default function HomePage() {
 
           {/* Bell curve with colored zones */}
           <svg viewBox="0 0 600 190" style={{ width: "100%", display: "block", overflow: "visible" }}>
-            {/* Zone fills — softer opacities */}
-            <path d="M 20,165 Q 90,163 140,148 Q 185,110 222,97 L 222,165 Z" fill="rgba(91,79,207,0.07)" />
-            <path d="M 222,165 L 222,97 Q 265,48 300,28 Q 335,48 378,97 L 378,165 Z" fill="rgba(91,79,207,0.18)" />
-            <path d="M 378,165 L 378,97 Q 415,132 452,145 L 452,165 Z" fill="rgba(91,79,207,0.38)" />
-            <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.62)" />
-            {/* Zone separators */}
-            <line x1="222" y1="97" x2="222" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
-            <line x1="378" y1="97" x2="378" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
+            {/* 5 zones — matching results page classification (Wechsler) */}
+            <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 241,71 248,70 L 248,165 Z" fill="rgba(91,79,207,0.06)" />
+            <path d="M 248,165 L 248,70 Q 265,48 300,28 Q 335,48 350,70 L 350,165 Z" fill="rgba(91,79,207,0.15)" />
+            <path d="M 350,165 L 350,70 Q 377,90 401,118 L 401,165 Z" fill="rgba(91,79,207,0.32)" />
+            <path d="M 401,165 L 401,118 Q 428,137 452,145 L 452,165 Z" fill="rgba(91,79,207,0.52)" />
+            <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.72)" />
+            {/* Separators at IQ 90, 110, 120, 130 */}
+            <line x1="248" y1="70"  x2="248" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="350" y1="70"  x2="350" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="401" y1="118" x2="401" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
             <line x1="452" y1="145" x2="452" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
-            {/* Curve outline */}
+            {/* Curve */}
             <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
-            {/* Baseline */}
             <line x1="20" y1="165" x2="580" y2="165" stroke="#D4D0C8" strokeWidth="1" />
-            {/* Center line */}
-            <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.30" />
-            {/* Axis labels */}
-            <text x="148" y="184" textAnchor="middle" fontSize="11" fill="#B0AEC0">70</text>
-            <text x="222" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">85</text>
+            <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.28" />
+            {/* Axis: 90 · 100 · 110 · 120 · 130 */}
+            <text x="248" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">90</text>
             <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="500">100</text>
-            <text x="378" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">115</text>
-            <text x="452" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">130</text>
+            <text x="350" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">110</text>
+            <text x="401" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">120</text>
+            <text x="452" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">130</text>
           </svg>
 
-          {/* Zone legend — aligned with flex column */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px", marginTop: "20px" }}>
+          {/* Legend — 5 zones, 2 rows for readability */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "6px", marginTop: "20px", marginBottom: "6px" }}>
             {[
-              { range: "< 85",    label: "Below average",  pct: "16%", bg: "rgba(91,79,207,0.07)", text: "#8B7FE8", sub: "#9896A8" },
-              { range: "85–115",  label: "Average",        pct: "68%", bg: "rgba(91,79,207,0.18)", text: "#5B4FCF", sub: "#5C5A6E" },
-              { range: "115–130", label: "Above average",  pct: "14%", bg: "rgba(91,79,207,0.38)", text: "#3D2FA8", sub: "#4A3EBE" },
-              { range: "> 130",   label: "Gifted",         pct: "2%",  bg: "rgba(91,79,207,0.62)", text: "#fff",    sub: "rgba(255,255,255,0.75)" },
+              { range: "< 90",    label: "Below Avg",   pct: "25%", bg: "rgba(91,79,207,0.06)", text: "#9896A8",  sub: "#B0AEC0" },
+              { range: "90–109",  label: "Average",     pct: "50%", bg: "rgba(91,79,207,0.15)", text: "#5B4FCF",  sub: "#5C5A6E" },
+              { range: "110–119", label: "Above Avg",   pct: "16%", bg: "rgba(91,79,207,0.32)", text: "#3D2FA8",  sub: "#4A3EBE" },
             ].map((z) => (
-              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "84px" }}>
-                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
-                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub, lineHeight: 1.3 }}>{z.label}</div>
+              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "78px" }}>
+                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text }}>{z.range}</div>
+                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub }}>{z.label}</div>
+                <div style={{ fontSize: "17px", fontWeight: 600, color: z.text }}>{z.pct}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "6px" }}>
+            {[
+              { range: "120–129", label: "Superior", pct: "7%", bg: "rgba(91,79,207,0.52)", text: "#fff", sub: "rgba(255,255,255,0.78)" },
+              { range: "≥ 130",   label: "Gifted",   pct: "2%", bg: "rgba(91,79,207,0.72)", text: "#fff", sub: "rgba(255,255,255,0.78)" },
+            ].map((z) => (
+              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "78px" }}>
+                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text }}>{z.range}</div>
+                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub }}>{z.label}</div>
                 <div style={{ fontSize: "17px", fontWeight: 600, color: z.text }}>{z.pct}</div>
               </div>
             ))}
@@ -350,8 +361,8 @@ export default function HomePage() {
                 name: "James T.",
                 location: "London, UK",
                 score: 134,
-                label: "Superior",
-                labelColor: "#4A3EBE",
+                label: "Gifted",
+                labelColor: "#5B4FCF",
                 text: "I took an official Mensa test a year ago and scored 131. BrainScale gave me 134. Impressed by the accuracy — and it's completely free. The domain breakdown is genuinely useful.",
                 initials: "JT",
               },
