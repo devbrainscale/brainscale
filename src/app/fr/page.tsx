@@ -323,6 +323,72 @@ export default function FrHomePage() {
         </div>
       </section>
 
+      {/* TÉMOIGNAGES */}
+      <section style={{ padding: "72px 24px" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: "56px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginBottom: "16px" }}>
+              {[1,2,3,4,5].map(i => (
+                <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#FBBF24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              ))}
+              <span style={{ fontSize: "14px", color: "#9896A8", marginLeft: "6px" }}>4,8 / 5 — 2 400+ avis</span>
+            </div>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825" }}>
+              Ce que disent nos <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>utilisateurs</em>
+            </h2>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
+            {[
+              {
+                name: "Thomas L.",
+                location: "Paris, France",
+                score: 131,
+                stars: 5,
+                text: "J'ai passé un test Mensa officiel l'année dernière — score 128. BrainScale m'a donné 131. La précision est vraiment impressionnante pour un test gratuit. Le rapport détaillé est un vrai plus.",
+                initials: "TL",
+              },
+              {
+                name: "Camille R.",
+                location: "Lyon, France",
+                score: 119,
+                stars: 5,
+                text: "Sceptique au départ, mais les questions sont vraiment difficiles — bien au-dessus des autres tests en ligne. Mon score de 119 me semblait réaliste. Interface fluide, résultats clairs.",
+                initials: "CR",
+              },
+              {
+                name: "Mehdi B.",
+                location: "Bruxelles, Belgique",
+                score: 124,
+                stars: 5,
+                text: "J'ai utilisé le rapport premium pour une candidature qui demandait une évaluation cognitive. Le PDF est professionnel, la décomposition par domaine est suffisamment détaillée pour être crédible.",
+                initials: "MB",
+              },
+            ].map((t) => (
+              <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "32px 28px", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column", gap: "20px" }}>
+                <div style={{ display: "flex", gap: "3px" }}>
+                  {[1,2,3,4,5].map(i => (
+                    <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i <= t.stars ? "#FBBF24" : "#E8E5DC"}><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  ))}
+                </div>
+                <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.75, margin: 0, flex: 1 }}>
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", borderTop: "1px solid #E8E5DC", paddingTop: "20px" }}>
+                  <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "#EDE9FF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "13px", fontWeight: 700, color: "#5B4FCF", flexShrink: 0 }}>
+                    {t.initials}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>{t.name}</div>
+                    <div style={{ fontSize: "12px", color: "#9896A8" }}>{t.location} · QI {t.score}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA FINAL */}
       <section style={{ margin: "0 24px 24px", borderRadius: "28px", backgroundColor: "#0F0E17", padding: "80px 24px", textAlign: "center" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
