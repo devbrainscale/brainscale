@@ -158,15 +158,15 @@ export default function FrHomePage() {
           </h2>
           <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>Moyenne mondiale : 100 · Écart-type : 15</p>
 
-          {/* Courbe avec zones colorées — 5 zones Wechsler */}
+          {/* Courbe avec zones colorées + labels % intégrés */}
           <svg viewBox="0 0 600 190" style={{ width: "100%", display: "block", overflow: "visible" }}>
-            {/* 5 zones — correspondant à la page résultats (classification Wechsler) */}
+            {/* 5 zones — classification Wechsler */}
             <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 241,71 248,70 L 248,165 Z" fill="rgba(91,79,207,0.06)" />
             <path d="M 248,165 L 248,70 Q 265,48 300,28 Q 335,48 350,70 L 350,165 Z" fill="rgba(91,79,207,0.15)" />
             <path d="M 350,165 L 350,70 Q 377,90 401,118 L 401,165 Z" fill="rgba(91,79,207,0.32)" />
             <path d="M 401,165 L 401,118 Q 428,137 452,145 L 452,165 Z" fill="rgba(91,79,207,0.52)" />
             <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.72)" />
-            {/* Séparateurs à QI 90, 110, 120, 130 */}
+            {/* Séparateurs */}
             <line x1="248" y1="70"  x2="248" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
             <line x1="350" y1="70"  x2="350" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
             <line x1="401" y1="118" x2="401" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
@@ -175,6 +175,12 @@ export default function FrHomePage() {
             <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
             <line x1="20" y1="165" x2="580" y2="165" stroke="#D4D0C8" strokeWidth="1" />
             <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.28" />
+            {/* Labels % — positionnés là où chaque zone a de l'espace vertical */}
+            <text x="120" y="158" textAnchor="middle" fontSize="12" fontWeight="700" fill="#9896A8">25%</text>
+            <text x="299" y="112" textAnchor="middle" fontSize="13" fontWeight="700" fill="#5B4FCF">50%</text>
+            <text x="375" y="142" textAnchor="middle" fontSize="12" fontWeight="700" fill="#3D2FA8">16%</text>
+            <text x="426" y="152" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff">7%</text>
+            <text x="516" y="152" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff">2%</text>
             {/* Axe : 90 · 100 · 110 · 120 · 130 */}
             <text x="248" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">90</text>
             <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="500">100</text>
@@ -183,30 +189,20 @@ export default function FrHomePage() {
             <text x="452" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">130</text>
           </svg>
 
-          {/* Légende — 5 zones, 2 rangées */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "6px", marginTop: "20px", marginBottom: "6px" }}>
+          {/* Légende slim — chips horizontaux, wrapping mobile */}
+          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "4px 20px", marginTop: "16px" }}>
             {[
-              { range: "< 90",    label: "Sous la moy.",  pct: "25%", bg: "rgba(91,79,207,0.06)", text: "#9896A8", sub: "#B0AEC0" },
-              { range: "90–109",  label: "Moyenne",       pct: "50%", bg: "rgba(91,79,207,0.15)", text: "#5B4FCF", sub: "#5C5A6E" },
-              { range: "110–119", label: "Au-dessus",     pct: "16%", bg: "rgba(91,79,207,0.32)", text: "#3D2FA8", sub: "#4A3EBE" },
+              { range: "< 90",    label: "Sous la moy.", color: "#9896A8" },
+              { range: "90–109",  label: "Moyenne",      color: "#5B4FCF" },
+              { range: "110–119", label: "Au-dessus",    color: "#3D2FA8" },
+              { range: "120–129", label: "Supérieur",    color: "#4A3EBE" },
+              { range: "≥ 130",   label: "Surdoué",      color: "#5B4FCF" },
             ].map((z) => (
-              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "78px" }}>
-                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text }}>{z.range}</div>
-                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub }}>{z.label}</div>
-                <div style={{ fontSize: "17px", fontWeight: 600, color: z.text }}>{z.pct}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "6px" }}>
-            {[
-              { range: "120–129", label: "Supérieur", pct: "7%", bg: "rgba(91,79,207,0.52)", text: "#fff", sub: "rgba(255,255,255,0.78)" },
-              { range: "≥ 130",   label: "Surdoué",   pct: "2%", bg: "rgba(91,79,207,0.72)", text: "#fff", sub: "rgba(255,255,255,0.78)" },
-            ].map((z) => (
-              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "78px" }}>
-                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text }}>{z.range}</div>
-                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub }}>{z.label}</div>
-                <div style={{ fontSize: "17px", fontWeight: 600, color: z.text }}>{z.pct}</div>
-              </div>
+              <span key={z.range} style={{ fontSize: "12px", whiteSpace: "nowrap", color: "#5C5A6E" }}>
+                <span style={{ fontWeight: 600, color: z.color }}>{z.range}</span>
+                <span style={{ color: "#C8C6D4", margin: "0 5px" }}>·</span>
+                <span style={{ fontWeight: 400 }}>{z.label}</span>
+              </span>
             ))}
           </div>
         </div>
