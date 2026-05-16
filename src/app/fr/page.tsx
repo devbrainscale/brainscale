@@ -101,8 +101,8 @@ export default function FrHomePage() {
             <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>EN</Link>
             <span style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
             <span style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
-            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
-              Commencer le test
+            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+              Tester mon QI
             </Link>
           </div>
         </div>
@@ -333,8 +333,8 @@ export default function FrHomePage() {
           <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
             Rejoignez 2,1M+ personnes qui ont déjà découvert leur QI. Gratuit, rapide, sans inscription.
           </p>
-          <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 44px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)" }}>
-            Commencer maintenant — c&apos;est gratuit
+          <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)", display: "inline-block" }}>
+            Commencer le test — Gratuit
           </Link>
         </div>
       </section>
