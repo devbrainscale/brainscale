@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     const pdfRes = await fetch(`${PDF_SERVICE_URL}/generate-pdf`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'X-API-Key': PDF_API_KEY },
-      body:    JSON.stringify({ score, correct, total }),
+      body:    JSON.stringify({ score, correct, total, lang }),
     });
     if (!pdfRes.ok) throw new Error(`PDF service error: ${pdfRes.status}`);
     const pdfData = await pdfRes.json();
