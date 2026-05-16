@@ -113,82 +113,87 @@ export default function ResultsContent() {
     ctx.fillStyle = "#0F0E17";
     ctx.fillRect(0, 0, 1080, 1080);
 
-    // Purple radial glow
-    const glow = ctx.createRadialGradient(540, 480, 0, 540, 480, 420);
-    glow.addColorStop(0, "rgba(91,79,207,0.18)");
+    // Subtle purple glow
+    const glow = ctx.createRadialGradient(540, 420, 0, 540, 420, 380);
+    glow.addColorStop(0, "rgba(91,79,207,0.22)");
     glow.addColorStop(1, "rgba(91,79,207,0)");
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, 1080, 1080);
 
-    // Subtle circle outline
+    // Top badge "MY IQ SCORE"
+    const badgeLabel = "MY IQ SCORE";
+    ctx.font = "600 22px system-ui, -apple-system, sans-serif";
+    const bw = ctx.measureText(badgeLabel).width + 48;
+    const bx = 540 - bw / 2;
+    ctx.fillStyle = "rgba(91,79,207,0.2)";
     ctx.beginPath();
-    ctx.arc(540, 480, 360, 0, Math.PI * 2);
-    ctx.strokeStyle = "rgba(91,79,207,0.12)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // "MY IQ SCORE" label
-    ctx.fillStyle = "#5C5A6E";
-    ctx.font = "600 26px system-ui, -apple-system, sans-serif";
+    ctx.moveTo(bx + 20, 200); ctx.lineTo(bx + bw - 20, 200);
+    ctx.quadraticCurveTo(bx + bw, 200, bx + bw, 220);
+    ctx.lineTo(bx + bw, 248); ctx.quadraticCurveTo(bx + bw, 268, bx + bw - 20, 268);
+    ctx.lineTo(bx + 20, 268); ctx.quadraticCurveTo(bx, 268, bx, 248);
+    ctx.lineTo(bx, 220); ctx.quadraticCurveTo(bx, 200, bx + 20, 200);
+    ctx.closePath(); ctx.fill();
+    ctx.fillStyle = "#9B8FE0";
+    ctx.font = "700 20px system-ui, -apple-system, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("MY IQ SCORE", 540, 300);
+    ctx.fillText(badgeLabel, 540, 240);
 
     // Score number
-    ctx.fillStyle = "#5B4FCF";
-    ctx.font = "300 240px Georgia, 'Times New Roman', serif";
+    ctx.fillStyle = "#fff";
+    ctx.font = "300 180px Georgia, 'Times New Roman', serif";
     ctx.textAlign = "center";
-    ctx.fillText(score.toString(), 540, 560);
+    ctx.fillText(score.toString(), 540, 490);
 
-    // Label pill
+    // IQ label pill
     const pillText = label.title.toUpperCase();
-    ctx.font = "bold 26px system-ui, -apple-system, sans-serif";
-    const textW = ctx.measureText(pillText).width;
-    const pillW = textW + 72;
-    const pillX = 540 - pillW / 2;
-    const pillY = 600;
-    const r = 28;
+    ctx.font = "700 22px system-ui, -apple-system, sans-serif";
+    const tw = ctx.measureText(pillText).width;
+    const pw = tw + 64; const px = 540 - pw / 2; const py = 530;
     ctx.fillStyle = "#5B4FCF";
     ctx.beginPath();
-    ctx.moveTo(pillX + r, pillY);
-    ctx.lineTo(pillX + pillW - r, pillY);
-    ctx.quadraticCurveTo(pillX + pillW, pillY, pillX + pillW, pillY + r);
-    ctx.lineTo(pillX + pillW, pillY + 56 - r);
-    ctx.quadraticCurveTo(pillX + pillW, pillY + 56, pillX + pillW - r, pillY + 56);
-    ctx.lineTo(pillX + r, pillY + 56);
-    ctx.quadraticCurveTo(pillX, pillY + 56, pillX, pillY + 56 - r);
-    ctx.lineTo(pillX, pillY + r);
-    ctx.quadraticCurveTo(pillX, pillY, pillX + r, pillY);
-    ctx.closePath();
-    ctx.fill();
+    ctx.moveTo(px + 24, py); ctx.lineTo(px + pw - 24, py);
+    ctx.quadraticCurveTo(px + pw, py, px + pw, py + 24);
+    ctx.lineTo(px + pw, py + 52 - 24);
+    ctx.quadraticCurveTo(px + pw, py + 52, px + pw - 24, py + 52);
+    ctx.lineTo(px + 24, py + 52); ctx.quadraticCurveTo(px, py + 52, px, py + 52 - 24);
+    ctx.lineTo(px, py + 24); ctx.quadraticCurveTo(px, py, px + 24, py);
+    ctx.closePath(); ctx.fill();
     ctx.fillStyle = "#fff";
-    ctx.font = "bold 24px system-ui, -apple-system, sans-serif";
+    ctx.font = "700 21px system-ui, -apple-system, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(pillText, 540, 637);
+    ctx.fillText(pillText, 540, 563);
 
     // Percentile
     ctx.fillStyle = "#5C5A6E";
-    ctx.font = "400 24px system-ui, -apple-system, sans-serif";
+    ctx.font = "400 22px system-ui, -apple-system, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText(`Top ${100 - percentile}% of the population`, 540, 720);
+    ctx.fillText(`${percentile}th percentile worldwide`, 540, 640);
+
+    // Decorative dots
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.arc(430 + i * 55, 700, 3, 0, Math.PI * 2);
+      ctx.fillStyle = i === 2 ? "#5B4FCF" : "rgba(91,79,207,0.3)";
+      ctx.fill();
+    }
 
     // Divider
-    ctx.strokeStyle = "#2A2836";
+    ctx.strokeStyle = "#1E1D2E";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(360, 800);
-    ctx.lineTo(720, 800);
+    ctx.moveTo(300, 780); ctx.lineTo(780, 780);
     ctx.stroke();
 
     // BrainScale branding
     ctx.fillStyle = "#fff";
-    ctx.font = "600 36px Georgia, 'Times New Roman', serif";
+    ctx.font = "600 34px Georgia, 'Times New Roman', serif";
     ctx.textAlign = "center";
-    ctx.fillText("BrainScale", 540, 880);
+    ctx.fillText("BrainScale", 540, 860);
 
-    ctx.fillStyle = "#5C5A6E";
-    ctx.font = "400 22px system-ui, -apple-system, sans-serif";
+    ctx.fillStyle = "#3D3B52";
+    ctx.font = "400 20px system-ui, -apple-system, sans-serif";
     ctx.textAlign = "center";
-    ctx.fillText("brainscale.app", 540, 920);
+    ctx.fillText("brainscale.app", 540, 900);
 
     // Download
     const link = document.createElement("a");
