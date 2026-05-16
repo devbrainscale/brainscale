@@ -139,7 +139,7 @@ export default function HomePage() {
             {[
               { value: "847,000+", label: "Tests completed" },
               { value: "4.8 / 5", label: "Satisfaction" },
-              { value: "r = 0.87", label: "Correlation with standardized tests" },
+              { value: "r = 0.87", label: "Reliability correlation" },
             ].map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
                 <div className="bs-stat-value" style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
@@ -160,7 +160,7 @@ export default function HomePage() {
       {/* BELL CURVE */}
       <section style={{ padding: "16px 24px 48px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "48px 40px", textAlign: "center" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 500, color: "#1A1825", marginBottom: "6px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 300, color: "#1A1825", marginBottom: "6px" }}>
             IQ Distribution Worldwide
           </h2>
           <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>World average: 100 · Standard deviation: 15</p>

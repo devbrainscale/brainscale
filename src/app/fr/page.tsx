@@ -139,7 +139,7 @@ export default function FrHomePage() {
             {[
               { value: "847 000+", label: "Tests complétés" },
               { value: "4,8 / 5", label: "Satisfaction" },
-              { value: "r = 0,87", label: "Corrélation tests standardisés" },
+              { value: "r = 0,87", label: "Corrélation fiabilité" },
             ].map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
                 <div className="bs-stat-value" style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
@@ -153,7 +153,7 @@ export default function FrHomePage() {
       {/* BELL CURVE */}
       <section style={{ padding: "16px 24px 48px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "clamp(28px, 5vw, 48px) clamp(20px, 5vw, 40px)", textAlign: "center" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 500, color: "#1A1825", marginBottom: "6px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 300, color: "#1A1825", marginBottom: "6px" }}>
             Distribution mondiale du QI
           </h2>
           <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>Moyenne mondiale : 100 · Écart-type : 15</p>
