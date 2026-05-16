@@ -92,16 +92,16 @@ export default function FrHomePage() {
 
       {/* NAV */}
       <nav style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", position: "sticky", top: 0, zIndex: 50 }}>
-        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
+        <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 20px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825", textDecoration: "none", flexShrink: 0 }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </Link>
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
-            <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>EN</Link>
-            <span style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
-            <span style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
-            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
+            <Link href="/fr/blog" className="fr-nav-blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none", whiteSpace: "nowrap" }}>Blog</Link>
+            <Link href="/" className="fr-nav-lang" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>EN</Link>
+            <span className="fr-nav-lang" style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
+            <span className="fr-nav-lang" style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
+            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}>
               Tester mon QI
             </Link>
           </div>
@@ -135,11 +135,11 @@ export default function FrHomePage() {
             </a>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "56px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "40px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
             {[
-              { value: "2,1M+", label: "Tests complétés" },
-              { value: "4.8 / 5", label: "Satisfaction" },
-              { value: "r = 0,87", label: "Corrélation avec les tests standardisés" },
+              { value: "847 000+", label: "Tests complétés" },
+              { value: "4,8 / 5", label: "Satisfaction" },
+              { value: "r = 0,87", label: "Corrélation tests standardisés" },
             ].map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
                 <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
@@ -152,7 +152,7 @@ export default function FrHomePage() {
 
       {/* BELL CURVE */}
       <section style={{ padding: "16px 24px 48px" }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "48px 40px", textAlign: "center" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "clamp(28px, 5vw, 48px) clamp(20px, 5vw, 40px)", textAlign: "center" }}>
           <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 500, color: "#1A1825", marginBottom: "6px" }}>
             Distribution mondiale du QI
           </h2>
@@ -207,7 +207,7 @@ export default function FrHomePage() {
             {[
               { num: "01", title: "Raisonnement matriciel", desc: "Identifiez des patterns visuels et complétez des séquences logiques — le cœur de la mesure du QI fluide." },
               { num: "02", title: "Logique analytique", desc: "Problèmes de déduction, séries numériques et analogies verbales pour évaluer le raisonnement cristallisé." },
-              { num: "03", title: "Score calibré", desc: "Votre résultat est normalisé sur notre base de 2,1M+ participants pour une comparaison précise." },
+              { num: "03", title: "Score calibré", desc: "Votre résultat est normalisé sur notre base de 847 000+ participants pour une comparaison précise." },
             ].map((c) => (
               <div key={c.num} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "36px 32px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
                 <div style={{ fontSize: "11px", fontWeight: 800, letterSpacing: "3px", color: "#5B4FCF", marginBottom: "16px" }}>{c.num}</div>
@@ -331,6 +331,7 @@ export default function FrHomePage() {
               De vrais scores, de vraies <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>personnes</em>
             </h2>
             <p style={{ fontSize: "16px", color: "#9896A8" }}>847 000+ tests complétés · Reconnu dans le monde entier</p>
+
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
@@ -365,12 +366,12 @@ export default function FrHomePage() {
             ].map((t) => (
               <div key={t.name} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", overflow: "hidden", boxShadow: "0 2px 16px rgba(26,24,37,0.06)", display: "flex", flexDirection: "column" }}>
                 {/* Score header — miroir de /fr/results */}
-                <div style={{ padding: "28px 28px 20px", borderBottom: "1px solid #E8E5DC", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "52px", fontWeight: 300, color: "#5B4FCF", lineHeight: 1 }}>
+                <div style={{ padding: "24px 24px 18px", borderBottom: "1px solid #E8E5DC", display: "flex", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
+                  <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "52px", fontWeight: 300, color: "#5B4FCF", lineHeight: 1, flexShrink: 0 }}>
                     {t.score}
                   </div>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ display: "inline-block", backgroundColor: t.labelColor, color: "#fff", padding: "5px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "6px" }}>
+                  <div style={{ textAlign: "right", minWidth: 0 }}>
+                    <div style={{ display: "inline-block", backgroundColor: t.labelColor, color: "#fff", padding: "5px 12px", borderRadius: "999px", fontSize: "10px", fontWeight: 700, letterSpacing: "0.3px", marginBottom: "6px", maxWidth: "140px", textAlign: "center" }}>
                       {t.label}
                     </div>
                     <div style={{ fontSize: "11px", color: "#9896A8", fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase" }}>Score QI</div>
@@ -406,7 +407,7 @@ export default function FrHomePage() {
             <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>votre potentiel ?</em>
           </h2>
           <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
-            Rejoignez 2,1M+ personnes qui ont déjà découvert leur QI. Gratuit, rapide, sans inscription.
+            Rejoignez 847 000+ personnes qui ont déjà découvert leur QI. Gratuit, rapide, sans inscription.
           </p>
           <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)", display: "inline-block" }}>
             Commencer le test — Gratuit
@@ -428,6 +429,17 @@ export default function FrHomePage() {
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · Test psychométrique gratuit</p>
       </footer>
+
+      {/* Responsive styles */}
+      <style>{`
+        @media (max-width: 480px) {
+          .fr-nav-blog { display: none !important; }
+          .fr-nav-lang { display: none !important; }
+        }
+        @media (max-width: 640px) {
+          .fr-nav-blog { display: none !important; }
+        }
+      `}</style>
 
       {/* FAQ Schema.org */}
       <script
