@@ -31,8 +31,9 @@ export async function POST(request: NextRequest) {
   const score   = parseInt(session.metadata?.iq_score  ?? '100');
   const correct = parseInt(session.metadata?.correct   ?? '20');
   const total   = parseInt(session.metadata?.total     ?? '40');
-  const lang    = session.metadata?.lang ?? 'en';
-  const isFr    = lang === 'fr';
+  const lang      = session.metadata?.lang ?? 'en';
+  const isFr      = lang === 'fr';
+  const isPremium = session.metadata?.tier === 'premium';
 
   if (!email) {
     console.error('No email in session', session.id);
@@ -66,13 +67,16 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         sender:  { name: 'BrainScale', email: 'noreply@brainscale.app' },
         to:      [{ email }],
-        subject: isFr ? 'Votre rapport cognitif BrainScale' : 'Your BrainScale Cognitive Report',
+        subject: isFr
+          ? (isPremium ? 'Votre rapport cognitif Premium BrainScale' : 'Votre rapport cognitif BrainScale')
+          : (isPremium ? 'Your BrainScale Premium Cognitive Report' : 'Your BrainScale Cognitive Report'),
         htmlContent: isFr ? `
           <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px">
             <h2 style="font-size:22px;color:#14121F;margin-bottom:8px">Votre rapport est prêt.</h2>
             <p style="color:#475569;line-height:1.6;margin-bottom:24px">
               Merci d&apos;avoir complété le test cognitif BrainScale.
               Votre rapport complet est joint à cet email.
+              ${isPremium ? '<br/><br/><strong>Votre accès Premium inclut :</strong> votre protocole d&apos;entraînement cognitif 30 jours vous sera envoyé dans les 24h à cette adresse.' : ''}
             </p>
             <p style="color:#475569;line-height:1.6">
               Votre score QI : <strong style="color:#5B4FCF">${score}</strong>
@@ -88,6 +92,7 @@ export async function POST(request: NextRequest) {
             <p style="color:#475569;line-height:1.6;margin-bottom:24px">
               Thank you for completing the BrainScale assessment.
               Your full cognitive report is attached to this email.
+              ${isPremium ? '<br/><br/><strong>Your Premium access includes:</strong> your personalized 30-day cognitive training protocol will be sent to this address within 24 hours.' : ''}
             </p>
             <p style="color:#475569;line-height:1.6">
               Your IQ Score: <strong style="color:#4F46E5">${score}</strong>

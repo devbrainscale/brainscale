@@ -45,22 +45,22 @@ export default function FrResultsContent() {
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic' | 'premium'>(null);
 
-  async function handleUnlock() {
-    setCheckoutLoading(true);
+  async function handleUnlock(tier: 'basic' | 'premium') {
+    setCheckoutLoading(tier);
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr" }),
+        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr", tier }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
     } catch {
       // silent fallback
     } finally {
-      setCheckoutLoading(false);
+      setCheckoutLoading(null);
     }
   }
 
@@ -170,7 +170,7 @@ export default function FrResultsContent() {
         {!submitted && !skipped ? (
           <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "36px", marginBottom: "20px", textAlign: "center" }}>
             <p style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 700, letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>
-              🧠 Plan d'amélioration gratuit
+              🧠 Plan d&apos;amélioration gratuit
             </p>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>
               Sauvegardez vos résultats & recevez votre plan de 7 jours gratuit
@@ -193,13 +193,13 @@ export default function FrResultsContent() {
             <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", maxWidth: "440px", margin: "12px auto 0", textAlign: "left" }}>
               <input type="checkbox" id="gdpr-fr" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#5B4FCF", flexShrink: 0, cursor: "pointer" }} />
               <label htmlFor="gdpr-fr" style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.5, cursor: "pointer" }}>
-                J'accepte de recevoir mes résultats et des conseils par email. Je peux me désabonner à tout moment. Voir notre{" "}
+                J&apos;accepte de recevoir mes résultats et des conseils par email. Je peux me désabonner à tout moment. Voir notre{" "}
                 <a href="/fr/privacy" style={{ color: "#5B4FCF", textDecoration: "underline" }}>Politique de confidentialité</a>.
               </label>
             </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
             <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#9896A8", fontSize: "12px", marginTop: "14px", cursor: "pointer", textDecoration: "underline" }}>
-              Ignorer pour l'instant
+              Ignorer pour l&apos;instant
             </button>
           </div>
         ) : submitted ? (
@@ -211,7 +211,7 @@ export default function FrResultsContent() {
         {/* GAUGE */}
         <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px", marginBottom: "20px", boxShadow: "0 2px 12px rgba(26,24,37,0.06)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
-            <span style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>Position sur l'échelle QI</span>
+            <span style={{ fontSize: "14px", fontWeight: 600, color: "#1A1825" }}>Position sur l&apos;échelle QI</span>
             <span style={{ fontSize: "13px", color: "#9896A8" }}>Plage : 75–145</span>
           </div>
           <div style={{ height: "12px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
@@ -261,15 +261,50 @@ export default function FrResultsContent() {
               <div key={item} style={{ padding: "14px 0", borderBottom: "1px solid #E8E5DC", fontSize: "14px", color: "#5C5A6E" }}>{item}</div>
             ))}
           </div>
-          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.85)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "32px" }}>
-            <div style={{ fontSize: "28px", marginBottom: "12px" }}>🔒</div>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>Rapport Cognitif Complet</h3>
-            <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "320px" }}>
-              Débloquez votre analyse détaillée, vos insights personnalisés et votre certificat PDF imprimable.
+          {/* Overlay — deux tiers */}
+          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.93)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", backdropFilter: "blur(2px)" }}>
+            <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "2px", color: "#5B4FCF", textTransform: "uppercase", marginBottom: "6px" }}>Débloquer vos résultats</p>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 500, color: "#1A1825", marginBottom: "20px", textAlign: "center" }}>
+              Votre rapport cognitif complet en 8 pages
+            </h3>
+            <div style={{ display: "flex", gap: "12px", width: "100%", maxWidth: "500px", flexWrap: "wrap", justifyContent: "center" }}>
+              {/* ESSENTIEL */}
+              <div style={{ flex: "1 1 178px", backgroundColor: "#fff", border: "1.5px solid #E8E5DC", borderRadius: "16px", padding: "20px 16px", textAlign: "center" }}>
+                <p style={{ fontSize: "11px", fontWeight: 700, color: "#9896A8", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "4px" }}>Essentiel</p>
+                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 600, color: "#1A1825", marginBottom: "14px" }}>14,99 $</p>
+                <div style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.9, marginBottom: "16px", textAlign: "left" }}>
+                  <div>✓ Rapport PDF 8 pages</div>
+                  <div>✓ Certificat cognitif</div>
+                  <div>✓ Livraison instantan&eacute;e</div>
+                </div>
+                <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
+                  style={{ width: "100%", backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "11px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
+                  {checkoutLoading === 'basic' ? "Redirection…" : "Obtenir l'Essentiel"}
+                </button>
+              </div>
+              {/* PREMIUM */}
+              <div style={{ flex: "1 1 178px", backgroundColor: "#5B4FCF", border: "2px solid #5B4FCF", borderRadius: "16px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
+                <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#FBBF24", color: "#1A1825", fontSize: "11px", fontWeight: 800, padding: "4px 14px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
+                  ⭐ LE PLUS POPULAIRE
+                </div>
+                <p style={{ fontSize: "11px", fontWeight: 700, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "4px" }}>Premium</p>
+                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 600, color: "#fff", marginBottom: "14px" }}>24,99 $</p>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.82)", lineHeight: 1.9, marginBottom: "16px", textAlign: "left" }}>
+                  <div>✓ Rapport PDF 8 pages</div>
+                  <div>✓ Certificat cognitif</div>
+                  <div>✓ Livraison instantan&eacute;e</div>
+                  <div style={{ color: "#C4BBFF", fontWeight: 600 }}>✓ Protocole 30 jours</div>
+                  <div style={{ color: "#C4BBFF", fontWeight: 600 }}>✓ Badge LinkedIn</div>
+                </div>
+                <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
+                  style={{ width: "100%", backgroundColor: "#fff", color: "#5B4FCF", padding: "11px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'premium' ? 0.6 : 1, boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
+                  {checkoutLoading === 'premium' ? "Redirection…" : "Obtenir Premium →"}
+                </button>
+              </div>
+            </div>
+            <p style={{ fontSize: "11px", color: "#9896A8", marginTop: "14px" }}>
+              🔒 Paiement s&eacute;curis&eacute; · Livraison instantan&eacute;e
             </p>
-            <button onClick={handleUnlock} disabled={checkoutLoading} style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading ? "not-allowed" : "pointer", opacity: checkoutLoading ? 0.7 : 1, boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}>
-              {checkoutLoading ? "Redirection…" : "Débloquer le rapport complet — 9 $"}
-            </button>
           </div>
         </div>
 
@@ -308,21 +343,27 @@ export default function FrResultsContent() {
             Refaire le test
           </Link>
           <Link href="/fr" style={{ backgroundColor: "#fff", color: "#1A1825", padding: "16px 36px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none", border: "1px solid #E8E5DC" }}>
-            Retour à l'accueil
+            Retour à l&apos;accueil
           </Link>
         </div>
 
       </main>
 
-      {/* STICKY BOTTOM CTA */}
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.95)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "14px 24px", zIndex: 100, display: "flex", alignItems: "center", justifyContent: "center", gap: "16px", flexWrap: "wrap", boxShadow: "0 -4px 24px rgba(26,24,37,0.08)" }}>
-        <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500 }}>
-          🔒 <strong style={{ color: "#1A1825" }}>Rapport cognitif complet</strong> — analyse détaillée + certificat PDF
-        </span>
-        <button onClick={handleUnlock} disabled={checkoutLoading}
-          style={{ backgroundColor: checkoutLoading ? "#9896A8" : "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, border: "none", cursor: checkoutLoading ? "not-allowed" : "pointer", whiteSpace: "nowrap", boxShadow: checkoutLoading ? "none" : "0 4px 20px rgba(91,79,207,0.4)", transition: "all 0.15s ease" }}>
-          {checkoutLoading ? "Redirection…" : "Débloquer le rapport — 9 $"}
-        </button>
+      {/* STICKY BOTTOM CTA — deux tiers */}
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.97)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "12px 20px", zIndex: 100, boxShadow: "0 -4px 24px rgba(26,24,37,0.08)" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
+          <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500, whiteSpace: "nowrap" }}>
+            🔒 <strong style={{ color: "#1A1825" }}>D&eacute;bloquer votre rapport</strong>
+          </span>
+          <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
+            style={{ backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", opacity: checkoutLoading === 'basic' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+            {checkoutLoading === 'basic' ? "…" : "Essentiel — 14,99 $"}
+          </button>
+          <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
+            style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", boxShadow: "0 4px 16px rgba(91,79,207,0.4)", opacity: checkoutLoading === 'premium' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+            {checkoutLoading === 'premium' ? "…" : "Premium ⭐ — 24,99 $"}
+          </button>
+        </div>
       </div>
     </div>
   );

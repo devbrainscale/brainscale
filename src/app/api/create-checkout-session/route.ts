@@ -7,7 +7,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: NextRequest) {
   try {
-    const { score, correct, total, email, lang } = await request.json();
+    const { score, correct, total, email, lang, tier } = await request.json();
+    const isPremium = tier === 'premium';
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -16,10 +17,12 @@ export async function POST(request: NextRequest) {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Full Cognitive Report',
-              description: 'Detailed IQ breakdown, personalized insights, and printable PDF certificate.',
+              name: isPremium ? 'Cognitive Report — Premium' : 'Cognitive Report — Essential',
+              description: isPremium
+                ? '8-page cognitive report + 30-day training protocol + LinkedIn badge.'
+                : '8-page cognitive report with personalized insights and printable PDF certificate.',
             },
-            unit_amount: 900, // $9.00 in cents
+            unit_amount: isPremium ? 2499 : 1499, // $24.99 or $14.99
           },
           quantity: 1,
         },
@@ -33,6 +36,7 @@ export async function POST(request: NextRequest) {
         correct:    String(correct ?? 20),
         total:      String(total   ?? 40),
         lang:       String(lang ?? "en"),
+        tier:       String(tier ?? "basic"),
       },
     });
 

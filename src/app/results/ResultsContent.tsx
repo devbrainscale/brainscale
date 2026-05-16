@@ -46,15 +46,15 @@ export default function ResultsContent() {
   const [loading, setLoading] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [gdprConsent, setGdprConsent] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic' | 'premium'>(null);
 
-  async function handleUnlock() {
-    setCheckoutLoading(true);
+  async function handleUnlock(tier: 'basic' | 'premium') {
+    setCheckoutLoading(tier);
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined }),
+        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, tier }),
       });
       const data = await res.json();
       if (data.url) {
@@ -63,7 +63,7 @@ export default function ResultsContent() {
     } catch {
       // fallback silent
     } finally {
-      setCheckoutLoading(false);
+      setCheckoutLoading(null);
     }
   }
 
@@ -185,7 +185,7 @@ export default function ResultsContent() {
               Save your results & get your free 7-day brain training plan
             </h3>
             <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "380px", margin: "0 auto 24px" }}>
-              We'll email you your score + a personalized plan to boost your weakest cognitive areas.
+              We&apos;ll email you your score + a personalized plan to boost your weakest cognitive areas.
             </p>
             <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
               <input
@@ -293,20 +293,50 @@ export default function ResultsContent() {
               <div key={item} style={{ padding: "14px 0", borderBottom: "1px solid #E8E5DC", fontSize: "14px", color: "#5C5A6E" }}>{item}</div>
             ))}
           </div>
-          {/* Overlay */}
-          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.85)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", padding: "32px" }}>
-            <div style={{ fontSize: "28px", marginBottom: "12px" }}>🔒</div>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "8px" }}>Full Cognitive Report</h3>
-            <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "320px" }}>
-              Unlock your detailed breakdown, personalized insights, and printable PDF certificate.
+          {/* Overlay — two-tier pricing */}
+          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.93)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "24px", backdropFilter: "blur(2px)" }}>
+            <p style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "2px", color: "#5B4FCF", textTransform: "uppercase", marginBottom: "6px" }}>Unlock Your Full Results</p>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 500, color: "#1A1825", marginBottom: "20px", textAlign: "center" }}>
+              Get your complete 8-page cognitive report
+            </h3>
+            <div style={{ display: "flex", gap: "12px", width: "100%", maxWidth: "500px", flexWrap: "wrap", justifyContent: "center" }}>
+              {/* ESSENTIAL */}
+              <div style={{ flex: "1 1 178px", backgroundColor: "#fff", border: "1.5px solid #E8E5DC", borderRadius: "16px", padding: "20px 16px", textAlign: "center" }}>
+                <p style={{ fontSize: "11px", fontWeight: 700, color: "#9896A8", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "4px" }}>Essential</p>
+                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 600, color: "#1A1825", marginBottom: "14px" }}>$14.99</p>
+                <div style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.9, marginBottom: "16px", textAlign: "left" }}>
+                  <div>✓ 8-page PDF report</div>
+                  <div>✓ Cognitive certificate</div>
+                  <div>✓ Instant email delivery</div>
+                </div>
+                <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
+                  style={{ width: "100%", backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "11px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
+                  {checkoutLoading === 'basic' ? "Redirecting…" : "Get Essential"}
+                </button>
+              </div>
+              {/* PREMIUM */}
+              <div style={{ flex: "1 1 178px", backgroundColor: "#5B4FCF", border: "2px solid #5B4FCF", borderRadius: "16px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
+                <div style={{ position: "absolute", top: "-13px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#FBBF24", color: "#1A1825", fontSize: "11px", fontWeight: 800, padding: "4px 14px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
+                  ⭐ MOST POPULAR
+                </div>
+                <p style={{ fontSize: "11px", fontWeight: 700, color: "rgba(255,255,255,0.6)", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "4px" }}>Premium</p>
+                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 600, color: "#fff", marginBottom: "14px" }}>$24.99</p>
+                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.82)", lineHeight: 1.9, marginBottom: "16px", textAlign: "left" }}>
+                  <div>✓ 8-page PDF report</div>
+                  <div>✓ Cognitive certificate</div>
+                  <div>✓ Instant email delivery</div>
+                  <div style={{ color: "#C4BBFF", fontWeight: 600 }}>✓ 30-day training protocol</div>
+                  <div style={{ color: "#C4BBFF", fontWeight: 600 }}>✓ LinkedIn profile badge</div>
+                </div>
+                <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
+                  style={{ width: "100%", backgroundColor: "#fff", color: "#5B4FCF", padding: "11px 16px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'premium' ? 0.6 : 1, boxShadow: "0 2px 12px rgba(0,0,0,0.15)" }}>
+                  {checkoutLoading === 'premium' ? "Redirecting…" : "Get Premium →"}
+                </button>
+              </div>
+            </div>
+            <p style={{ fontSize: "11px", color: "#9896A8", marginTop: "14px" }}>
+              🔒 Secure payment · Instant delivery
             </p>
-            <button
-              onClick={handleUnlock}
-              disabled={checkoutLoading}
-              style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading ? "not-allowed" : "pointer", opacity: checkoutLoading ? 0.7 : 1, boxShadow: "0 4px 20px rgba(91,79,207,0.4)" }}
-            >
-              {checkoutLoading ? "Redirecting…" : "Unlock Full Report — $9"}
-            </button>
           </div>
         </div>
 
@@ -371,48 +401,21 @@ export default function ResultsContent() {
 
       </main>
 
-      {/* STICKY BOTTOM CTA */}
-      <div style={{
-        position: "fixed",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "rgba(247,246,242,0.95)",
-        backdropFilter: "blur(12px)",
-        borderTop: "1px solid #E8E5DC",
-        padding: "14px 24px",
-        zIndex: 100,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "16px",
-        flexWrap: "wrap",
-        boxShadow: "0 -4px 24px rgba(26,24,37,0.08)",
-      }}>
-        <div style={{ textAlign: "center" }}>
-          <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500 }}>
-            🔒 <strong style={{ color: "#1A1825" }}>Full Cognitive Report</strong> — detailed breakdown + PDF certificate
+      {/* STICKY BOTTOM CTA — two tiers */}
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.97)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "12px 20px", zIndex: 100, boxShadow: "0 -4px 24px rgba(26,24,37,0.08)" }}>
+        <div style={{ maxWidth: "760px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
+          <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500, whiteSpace: "nowrap" }}>
+            🔒 <strong style={{ color: "#1A1825" }}>Unlock your full report</strong>
           </span>
+          <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
+            style={{ backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", opacity: checkoutLoading === 'basic' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+            {checkoutLoading === 'basic' ? "…" : "Essential — $14.99"}
+          </button>
+          <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
+            style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", boxShadow: "0 4px 16px rgba(91,79,207,0.4)", opacity: checkoutLoading === 'premium' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+            {checkoutLoading === 'premium' ? "…" : "Premium ⭐ — $24.99"}
+          </button>
         </div>
-        <button
-          onClick={handleUnlock}
-          disabled={checkoutLoading}
-          style={{
-            backgroundColor: checkoutLoading ? "#9896A8" : "#5B4FCF",
-            color: "#fff",
-            padding: "14px 32px",
-            borderRadius: "999px",
-            fontSize: "15px",
-            fontWeight: 700,
-            border: "none",
-            cursor: checkoutLoading ? "not-allowed" : "pointer",
-            whiteSpace: "nowrap",
-            boxShadow: checkoutLoading ? "none" : "0 4px 20px rgba(91,79,207,0.4)",
-            transition: "all 0.15s ease",
-          }}
-        >
-          {checkoutLoading ? "Redirecting…" : "Unlock Full Report — $9"}
-        </button>
       </div>
     </div>
   );
