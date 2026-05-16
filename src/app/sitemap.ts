@@ -1,12 +1,20 @@
 import { MetadataRoute } from "next";
-import { articles } from "./fr/blog/data";
+import { articles as frArticles } from "./fr/blog/data";
+import { articles as enArticles } from "./blog/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const blogUrls: MetadataRoute.Sitemap = articles.map((a) => ({
+  const frBlogUrls: MetadataRoute.Sitemap = frArticles.map((a) => ({
     url: `https://www.brainscale.app/fr/blog/${a.slug}`,
     lastModified: new Date(a.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.75,
+  }));
+
+  const enBlogUrls: MetadataRoute.Sitemap = enArticles.map((a) => ({
+    url: `https://www.brainscale.app/blog/${a.slug}`,
+    lastModified: new Date(a.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
   }));
 
   return [
@@ -22,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
+    },
+    {
+      url: "https://www.brainscale.app/blog",
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.85,
     },
     {
       url: "https://www.brainscale.app/about",
@@ -60,7 +74,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    ...blogUrls,
+    ...enBlogUrls,
+    ...frBlogUrls,
   ];
 }
 
