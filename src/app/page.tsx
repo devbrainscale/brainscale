@@ -167,41 +167,41 @@ export default function HomePage() {
 
           {/* Bell curve with colored zones */}
           <svg viewBox="0 0 600 190" style={{ width: "100%", display: "block", overflow: "visible" }}>
-            {/* Zone fills — light to intense (left to right = common to rare) */}
-            <path d="M 20,165 Q 90,163 140,148 Q 185,110 222,97 L 222,165 Z" fill="rgba(91,79,207,0.10)" />
-            <path d="M 222,165 L 222,97 Q 265,48 300,28 Q 335,48 378,97 L 378,165 Z" fill="rgba(91,79,207,0.28)" />
-            <path d="M 378,165 L 378,97 Q 415,132 452,145 L 452,165 Z" fill="rgba(91,79,207,0.60)" />
-            <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.85)" />
+            {/* Zone fills — softer opacities */}
+            <path d="M 20,165 Q 90,163 140,148 Q 185,110 222,97 L 222,165 Z" fill="rgba(91,79,207,0.07)" />
+            <path d="M 222,165 L 222,97 Q 265,48 300,28 Q 335,48 378,97 L 378,165 Z" fill="rgba(91,79,207,0.18)" />
+            <path d="M 378,165 L 378,97 Q 415,132 452,145 L 452,165 Z" fill="rgba(91,79,207,0.38)" />
+            <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.62)" />
             {/* Zone separators */}
-            <line x1="222" y1="97" x2="222" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
-            <line x1="378" y1="97" x2="378" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
-            <line x1="452" y1="145" x2="452" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="222" y1="97" x2="222" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="378" y1="97" x2="378" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="452" y1="145" x2="452" y2="165" stroke="rgba(91,79,207,0.15)" strokeWidth="1" strokeDasharray="3,3" />
             {/* Curve outline */}
-            <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+            <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
             {/* Baseline */}
             <line x1="20" y1="165" x2="580" y2="165" stroke="#D4D0C8" strokeWidth="1" />
             {/* Center line */}
-            <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1.5" strokeDasharray="4,3" strokeOpacity="0.40" />
+            <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.30" />
             {/* Axis labels */}
-            <text x="148" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">70</text>
+            <text x="148" y="184" textAnchor="middle" fontSize="11" fill="#B0AEC0">70</text>
             <text x="222" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">85</text>
-            <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="700">100</text>
+            <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="500">100</text>
             <text x="378" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">115</text>
             <text x="452" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">130</text>
           </svg>
 
-          {/* Zone legend strip */}
+          {/* Zone legend — aligned with flex column */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px", marginTop: "20px" }}>
             {[
-              { range: "< 85",    label: "Below\naverage",   pct: "16%", bg: "rgba(91,79,207,0.10)", text: "#5B4FCF", sub: "#5C5A6E" },
-              { range: "85–115",  label: "Average",          pct: "68%", bg: "rgba(91,79,207,0.28)", text: "#5B4FCF", sub: "#5C5A6E" },
-              { range: "115–130", label: "Above\naverage",   pct: "14%", bg: "rgba(91,79,207,0.60)", text: "#fff",    sub: "rgba(255,255,255,0.85)" },
-              { range: "> 130",   label: "Gifted",           pct: "2%",  bg: "rgba(91,79,207,0.85)", text: "#fff",    sub: "rgba(255,255,255,0.85)" },
+              { range: "< 85",    label: "Below average",  pct: "16%", bg: "rgba(91,79,207,0.07)", text: "#8B7FE8", sub: "#9896A8" },
+              { range: "85–115",  label: "Average",        pct: "68%", bg: "rgba(91,79,207,0.18)", text: "#5B4FCF", sub: "#5C5A6E" },
+              { range: "115–130", label: "Above average",  pct: "14%", bg: "rgba(91,79,207,0.38)", text: "#3D2FA8", sub: "#4A3EBE" },
+              { range: "> 130",   label: "Gifted",         pct: "2%",  bg: "rgba(91,79,207,0.62)", text: "#fff",    sub: "rgba(255,255,255,0.75)" },
             ].map((z) => (
-              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "12px 6px", textAlign: "center" }}>
-                <div style={{ fontSize: "12px", fontWeight: 700, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
-                <div style={{ fontSize: "10px", color: z.sub, marginTop: "4px", lineHeight: 1.35, whiteSpace: "pre-line" }}>{z.label}</div>
-                <div style={{ fontSize: "16px", fontWeight: 700, color: z.text, marginTop: "6px" }}>{z.pct}</div>
+              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "14px 6px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "84px" }}>
+                <div style={{ fontSize: "11px", fontWeight: 500, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
+                <div style={{ fontSize: "10px", fontWeight: 400, color: z.sub, lineHeight: 1.3 }}>{z.label}</div>
+                <div style={{ fontSize: "17px", fontWeight: 600, color: z.text }}>{z.pct}</div>
               </div>
             ))}
           </div>
