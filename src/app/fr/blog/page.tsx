@@ -47,7 +47,7 @@ export default function FrBlogPage() {
             <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>Cognition</em>
           </h1>
           <p style={{ fontSize: "18px", color: "#9896A8", maxWidth: "480px", margin: "0 auto" }}>
-            Guides scientifiques, analyses de données et conseils pratiques sur l'intelligence et les capacités cognitives.
+            Guides scientifiques, analyses de données et conseils pratiques sur l&apos;intelligence et les capacités cognitives.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export default function FrBlogPage() {
             <p style={{ fontSize: "16px", color: "#5C5A6E", lineHeight: 1.6, marginBottom: "24px" }}>
               {articles[0].excerpt}
             </p>
-            <span style={{ color: "#5B4FCF", fontWeight: 600, fontSize: "14px" }}>Lire l'article →</span>
+            <span style={{ color: "#5B4FCF", fontWeight: 600, fontSize: "14px" }}>Lire l&apos;article →</span>
           </div>
         </Link>
 

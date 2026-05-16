@@ -22,7 +22,7 @@ export default function FrTermsPage() {
 
       <main style={{ maxWidth: "720px", margin: "0 auto", padding: "64px 24px 96px" }}>
         <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1A1825", marginBottom: "8px" }}>
-          Conditions d'Utilisation
+          Conditions d&apos;Utilisation
         </h1>
         <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "48px" }}>Dernière mise à jour : 14 mai 2026</p>
 
@@ -84,7 +84,7 @@ export default function FrTermsPage() {
 
         <div style={{ borderTop: "1px solid #E8E5DC", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
           <Link href="/fr/privacy" style={{ fontSize: "14px", color: "#5B4FCF", textDecoration: "none", fontWeight: 500 }}>Politique de confidentialité</Link>
-          <Link href="/fr" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Retour à l'accueil</Link>
+          <Link href="/fr" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Retour à l&apos;accueil</Link>
         </div>
       </main>
     </div>

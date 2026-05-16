@@ -1,6 +1,14 @@
 import { MetadataRoute } from "next";
+import { articles } from "./fr/blog/data";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const blogUrls: MetadataRoute.Sitemap = articles.map((a) => ({
+    url: `https://www.brainscale.app/fr/blog/${a.slug}`,
+    lastModified: new Date(a.publishedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   return [
     // ── English ──────────────────────────────────────────────
     {
@@ -52,6 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...blogUrls,
   ];
 }
 

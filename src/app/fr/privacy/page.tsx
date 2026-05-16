@@ -83,8 +83,8 @@ export default function FrPrivacyPage() {
         ))}
 
         <div style={{ borderTop: "1px solid #E8E5DC", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-          <Link href="/fr/terms" style={{ fontSize: "14px", color: "#5B4FCF", textDecoration: "none", fontWeight: 500 }}>Conditions d'utilisation</Link>
-          <Link href="/fr" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Retour à l'accueil</Link>
+          <Link href="/fr/terms" style={{ fontSize: "14px", color: "#5B4FCF", textDecoration: "none", fontWeight: 500 }}>Conditions d&apos;utilisation</Link>
+          <Link href="/fr" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Retour à l&apos;accueil</Link>
         </div>
       </main>
     </div>
