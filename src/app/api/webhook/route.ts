@@ -22,15 +22,17 @@ async function sendBrevoEmail(payload: object) {
   }
 }
 
-async function markBrevoContactPurchased(email: string) {
+async function removeFromDripList(email: string, isFr: boolean) {
+  // Remove buyer from drip list (5=EN, 6=FR) to stop the automation
+  const listId = isFr ? 6 : 5;
   try {
-    await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
-      method:  'PUT',
+    await fetch(`https://api.brevo.com/v3/contacts/lists/${listId}/contacts/remove`, {
+      method:  'POST',
       headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
-      body:    JSON.stringify({ attributes: { PURCHASED: true } }),
+      body:    JSON.stringify({ emails: [email] }),
     });
   } catch (err) {
-    console.error('Failed to mark contact as purchased:', err);
+    console.error('Failed to remove contact from drip list:', err);
   }
 }
 
@@ -301,8 +303,8 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // 4. Mark contact as purchased in Brevo (stops the drip automation)
-  await markBrevoContactPurchased(email);
+  // 4. Remove buyer from drip list (stops the automation)
+  await removeFromDripList(email, isFr);
 
   console.log(`✓ Emails sent to ${email} (score: ${score}, premium: ${isPremium})`);
   return NextResponse.json({ success: true });
