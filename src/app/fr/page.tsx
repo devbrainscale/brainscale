@@ -98,9 +98,9 @@ export default function FrHomePage() {
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "10px", minWidth: 0 }}>
             <Link href="/fr/blog" className="fr-nav-blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none", whiteSpace: "nowrap" }}>Blog</Link>
-            <Link href="/" className="fr-nav-lang" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>EN</Link>
-            <span className="fr-nav-lang" style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
-            <span className="fr-nav-lang" style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
+            <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none", flexShrink: 0 }}>EN</Link>
+            <span className="fr-nav-sep" style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
+            <span className="fr-nav-sep" style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
             <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, textDecoration: "none", whiteSpace: "nowrap", flexShrink: 0 }}>
               Tester mon QI
             </Link>
@@ -424,7 +424,7 @@ export default function FrHomePage() {
           <Link href="/fr/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
           <Link href="/fr/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>CGU</Link>
           <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
-          <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>🇬🇧 English</Link>
+          <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>English</Link>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · Test psychométrique gratuit</p>
       </footer>
@@ -433,7 +433,7 @@ export default function FrHomePage() {
       <style>{`
         @media (max-width: 480px) {
           .fr-nav-blog { display: none !important; }
-          .fr-nav-lang { display: none !important; }
+          .fr-nav-sep  { display: none !important; }
         }
         @media (max-width: 640px) {
           .fr-nav-blog { display: none !important; }
