@@ -22,6 +22,18 @@ async function sendBrevoEmail(payload: object) {
   }
 }
 
+async function markBrevoContactPurchased(email: string) {
+  try {
+    await fetch(`https://api.brevo.com/v3/contacts/${encodeURIComponent(email)}`, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
+      body:    JSON.stringify({ attributes: { PURCHASED: true } }),
+    });
+  } catch (err) {
+    console.error('Failed to mark contact as purchased:', err);
+  }
+}
+
 function trainingProtocolHtml(score: number, isFr: boolean): string {
   const accent = isFr ? '#5B4FCF' : '#4F46E5';
 
@@ -288,6 +300,9 @@ export async function POST(request: NextRequest) {
       console.error('Training protocol email failed:', err);
     }
   }
+
+  // 4. Mark contact as purchased in Brevo (stops the drip automation)
+  await markBrevoContactPurchased(email);
 
   console.log(`✓ Emails sent to ${email} (score: ${score}, premium: ${isPremium})`);
   return NextResponse.json({ success: true });

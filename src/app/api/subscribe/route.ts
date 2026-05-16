@@ -62,9 +62,10 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         email,
         attributes: {
-          IQ_SCORE: numericScore,
-          LANG:     language,
-          IQ_LABEL: getIqLabel(numericScore, language),
+          IQ_SCORE:  numericScore,
+          LANG:      language,
+          IQ_LABEL:  getIqLabel(numericScore, language),
+          PURCHASED: false,
         },
         listIds: [language === 'fr' ? 6 : 5],
         updateEnabled: true,
