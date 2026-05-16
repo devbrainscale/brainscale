@@ -158,35 +158,43 @@ export default function FrHomePage() {
           </h2>
           <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>Moyenne mondiale : 100 · Écart-type : 15</p>
 
-          <svg viewBox="0 0 600 180" style={{ width: "100%", maxWidth: "480px", display: "block", margin: "0 auto 24px" }}>
-            <defs>
-              <linearGradient id="bg-fr" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#5B4FCF" stopOpacity="0.2" />
-                <stop offset="100%" stopColor="#5B4FCF" stopOpacity="0.02" />
-              </linearGradient>
-            </defs>
-            <path d="M 20 165 Q 90 163 140 148 Q 195 130 235 85 Q 265 48 300 28 Q 335 48 365 85 Q 405 130 460 148 Q 510 163 580 165 Z" fill="url(#bg-fr)" stroke="#5B4FCF" strokeWidth="2.5" />
-            <line x1="300" y1="28" x2="300" y2="168" stroke="#5B4FCF" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5" />
-            <text x="300" y="178" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="700">100</text>
-            {[{ x: 148, l: "70" }, { x: 222, l: "85" }, { x: 378, l: "115" }, { x: 452, l: "130" }].map(({ x, l }) => (
-              <g key={l}>
-                <line x1={x} y1="162" x2={x} y2="170" stroke="#9896A8" strokeWidth="1" />
-                <text x={x} y="178" textAnchor="middle" fontSize="11" fill="#9896A8">{l}</text>
-              </g>
-            ))}
+          {/* Courbe avec zones colorées */}
+          <svg viewBox="0 0 600 190" style={{ width: "100%", display: "block", overflow: "visible" }}>
+            {/* Remplissages des zones — de clair à intense */}
+            <path d="M 20,165 Q 90,163 140,148 Q 185,110 222,97 L 222,165 Z" fill="rgba(91,79,207,0.10)" />
+            <path d="M 222,165 L 222,97 Q 265,48 300,28 Q 335,48 378,97 L 378,165 Z" fill="rgba(91,79,207,0.28)" />
+            <path d="M 378,165 L 378,97 Q 415,132 452,145 L 452,165 Z" fill="rgba(91,79,207,0.60)" />
+            <path d="M 452,165 L 452,145 Q 510,163 580,165 Z" fill="rgba(91,79,207,0.85)" />
+            {/* Séparateurs de zone */}
+            <line x1="222" y1="97" x2="222" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="378" y1="97" x2="378" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
+            <line x1="452" y1="145" x2="452" y2="165" stroke="rgba(91,79,207,0.22)" strokeWidth="1" strokeDasharray="3,3" />
+            {/* Courbe */}
+            <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round" />
+            {/* Baseline */}
+            <line x1="20" y1="165" x2="580" y2="165" stroke="#D4D0C8" strokeWidth="1" />
+            {/* Ligne centre */}
+            <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1.5" strokeDasharray="4,3" strokeOpacity="0.40" />
+            {/* Labels axe */}
+            <text x="148" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">70</text>
+            <text x="222" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">85</text>
+            <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="700">100</text>
+            <text x="378" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">115</text>
+            <text x="452" y="184" textAnchor="middle" fontSize="11" fill="#9896A8">130</text>
           </svg>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "12px", flexWrap: "wrap" }}>
+          {/* Légende zones */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "6px", marginTop: "20px" }}>
             {[
-              { range: "< 85", label: "Sous la moyenne", pct: "16%" },
-              { range: "85–115", label: "Moyenne", pct: "68%" },
-              { range: "115–130", label: "Au-dessus", pct: "14%" },
-              { range: "> 130", label: "Surdoué", pct: "2%" },
-            ].map((b) => (
-              <div key={b.range} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "14px", padding: "12px 18px", textAlign: "center", minWidth: "110px" }}>
-                <div style={{ fontWeight: 700, color: "#5B4FCF", fontSize: "15px" }}>{b.range}</div>
-                <div style={{ color: "#5C5A6E", fontSize: "13px", marginTop: "2px" }}>{b.label}</div>
-                <div style={{ color: "#9896A8", fontSize: "11px" }}>{b.pct} de la pop.</div>
+              { range: "< 85",    label: "Sous la\nmoyenne", pct: "16%", bg: "rgba(91,79,207,0.10)", text: "#5B4FCF", sub: "#5C5A6E" },
+              { range: "85–115",  label: "Moyenne",          pct: "68%", bg: "rgba(91,79,207,0.28)", text: "#5B4FCF", sub: "#5C5A6E" },
+              { range: "115–130", label: "Au-dessus",        pct: "14%", bg: "rgba(91,79,207,0.60)", text: "#fff",    sub: "rgba(255,255,255,0.85)" },
+              { range: "> 130",   label: "Surdoué",          pct: "2%",  bg: "rgba(91,79,207,0.85)", text: "#fff",    sub: "rgba(255,255,255,0.85)" },
+            ].map((z) => (
+              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "12px 6px", textAlign: "center" }}>
+                <div style={{ fontSize: "12px", fontWeight: 700, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
+                <div style={{ fontSize: "10px", color: z.sub, marginTop: "4px", lineHeight: 1.35, whiteSpace: "pre-line" }}>{z.label}</div>
+                <div style={{ fontSize: "16px", fontWeight: 700, color: z.text, marginTop: "6px" }}>{z.pct}</div>
               </div>
             ))}
           </div>
