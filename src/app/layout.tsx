@@ -42,6 +42,9 @@ export const metadata: Metadata = {
     description:
       "Measure your cognitive abilities for free. 40 questions, instant results, no registration.",
   },
+  verification: {
+    google: "aYb11-OSmnEYPiEP5LghGfbDzNG816-xIeXTTI28ZHw",
+  },
   robots: {
     index: true,
     follow: true,
