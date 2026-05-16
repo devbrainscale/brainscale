@@ -85,29 +85,54 @@ export default function FrResultsContent() {
     canvas.height = 1080;
     const ctx = canvas.getContext("2d")!;
     const W = 1080, H = 1080;
-    const cx = W / 2, cy = 435;
-    const R = 238;
+    const cx = W / 2, cy = 442;
+    const R = 260;
+
+    // Helper: rounded rect path
+    function rr(x: number, y: number, w: number, h: number, r: number) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
 
     // ── Background ──────────────────────────────────────────
     ctx.fillStyle = "#0C0B14";
     ctx.fillRect(0, 0, W, H);
-    const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 420);
-    bgGlow.addColorStop(0, "rgba(65,52,158,0.08)");
+    const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 440);
+    bgGlow.addColorStop(0, "rgba(65,52,158,0.09)");
     bgGlow.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = bgGlow;
     ctx.fillRect(0, 0, W, H);
 
-    // ── Top label ───────────────────────────────────────────
+    // ── Badge pill "MON SCORE QI" ────────────────────────────
+    const badgeText = "MON SCORE QI";
+    ctx.font = "700 15px system-ui,-apple-system,sans-serif";
+    const badgeW = ctx.measureText(badgeText).width + 52;
+    const badgeH = 38;
+    const badgeX = cx - badgeW / 2;
+    const badgeY = 78;
+    ctx.fillStyle = "rgba(91,79,207,0.16)";
+    rr(badgeX, badgeY, badgeW, badgeH, 19);
+    ctx.fill();
+    ctx.strokeStyle = "rgba(91,79,207,0.50)";
+    ctx.lineWidth = 1;
+    rr(badgeX, badgeY, badgeW, badgeH, 19);
+    ctx.stroke();
+    ctx.fillStyle = "rgba(185,172,255,0.90)";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "500 11px system-ui,-apple-system,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.20)";
-    ctx.fillText("S  C  O  R  E     Q  I", cx, 106);
+    ctx.fillText(badgeText, cx, badgeY + badgeH / 2);
 
-    // ── Gauge geometry ───────────────────────────────────────
-    // Arc: 148° (lower-left, ~8 o'clock) → clockwise 244° → 32° (lower-right, ~4 o'clock)
-    // IQ 100 maps exactly to 270° (12 o'clock top)
-    // IQ 70 → 148°, IQ 130 → 32°
+    // ── Gauge ─────────────────────────────────────────────────
+    // Arc 148° → 32° clockwise (244° total). IQ 100 = 270° (12 o'clock).
     const toRad = (d: number) => d * Math.PI / 180;
     const IQ_MIN = 70, IQ_MAX = 130;
     const ARC_START = 148, ARC_SPAN = 244;
@@ -115,42 +140,40 @@ export default function FrResultsContent() {
     const scoreDeg = ARC_START + ((clamped - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
     const scoreRad = toRad(scoreDeg);
 
-    // Track arc (background)
+    // Track
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, R, toRad(ARC_START), toRad(32), false);
-    ctx.strokeStyle = "rgba(255,255,255,0.052)";
-    ctx.lineWidth = 4;
+    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    ctx.lineWidth = 6;
     ctx.lineCap = "butt";
     ctx.stroke();
     ctx.restore();
 
-    // Progress arc
-    const startPt = { x: cx + R * Math.cos(toRad(ARC_START)), y: cy + R * Math.sin(toRad(ARC_START)) };
-    const endPt   = { x: cx + R * Math.cos(scoreRad),         y: cy + R * Math.sin(scoreRad) };
-    const pg = ctx.createLinearGradient(startPt.x, startPt.y, endPt.x, endPt.y);
-    pg.addColorStop(0, "#2C258E");
+    // Progress
+    const sp = { x: cx + R * Math.cos(toRad(ARC_START)), y: cy + R * Math.sin(toRad(ARC_START)) };
+    const ep = { x: cx + R * Math.cos(scoreRad),         y: cy + R * Math.sin(scoreRad) };
+    const pg = ctx.createLinearGradient(sp.x, sp.y, ep.x, ep.y);
+    pg.addColorStop(0, "#2A238C");
     pg.addColorStop(1, "#7268E0");
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, R, toRad(ARC_START), scoreRad, false);
     ctx.strokeStyle = pg;
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 6;
     ctx.lineCap = "butt";
     ctx.stroke();
     ctx.restore();
 
-    // Tick marks
-    const majorTicks = [70, 80, 90, 100, 110, 120, 130];
-    const allTicks   = [...majorTicks, 75, 85, 95, 105, 115, 125];
-    allTicks.forEach(iq => {
-      const deg = ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
-      const a = toRad(deg);
-      const maj = majorTicks.includes(iq);
+    // Ticks
+    const majors = [70, 80, 90, 100, 110, 120, 130];
+    [...majors, 75, 85, 95, 105, 115, 125].forEach(iq => {
+      const a = toRad(ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN);
+      const maj = majors.includes(iq);
       ctx.save();
       ctx.beginPath();
-      ctx.moveTo(cx + (R - (maj ? 8 : 4)) * Math.cos(a), cy + (R - (maj ? 8 : 4)) * Math.sin(a));
-      ctx.lineTo(cx + (R + (maj ? 14 : 7)) * Math.cos(a), cy + (R + (maj ? 14 : 7)) * Math.sin(a));
+      ctx.moveTo(cx + (R - (maj ? 9 : 5)) * Math.cos(a), cy + (R - (maj ? 9 : 5)) * Math.sin(a));
+      ctx.lineTo(cx + (R + (maj ? 15 : 8)) * Math.cos(a), cy + (R + (maj ? 15 : 8)) * Math.sin(a));
       ctx.strokeStyle = maj ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.08)";
       ctx.lineWidth = maj ? 1.5 : 1;
       ctx.stroke();
@@ -158,70 +181,106 @@ export default function FrResultsContent() {
     });
 
     // Scale labels
-    const labelR = R + 40;
-    ctx.font = "400 13px system-ui,sans-serif";
+    ctx.font = "400 14px system-ui,sans-serif";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     [70, 85, 100, 115, 130].forEach(iq => {
-      const deg = ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
-      const a = toRad(deg);
-      ctx.fillStyle = "rgba(255,255,255,0.18)";
-      ctx.fillText(iq.toString(), cx + labelR * Math.cos(a), cy + labelR * Math.sin(a));
+      const a = toRad(ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN);
+      ctx.fillStyle = "rgba(255,255,255,0.20)";
+      ctx.fillText(iq.toString(), cx + (R + 42) * Math.cos(a), cy + (R + 42) * Math.sin(a));
     });
 
     // Score dot
     const dotX = cx + R * Math.cos(scoreRad);
     const dotY = cy + R * Math.sin(scoreRad);
     const halo = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 22);
-    halo.addColorStop(0, "rgba(185,175,255,0.26)");
+    halo.addColorStop(0, "rgba(185,175,255,0.28)");
     halo.addColorStop(1, "rgba(185,175,255,0)");
     ctx.fillStyle = halo;
     ctx.beginPath();
     ctx.arc(dotX, dotY, 22, 0, Math.PI * 2);
     ctx.fill();
     ctx.beginPath();
-    ctx.arc(dotX, dotY, 7, 0, Math.PI * 2);
+    ctx.arc(dotX, dotY, 8, 0, Math.PI * 2);
     ctx.fillStyle = "#FFFFFF";
     ctx.fill();
 
     // ── Score number ─────────────────────────────────────────
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
-    ctx.font = "200 150px Georgia,'Times New Roman',serif";
+    ctx.font = "200 160px Georgia,'Times New Roman',serif";
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText(score.toString(), cx, cy + 16);
+    ctx.fillText(score.toString(), cx, cy + 14);
 
-    // IQ label — small, spaced, muted violet
-    ctx.font = "600 11px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(148,132,248,0.88)";
-    ctx.fillText(label.title.toUpperCase(), cx, cy + 105);
+    // ── Label pill ────────────────────────────────────────────
+    const pillText = label.title.toUpperCase();
+    ctx.font = "700 15px system-ui,sans-serif";
+    const pillW = ctx.measureText(pillText).width + 50;
+    const pillH = 36;
+    const pillX = cx - pillW / 2;
+    const pillY = cy + 106;
+    ctx.fillStyle = "#5B4FCF";
+    rr(pillX, pillY, pillW, pillH, 18);
+    ctx.fill();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(pillText, cx, pillY + pillH / 2);
 
     // ── Percentile ────────────────────────────────────────────
-    const percY = cy + R + 74;
+    const percY = cy + R + 68;
     ctx.textBaseline = "alphabetic";
-    ctx.font = "300 15px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.22)";
+    ctx.font = "300 17px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.42)";
     ctx.fillText(`${percentile}e percentile mondial`, cx, percY);
 
-    // ── Thin rule ─────────────────────────────────────────────
-    const ruleY = percY + 54;
-    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    // ── Description text (word-wrapped) ───────────────────────
+    ctx.font = "300 15px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.26)";
+    const maxW = 520;
+    const words = label.desc.split(" ");
+    let line = "", lines: string[] = [];
+    for (const w of words) {
+      const test = line ? line + " " + w : w;
+      if (ctx.measureText(test).width > maxW) { lines.push(line); line = w; }
+      else line = test;
+    }
+    if (line) lines.push(line);
+    const descY0 = percY + 34;
+    lines.forEach((l, i) => ctx.fillText(l, cx, descY0 + i * 24));
+
+    // ── Decorative dots ───────────────────────────────────────
+    const dotsY = descY0 + lines.length * 24 + 28;
+    for (let i = 0; i < 5; i++) {
+      ctx.beginPath();
+      ctx.arc(cx - 110 + i * 55, dotsY, 3, 0, Math.PI * 2);
+      ctx.fillStyle = i === 2 ? "rgba(91,79,207,0.9)" : "rgba(91,79,207,0.30)";
+      ctx.fill();
+    }
+
+    // ── Divider ───────────────────────────────────────────────
+    const divY = dotsY + 44;
+    ctx.strokeStyle = "rgba(255,255,255,0.07)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(cx - 155, ruleY);
-    ctx.lineTo(cx + 155, ruleY);
+    ctx.moveTo(cx - 180, divY);
+    ctx.lineTo(cx + 180, divY);
     ctx.stroke();
 
     // ── Branding ──────────────────────────────────────────────
-    const brandY = H - 86;
+    const brandY = divY + 60;
     ctx.textAlign = "center";
     ctx.textBaseline = "alphabetic";
-    ctx.font = "600 26px Georgia,'Times New Roman',serif";
-    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.strokeStyle = "rgba(255,255,255,0.18)";
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - 160, brandY - 12); ctx.lineTo(cx - 80, brandY - 12); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 80,  brandY - 12); ctx.lineTo(cx + 160, brandY - 12); ctx.stroke();
+    ctx.font = "600 28px Georgia,'Times New Roman',serif";
+    ctx.fillStyle = "rgba(255,255,255,0.80)";
     ctx.fillText("BrainScale", cx, brandY);
     ctx.font = "400 13px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.16)";
-    ctx.fillText("brainscale.app", cx, brandY + 26);
+    ctx.fillStyle = "rgba(255,255,255,0.18)";
+    ctx.fillText("brainscale.app", cx, brandY + 28);
 
     // ── Download ──────────────────────────────────────────────
     const link = document.createElement("a");
