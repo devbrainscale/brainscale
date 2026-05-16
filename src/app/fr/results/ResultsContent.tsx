@@ -473,13 +473,13 @@ export default function FrResultsContent() {
 
         {/* PREMIUM TEASER */}
         <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", marginBottom: "28px" }}>
-          <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none", minHeight: "660px" }}>
+          <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", color: "#1A1825", marginBottom: "16px" }}>Profil cognitif détaillé</h3>
             {["Mémoire de travail : 94e percentile", "Traitement visuo-spatial : 87e percentile", "Raisonnement fluide : 96e percentile", "Vitesse de traitement : 79e percentile", "Attention soutenue : 88e percentile"].map((item) => (
               <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #E8E5DC", fontSize: "13px", color: "#5C5A6E" }}>{item}</div>
             ))}
           </div>
-          <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(247,246,242,0.94)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 24px", backdropFilter: "blur(2px)" }}>
+          <div className="bs-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "#F7F6F2", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 24px", overflowY: "auto" }}>
             <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#5B4FCF", textTransform: "uppercase", marginBottom: "8px" }}>Débloquer vos résultats</p>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1A1825", marginBottom: "24px", textAlign: "center", lineHeight: 1.4 }}>
               Rapport cognitif complet — 8 pages
@@ -535,6 +535,12 @@ export default function FrResultsContent() {
 
       {/* STICKY BOTTOM CTA */}
       <style>{`
+        .bs-blur-bg { min-height: 420px; }
+        .bs-overlay { justify-content: center !important; }
+        @media (max-width: 540px) {
+          .bs-blur-bg { min-height: 860px; }
+          .bs-overlay { justify-content: flex-start !important; padding-top: 32px !important; }
+        }
         .bs-sticky { display:flex; align-items:center; justify-content:center; gap:10px; max-width:680px; margin:0 auto; }
         .bs-sticky-label { font-size:13px; color:#5C5A6E; font-weight:500; white-space:nowrap; }
         .bs-btn-basic { background:#F0EEF8; color:#5B4FCF; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #C4BBFF; white-space:nowrap; cursor:pointer; transition:all .15s; }
