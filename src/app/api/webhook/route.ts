@@ -31,6 +31,8 @@ export async function POST(request: NextRequest) {
   const score   = parseInt(session.metadata?.iq_score  ?? '100');
   const correct = parseInt(session.metadata?.correct   ?? '20');
   const total   = parseInt(session.metadata?.total     ?? '40');
+  const lang    = session.metadata?.lang ?? 'en';
+  const isFr    = lang === 'fr';
 
   if (!email) {
     console.error('No email in session', session.id);
@@ -64,8 +66,23 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         sender:  { name: 'BrainScale', email: 'noreply@brainscale.app' },
         to:      [{ email }],
-        subject: 'Your BrainScale Cognitive Report',
-        htmlContent: `
+        subject: isFr ? 'Votre rapport cognitif BrainScale' : 'Your BrainScale Cognitive Report',
+        htmlContent: isFr ? `
+          <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px">
+            <h2 style="font-size:22px;color:#14121F;margin-bottom:8px">Votre rapport est prêt.</h2>
+            <p style="color:#475569;line-height:1.6;margin-bottom:24px">
+              Merci d&apos;avoir complété le test cognitif BrainScale.
+              Votre rapport complet est joint à cet email.
+            </p>
+            <p style="color:#475569;line-height:1.6">
+              Votre score QI : <strong style="color:#5B4FCF">${score}</strong>
+            </p>
+            <hr style="border:none;border-top:1px solid #E2E8F0;margin:24px 0"/>
+            <p style="font-size:12px;color:#94A3B8">
+              BrainScale · brainscale.app · Ceci n&apos;est pas une évaluation clinique ou médicale
+            </p>
+          </div>
+        ` : `
           <div style="font-family:sans-serif;max-width:520px;margin:0 auto;padding:32px 24px">
             <h2 style="font-size:22px;color:#14121F;margin-bottom:8px">Your report is ready.</h2>
             <p style="color:#475569;line-height:1.6;margin-bottom:24px">
@@ -83,7 +100,7 @@ export async function POST(request: NextRequest) {
         `,
         attachment: [{
           content: pdfBase64,
-          name:    'BrainScale_Cognitive_Report.pdf',
+          name:    isFr ? 'BrainScale_Rapport_Cognitif.pdf' : 'BrainScale_Cognitive_Report.pdf',
         }],
       }),
     });

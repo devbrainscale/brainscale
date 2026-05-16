@@ -53,7 +53,7 @@ export default function FrResultsContent() {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined }),
+        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr" }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
