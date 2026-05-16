@@ -213,18 +213,29 @@ export default function TestPage() {
           </button>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginTop: "48px", flexWrap: "wrap" }}>
-          {questions.map((_, i) => (
-            <div key={i} style={{
-              width: i === current ? "24px" : "8px",
-              height: "8px",
-              borderRadius: "999px",
-              backgroundColor: i < current ? "#5B4FCF" : i === current ? "#5B4FCF" : "#D4D0C8",
-              opacity: i < current ? 0.5 : 1,
-              transition: "all 0.3s ease",
-            }} />
-          ))}
+        {/* PROGRESS SEGMENTS — 10 blocks of 4 questions */}
+        <div style={{ display: "flex", justifyContent: "center", gap: "4px", marginTop: "40px" }}>
+          {Array.from({ length: 10 }).map((_, i) => {
+            const segStart = i * 4;
+            const segEnd = (i + 1) * 4;
+            const isDone = current >= segEnd;
+            const isActive = current >= segStart && current < segEnd;
+            return (
+              <div key={i} style={{
+                height: "4px",
+                flex: 1,
+                maxWidth: "48px",
+                borderRadius: "2px",
+                backgroundColor: isDone ? "#5B4FCF" : isActive ? "#8B7FE8" : "#D4D0C8",
+                opacity: isDone ? 0.65 : 1,
+                transition: "all 0.3s ease",
+              }} />
+            );
+          })}
         </div>
+        <p style={{ textAlign: "center", fontSize: "11px", color: "#C4BBFF", marginTop: "10px", letterSpacing: "0.5px" }}>
+          {current + 1} / {questions.length}
+        </p>
       </main>
     </div>
   );

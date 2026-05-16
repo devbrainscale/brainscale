@@ -471,7 +471,7 @@ export default function ResultsContent() {
 
         {/* PREMIUM TEASER */}
         <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", marginBottom: "28px" }}>
-          <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none", minHeight: "320px" }}>
+          <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none", minHeight: "660px" }}>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", color: "#1A1825", marginBottom: "16px" }}>Detailed cognitive profile</h3>
             {["Working Memory Index: 94th percentile", "Visual-Spatial Processing: 87th percentile", "Fluid Reasoning: 96th percentile", "Processing Speed: 79th percentile", "Sustained Attention: 88th percentile"].map((item) => (
               <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #E8E5DC", fontSize: "13px", color: "#5C5A6E" }}>{item}</div>
@@ -532,17 +532,26 @@ export default function ResultsContent() {
       </main>
 
       {/* STICKY BOTTOM CTA */}
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.97)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "12px 20px", zIndex: 100 }}>
-        <div style={{ maxWidth: "680px", margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", gap: "10px", flexWrap: "wrap" }}>
-          <span style={{ fontSize: "13px", color: "#5C5A6E", fontWeight: 500, whiteSpace: "nowrap" }}>
-            <strong style={{ color: "#1A1825" }}>Unlock your report</strong>
-          </span>
-          <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
-            style={{ backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", opacity: checkoutLoading === 'basic' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+      <style>{`
+        .bs-sticky { display:flex; align-items:center; justify-content:center; gap:10px; max-width:680px; margin:0 auto; }
+        .bs-sticky-label { font-size:13px; color:#5C5A6E; font-weight:500; white-space:nowrap; }
+        .bs-btn-basic { background:#F0EEF8; color:#5B4FCF; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #C4BBFF; white-space:nowrap; cursor:pointer; transition:all .15s; }
+        .bs-btn-premium { background:#5B4FCF; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(91,79,207,.4); transition:all .15s; }
+        @media (max-width:480px) {
+          .bs-sticky { flex-wrap:nowrap; }
+          .bs-sticky-label { display:none; }
+          .bs-btn-basic, .bs-btn-premium { flex:1; text-align:center; font-size:12px; padding:12px 10px; }
+        }
+      `}</style>
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.97)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "12px 16px", zIndex: 100 }}>
+        <div className="bs-sticky">
+          <span className="bs-sticky-label"><strong style={{ color: "#1A1825" }}>Unlock your report</strong></span>
+          <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null} className="bs-btn-basic"
+            style={{ opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
             {checkoutLoading === 'basic' ? "…" : "Essential — $14.99"}
           </button>
-          <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
-            style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "12px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", whiteSpace: "nowrap", boxShadow: "0 4px 16px rgba(91,79,207,0.4)", opacity: checkoutLoading === 'premium' ? 0.6 : 1, transition: "all 0.15s ease" }}>
+          <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null} className="bs-btn-premium"
+            style={{ opacity: checkoutLoading === 'premium' ? 0.6 : 1 }}>
             {checkoutLoading === 'premium' ? "…" : "Premium — $24.99"}
           </button>
         </div>
