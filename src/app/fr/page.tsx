@@ -135,15 +135,15 @@ export default function FrHomePage() {
             </a>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "center", gap: "40px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
+          <div className="bs-stats-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC" }}>
             {[
               { value: "847 000+", label: "Tests complétés" },
               { value: "4,8 / 5", label: "Satisfaction" },
               { value: "r = 0,87", label: "Corrélation tests standardisés" },
             ].map((s) => (
               <div key={s.label} style={{ textAlign: "center" }}>
-                <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
-                <div style={{ fontSize: "13px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
+                <div className="bs-stat-value" style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
+                <div className="bs-stat-label" style={{ fontSize: "13px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -434,6 +434,11 @@ export default function FrHomePage() {
         @media (max-width: 380px) {
           .fr-nav-blog { display: none !important; }
           .fr-nav-sep  { display: none !important; }
+        }
+        @media (max-width: 500px) {
+          .bs-stat-value { font-size: 22px !important; }
+          .bs-stat-label { font-size: 11px !important; }
+          .bs-stats-row { gap: 8px !important; }
         }
       `}</style>
 
