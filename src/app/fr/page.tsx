@@ -402,12 +402,11 @@ export default function FrHomePage() {
       {/* CTA FINAL */}
       <section style={{ margin: "0 24px 24px", borderRadius: "28px", backgroundColor: "#0F0E17", padding: "80px 24px", textAlign: "center" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 300, color: "#fff", marginBottom: "20px" }}>
-            Prêt à découvrir{" "}
-            <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>votre potentiel ?</em>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 46px)", fontWeight: 300, color: "#fff", marginBottom: "20px", lineHeight: 1.2 }}>
+            Prêt à découvrir <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>votre potentiel ?</em>
           </h2>
-          <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
-            Rejoignez 847 000+ personnes qui ont déjà découvert leur QI. Gratuit, rapide, sans inscription.
+          <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px", lineHeight: 1.7 }}>
+            Rejoignez 847 000+ personnes qui ont déjà découvert leur QI.<br />Gratuit, rapide, sans inscription.
           </p>
           <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)", display: "inline-block" }}>
             Commencer le test — Gratuit

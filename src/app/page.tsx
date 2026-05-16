@@ -397,12 +397,11 @@ export default function HomePage() {
       {/* CTA */}
       <section style={{ margin: "0 24px 24px", borderRadius: "28px", backgroundColor: "#0F0E17", padding: "80px 24px", textAlign: "center" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(32px, 5vw, 52px)", fontWeight: 300, color: "#fff", marginBottom: "20px" }}>
-            Ready to discover{" "}
-            <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>your potential?</em>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 46px)", fontWeight: 300, color: "#fff", marginBottom: "20px", lineHeight: 1.2 }}>
+            Ready to discover <em style={{ color: "#9B8FE0", fontStyle: "italic" }}>your potential?</em>
           </h2>
-          <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px" }}>
-            Join 847,000+ people who have already discovered their IQ. Free, fast, no sign-up.
+          <p style={{ fontSize: "17px", color: "#9896A8", marginBottom: "40px", lineHeight: 1.7 }}>
+            Join 847,000+ people who have already discovered their IQ.<br />Free, fast, no sign-up.
           </p>
           <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 44px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)" }}>
             Start Now — It&apos;s Free
