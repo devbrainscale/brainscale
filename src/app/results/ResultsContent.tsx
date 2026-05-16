@@ -108,94 +108,146 @@ export default function ResultsContent() {
     canvas.width = 1080;
     canvas.height = 1080;
     const ctx = canvas.getContext("2d")!;
+    const W = 1080, H = 1080;
+    const cx = W / 2, cy = 435;
+    const R = 238;
 
-    // Background
-    ctx.fillStyle = "#0F0E17";
-    ctx.fillRect(0, 0, 1080, 1080);
+    // ── Background ──────────────────────────────────────────
+    ctx.fillStyle = "#0C0B14";
+    ctx.fillRect(0, 0, W, H);
+    const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 420);
+    bgGlow.addColorStop(0, "rgba(65,52,158,0.08)");
+    bgGlow.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = bgGlow;
+    ctx.fillRect(0, 0, W, H);
 
-    // Subtle purple glow
-    const glow = ctx.createRadialGradient(540, 420, 0, 540, 420, 380);
-    glow.addColorStop(0, "rgba(91,79,207,0.22)");
-    glow.addColorStop(1, "rgba(91,79,207,0)");
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, 1080, 1080);
+    // ── Top label ───────────────────────────────────────────
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "500 11px system-ui,-apple-system,sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.20)";
+    ctx.fillText("I  Q     S  C  O  R  E", cx, 106);
 
-    // Top badge "MY IQ SCORE"
-    const badgeLabel = "MY IQ SCORE";
-    ctx.font = "600 22px system-ui, -apple-system, sans-serif";
-    const bw = ctx.measureText(badgeLabel).width + 48;
-    const bx = 540 - bw / 2;
-    ctx.fillStyle = "rgba(91,79,207,0.2)";
+    // ── Gauge geometry ───────────────────────────────────────
+    // Arc: 148° (lower-left, ~8 o'clock) → clockwise 244° → 32° (lower-right, ~4 o'clock)
+    // IQ 100 maps exactly to 270° (12 o'clock top)
+    // IQ 70 → 148°, IQ 130 → 32°
+    const toRad = (d: number) => d * Math.PI / 180;
+    const IQ_MIN = 70, IQ_MAX = 130;
+    const ARC_START = 148, ARC_SPAN = 244;
+    const clamped = Math.max(IQ_MIN, Math.min(IQ_MAX, score));
+    const scoreDeg = ARC_START + ((clamped - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
+    const scoreRad = toRad(scoreDeg);
+
+    // Track arc (background)
+    ctx.save();
     ctx.beginPath();
-    ctx.moveTo(bx + 20, 200); ctx.lineTo(bx + bw - 20, 200);
-    ctx.quadraticCurveTo(bx + bw, 200, bx + bw, 220);
-    ctx.lineTo(bx + bw, 248); ctx.quadraticCurveTo(bx + bw, 268, bx + bw - 20, 268);
-    ctx.lineTo(bx + 20, 268); ctx.quadraticCurveTo(bx, 268, bx, 248);
-    ctx.lineTo(bx, 220); ctx.quadraticCurveTo(bx, 200, bx + 20, 200);
-    ctx.closePath(); ctx.fill();
-    ctx.fillStyle = "#9B8FE0";
-    ctx.font = "700 20px system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(badgeLabel, 540, 240);
+    ctx.arc(cx, cy, R, toRad(ARC_START), toRad(32), false);
+    ctx.strokeStyle = "rgba(255,255,255,0.052)";
+    ctx.lineWidth = 4;
+    ctx.lineCap = "butt";
+    ctx.stroke();
+    ctx.restore();
 
-    // Score number
-    ctx.fillStyle = "#fff";
-    ctx.font = "300 180px Georgia, 'Times New Roman', serif";
-    ctx.textAlign = "center";
-    ctx.fillText(score.toString(), 540, 490);
-
-    // IQ label pill
-    const pillText = label.title.toUpperCase();
-    ctx.font = "700 22px system-ui, -apple-system, sans-serif";
-    const tw = ctx.measureText(pillText).width;
-    const pw = tw + 64; const px = 540 - pw / 2; const py = 530;
-    ctx.fillStyle = "#5B4FCF";
+    // Progress arc
+    const startPt = { x: cx + R * Math.cos(toRad(ARC_START)), y: cy + R * Math.sin(toRad(ARC_START)) };
+    const endPt   = { x: cx + R * Math.cos(scoreRad),         y: cy + R * Math.sin(scoreRad) };
+    const pg = ctx.createLinearGradient(startPt.x, startPt.y, endPt.x, endPt.y);
+    pg.addColorStop(0, "#2C258E");
+    pg.addColorStop(1, "#7268E0");
+    ctx.save();
     ctx.beginPath();
-    ctx.moveTo(px + 24, py); ctx.lineTo(px + pw - 24, py);
-    ctx.quadraticCurveTo(px + pw, py, px + pw, py + 24);
-    ctx.lineTo(px + pw, py + 52 - 24);
-    ctx.quadraticCurveTo(px + pw, py + 52, px + pw - 24, py + 52);
-    ctx.lineTo(px + 24, py + 52); ctx.quadraticCurveTo(px, py + 52, px, py + 52 - 24);
-    ctx.lineTo(px, py + 24); ctx.quadraticCurveTo(px, py, px + 24, py);
-    ctx.closePath(); ctx.fill();
-    ctx.fillStyle = "#fff";
-    ctx.font = "700 21px system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(pillText, 540, 563);
+    ctx.arc(cx, cy, R, toRad(ARC_START), scoreRad, false);
+    ctx.strokeStyle = pg;
+    ctx.lineWidth = 4;
+    ctx.lineCap = "butt";
+    ctx.stroke();
+    ctx.restore();
 
-    // Percentile
-    ctx.fillStyle = "#5C5A6E";
-    ctx.font = "400 22px system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText(`${percentile}th percentile worldwide`, 540, 640);
-
-    // Decorative dots
-    for (let i = 0; i < 5; i++) {
+    // Tick marks
+    const majorTicks = [70, 80, 90, 100, 110, 120, 130];
+    const allTicks   = [...majorTicks, 75, 85, 95, 105, 115, 125];
+    allTicks.forEach(iq => {
+      const deg = ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
+      const a = toRad(deg);
+      const maj = majorTicks.includes(iq);
+      ctx.save();
       ctx.beginPath();
-      ctx.arc(430 + i * 55, 700, 3, 0, Math.PI * 2);
-      ctx.fillStyle = i === 2 ? "#5B4FCF" : "rgba(91,79,207,0.3)";
-      ctx.fill();
-    }
+      ctx.moveTo(cx + (R - (maj ? 8 : 4)) * Math.cos(a), cy + (R - (maj ? 8 : 4)) * Math.sin(a));
+      ctx.lineTo(cx + (R + (maj ? 14 : 7)) * Math.cos(a), cy + (R + (maj ? 14 : 7)) * Math.sin(a));
+      ctx.strokeStyle = maj ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.08)";
+      ctx.lineWidth = maj ? 1.5 : 1;
+      ctx.stroke();
+      ctx.restore();
+    });
 
-    // Divider
-    ctx.strokeStyle = "#1E1D2E";
+    // Scale labels
+    const labelR = R + 40;
+    ctx.font = "400 13px system-ui,sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    [70, 85, 100, 115, 130].forEach(iq => {
+      const deg = ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN;
+      const a = toRad(deg);
+      ctx.fillStyle = "rgba(255,255,255,0.18)";
+      ctx.fillText(iq.toString(), cx + labelR * Math.cos(a), cy + labelR * Math.sin(a));
+    });
+
+    // Score dot
+    const dotX = cx + R * Math.cos(scoreRad);
+    const dotY = cy + R * Math.sin(scoreRad);
+    const halo = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 22);
+    halo.addColorStop(0, "rgba(185,175,255,0.26)");
+    halo.addColorStop(1, "rgba(185,175,255,0)");
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 22, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(dotX, dotY, 7, 0, Math.PI * 2);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fill();
+
+    // ── Score number ─────────────────────────────────────────
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = "200 150px Georgia,'Times New Roman',serif";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(score.toString(), cx, cy + 16);
+
+    // IQ label — small, spaced, muted violet
+    ctx.font = "600 11px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(148,132,248,0.88)";
+    ctx.fillText(label.title.toUpperCase(), cx, cy + 105);
+
+    // ── Percentile ────────────────────────────────────────────
+    const percY = cy + R + 74;
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "300 15px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.22)";
+    ctx.fillText(`${percentile}th percentile worldwide`, cx, percY);
+
+    // ── Thin rule ─────────────────────────────────────────────
+    const ruleY = percY + 54;
+    ctx.strokeStyle = "rgba(255,255,255,0.06)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(300, 780); ctx.lineTo(780, 780);
+    ctx.moveTo(cx - 155, ruleY);
+    ctx.lineTo(cx + 155, ruleY);
     ctx.stroke();
 
-    // BrainScale branding
-    ctx.fillStyle = "#fff";
-    ctx.font = "600 34px Georgia, 'Times New Roman', serif";
+    // ── Branding ──────────────────────────────────────────────
+    const brandY = H - 86;
     ctx.textAlign = "center";
-    ctx.fillText("BrainScale", 540, 860);
+    ctx.textBaseline = "alphabetic";
+    ctx.font = "600 26px Georgia,'Times New Roman',serif";
+    ctx.fillStyle = "rgba(255,255,255,0.72)";
+    ctx.fillText("BrainScale", cx, brandY);
+    ctx.font = "400 13px system-ui,sans-serif";
+    ctx.fillStyle = "rgba(255,255,255,0.16)";
+    ctx.fillText("brainscale.app", cx, brandY + 26);
 
-    ctx.fillStyle = "#3D3B52";
-    ctx.font = "400 20px system-ui, -apple-system, sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("brainscale.app", 540, 900);
-
-    // Download
+    // ── Download ──────────────────────────────────────────────
     const link = document.createElement("a");
     link.download = `brainscale-iq-${score}.png`;
     link.href = canvas.toDataURL("image/png");
