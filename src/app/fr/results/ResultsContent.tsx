@@ -471,6 +471,13 @@ export default function FrResultsContent() {
           ))}
         </div>
 
+        {/* IQ SCORE SEO LINK */}
+        <div style={{ textAlign: "center", marginBottom: "16px" }}>
+          <Link href={`/fr/iq-score/${score}`} style={{ fontSize: "13px", color: "#5B4FCF", textDecoration: "none", fontWeight: 600 }}>
+            En savoir plus sur le QI {score} — percentile, classification et signification →
+          </Link>
+        </div>
+
         {/* PREMIUM TEASER */}
         <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", marginBottom: "28px" }}>
           <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
