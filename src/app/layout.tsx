@@ -52,6 +52,34 @@ export const metadata: Metadata = {
   },
 };
 
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.brainscale.app/#organization",
+      "name": "BrainScale",
+      "url": "https://www.brainscale.app",
+      "description": "Free online cognitive assessment and IQ test platform.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contact@brainscale.app",
+        "contactType": "customer support",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.brainscale.app/#website",
+      "url": "https://www.brainscale.app",
+      "name": "BrainScale",
+      "description":
+        "Take a free, scientifically-inspired IQ and cognitive assessment. Instant results, no registration required.",
+      "publisher": { "@id": "https://www.brainscale.app/#organization" },
+      "inLanguage": "en-US",
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -62,6 +90,12 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${jakarta.variable} h-full`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
         {children}
         <CookieConsent />
