@@ -1,5 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+function getIqLabel(score: number, lang: string): string {
+  const labels = {
+    en: score >= 130 ? 'Gifted'        : score >= 120 ? 'Superior'     : score >= 110 ? 'Above Average' : score >= 90 ? 'Average' : 'Below Average',
+    fr: score >= 130 ? 'Surdoué'       : score >= 120 ? 'Supérieur'    : score >= 110 ? 'Au-dessus de la moyenne' : score >= 90 ? 'Moyenne' : 'Sous la moyenne',
+  };
+  return labels[lang as 'en' | 'fr'] ?? labels.en;
+}
+
 // Simple in-memory rate limiter: max 5 requests per IP per 10 minutes
 const rateLimitMap = new Map<string, { count: number; resetAt: number }>();
 
@@ -26,7 +34,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Too many requests. Please try again later.' }, { status: 429 });
     }
 
-    const { email, score } = await request.json();
+    const { email, score, lang } = await request.json();
+    const language = lang === 'fr' ? 'fr' : 'en';
 
     if (!email || !email.includes('@')) {
       return NextResponse.json({ success: false, error: 'Invalid email' }, { status: 400 });
@@ -54,6 +63,8 @@ export async function POST(request: NextRequest) {
         email,
         attributes: {
           IQ_SCORE: numericScore,
+          LANG:     language,
+          IQ_LABEL: getIqLabel(numericScore, language),
         },
         listIds: [5],
         updateEnabled: true,

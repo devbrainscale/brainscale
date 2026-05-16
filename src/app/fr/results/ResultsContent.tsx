@@ -94,7 +94,7 @@ export default function FrResultsContent() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, score }),
+        body: JSON.stringify({ email, score, lang: "fr" }),
       });
       const data = await res.json();
       if (data.success) setSubmitted(true);
