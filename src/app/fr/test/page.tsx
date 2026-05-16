@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // Questions mixtes : logique pure (pas besoin de traduction) + verbales en français
 const questions = [
@@ -113,9 +114,9 @@ export default function FrTestPage() {
     <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
       <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825" }}>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
-          </span>
+          </Link>
           <span style={{ fontSize: "13px", color: "#9896A8", fontWeight: 500 }}>
             Question {current + 1} sur {questions.length}
           </span>

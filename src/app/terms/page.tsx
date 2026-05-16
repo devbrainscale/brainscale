@@ -86,6 +86,17 @@ export default function TermsPage() {
           <Link href="/" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Back to home</Link>
         </div>
       </main>
+
+      <footer style={{ padding: "32px 24px", textAlign: "center", borderTop: "1px solid #E8E5DC" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "10px", flexWrap: "wrap" }}>
+          <Link href="/" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Home</Link>
+          <Link href="/blog" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
+          <Link href="/test" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>IQ Test</Link>
+          <Link href="/privacy" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Terms</Link>
+        </div>
+        <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · All rights reserved</p>
+      </footer>
     </div>
   );
 }

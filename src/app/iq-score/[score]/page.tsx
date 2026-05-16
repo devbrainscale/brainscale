@@ -208,9 +208,12 @@ export default async function IQScorePage({ params }: Props) {
           <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </Link>
-          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "8px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
-            Take the test →
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
+            <Link href="/blog" style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
+            <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "8px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
+              Take the test →
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -360,15 +363,16 @@ export default async function IQScorePage({ params }: Props) {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid #E8E5DC", padding: "24px", textAlign: "center" }}>
-        <p style={{ fontSize: "12px", color: "#9896A8" }}>
-          <Link href="/" style={{ color: "#9896A8", textDecoration: "none" }}>BrainScale</Link>
-          {" · "}
-          <Link href="/privacy" style={{ color: "#9896A8", textDecoration: "none" }}>Privacy</Link>
-          {" · "}
-          <Link href="/terms" style={{ color: "#9896A8", textDecoration: "none" }}>Terms</Link>
-          {" · Not a clinical assessment"}
-        </p>
+      <footer style={{ borderTop: "1px solid #E8E5DC", padding: "32px 24px", textAlign: "center" }}>
+        <div style={{ display: "flex", justifyContent: "center", gap: "20px", marginBottom: "10px", flexWrap: "wrap" }}>
+          <Link href="/" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Home</Link>
+          <Link href="/blog" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
+          <Link href="/test" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>IQ Test</Link>
+          <Link href="/privacy" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Terms</Link>
+          <Link href={`/fr/iq-score/${iq}`} style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Français</Link>
+        </div>
+        <p style={{ fontSize: "11px", color: "#C4BBFF" }}>© 2026 BrainScale · Not a clinical assessment</p>
       </footer>
     </div>
   );

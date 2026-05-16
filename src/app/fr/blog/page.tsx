@@ -32,9 +32,12 @@ export default function FrBlogPage() {
           <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </Link>
-          <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
-            Faire le test →
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <Link href="/fr/blog" style={{ fontSize: "14px", color: "#5B4FCF", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
+            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+              Faire le test →
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -110,9 +113,11 @@ export default function FrBlogPage() {
       <footer style={{ padding: "40px 24px", textAlign: "center", borderTop: "1px solid #E8E5DC" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "12px", flexWrap: "wrap" }}>
           <Link href="/fr" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Accueil</Link>
+          <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
           <Link href="/fr/test" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Test QI</Link>
           <Link href="/fr/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
-          <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>English</Link>
+          <Link href="/fr/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Conditions</Link>
+          <Link href="/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>English</Link>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · Tous droits réservés</p>
       </footer>

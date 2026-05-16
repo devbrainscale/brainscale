@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const questions = [
   { id: 1, question: "Which number comes next in the sequence: 2, 4, 8, 16, ?", options: ["24", "32", "28", "20"], answer: 1 },
@@ -119,9 +120,9 @@ export default function TestPage() {
       {/* HEADER */}
       <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825" }}>
+          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
-          </span>
+          </Link>
           <span style={{ fontSize: "13px", color: "#9896A8", fontWeight: 500 }}>
             Question {current + 1} of {questions.length}
           </span>

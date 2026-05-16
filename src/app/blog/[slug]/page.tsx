@@ -72,9 +72,12 @@ export default async function ArticlePage({ params }: Props) {
           <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
             Brain<span style={{ color: "#4F46E5" }}>Scale</span>
           </Link>
-          <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
-            Take the test →
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+            <Link href="/blog" style={{ fontSize: "14px", color: "#4F46E5", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
+            <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+              Take the test →
+            </Link>
+          </div>
         </div>
       </nav>
 
@@ -167,7 +170,9 @@ export default async function ArticlePage({ params }: Props) {
           <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Home</Link>
           <Link href="/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
           <Link href="/test" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>IQ Test</Link>
-          <Link href="/fr" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Français</Link>
+          <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Terms</Link>
+          <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Français</Link>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · All rights reserved</p>
       </footer>
