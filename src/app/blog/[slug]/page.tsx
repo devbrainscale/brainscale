@@ -173,14 +173,23 @@ export default async function ArticlePage({ params }: Props) {
       </footer>
 
       <style>{`
-        .article-content h2 { font-family: var(--font-display, serif); font-size: 26px; font-weight: 400; color: #1A1825; margin: 48px 0 16px; line-height: 1.3; }
-        .article-content h3 { font-family: var(--font-display, serif); font-size: 20px; font-weight: 400; color: #1A1825; margin: 32px 0 12px; }
+        .article-content { overflow-wrap: break-word; word-break: break-word; }
+        .article-content h2 { font-family: var(--font-display, serif); font-size: clamp(20px, 3.5vw, 26px); font-weight: 400; color: #1A1825; margin: 48px 0 16px; line-height: 1.3; }
+        .article-content h3 { font-family: var(--font-display, serif); font-size: clamp(17px, 3vw, 20px); font-weight: 400; color: #1A1825; margin: 32px 0 12px; }
         .article-content p { margin-bottom: 20px; }
         .article-content ul, .article-content ol { padding-left: 24px; margin-bottom: 20px; }
         .article-content li { margin-bottom: 10px; }
         .article-content strong { color: #1A1825; font-weight: 600; }
         .article-content a { color: #4F46E5; text-decoration: underline; }
         .article-content a:hover { opacity: 0.8; }
+        .article-content table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 15px; }
+        .article-content th, .article-content td { padding: 10px 14px; border: 1px solid #E8E5DC; text-align: left; }
+        .article-content th { background: #F7F6F2; font-weight: 600; }
+        @media (max-width: 480px) {
+          .article-content { font-size: 16px; }
+          .article-content h2 { font-size: 20px; margin-top: 36px; }
+          .article-content h3 { font-size: 17px; }
+        }
       `}</style>
 
     </div>
