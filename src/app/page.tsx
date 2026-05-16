@@ -97,6 +97,7 @@ export default function HomePage() {
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </span>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Link href="/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
             <span style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>EN</span>
             <span style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
             <Link href="/fr" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>FR</Link>
@@ -329,7 +330,7 @@ export default function HomePage() {
             Join 847,000+ people who have already discovered their IQ. Free, fast, no sign-up.
           </p>
           <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 44px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 32px rgba(91,79,207,0.5)" }}>
-            Start Now — It's Free
+            Start Now — It&apos;s Free
           </Link>
         </div>
       </section>
@@ -340,6 +341,7 @@ export default function HomePage() {
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "16px", flexWrap: "wrap" }}>
+          <Link href="/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
           <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Privacy Policy</Link>
           <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Terms of Service</Link>
           <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
