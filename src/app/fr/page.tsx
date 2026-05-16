@@ -254,10 +254,11 @@ export default function FrHomePage() {
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "16px", flexWrap: "wrap" }}>
-          <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Politique de confidentialité</Link>
-          <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Conditions d'utilisation</Link>
+          <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
+          <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>CGU</Link>
           <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
-          <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>English version</Link>
+          <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
+          <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>🇬🇧 English</Link>
         </div>
         <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · Test psychométrique gratuit</p>
       </footer>

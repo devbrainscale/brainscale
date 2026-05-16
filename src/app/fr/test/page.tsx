@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 // Questions mixtes : logique pure (pas besoin de traduction) + verbales en français
 const questions = [
   { id: 1, question: "Quel nombre vient ensuite dans la suite : 2, 4, 8, 16, ?", options: ["24", "32", "28", "20"], answer: 1 },
-  { id: 2, question: "Si tous les Bloops sont des Razzies, et tous les Razzies sont des Lazzies, alors tous les Bloops sont forcément :", options: ["Pas des Lazzies", "Des Lazzies", "Pas des Razzies", "Aucune de ces réponses"], answer: 1 },
+  { id: 2, question: "Si tous les chats sont des animaux, et que tous les animaux sont mortels, alors :", options: ["Certains chats ne sont pas mortels", "Tous les chats sont mortels", "Certains animaux ne sont pas des chats", "Aucune de ces réponses"], answer: 1 },
   { id: 3, question: "Quelle forme complète le motif ? △ ○ □ △ ○ ?", options: ["△", "○", "□", "◇"], answer: 2 },
   { id: 4, question: "Une horloge indique 3h15. Quel est l'angle entre l'aiguille des heures et celle des minutes ?", options: ["0°", "7,5°", "15°", "22,5°"], answer: 1 },
   { id: 5, question: "Quel nombre manque : 1, 1, 2, 3, 5, 8, ?, 21", options: ["11", "12", "13", "14"], answer: 2 },

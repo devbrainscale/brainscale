@@ -96,9 +96,14 @@ export default function HomePage() {
           <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1825" }}>
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </span>
-          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
-            Start Test
-          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <span style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>EN</span>
+            <span style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
+            <Link href="/fr" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>FR</Link>
+            <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+              Start Test
+            </Link>
+          </div>
         </div>
       </nav>
 
