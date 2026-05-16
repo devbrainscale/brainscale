@@ -194,7 +194,7 @@ export default function FrResultsContent() {
               <input type="checkbox" id="gdpr-fr" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#5B4FCF", flexShrink: 0, cursor: "pointer" }} />
               <label htmlFor="gdpr-fr" style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.5, cursor: "pointer" }}>
                 J'accepte de recevoir mes résultats et des conseils par email. Je peux me désabonner à tout moment. Voir notre{" "}
-                <a href="/privacy" style={{ color: "#5B4FCF", textDecoration: "underline" }}>Politique de confidentialité</a>.
+                <a href="/fr/privacy" style={{ color: "#5B4FCF", textDecoration: "underline" }}>Politique de confidentialité</a>.
               </label>
             </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}

@@ -254,8 +254,8 @@ export default function FrHomePage() {
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "16px", flexWrap: "wrap" }}>
-          <Link href="/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
-          <Link href="/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>CGU</Link>
+          <Link href="/fr/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
+          <Link href="/fr/terms" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>CGU</Link>
           <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Contact</a>
           <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
           <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>🇬🇧 English</Link>
