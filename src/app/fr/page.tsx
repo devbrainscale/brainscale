@@ -416,9 +416,9 @@ export default function FrHomePage() {
 
       {/* FOOTER */}
       <footer style={{ padding: "40px 24px", textAlign: "center" }}>
-        <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", marginBottom: "12px" }}>
+        <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none", display: "inline-block", marginBottom: "12px" }}>
           Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
-        </div>
+        </Link>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "16px", flexWrap: "wrap" }}>
           <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
           <Link href="/fr/privacy" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
@@ -431,12 +431,9 @@ export default function FrHomePage() {
 
       {/* Responsive styles */}
       <style>{`
-        @media (max-width: 480px) {
+        @media (max-width: 380px) {
           .fr-nav-blog { display: none !important; }
           .fr-nav-sep  { display: none !important; }
-        }
-        @media (max-width: 640px) {
-          .fr-nav-blog { display: none !important; }
         }
       `}</style>
 
