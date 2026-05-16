@@ -189,20 +189,20 @@ export default function FrHomePage() {
             <text x="452" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">130</text>
           </svg>
 
-          {/* Légende slim — chips horizontaux, wrapping mobile */}
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "4px 20px", marginTop: "16px" }}>
+          {/* Légende 5 zones — cartes uniformes, rangée unique */}
+          <div className="bs-bell-legend" style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "5px", marginTop: "20px" }}>
             {[
-              { range: "< 90",    label: "Sous la moy.", color: "#9896A8" },
-              { range: "90–109",  label: "Moyenne",      color: "#5B4FCF" },
-              { range: "110–119", label: "Au-dessus",    color: "#3D2FA8" },
-              { range: "120–129", label: "Supérieur",    color: "#4A3EBE" },
-              { range: "≥ 130",   label: "Surdoué",      color: "#5B4FCF" },
+              { range: "< 90",    label: "Sous moy.",  pct: "25%", bg: "rgba(91,79,207,0.06)", text: "#9896A8", sub: "#B0AEC0" },
+              { range: "90–109",  label: "Moyenne",    pct: "50%", bg: "rgba(91,79,207,0.15)", text: "#5B4FCF", sub: "#5C5A6E" },
+              { range: "110–119", label: "Au-dessus",  pct: "16%", bg: "rgba(91,79,207,0.32)", text: "#3D2FA8", sub: "#4A3EBE" },
+              { range: "120–129", label: "Supérieur",  pct: "7%",  bg: "rgba(91,79,207,0.52)", text: "#fff",    sub: "rgba(255,255,255,0.78)" },
+              { range: "≥ 130",   label: "Surdoué",    pct: "2%",  bg: "rgba(91,79,207,0.72)", text: "#fff",    sub: "rgba(255,255,255,0.78)" },
             ].map((z) => (
-              <span key={z.range} style={{ fontSize: "12px", whiteSpace: "nowrap", color: "#5C5A6E" }}>
-                <span style={{ fontWeight: 600, color: z.color }}>{z.range}</span>
-                <span style={{ color: "#C8C6D4", margin: "0 5px" }}>·</span>
-                <span style={{ fontWeight: 400 }}>{z.label}</span>
-              </span>
+              <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "12px 4px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "72px" }}>
+                <div className="bs-bell-range" style={{ fontSize: "10px", fontWeight: 500, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
+                <div className="bs-bell-label" style={{ fontSize: "9px", fontWeight: 400, color: z.sub, lineHeight: 1.3 }}>{z.label}</div>
+                <div className="bs-bell-pct" style={{ fontSize: "15px", fontWeight: 600, color: z.text }}>{z.pct}</div>
+              </div>
             ))}
           </div>
         </div>
@@ -454,6 +454,12 @@ export default function FrHomePage() {
           .bs-stat-value { font-size: 22px !important; }
           .bs-stat-label { font-size: 11px !important; }
           .bs-stats-row { gap: 8px !important; }
+        }
+        @media (max-width: 420px) {
+          .bs-bell-legend { gap: 3px !important; }
+          .bs-bell-range { font-size: 9px !important; }
+          .bs-bell-label { font-size: 8px !important; }
+          .bs-bell-pct   { font-size: 13px !important; }
         }
       `}</style>
 
