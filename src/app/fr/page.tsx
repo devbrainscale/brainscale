@@ -99,6 +99,7 @@ export default function FrHomePage() {
             Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Link href="/fr/blog" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
             <Link href="/" style={{ fontSize: "13px", color: "#9896A8", textDecoration: "none" }}>EN</Link>
             <span style={{ fontSize: "13px", color: "#D4D0C8" }}>|</span>
             <span style={{ fontSize: "13px", color: "#5B4FCF", fontWeight: 600 }}>FR</span>
@@ -187,7 +188,7 @@ export default function FrHomePage() {
       <section style={{ padding: "80px 24px", backgroundColor: "#fff" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto" }}>
           <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", textAlign: "center", marginBottom: "48px" }}>
-            L'échelle de{" "}
+            L&apos;échelle de{" "}
             <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>référence QI</em>
           </h2>
           {[
@@ -243,7 +244,7 @@ export default function FrHomePage() {
           </h2>
           <p style={{ fontSize: "16px", color: "#9896A8", marginBottom: "32px" }}>40 questions · ~35 minutes · Résultats instantanés</p>
           <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "18px 48px", borderRadius: "999px", fontSize: "16px", fontWeight: 700, textDecoration: "none", boxShadow: "0 8px 32px rgba(91,79,207,0.35)", display: "inline-block" }}>
-            Commencer maintenant — c'est gratuit →
+            Commencer maintenant — c&apos;est gratuit →
           </Link>
         </div>
       </section>
