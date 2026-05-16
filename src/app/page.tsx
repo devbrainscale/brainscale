@@ -352,9 +352,9 @@ export default function HomePage() {
               {
                 name: "Aryan K.",
                 location: "Toronto, Canada",
-                score: 127,
-                label: "Superior",
-                labelColor: "#4A3EBE",
+                score: 136,
+                label: "Gifted",
+                labelColor: "#5B4FCF",
                 text: "Used the premium report for a job application requiring cognitive assessment. The PDF looks professional and the breakdown by domain is detailed enough to be credible.",
                 initials: "AK",
               },

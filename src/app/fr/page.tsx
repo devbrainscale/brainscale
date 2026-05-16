@@ -357,9 +357,9 @@ export default function FrHomePage() {
               {
                 name: "Mehdi B.",
                 location: "Bruxelles, Belgique",
-                score: 124,
-                label: "Supérieur",
-                labelColor: "#4A3EBE",
+                score: 136,
+                label: "Surdoué",
+                labelColor: "#5B4FCF",
                 text: "J'ai utilisé le rapport premium pour une candidature demandant une évaluation cognitive. Le PDF est professionnel et la décomposition par domaine est suffisamment détaillée pour être crédible.",
                 initials: "MB",
               },
