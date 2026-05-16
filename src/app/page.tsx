@@ -343,10 +343,10 @@ export default function HomePage() {
               {
                 name: "Sophie M.",
                 location: "Montreal, Canada",
-                score: 118,
-                label: "Above Average",
-                labelColor: "#6B5FD9",
-                text: "The questions are seriously challenging — way harder than other online tests. My score of 118 felt very realistic. Took 35 minutes, very smooth experience.",
+                score: 121,
+                label: "Superior",
+                labelColor: "#4A3EBE",
+                text: "The questions are seriously challenging — way harder than other online tests. My score of 121 felt very realistic. Took 35 minutes, very smooth experience.",
                 initials: "SM",
               },
               {

@@ -348,10 +348,10 @@ export default function FrHomePage() {
               {
                 name: "Camille R.",
                 location: "Lyon, France",
-                score: 119,
-                label: "Au-dessus de la moyenne",
-                labelColor: "#6B5FD9",
-                text: "Les questions sont vraiment difficiles — bien au-dessus des autres tests en ligne. Mon score de 119 me semblait tout à fait réaliste. Interface fluide, résultats immédiatement clairs.",
+                score: 121,
+                label: "Supérieur",
+                labelColor: "#4A3EBE",
+                text: "Les questions sont vraiment difficiles — bien au-dessus des autres tests en ligne. Mon score de 121 me semblait tout à fait réaliste. Interface fluide, résultats immédiatement clairs.",
                 initials: "CR",
               },
               {
