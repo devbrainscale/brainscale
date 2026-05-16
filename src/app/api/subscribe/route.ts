@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
           LANG:     language,
           IQ_LABEL: getIqLabel(numericScore, language),
         },
-        listIds: [5],
+        listIds: [language === 'fr' ? 6 : 5],
         updateEnabled: true,
       }),
     });
