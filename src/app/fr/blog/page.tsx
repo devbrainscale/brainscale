@@ -21,6 +21,10 @@ const categoryColors: Record<string, string> = {
 export default function FrBlogPage() {
   return (
     <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+      <style>{`
+        .blog-featured:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(91,79,207,0.15); }
+        .blog-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26,24,37,0.1); }
+      `}</style>
 
       {/* NAV */}
       <nav style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", position: "sticky", top: 0, zIndex: 50 }}>
@@ -49,10 +53,7 @@ export default function FrBlogPage() {
 
         {/* FEATURED ARTICLE */}
         <Link href={`/fr/blog/${articles[0].slug}`} style={{ textDecoration: "none", display: "block", marginBottom: "32px" }}>
-          <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "48px", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 32px rgba(91,79,207,0.15)"; }}
-            onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-          >
+          <div className="blog-featured" style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "24px", padding: "48px", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <span style={{ backgroundColor: categoryColors[articles[0].category] || "#5B4FCF", color: "#fff", padding: "4px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
                 {articles[0].category}
@@ -73,10 +74,7 @@ export default function FrBlogPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px" }}>
           {articles.slice(1).map((article) => (
             <Link key={article.slug} href={`/fr/blog/${article.slug}`} style={{ textDecoration: "none" }}>
-              <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "28px", height: "100%", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = "translateY(-2px)"; (e.currentTarget as HTMLElement).style.boxShadow = "0 6px 24px rgba(26,24,37,0.1)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = "none"; (e.currentTarget as HTMLElement).style.boxShadow = "none"; }}
-              >
+              <div className="blog-card" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "20px", padding: "28px", height: "100%", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
                   <span style={{ backgroundColor: (categoryColors[article.category] || "#5B4FCF") + "18", color: categoryColors[article.category] || "#5B4FCF", padding: "3px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>
                     {article.category}
