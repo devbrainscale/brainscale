@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&score=${score}`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&score=${score}&tier=${tier}&lang=${lang ?? 'en'}`,
       cancel_url:  `${process.env.NEXT_PUBLIC_BASE_URL}${isFr ? '/fr' : ''}/results?score=${score}`,
       customer_email: email || undefined,
       metadata: {

@@ -2,7 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { trackFbq } from "@/lib/fbq";
 
 function getPercentile(iq: number): number {
   if (iq >= 145) return 99.9;
@@ -48,7 +49,23 @@ export default function ResultsContent() {
   const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic' | 'premium'>(null);
   const [copied, setCopied] = useState(false);
 
+  // Fire ViewContent once when results page loads
+  useEffect(() => {
+    trackFbq('track', 'ViewContent', {
+      content_name: 'IQ Score Results',
+      content_category: 'Results',
+      value: score,
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   async function handleUnlock(tier: 'basic' | 'premium') {
+    // Fire InitiateCheckout before redirecting to Stripe
+    trackFbq('track', 'InitiateCheckout', {
+      content_name: tier === 'premium' ? 'Cognitive Report — Premium' : 'Cognitive Report — Essential',
+      value: tier === 'premium' ? 24.99 : 14.99,
+      currency: 'USD',
+    });
     setCheckoutLoading(tier);
     try {
       const res = await fetch('/api/create-checkout-session', {

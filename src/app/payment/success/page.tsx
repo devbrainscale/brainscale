@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import Link from "next/link";
+import PixelPurchase from "./PixelPurchase";
 
 export const metadata = {
   title: "Payment Successful — BrainScale",
@@ -26,5 +28,9 @@ export default function SuccessPage() {
         </Link>
       </div>
     </div>
+    {/* Meta Pixel — Purchase event */}
+    <Suspense fallback={null}>
+      <PixelPurchase />
+    </Suspense>
   );
 }
