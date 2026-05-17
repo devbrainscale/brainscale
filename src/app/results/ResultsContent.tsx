@@ -26,7 +26,7 @@ function getPercentile(iq: number): number {
 function getLabel(iq: number): { title: string; desc: string; color: string } {
   if (iq >= 130) return { title: "Gifted", desc: "I am in the top 2% of the population.\nExceptional reasoning and problem-solving abilities.", color: "#C96442" };
   if (iq >= 120) return { title: "Superior", desc: "I am in the top 9% of the population.\nStrong analytical and logical skills.", color: "#B5572F" };
-  if (iq >= 110) return { title: "Above Average", desc: "I am in the top 25% of the population.\nAbove-average reasoning capacity.", color: "#5248D0" };
+  if (iq >= 110) return { title: "Above Average", desc: "I am in the top 25% of the population.\nAbove-average reasoning capacity.", color: "#C96442" };
   if (iq >= 90) return { title: "Average", desc: "My score is in the typical range,\nshared by 68% of the population.", color: "#D4835E" };
   return { title: "Below Average", desc: "My score is below the population average.\nPractice and focus can improve this.", color: "#99958C" };
 }
@@ -120,10 +120,10 @@ export default function ResultsContent() {
     }
 
     // ── Background ──────────────────────────────────────────
-    ctx.fillStyle = "#0C0B14";
+    ctx.fillStyle = "#1A1916";
     ctx.fillRect(0, 0, W, H);
     const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 440);
-    bgGlow.addColorStop(0, "rgba(65,52,158,0.09)");
+    bgGlow.addColorStop(0, "rgba(201,100,66,0.05)");
     bgGlow.addColorStop(1, "rgba(0,0,0,0)");
     ctx.fillStyle = bgGlow;
     ctx.fillRect(0, 0, W, H);
@@ -135,14 +135,14 @@ export default function ResultsContent() {
     const badgeH = 38;
     const badgeX = cx - badgeW / 2;
     const badgeY = 78;
-    ctx.fillStyle = "rgba(59,53,181,0.16)";
+    ctx.fillStyle = "rgba(201,100,66,0.16)";
     rr(badgeX, badgeY, badgeW, badgeH, 19);
     ctx.fill();
-    ctx.strokeStyle = "rgba(59,53,181,0.50)";
+    ctx.strokeStyle = "rgba(201,100,66,0.50)";
     ctx.lineWidth = 1;
     rr(badgeX, badgeY, badgeW, badgeH, 19);
     ctx.stroke();
-    ctx.fillStyle = "rgba(185,172,255,0.90)";
+    ctx.fillStyle = "rgba(250,248,245,0.88)";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(badgeText, cx, badgeY + badgeH / 2);
@@ -169,8 +169,8 @@ export default function ResultsContent() {
     const sp = { x: cx + R * Math.cos(toRad(ARC_START)), y: cy + R * Math.sin(toRad(ARC_START)) };
     const ep = { x: cx + R * Math.cos(scoreRad),         y: cy + R * Math.sin(scoreRad) };
     const pg = ctx.createLinearGradient(sp.x, sp.y, ep.x, ep.y);
-    pg.addColorStop(0, "#2A238C");
-    pg.addColorStop(1, "#7268E0");
+    pg.addColorStop(0, "#7A3218");
+    pg.addColorStop(1, "#C96442");
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, R, toRad(ARC_START), scoreRad, false);
@@ -209,8 +209,8 @@ export default function ResultsContent() {
     const dotX = cx + R * Math.cos(scoreRad);
     const dotY = cy + R * Math.sin(scoreRad);
     const halo = ctx.createRadialGradient(dotX, dotY, 0, dotX, dotY, 22);
-    halo.addColorStop(0, "rgba(185,175,255,0.28)");
-    halo.addColorStop(1, "rgba(185,175,255,0)");
+    halo.addColorStop(0, "rgba(201,100,66,0.28)");
+    halo.addColorStop(1, "rgba(201,100,66,0)");
     ctx.fillStyle = halo;
     ctx.beginPath();
     ctx.arc(dotX, dotY, 22, 0, Math.PI * 2);
@@ -272,7 +272,7 @@ export default function ResultsContent() {
     for (let i = 0; i < 5; i++) {
       ctx.beginPath();
       ctx.arc(cx - 110 + i * 55, dotsY, 3, 0, Math.PI * 2);
-      ctx.fillStyle = i === 2 ? "rgba(59,53,181,0.9)" : "rgba(201,100,66,0.30)";
+      ctx.fillStyle = i === 2 ? "rgba(201,100,66,0.9)" : "rgba(201,100,66,0.30)";
       ctx.fill();
     }
 
@@ -525,7 +525,7 @@ export default function ResultsContent() {
                   <div>✓ Instant delivery</div>
                 </div>
                 <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
-                  style={{ width: "100%", backgroundColor: "#EEEAF5", color: "#C96442", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "1.5px solid #E8C4B4", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
+                  style={{ width: "100%", backgroundColor: "#FBF0EB", color: "#C96442", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "1.5px solid #E8C4B4", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
                   {checkoutLoading === 'basic' ? "Redirecting…" : "Get Essential"}
                 </button>
               </div>
@@ -574,8 +574,8 @@ export default function ResultsContent() {
         }
         .bs-sticky { display:flex; align-items:center; justify-content:center; gap:10px; max-width:680px; margin:0 auto; }
         .bs-sticky-label { font-size:13px; color:#5C5A52; font-weight:500; white-space:nowrap; }
-        .bs-btn-basic { background:#EEEAF5; color:#C96442; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #E8C4B4; white-space:nowrap; cursor:pointer; transition:all .15s; }
-        .bs-btn-premium { background:#C96442; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(59,53,181,.4); transition:all .15s; }
+        .bs-btn-basic { background:#FBF0EB; color:#C96442; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #E8C4B4; white-space:nowrap; cursor:pointer; transition:all .15s; }
+        .bs-btn-premium { background:#C96442; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(201,100,66,0.4); transition:all .15s; }
         @media (max-width:480px) {
           .bs-sticky { flex-wrap:nowrap; }
           .bs-sticky-label { display:none; }
