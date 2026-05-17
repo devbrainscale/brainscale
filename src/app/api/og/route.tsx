@@ -22,11 +22,11 @@ function getPercentile(iq: number): number {
 }
 
 function getLabel(iq: number): { title: string; color: string } {
-  if (iq >= 130) return { title: "Gifted", color: "#3B35B5" };
-  if (iq >= 120) return { title: "Superior", color: "#3028A8" };
+  if (iq >= 130) return { title: "Gifted", color: "#C96442" };
+  if (iq >= 120) return { title: "Superior", color: "#B5572F" };
   if (iq >= 110) return { title: "Above Average", color: "#5248D0" };
-  if (iq >= 90) return { title: "Average", color: "#7068D8" };
-  return { title: "Below Average", color: "#978F80" };
+  if (iq >= 90) return { title: "Average", color: "#D4835E" };
+  return { title: "Below Average", color: "#99958C" };
 }
 
 export async function GET(req: NextRequest) {
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
           height: "630px",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#F4F2EC",
+          backgroundColor: "#FAF8F5",
           fontFamily: "sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -96,7 +96,7 @@ export async function GET(req: NextRequest) {
               style={{
                 fontSize: "28px",
                 fontWeight: 700,
-                color: "#1C1B13",
+                color: "#1A1916",
                 letterSpacing: "-0.5px",
               }}
             >
@@ -107,11 +107,11 @@ export async function GET(req: NextRequest) {
               style={{
                 width: "1px",
                 height: "20px",
-                backgroundColor: "#C8C4B8",
+                backgroundColor: "#D5D0C7",
                 margin: "0 4px",
               }}
             />
-            <div style={{ fontSize: "16px", color: "#978F80", fontWeight: 400 }}>
+            <div style={{ fontSize: "16px", color: "#99958C", fontWeight: 400 }}>
               Cognitive Assessment
             </div>
           </div>
@@ -187,7 +187,7 @@ export async function GET(req: NextRequest) {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ fontSize: "18px", color: "#978F80" }}>
+            <div style={{ fontSize: "18px", color: "#99958C" }}>
               Can you beat my score?
             </div>
             <div

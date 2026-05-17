@@ -20,16 +20,16 @@ const categoryColors: Record<string, string> = {
 
 export default function BlogPage() {
   return (
-    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+    <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
       <style>{`
         .blog-featured:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,70,229,0.15); }
-        .blog-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(28,27,19,0.1); }
+        .blog-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26,25,22,0.1); }
       `}</style>
 
       {/* NAV */}
-      <nav style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", position: "sticky", top: 0, zIndex: 50 }}>
+      <nav style={{ backgroundColor: "#FAF8F5", borderBottom: "1px solid #E8E5DF", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1C1B13", textDecoration: "none" }}>
+          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1916", textDecoration: "none" }}>
             Brain<span style={{ color: "#4F46E5" }}>Scale</span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
@@ -45,11 +45,11 @@ export default function BlogPage() {
 
         {/* HEADER */}
         <div style={{ textAlign: "center", marginBottom: "64px" }}>
-          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 300, color: "#1C1B13", lineHeight: 1.1, marginBottom: "16px" }}>
+          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 300, color: "#1A1916", lineHeight: 1.1, marginBottom: "16px" }}>
             IQ &amp;{" "}
             <em style={{ color: "#4F46E5", fontStyle: "italic" }}>Cognition</em>
           </h1>
-          <p style={{ fontSize: "18px", color: "#978F80", maxWidth: "480px", margin: "0 auto" }}>
+          <p style={{ fontSize: "18px", color: "#99958C", maxWidth: "480px", margin: "0 auto" }}>
             Science-backed guides on intelligence testing, cognitive improvement, and what the research actually says.
           </p>
         </div>
@@ -61,12 +61,12 @@ export default function BlogPage() {
               <span style={{ backgroundColor: categoryColors[articles[0].category] || "#4F46E5", color: "#fff", padding: "4px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
                 {articles[0].category}
               </span>
-              <span style={{ fontSize: "13px", color: "#978F80" }}>{articles[0].readingTime} read</span>
+              <span style={{ fontSize: "13px", color: "#99958C" }}>{articles[0].readingTime} read</span>
             </div>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, color: "#1C1B13", marginBottom: "12px", lineHeight: 1.3 }}>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 400, color: "#1A1916", marginBottom: "12px", lineHeight: 1.3 }}>
               {articles[0].title}
             </h2>
-            <p style={{ fontSize: "16px", color: "#5A5849", lineHeight: 1.6, marginBottom: "24px" }}>
+            <p style={{ fontSize: "16px", color: "#5C5A52", lineHeight: 1.6, marginBottom: "24px" }}>
               {articles[0].excerpt}
             </p>
             <span style={{ color: "#4F46E5", fontWeight: 600, fontSize: "14px" }}>Read article →</span>
@@ -77,17 +77,17 @@ export default function BlogPage() {
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "20px" }}>
           {articles.slice(1).map((article) => (
             <Link key={article.slug} href={`/blog/${article.slug}`} style={{ textDecoration: "none" }}>
-              <div className="blog-card" style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "20px", padding: "28px", height: "100%", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
+              <div className="blog-card" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DF", borderRadius: "20px", padding: "28px", height: "100%", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
                   <span style={{ backgroundColor: (categoryColors[article.category] || "#4F46E5") + "18", color: categoryColors[article.category] || "#4F46E5", padding: "3px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>
                     {article.category}
                   </span>
-                  <span style={{ fontSize: "12px", color: "#978F80" }}>{article.readingTime}</span>
+                  <span style={{ fontSize: "12px", color: "#99958C" }}>{article.readingTime}</span>
                 </div>
-                <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 400, color: "#1C1B13", marginBottom: "10px", lineHeight: 1.4 }}>
+                <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 400, color: "#1A1916", marginBottom: "10px", lineHeight: 1.4 }}>
                   {article.title}
                 </h2>
-                <p style={{ fontSize: "14px", color: "#978F80", lineHeight: 1.6, marginBottom: "20px" }}>
+                <p style={{ fontSize: "14px", color: "#99958C", lineHeight: 1.6, marginBottom: "20px" }}>
                   {article.excerpt}
                 </p>
                 <span style={{ color: "#4F46E5", fontWeight: 600, fontSize: "13px" }}>Read →</span>
@@ -97,11 +97,11 @@ export default function BlogPage() {
         </div>
 
         {/* CTA */}
-        <div style={{ textAlign: "center", marginTop: "64px", padding: "48px", backgroundColor: "#fff", borderRadius: "24px", border: "1px solid #DDD9CF" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 300, color: "#1C1B13", marginBottom: "12px" }}>
+        <div style={{ textAlign: "center", marginTop: "64px", padding: "48px", backgroundColor: "#fff", borderRadius: "24px", border: "1px solid #E8E5DF" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 300, color: "#1A1916", marginBottom: "12px" }}>
             Ready to find your score?
           </h2>
-          <p style={{ fontSize: "15px", color: "#978F80", marginBottom: "24px" }}>40 questions · Instant results · 100% free</p>
+          <p style={{ fontSize: "15px", color: "#99958C", marginBottom: "24px" }}>40 questions · Instant results · 100% free</p>
           <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "16px 40px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", boxShadow: "0 6px 24px rgba(79,70,229,0.35)", display: "inline-block" }}>
             Start the free IQ test →
           </Link>
@@ -110,16 +110,16 @@ export default function BlogPage() {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ padding: "40px 24px", textAlign: "center", borderTop: "1px solid #DDD9CF" }}>
+      <footer style={{ padding: "40px 24px", textAlign: "center", borderTop: "1px solid #E8E5DF" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "12px", flexWrap: "wrap" }}>
-          <Link href="/" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>Home</Link>
-          <Link href="/blog" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>Blog</Link>
-          <Link href="/test" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>IQ Test</Link>
-          <Link href="/privacy" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>Privacy</Link>
-          <Link href="/terms" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>Terms</Link>
-          <Link href="/fr/blog" style={{ fontSize: "13px", color: "#978F80", textDecoration: "none" }}>Français</Link>
+          <Link href="/" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>Home</Link>
+          <Link href="/blog" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>Blog</Link>
+          <Link href="/test" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>IQ Test</Link>
+          <Link href="/privacy" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>Terms</Link>
+          <Link href="/fr/blog" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>Français</Link>
         </div>
-        <p style={{ fontSize: "12px", color: "#978F80" }}>© 2026 BrainScale · All rights reserved</p>
+        <p style={{ fontSize: "12px", color: "#99958C" }}>© 2026 BrainScale · All rights reserved</p>
       </footer>
     </div>
   );

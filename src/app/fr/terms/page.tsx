@@ -8,23 +8,23 @@ export const metadata = {
 
 export default function FrTermsPage() {
   return (
-    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
-      <header style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", padding: "0 24px" }}>
+    <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+      <header style={{ backgroundColor: "#FAF8F5", borderBottom: "1px solid #E8E5DF", padding: "0 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1C1B13", textDecoration: "none" }}>
-            Brain<span style={{ color: "#3B35B5" }}>Scale</span>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1916", textDecoration: "none" }}>
+            Brain<span style={{ color: "#C96442" }}>Scale</span>
           </Link>
-          <Link href="/fr/test" style={{ backgroundColor: "#3B35B5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/fr/test" style={{ backgroundColor: "#C96442", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
             Faire le test
           </Link>
         </div>
       </header>
 
       <main style={{ maxWidth: "720px", margin: "0 auto", padding: "64px 24px 96px" }}>
-        <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1C1B13", marginBottom: "8px" }}>
+        <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1A1916", marginBottom: "8px" }}>
           Conditions d&apos;Utilisation
         </h1>
-        <p style={{ fontSize: "13px", color: "#978F80", marginBottom: "48px" }}>Dernière mise à jour : 14 mai 2026</p>
+        <p style={{ fontSize: "13px", color: "#99958C", marginBottom: "48px" }}>Dernière mise à jour : 14 mai 2026</p>
 
         {[
           {
@@ -73,18 +73,18 @@ export default function FrTermsPage() {
           },
         ].map((section) => (
           <div key={section.title} style={{ marginBottom: "36px" }}>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "12px" }}>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1916", marginBottom: "12px" }}>
               {section.title}
             </h2>
-            <p style={{ fontSize: "15px", color: "#5A5849", lineHeight: 1.8 }}>
+            <p style={{ fontSize: "15px", color: "#5C5A52", lineHeight: 1.8 }}>
               {section.content}
             </p>
           </div>
         ))}
 
-        <div style={{ borderTop: "1px solid #DDD9CF", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-          <Link href="/fr/privacy" style={{ fontSize: "14px", color: "#3B35B5", textDecoration: "none", fontWeight: 500 }}>Politique de confidentialité</Link>
-          <Link href="/fr" style={{ fontSize: "14px", color: "#978F80", textDecoration: "none" }}>← Retour à l&apos;accueil</Link>
+        <div style={{ borderTop: "1px solid #E8E5DF", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
+          <Link href="/fr/privacy" style={{ fontSize: "14px", color: "#C96442", textDecoration: "none", fontWeight: 500 }}>Politique de confidentialité</Link>
+          <Link href="/fr" style={{ fontSize: "14px", color: "#99958C", textDecoration: "none" }}>← Retour à l&apos;accueil</Link>
         </div>
       </main>
     </div>
