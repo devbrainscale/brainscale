@@ -339,7 +339,7 @@ export default function FrHomePage() {
             <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
               De vrais scores,<br className="fr-mobile-br" /> de vraies <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>personnes</em>
             </h2>
-            <p style={{ fontSize: "16px", color: "#9896A8" }}>847 000+ tests complétés · Reconnu dans le monde entier</p>
+            <p style={{ fontSize: "16px", color: "#9896A8" }}>847 000+ tests complétés ·<br className="fr-mobile-br" /> Reconnu dans le monde entier</p>
 
           </div>
 
