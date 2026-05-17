@@ -86,7 +86,6 @@ const faqs = [
 
 export default function FrHomePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
@@ -97,86 +96,14 @@ export default function FrHomePage() {
           <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, letterSpacing: "-0.03em", color: "#1A1916", textDecoration: "none" }}>
             Brain<span style={{ color: "#C96442" }}>Scale</span>
           </Link>
-          {/* Desktop links */}
-          <div className="bs-nav-links" style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-            <Link href="/fr/blog" style={{ fontSize: "14px", color: "#5C5A52", textDecoration: "none" }}>Blog</Link>
-            <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-              <Link href="/" style={{ fontSize: "14px", color: "#5C5A52", textDecoration: "none" }}>EN</Link>
-              <span style={{ fontSize: "11px", color: "#D5D0C7" }}>·</span>
-              <span style={{ fontSize: "14px", color: "#C96442", fontWeight: 600 }}>FR</span>
-            </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <Link href="/" style={{ fontSize: "13px", color: "#99958C", textDecoration: "none" }}>EN</Link>
             <Link href="/fr/test" style={{ backgroundColor: "#1A1916", color: "#FAF8F5", padding: "10px 22px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
               Tester mon QI
             </Link>
           </div>
-          {/* Mobile burger */}
-          <button
-            className="bs-burger"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Ouvrir le menu"
-            style={{ display: "none", alignItems: "center", justifyContent: "center", width: "40px", height: "40px", background: "none", border: "none", cursor: "pointer", padding: 0, color: "#1A1916" }}
-          >
-            <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
-              <line x1="0" y1="1"  x2="22" y2="1"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="0" y1="8"  x2="22" y2="8"  stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              <line x1="0" y1="15" x2="22" y2="15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-          </button>
         </div>
       </nav>
-
-      {/* MOBILE MENU OVERLAY */}
-      {menuOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 200, backgroundColor: "#FAF8F5", display: "flex", flexDirection: "column" }}>
-          <div style={{ padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #E8E5DF", flexShrink: 0 }}>
-            <Link href="/fr" onClick={() => setMenuOpen(false)} style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, letterSpacing: "-0.03em", color: "#1A1916", textDecoration: "none" }}>
-              Brain<span style={{ color: "#C96442" }}>Scale</span>
-            </Link>
-            <button onClick={() => setMenuOpen(false)} aria-label="Fermer" style={{ background: "none", border: "none", cursor: "pointer", color: "#1A1916", padding: "8px" }}>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <line x1="2" y1="2" x2="18" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                <line x1="18" y1="2" x2="2" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
-            </button>
-          </div>
-          <div style={{ flex: 1, overflowY: "auto" }}>
-            {[
-              { href: "/fr/test",    label: "Tester mon QI — Gratuit", accent: true },
-              { href: "/fr/blog",    label: "Blog",                    accent: false },
-              { href: "/",           label: "English",                 accent: false },
-              { href: "/fr/privacy", label: "Confidentialité",         accent: false },
-            ].map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  display: "block",
-                  padding: "20px 24px",
-                  fontSize: item.accent ? "20px" : "17px",
-                  fontWeight: item.accent ? 600 : 400,
-                  color: item.accent ? "#C96442" : "#1A1916",
-                  textDecoration: "none",
-                  borderBottom: "1px solid #E8E5DF",
-                  fontFamily: item.accent ? "var(--font-display, serif)" : "inherit",
-                  letterSpacing: item.accent ? "-0.01em" : "0",
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
-          <div style={{ padding: "24px", borderTop: "1px solid #E8E5DF", flexShrink: 0 }}>
-            <Link
-              href="/fr/test"
-              onClick={() => setMenuOpen(false)}
-              style={{ display: "block", textAlign: "center", backgroundColor: "#1A1916", color: "#FAF8F5", padding: "16px 24px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none" }}
-            >
-              Tester mon QI — C&apos;est gratuit
-            </Link>
-          </div>
-        </div>
-      )}
 
       {/* HERO — asymmetric 2-column */}
       <section style={{ padding: "108px 24px 80px" }}>
@@ -262,13 +189,6 @@ export default function FrHomePage() {
         </div>
 
         <style>{`
-          /* Nav responsive */
-          .bs-nav-links { display: flex; }
-          .bs-burger    { display: none !important; }
-          @media (max-width: 768px) {
-            .bs-nav-links { display: none !important; }
-            .bs-burger    { display: flex !important; }
-          }
           /* Hero */
           .bs-hero-grid { grid-template-columns: 1fr 1fr; }
           .bs-hero-card { display: block; }
