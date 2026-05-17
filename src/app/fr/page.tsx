@@ -175,12 +175,6 @@ export default function FrHomePage() {
             <path d="M 20,165 Q 90,163 140,148 Q 195,130 235,85 Q 265,48 300,28 Q 335,48 365,85 Q 405,130 460,148 Q 510,163 580,165" fill="none" stroke="#5B4FCF" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" />
             <line x1="20" y1="165" x2="580" y2="165" stroke="#D4D0C8" strokeWidth="1" />
             <line x1="300" y1="28" x2="300" y2="165" stroke="#5B4FCF" strokeWidth="1" strokeDasharray="4,3" strokeOpacity="0.28" />
-            {/* Labels % — positionnés là où chaque zone a de l'espace vertical */}
-            <text x="120" y="158" textAnchor="middle" fontSize="12" fontWeight="700" fill="#9896A8">25%</text>
-            <text x="299" y="112" textAnchor="middle" fontSize="13" fontWeight="700" fill="#5B4FCF">50%</text>
-            <text x="375" y="142" textAnchor="middle" fontSize="12" fontWeight="700" fill="#3D2FA8">16%</text>
-            <text x="426" y="152" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff">7%</text>
-            <text x="516" y="152" textAnchor="middle" fontSize="11" fontWeight="700" fill="#fff">2%</text>
             {/* Axe : 90 · 100 · 110 · 120 · 130 */}
             <text x="248" y="184" textAnchor="middle" fontSize="10" fill="#9896A8">90</text>
             <text x="300" y="184" textAnchor="middle" fontSize="12" fill="#5B4FCF" fontWeight="500">100</text>
