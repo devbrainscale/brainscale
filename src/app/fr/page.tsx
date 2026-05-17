@@ -640,7 +640,7 @@ export default function FrHomePage() {
             <div>
               <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", color: "#AAA69E", textTransform: "uppercase" as const, marginBottom: "18px" }}>À propos</div>
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                <Link href="/about" style={{ fontSize: "13px", color: "#5C5A52", textDecoration: "none" }}>À propos</Link>
+                <Link href="/fr/about" style={{ fontSize: "13px", color: "#5C5A52", textDecoration: "none" }}>À propos</Link>
                 <a href="mailto:contact@brainscale.app" style={{ fontSize: "13px", color: "#5C5A52", textDecoration: "none" }}>Contact</a>
               </div>
             </div>
