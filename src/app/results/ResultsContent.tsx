@@ -40,13 +40,7 @@ export default function ResultsContent() {
   const total = isNaN(rawTotal) || rawTotal <= 0 ? 40 : rawTotal;
   const correct = isNaN(rawCorrect) ? 0 : Math.min(total, Math.max(0, rawCorrect));
 
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [skipped, setSkipped] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [gdprConsent, setGdprConsent] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic' | 'premium'>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic'>(null);
   const [copied, setCopied] = useState(false);
 
   // Fire ViewContent once when results page loads
@@ -70,7 +64,7 @@ export default function ResultsContent() {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined }),
+        body: JSON.stringify({ score, correct, total }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
@@ -319,34 +313,6 @@ export default function ResultsContent() {
     setTimeout(() => setCopied(false), 2000);
   }
 
-  async function handleSubscribe(e: React.FormEvent) {
-    e.preventDefault();
-    setEmailError("");
-    if (!email || !email.includes("@")) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-    if (!gdprConsent) {
-      setEmailError("Please accept the terms to continue.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, score, lang: "en" }),
-      });
-      const data = await res.json();
-      if (data.success) setSubmitted(true);
-      else setEmailError("Something went wrong. Please try again.");
-    } catch {
-      setEmailError("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", paddingBottom: "88px" }}>
 
@@ -412,44 +378,6 @@ export default function ResultsContent() {
           </div>
         </div>
 
-        {/* EMAIL CAPTURE */}
-        {!submitted && !skipped ? (
-          <div style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "16px", padding: "32px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "11px", color: "#C96442", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px" }}>
-              Free improvement plan
-            </p>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1916", marginBottom: "8px", lineHeight: 1.4 }}>
-              Get your personalized progress plan
-            </h3>
-            <p style={{ fontSize: "14px", color: "#5C5A52", marginBottom: "24px", maxWidth: "360px", margin: "0 auto 24px", lineHeight: 1.6 }}>
-              Score + 7-day plan to strengthen your weakest cognitive areas.
-            </p>
-            <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
-              <input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)}
-                aria-label="Email address"
-                style={{ flex: 1, minWidth: "200px", padding: "13px 18px", borderRadius: "8px", border: "1.5px solid #E8C4B4", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1A1916" }} />
-              <button type="submit" disabled={loading}
-                style={{ backgroundColor: "#C96442", color: "#fff", padding: "13px 24px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}>
-                {loading ? "Sending…" : "Send →"}
-              </button>
-            </form>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", maxWidth: "440px", margin: "12px auto 0", textAlign: "left" }}>
-              <input type="checkbox" id="gdpr-en" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#C96442", flexShrink: 0, cursor: "pointer" }} />
-              <label htmlFor="gdpr-en" style={{ fontSize: "12px", color: "#5C5A52", lineHeight: 1.5, cursor: "pointer" }}>
-                I agree to receive my results by email. Unsubscribe at any time.{" "}
-                <a href="/privacy" style={{ color: "#C96442", textDecoration: "underline" }}>Privacy Policy</a>.
-              </label>
-            </div>
-            {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
-            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#99958C", fontSize: "13px", marginTop: "8px", cursor: "pointer", textDecoration: "underline", padding: "10px 16px", display: "inline-block" }}>
-              Skip
-            </button>
-          </div>
-        ) : submitted ? (
-          <div style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "12px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "14px", color: "#C96442", fontWeight: 600 }}>Report sent — check your inbox.</p>
-          </div>
-        ) : null}
 
         {/* STATS STRIP — differentiated, not identical cards */}
         <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #E8E5DF", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>

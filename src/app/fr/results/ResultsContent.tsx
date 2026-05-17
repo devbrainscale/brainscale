@@ -40,13 +40,7 @@ export default function FrResultsContent() {
   const total = isNaN(rawTotal) || rawTotal <= 0 ? 40 : rawTotal;
   const correct = isNaN(rawCorrect) ? 0 : Math.min(total, Math.max(0, rawCorrect));
 
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [skipped, setSkipped] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [gdprConsent, setGdprConsent] = useState(false);
-  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic' | 'premium'>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState<null | 'basic'>(null);
   const [copied, setCopied] = useState(false);
 
   // Fire ViewContent once when results page loads
@@ -70,7 +64,7 @@ export default function FrResultsContent() {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr" }),
+        body: JSON.stringify({ score, correct, total, lang: "fr" }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
@@ -321,34 +315,6 @@ export default function FrResultsContent() {
     setTimeout(() => setCopied(false), 2000);
   }
 
-  async function handleSubscribe(e: React.FormEvent) {
-    e.preventDefault();
-    setEmailError("");
-    if (!email || !email.includes("@")) {
-      setEmailError("Veuillez entrer une adresse email valide.");
-      return;
-    }
-    if (!gdprConsent) {
-      setEmailError("Veuillez accepter les conditions pour continuer.");
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch("/api/subscribe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, score, lang: "fr" }),
-      });
-      const data = await res.json();
-      if (data.success) setSubmitted(true);
-      else setEmailError("Une erreur s'est produite. Veuillez réessayer.");
-    } catch {
-      setEmailError("Une erreur s'est produite. Veuillez réessayer.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
   return (
     <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", paddingBottom: "88px" }}>
 
@@ -413,45 +379,6 @@ export default function FrResultsContent() {
             </button>
           </div>
         </div>
-
-        {/* EMAIL CAPTURE */}
-        {!submitted && !skipped ? (
-          <div style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "16px", padding: "32px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "11px", color: "#C96442", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px" }}>
-              Plan d&apos;amélioration gratuit
-            </p>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1916", marginBottom: "8px", lineHeight: 1.4 }}>
-              Recevez votre plan de progression personnalisé
-            </h3>
-            <p style={{ fontSize: "14px", color: "#5C5A52", marginBottom: "24px", maxWidth: "360px", margin: "0 auto 24px", lineHeight: 1.6 }}>
-              Score + plan sur 7 jours pour renforcer vos points faibles cognitifs.
-            </p>
-            <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
-              <input type="email" placeholder="votre@email.com" value={email} onChange={(e) => setEmail(e.target.value)}
-                aria-label="Adresse email"
-                style={{ flex: 1, minWidth: "200px", padding: "13px 18px", borderRadius: "8px", border: "1.5px solid #E8C4B4", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1A1916" }} />
-              <button type="submit" disabled={loading}
-                style={{ backgroundColor: "#C96442", color: "#fff", padding: "13px 24px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}>
-                {loading ? "Envoi…" : "Recevoir →"}
-              </button>
-            </form>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", maxWidth: "440px", margin: "12px auto 0", textAlign: "left" }}>
-              <input type="checkbox" id="gdpr-fr" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#C96442", flexShrink: 0, cursor: "pointer" }} />
-              <label htmlFor="gdpr-fr" style={{ fontSize: "12px", color: "#5C5A52", lineHeight: 1.5, cursor: "pointer" }}>
-                J&apos;accepte de recevoir mes résultats par email. Désinscription possible à tout moment.{" "}
-                <a href="/fr/privacy" style={{ color: "#C96442", textDecoration: "underline" }}>Politique de confidentialité</a>.
-              </label>
-            </div>
-            {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
-            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#99958C", fontSize: "13px", marginTop: "8px", cursor: "pointer", textDecoration: "underline", padding: "10px 16px", display: "inline-block" }}>
-              Ignorer
-            </button>
-          </div>
-        ) : submitted ? (
-          <div style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "12px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "14px", color: "#C96442", fontWeight: 600 }}>Rapport envoyé — vérifiez votre boîte mail.</p>
-          </div>
-        ) : null}
 
         {/* STATS STRIP — différencié, pas de grille identique */}
         <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #E8E5DF", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>
