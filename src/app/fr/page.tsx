@@ -108,44 +108,88 @@ export default function FrHomePage() {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section style={{ padding: "80px 24px 60px", textAlign: "center" }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-          <div className="bs-trust-badge" style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px", whiteSpace: "nowrap" }}>
-            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", flexShrink: 0, display: "inline-block" }} />
-            Test validé · 40 questions · Résultats instantanés
+      {/* HERO — asymmetric 2-column */}
+      <section style={{ padding: "72px 24px 56px" }}>
+        <div className="bs-hero-grid" style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "center" }}>
+
+          {/* LEFT — text */}
+          <div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "7px 16px", borderRadius: "999px", fontSize: "12px", fontWeight: 600, marginBottom: "28px", whiteSpace: "nowrap" }}>
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#5B4FCF", flexShrink: 0, display: "inline-block" }} />
+              Test validé · 40 questions · Résultats instantanés
+            </div>
+
+            <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 4vw, 58px)", fontWeight: 400, lineHeight: 1.1, color: "#1A1825", marginBottom: "20px" }}>
+              Découvrez votre{" "}
+              <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>score QI</em>
+              {" "}en 40 minutes
+            </h1>
+
+            <p style={{ fontSize: "17px", color: "#5C5A6E", lineHeight: 1.75, marginBottom: "36px", maxWidth: "440px" }}>
+              Un test psychométrique rigoureux, entièrement gratuit, mesurant votre raisonnement logique, spatial et analytique.
+            </p>
+
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 30px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 20px rgba(91,79,207,0.35)" }}>
+                Tester mon QI — Gratuit
+              </Link>
+              <a href="#comment-ca-marche" style={{ color: "#5C5A6E", padding: "14px 26px", borderRadius: "999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #D4D0C8" }}>
+                Comment ça marche →
+              </a>
+            </div>
+
+            {/* Stats — inline, not stacked */}
+            <div style={{ display: "flex", gap: "28px", marginTop: "40px", paddingTop: "32px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
+              {[
+                { value: "847 000+", label: "tests" },
+                { value: "4,8/5", label: "satisfaction" },
+                { value: "r = 0,87", label: "fiabilité" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</span>
+                  {" "}<span style={{ fontSize: "13px", color: "#9896A8" }}>{s.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
-            Découvrez votre{" "}
-            <em style={{ color: "#5B4FCF", fontStyle: "italic", whiteSpace: "nowrap" }}>score QI</em>
-            <br />en 40 minutes
-          </h1>
+          {/* RIGHT — result preview card */}
+          <div style={{ backgroundColor: "#0F0E17", borderRadius: "24px", padding: "36px 32px", position: "relative", overflow: "hidden" }}>
+            <div style={{ position: "absolute", top: "35%", left: "50%", transform: "translate(-50%, -50%)", width: "280px", height: "280px", background: "radial-gradient(circle, rgba(91,79,207,0.13) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-          <p style={{ fontSize: "18px", color: "#5C5A6E", lineHeight: 1.7, marginBottom: "40px", maxWidth: "520px", margin: "0 auto 40px" }}>
-            Un test psychométrique rigoureux — entièrement gratuit — mesurant votre raisonnement logique, spatial et analytique.
-          </p>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", backgroundColor: "rgba(91,79,207,0.18)", color: "#B4ABFF", padding: "5px 12px", borderRadius: "999px", fontSize: "10px", fontWeight: 700, letterSpacing: "0.8px", marginBottom: "24px", border: "1px solid rgba(91,79,207,0.25)", textTransform: "uppercase" as const }}>
+              <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#7B6FE8", display: "inline-block" }} />
+              Votre résultat
+            </div>
 
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "16px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 24px rgba(91,79,207,0.35)" }}>
-              Tester mon QI — Gratuit
-            </Link>
-            <a href="#comment-ca-marche" style={{ color: "#5C5A6E", padding: "16px 32px", borderRadius: "999px", fontSize: "16px", fontWeight: 500, textDecoration: "none", border: "1px solid #D4D0C8" }}>
-              Comment ça marche →
-            </a>
-          </div>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "88px", fontWeight: 400, color: "#fff", lineHeight: 1, marginBottom: "10px" }}>
+              127
+            </div>
 
-          <div className="bs-stats-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
+              <span style={{ display: "inline-block", backgroundColor: "#4A3EBE", color: "#fff", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>Supérieur</span>
+              <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.32)" }}>Top 9%</span>
+            </div>
+
             {[
-              { value: "847 000+", label: "Tests complétés" },
-              { value: "4,8 / 5", label: "Satisfaction" },
-              { value: "r = 0,87", label: "Corrélation fiabilité" },
-            ].map((s) => (
-              <div key={s.label} style={{ textAlign: "center" }}>
-                <div className="bs-stat-value" style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
-                <div className="bs-stat-label" style={{ fontSize: "13px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
+              { label: "Raisonnement logique",   pct: 88 },
+              { label: "Intelligence spatiale",  pct: 74 },
+              { label: "Vitesse de traitement",  pct: 91 },
+            ].map((bar) => (
+              <div key={bar.label} style={{ marginBottom: "13px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,255,255,0.38)", marginBottom: "5px" }}>
+                  <span>{bar.label}</span>
+                  <span>{bar.pct}e pct.</span>
+                </div>
+                <div style={{ height: "3px", backgroundColor: "rgba(255,255,255,0.07)", borderRadius: "2px" }}>
+                  <div style={{ height: "100%", width: `${bar.pct}%`, backgroundColor: "#6B5FD9", borderRadius: "2px" }} />
+                </div>
               </div>
             ))}
+
+            <div style={{ marginTop: "20px", paddingTop: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
+              Exemple · votre résultat réel sera différent
+            </div>
           </div>
         </div>
       </section>
@@ -440,14 +484,13 @@ export default function FrHomePage() {
 
       {/* Responsive styles */}
       <style>{`
+        .bs-hero-grid { grid-template-columns: 1fr 1fr; }
+        @media (max-width: 768px) {
+          .bs-hero-grid { grid-template-columns: 1fr !important; }
+        }
         @media (max-width: 380px) {
           .fr-nav-blog { display: none !important; }
           .fr-nav-sep  { display: none !important; }
-        }
-        @media (max-width: 500px) {
-          .bs-stat-value { font-size: 22px !important; }
-          .bs-stat-label { font-size: 11px !important; }
-          .bs-stats-row { gap: 8px !important; }
         }
         .fr-mobile-br { display: none; }
         @media (max-width: 540px) {
