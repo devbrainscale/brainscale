@@ -199,9 +199,9 @@ export default function FrHomePage() {
               { range: "≥ 130",   label: "Surdoué",    pct: "2%",  bg: "rgba(91,79,207,0.72)", text: "#fff",    sub: "rgba(255,255,255,0.78)" },
             ].map((z) => (
               <div key={z.range} style={{ backgroundColor: z.bg, borderRadius: "10px", padding: "12px 4px", textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "space-between", minHeight: "72px" }}>
-                <div className="bs-bell-range" style={{ fontSize: "10px", fontWeight: 500, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
-                <div className="bs-bell-label" style={{ fontSize: "9px", fontWeight: 400, color: z.sub, lineHeight: 1.3 }}>{z.label}</div>
-                <div className="bs-bell-pct" style={{ fontSize: "15px", fontWeight: 600, color: z.text }}>{z.pct}</div>
+                <div className="bs-bell-range" style={{ fontSize: "10px", fontWeight: 400, color: z.text, lineHeight: 1.2 }}>{z.range}</div>
+                <div className="bs-bell-label" style={{ fontSize: "9px", fontWeight: 300, color: z.sub, lineHeight: 1.3 }}>{z.label}</div>
+                <div className="bs-bell-pct" style={{ fontSize: "15px", fontWeight: 500, color: z.text }}>{z.pct}</div>
               </div>
             ))}
           </div>
