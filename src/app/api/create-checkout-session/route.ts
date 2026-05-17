@@ -5,9 +5,26 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2026-04-22.dahlia',
 });
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.brainscale.app';
+
 export async function POST(request: NextRequest) {
   try {
-    const { score, correct, total, email, lang } = await request.json();
+    const body = await request.json();
+    const { email, lang } = body;
+
+    // Validate and sanitize inputs
+    const score   = parseInt(body.score,   10);
+    const correct = parseInt(body.correct, 10);
+    const total   = parseInt(body.total,   10);
+
+    if (isNaN(score)   || score < 75  || score > 145)       return NextResponse.json({ error: 'Invalid score' },   { status: 400 });
+    if (isNaN(total)   || total < 10  || total > 60)         return NextResponse.json({ error: 'Invalid total' },   { status: 400 });
+    if (isNaN(correct) || correct < 0 || correct > total)    return NextResponse.json({ error: 'Invalid correct' }, { status: 400 });
+    if (lang !== undefined && lang !== 'en' && lang !== 'fr') return NextResponse.json({ error: 'Invalid lang' },   { status: 400 });
+    if (email !== undefined && (typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
+      return NextResponse.json({ error: 'Invalid email' }, { status: 400 });
+    }
+
     const isFr = lang === 'fr';
 
     // Single offer — $5 USD / €5 EUR
@@ -35,14 +52,14 @@ export async function POST(request: NextRequest) {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&score=${score}&correct=${correct ?? 20}&total=${total ?? 40}&lang=${lang ?? 'en'}`,
-      cancel_url:  `${process.env.NEXT_PUBLIC_BASE_URL}${isFr ? '/fr' : ''}/results?score=${score}`,
+      success_url: `${BASE_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}&score=${score}&correct=${correct}&total=${total}&lang=${lang ?? 'en'}`,
+      cancel_url:  `${BASE_URL}${isFr ? '/fr' : ''}/results?score=${score}`,
       customer_email: email || undefined,
       metadata: {
         iq_score: String(score),
-        correct:  String(correct ?? 20),
-        total:    String(total   ?? 40),
-        lang:     String(lang    ?? 'en'),
+        correct:  String(correct),
+        total:    String(total),
+        lang:     String(lang ?? 'en'),
         tier:     'premium',
       },
     });
