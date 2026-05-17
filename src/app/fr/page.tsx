@@ -111,8 +111,8 @@ export default function FrHomePage() {
       {/* HERO */}
       <section style={{ padding: "80px 24px 60px", textAlign: "center" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px" }}>
-            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
+          <div className="bs-trust-badge" style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px", whiteSpace: "nowrap" }}>
+            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", flexShrink: 0, display: "inline-block" }} />
             Test validé · 40 questions · Résultats instantanés
           </div>
 
@@ -454,6 +454,7 @@ export default function FrHomePage() {
           .bs-bell-range { font-size: 8px !important; }
           .bs-bell-label { font-size: 7px !important; }
           .bs-bell-pct   { font-size: 11px !important; }
+          .bs-trust-badge { font-size: 10px !important; padding: 6px 13px !important; gap: 6px !important; }
         }
       `}</style>
 
