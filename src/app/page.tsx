@@ -153,11 +153,13 @@ export default function HomePage() {
               .bs-stat-label { font-size: 11px !important; }
               .bs-stats-row { gap: 8px !important; }
             }
+            .en-mobile-br { display: none; }
             @media (max-width: 540px) {
               .bs-bell-legend { gap: 3px !important; }
               .bs-bell-range { font-size: 8px !important; }
               .bs-bell-label { font-size: 7px !important; }
               .bs-bell-pct   { font-size: 11px !important; }
+              .en-mobile-br { display: block; }
             }
           `}</style>
         </div>
@@ -348,7 +350,7 @@ export default function HomePage() {
             <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
               Real scores, real <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>people</em>
             </h2>
-            <p style={{ fontSize: "16px", color: "#9896A8" }}>847,000+ tests completed · Trusted worldwide</p>
+            <p style={{ fontSize: "16px", color: "#9896A8" }}>847,000+ tests completed ·<br className="en-mobile-br" /> Trusted worldwide</p>
           </div>
 
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "24px" }}>
