@@ -286,19 +286,27 @@ export default function ResultsContent() {
     ctx.stroke();
 
     // ── Branding ──────────────────────────────────────────────
-    const brandY = divY + 60;
+    const brandY = divY + 72;
     ctx.textAlign = "center";
     ctx.textBaseline = "alphabetic";
-    ctx.strokeStyle = "rgba(26,25,22,0.12)";
+    // Side lines — generous gap from text, wider reach
+    const lineY = brandY - 8;
+    ctx.strokeStyle = "rgba(26,25,22,0.10)";
     ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(cx - 160, brandY - 12); ctx.lineTo(cx - 80, brandY - 12); ctx.stroke();
-    ctx.beginPath(); ctx.moveTo(cx + 80,  brandY - 12); ctx.lineTo(cx + 160, brandY - 12); ctx.stroke();
-    ctx.font = "600 28px Georgia,'Times New Roman',serif";
+    ctx.beginPath(); ctx.moveTo(cx - 230, lineY); ctx.lineTo(cx - 112, lineY); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx + 112, lineY); ctx.lineTo(cx + 230, lineY); ctx.stroke();
+    // "BrainScale" wordmark — Bitter bold, matching site typography
+    ctx.font = "700 32px Bitter,Georgia,'Times New Roman',serif";
     ctx.fillStyle = "#1A1916";
     ctx.fillText("BrainScale", cx, brandY);
+    // Terracotta accent bar (brand identity, matching favicon)
+    rr(cx - 28, brandY + 9, 56, 3, 1.5);
+    ctx.fillStyle = "#C96442";
+    ctx.fill();
+    // brainscale.app
     ctx.font = "400 13px system-ui,sans-serif";
     ctx.fillStyle = "#AAA69E";
-    ctx.fillText("brainscale.app", cx, brandY + 28);
+    ctx.fillText("brainscale.app", cx, brandY + 44);
 
     // ── Download ──────────────────────────────────────────────
     const link = document.createElement("a");
