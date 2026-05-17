@@ -154,7 +154,7 @@ export default function FrHomePage() {
       <section style={{ padding: "16px 24px 48px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto", backgroundColor: "#EFEDE6", borderRadius: "24px", padding: "clamp(28px, 5vw, 48px) clamp(20px, 5vw, 40px)", textAlign: "center" }}>
           <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "24px", fontWeight: 300, color: "#1A1825", marginBottom: "6px" }}>
-            Distribution mondiale du QI
+            Distribution mondiale<br className="fr-mobile-br" /> du QI
           </h2>
           <p style={{ fontSize: "13px", color: "#9896A8", marginBottom: "32px" }}>Moyenne mondiale : 100 · Écart-type : 15</p>
 
@@ -258,7 +258,7 @@ export default function FrHomePage() {
             EXEMPLE DE QUESTION
           </div>
           <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 300, color: "#1A1825", marginBottom: "40px" }}>
-            Quelle forme complète la séquence ?
+            Quelle forme complète<br className="fr-mobile-br" /> la séquence ?
           </h2>
           <SampleQuestion />
         </div>
@@ -269,7 +269,7 @@ export default function FrHomePage() {
         <div style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "48px", alignItems: "center" }}>
           <div>
             <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "32px" }}>
-              Votre vie privée,{" "}
+              Votre vie privée,<br className="fr-mobile-br" />{" "}
               <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>notre priorité</em>
             </h2>
             {[
@@ -337,7 +337,7 @@ export default function FrHomePage() {
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
           <div style={{ textAlign: "center", marginBottom: "56px" }}>
             <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 300, color: "#1A1825", marginBottom: "12px" }}>
-              De vrais scores, de vraies <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>personnes</em>
+              De vrais scores,<br className="fr-mobile-br" /> de vraies <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>personnes</em>
             </h2>
             <p style={{ fontSize: "16px", color: "#9896A8" }}>847 000+ tests complétés · Reconnu dans le monde entier</p>
 
@@ -449,12 +449,14 @@ export default function FrHomePage() {
           .bs-stat-label { font-size: 11px !important; }
           .bs-stats-row { gap: 8px !important; }
         }
+        .fr-mobile-br { display: none; }
         @media (max-width: 540px) {
           .bs-bell-legend { gap: 3px !important; }
           .bs-bell-range { font-size: 8px !important; }
           .bs-bell-label { font-size: 7px !important; }
           .bs-bell-pct   { font-size: 11px !important; }
           .bs-trust-badge { font-size: 10px !important; padding: 6px 13px !important; gap: 6px !important; }
+          .fr-mobile-br { display: block; }
         }
       `}</style>
 
