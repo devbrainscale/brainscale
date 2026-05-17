@@ -360,18 +360,21 @@ export default function FrResultsContent() {
 
       <main style={{ maxWidth: "680px", margin: "0 auto", padding: "48px 24px 80px" }}>
 
-        {/* SCORE HERO */}
-        <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <p style={{ fontSize: "11px", color: "#9896A8", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "20px" }}>
-            Votre score QI
-          </p>
-          <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(80px, 15vw, 120px)", fontWeight: 300, color: "#5B4FCF", lineHeight: 1, marginBottom: "12px" }}>
-            {score}
-          </div>
-          <div style={{ display: "inline-block", backgroundColor: label.color, color: "#fff", padding: "8px 24px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "20px" }}>
+        {/* SCORE REVEAL — label-first, breaks hero-metric template */}
+        <div style={{ marginBottom: "40px" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: label.color, color: "#fff", padding: "8px 20px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, letterSpacing: "0.3px", marginBottom: "20px" }}>
             {label.title}
           </div>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", maxWidth: "400px", margin: "0 auto", lineHeight: 1.7, whiteSpace: "pre-line" }}>
+          <div style={{ display: "flex", alignItems: "flex-end", gap: "20px", marginBottom: "16px", flexWrap: "wrap" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(72px, 13vw, 104px)", fontWeight: 300, color: "#1A1825", lineHeight: 1 }}>
+              {score}
+            </div>
+            <div style={{ paddingBottom: "10px" }}>
+              <div style={{ fontSize: "15px", color: label.color, fontWeight: 600 }}>{percentile}e percentile</div>
+              <div style={{ fontSize: "13px", color: "#9896A8" }}>mondial</div>
+            </div>
+          </div>
+          <p style={{ fontSize: "15px", color: "#5C5A6E", maxWidth: "420px", lineHeight: 1.7, whiteSpace: "pre-line" }}>
             {label.desc}
           </p>
         </div>
@@ -419,6 +422,7 @@ export default function FrResultsContent() {
             </p>
             <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
               <input type="email" placeholder="votre@email.com" value={email} onChange={(e) => setEmail(e.target.value)}
+                aria-label="Adresse email"
                 style={{ flex: 1, minWidth: "200px", padding: "13px 18px", borderRadius: "8px", border: "1.5px solid #C4BBFF", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1A1825" }} />
               <button type="submit" disabled={loading}
                 style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "13px 24px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}>
@@ -433,7 +437,7 @@ export default function FrResultsContent() {
               </label>
             </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
-            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#9896A8", fontSize: "12px", marginTop: "12px", cursor: "pointer", textDecoration: "underline" }}>
+            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#9896A8", fontSize: "13px", marginTop: "8px", cursor: "pointer", textDecoration: "underline", padding: "10px 16px", display: "inline-block" }}>
               Ignorer
             </button>
           </div>
@@ -452,24 +456,29 @@ export default function FrResultsContent() {
           <div style={{ height: "8px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
             <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #C4BBFF, #5B4FCF)", transition: "width 1s ease" }} />
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#C4BBFF" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#B8B4A8" }}>
             <span>75</span><span>90</span><span>100</span><span>115</span><span>130</span><span>145</span>
           </div>
         </div>
 
-        {/* STATS ROW */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "16px" }}>
-          {[
-            { value: `${percentile}%`, label: "Percentile", sub: "population mondiale" },
-            { value: `${correct}/${total}`, label: "Bonnes réponses", sub: `${accuracy}% de précision` },
-            { value: score >= 130 ? "Top 2%" : score >= 120 ? "Top 9%" : score >= 115 ? "Top 16%" : score >= 110 ? "Top 25%" : score >= 100 ? "Top 50%" : score >= 90 ? "25% inf." : "16% inf.", label: "Rang mondial", sub: "" },
-          ].map((s) => (
-            <div key={s.label} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "26px", fontWeight: 500, color: "#5B4FCF" }}>{s.value}</div>
-              <div style={{ fontSize: "11px", fontWeight: 600, color: "#1A1825", marginTop: "4px" }}>{s.label}</div>
-              {s.sub && <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>{s.sub}</div>}
+        {/* STATS STRIP — différencié, pas de grille identique */}
+        <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #E8E5DC", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>
+          <div style={{ flex: "1.5", padding: "20px 20px", borderRight: "1px solid #E8E5DC", backgroundColor: "#EDE9FF" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 500, color: "#5B4FCF", lineHeight: 1 }}>{percentile}%</div>
+            <div style={{ fontSize: "12px", color: "#5B4FCF", fontWeight: 600, marginTop: "5px" }}>Percentile</div>
+            <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>mondial</div>
+          </div>
+          <div style={{ flex: "1", padding: "20px 14px", borderRight: "1px solid #E8E5DC" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1A1825", lineHeight: 1 }}>{correct}/{total}</div>
+            <div style={{ fontSize: "12px", color: "#1A1825", fontWeight: 600, marginTop: "5px" }}>Correct</div>
+            <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>{accuracy}%</div>
+          </div>
+          <div style={{ flex: "1", padding: "20px 14px" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", lineHeight: 1.1 }}>
+              {score >= 130 ? "Top 2%" : score >= 120 ? "Top 9%" : score >= 115 ? "Top 16%" : score >= 110 ? "Top 25%" : score >= 100 ? "Top 50%" : score >= 90 ? "Bot. 25%" : "Bot. 16%"}
             </div>
-          ))}
+            <div style={{ fontSize: "12px", color: "#1A1825", fontWeight: 600, marginTop: "5px" }}>Rang mondial</div>
+          </div>
         </div>
 
         {/* BREAKDOWN */}
@@ -497,7 +506,7 @@ export default function FrResultsContent() {
 
         {/* PREMIUM TEASER */}
         <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", marginBottom: "28px" }}>
-          <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", filter: "blur(4px)", userSelect: "none", pointerEvents: "none" }}>
+          <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", opacity: 0.12, userSelect: "none", pointerEvents: "none" }} aria-hidden="true">
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", color: "#1A1825", marginBottom: "16px" }}>Profil cognitif détaillé</h3>
             {["Mémoire de travail : 94e percentile", "Traitement visuo-spatial : 87e percentile", "Raisonnement fluide : 96e percentile", "Vitesse de traitement : 79e percentile", "Attention soutenue : 88e percentile"].map((item) => (
               <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #E8E5DC", fontSize: "13px", color: "#5C5A6E" }}>{item}</div>
@@ -523,7 +532,7 @@ export default function FrResultsContent() {
                 </button>
               </div>
               <div style={{ flex: "1 1 170px", backgroundColor: "#5B4FCF", borderRadius: "12px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
-                <div style={{ position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#FBBF24", color: "#1A1825", fontSize: "10px", fontWeight: 800, padding: "4px 12px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
+                <div style={{ position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#1A1825", color: "#fff", fontSize: "10px", fontWeight: 800, padding: "4px 12px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
                   LE PLUS POPULAIRE
                 </div>
                 <p style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.55)", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Premium</p>
@@ -575,7 +584,7 @@ export default function FrResultsContent() {
           .bs-btn-basic, .bs-btn-premium { flex:1; text-align:center; font-size:12px; padding:12px 10px; }
         }
       `}</style>
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "rgba(247,246,242,0.97)", backdropFilter: "blur(12px)", borderTop: "1px solid #E8E5DC", padding: "12px 16px", zIndex: 100 }}>
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#F7F6F2", borderTop: "1px solid #E8E5DC", padding: "12px 16px", zIndex: 100 }}>
         <div className="bs-sticky">
           <span className="bs-sticky-label"><strong style={{ color: "#1A1825" }}>Débloquer votre rapport</strong></span>
           <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null} className="bs-btn-basic"

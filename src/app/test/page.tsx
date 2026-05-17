@@ -234,7 +234,7 @@ export default function TestPage() {
             );
           })}
         </div>
-        <p style={{ textAlign: "center", fontSize: "11px", color: "#C4BBFF", marginTop: "10px", letterSpacing: "0.5px" }}>
+        <p style={{ textAlign: "center", fontSize: "11px", color: "#9896A8", marginTop: "10px", letterSpacing: "0.5px" }}>
           {current + 1} / {questions.length}
         </p>
       </main>
