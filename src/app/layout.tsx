@@ -44,6 +44,13 @@ export const metadata: Metadata = {
     description:
       "Measure your cognitive abilities for free. 40 questions, instant results, no registration.",
   },
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   verification: {
     google: "aYb11-OSmnEYPiEP5LghGfbDzNG816-xIeXTTI28ZHw",
   },
