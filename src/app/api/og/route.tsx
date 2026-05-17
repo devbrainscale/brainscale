@@ -22,11 +22,11 @@ function getPercentile(iq: number): number {
 }
 
 function getLabel(iq: number): { title: string; color: string } {
-  if (iq >= 130) return { title: "Gifted", color: "#5B4FCF" };
-  if (iq >= 120) return { title: "Superior", color: "#4A3EBE" };
-  if (iq >= 110) return { title: "Above Average", color: "#6B5FD9" };
-  if (iq >= 90) return { title: "Average", color: "#8B7FE8" };
-  return { title: "Below Average", color: "#9896A8" };
+  if (iq >= 130) return { title: "Gifted", color: "#3B35B5" };
+  if (iq >= 120) return { title: "Superior", color: "#3028A8" };
+  if (iq >= 110) return { title: "Above Average", color: "#5248D0" };
+  if (iq >= 90) return { title: "Average", color: "#7068D8" };
+  return { title: "Below Average", color: "#978F80" };
 }
 
 export async function GET(req: NextRequest) {
@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
           height: "630px",
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#F7F6F2",
+          backgroundColor: "#F4F2EC",
           fontFamily: "sans-serif",
           position: "relative",
           overflow: "hidden",
@@ -96,7 +96,7 @@ export async function GET(req: NextRequest) {
               style={{
                 fontSize: "28px",
                 fontWeight: 700,
-                color: "#1A1825",
+                color: "#1C1B13",
                 letterSpacing: "-0.5px",
               }}
             >
@@ -107,11 +107,11 @@ export async function GET(req: NextRequest) {
               style={{
                 width: "1px",
                 height: "20px",
-                backgroundColor: "#D4D0C8",
+                backgroundColor: "#C8C4B8",
                 margin: "0 4px",
               }}
             />
-            <div style={{ fontSize: "16px", color: "#9896A8", fontWeight: 400 }}>
+            <div style={{ fontSize: "16px", color: "#978F80", fontWeight: 400 }}>
               Cognitive Assessment
             </div>
           </div>
@@ -187,7 +187,7 @@ export async function GET(req: NextRequest) {
               justifyContent: "space-between",
             }}
           >
-            <div style={{ fontSize: "18px", color: "#9896A8" }}>
+            <div style={{ fontSize: "18px", color: "#978F80" }}>
               Can you beat my score?
             </div>
             <div

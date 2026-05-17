@@ -54,7 +54,7 @@ export default function CookieConsent() {
       left: "50%",
       transform: "translateX(-50%)",
       zIndex: 9999,
-      backgroundColor: "#1A1825",
+      backgroundColor: "#1C1B13",
       color: "#fff",
       borderRadius: "16px",
       padding: "20px 24px",
@@ -68,18 +68,18 @@ export default function CookieConsent() {
     }}>
       <p style={{ margin: 0, fontSize: "13px", color: "#C8C6D8", lineHeight: 1.6, flex: 1, minWidth: "200px" }}>
         We use cookies for analytics to improve our service.{" "}
-        <Link href="/privacy" style={{ color: "#9B8FE0", textDecoration: "underline" }}>Privacy Policy</Link>
+        <Link href="/privacy" style={{ color: "#8578CC", textDecoration: "underline" }}>Privacy Policy</Link>
       </p>
       <div style={{ display: "flex", gap: "10px", flexShrink: 0 }}>
         <button
           onClick={decline}
-          style={{ background: "none", border: "1px solid rgba(255,255,255,0.2)", color: "#9896A8", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}
+          style={{ background: "none", border: "1px solid rgba(255,255,255,0.2)", color: "#978F80", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", cursor: "pointer", fontFamily: "inherit" }}
         >
           Decline
         </button>
         <button
           onClick={accept}
-          style={{ backgroundColor: "#5B4FCF", color: "#fff", border: "none", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}
+          style={{ backgroundColor: "#3B35B5", color: "#fff", border: "none", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, cursor: "pointer", fontFamily: "inherit" }}
         >
           Accept
         </button>

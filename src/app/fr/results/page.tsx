@@ -35,7 +35,7 @@ export default function FrResultsPage() {
   return (
     <Suspense fallback={
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <p style={{ color: "#9896A8" }}>Chargement des résultats…</p>
+        <p style={{ color: "#978F80" }}>Chargement des résultats…</p>
       </div>
     }>
       <FrResultsContent />

@@ -24,11 +24,11 @@ function getPercentile(iq: number): number {
 }
 
 function getLabel(iq: number): { title: string; desc: string; color: string } {
-  if (iq >= 130) return { title: "Surdoué", desc: "Je fais partie du top 2 % de la population.\nCapacités de raisonnement et de résolution de problèmes exceptionnelles.", color: "#5B4FCF" };
-  if (iq >= 120) return { title: "Supérieur", desc: "Je fais partie du top 9 % de la population.\nSolides compétences analytiques et logiques.", color: "#4A3EBE" };
-  if (iq >= 110) return { title: "Au-dessus de la moyenne", desc: "Je fais partie du top 25 % de la population.\nCapacité de raisonnement supérieure à la moyenne.", color: "#6B5FD9" };
-  if (iq >= 90) return { title: "Dans la moyenne", desc: "Mon score se situe dans la plage typique,\npartagée par 68 % de la population.", color: "#8B7FE8" };
-  return { title: "En dessous de la moyenne", desc: "Mon score est en dessous de la moyenne.\nLa pratique et la concentration peuvent l'améliorer.", color: "#9896A8" };
+  if (iq >= 130) return { title: "Surdoué", desc: "Je fais partie du top 2 % de la population.\nCapacités de raisonnement et de résolution de problèmes exceptionnelles.", color: "#3B35B5" };
+  if (iq >= 120) return { title: "Supérieur", desc: "Je fais partie du top 9 % de la population.\nSolides compétences analytiques et logiques.", color: "#3028A8" };
+  if (iq >= 110) return { title: "Au-dessus de la moyenne", desc: "Je fais partie du top 25 % de la population.\nCapacité de raisonnement supérieure à la moyenne.", color: "#5248D0" };
+  if (iq >= 90) return { title: "Dans la moyenne", desc: "Mon score se situe dans la plage typique,\npartagée par 68 % de la population.", color: "#7068D8" };
+  return { title: "En dessous de la moyenne", desc: "Mon score est en dessous de la moyenne.\nLa pratique et la concentration peuvent l'améliorer.", color: "#978F80" };
 }
 
 export default function FrResultsContent() {
@@ -136,10 +136,10 @@ export default function FrResultsContent() {
     const badgeH = 38;
     const badgeX = cx - badgeW / 2;
     const badgeY = 78;
-    ctx.fillStyle = "rgba(91,79,207,0.16)";
+    ctx.fillStyle = "rgba(59,53,181,0.16)";
     rr(badgeX, badgeY, badgeW, badgeH, 19);
     ctx.fill();
-    ctx.strokeStyle = "rgba(91,79,207,0.50)";
+    ctx.strokeStyle = "rgba(59,53,181,0.50)";
     ctx.lineWidth = 1;
     rr(badgeX, badgeY, badgeW, badgeH, 19);
     ctx.stroke();
@@ -236,7 +236,7 @@ export default function FrResultsContent() {
     const pillH = 36;
     const pillX = cx - pillW / 2;
     const pillY = cy + 106;
-    ctx.fillStyle = "#5B4FCF";
+    ctx.fillStyle = "#3B35B5";
     rr(pillX, pillY, pillW, pillH, 18);
     ctx.fill();
     ctx.fillStyle = "#FFFFFF";
@@ -274,7 +274,7 @@ export default function FrResultsContent() {
     for (let i = 0; i < 5; i++) {
       ctx.beginPath();
       ctx.arc(cx - 110 + i * 55, dotsY, 3, 0, Math.PI * 2);
-      ctx.fillStyle = i === 2 ? "rgba(91,79,207,0.9)" : "rgba(91,79,207,0.30)";
+      ctx.fillStyle = i === 2 ? "rgba(59,53,181,0.9)" : "rgba(59,53,181,0.30)";
       ctx.fill();
     }
 
@@ -344,15 +344,15 @@ export default function FrResultsContent() {
   }
 
   return (
-    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", paddingBottom: "88px" }}>
+    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)", paddingBottom: "88px" }}>
 
       {/* HEADER */}
-      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+      <header style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", padding: "0 24px" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
-            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, letterSpacing: "-0.03em", color: "#1C1B13", textDecoration: "none" }}>
+            Brain<span style={{ color: "#3B35B5" }}>Scale</span>
           </Link>
-          <span style={{ backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "6px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
+          <span style={{ backgroundColor: "#ECEBF8", color: "#3B35B5", padding: "6px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
             Test complété ✓
           </span>
         </div>
@@ -366,26 +366,26 @@ export default function FrResultsContent() {
             {label.title}
           </div>
           <div style={{ display: "flex", alignItems: "flex-end", gap: "20px", marginBottom: "16px", flexWrap: "wrap" }}>
-            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(72px, 13vw, 104px)", fontWeight: 300, color: "#1A1825", lineHeight: 1 }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(80px, 15vw, 116px)", fontWeight: 300, letterSpacing: "-0.04em", color: "#1C1B13", lineHeight: 1 }}>
               {score}
             </div>
             <div style={{ paddingBottom: "10px" }}>
               <div style={{ fontSize: "15px", color: label.color, fontWeight: 600 }}>{percentile}e percentile</div>
-              <div style={{ fontSize: "13px", color: "#9896A8" }}>mondial</div>
+              <div style={{ fontSize: "13px", color: "#978F80" }}>mondial</div>
             </div>
           </div>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", maxWidth: "420px", lineHeight: 1.7, whiteSpace: "pre-line" }}>
+          <p style={{ fontSize: "15px", color: "#5A5849", maxWidth: "420px", lineHeight: 1.7, whiteSpace: "pre-line" }}>
             {label.desc}
           </p>
         </div>
 
         {/* SHARE */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "24px", marginBottom: "24px" }}>
-          <p style={{ fontSize: "11px", color: "#9896A8", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px", textAlign: "center" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "24px", marginBottom: "24px" }}>
+          <p style={{ fontSize: "11px", color: "#978F80", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "16px", textAlign: "center" }}>
             Défier vos amis
           </p>
           <button onClick={downloadScoreCard}
-            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%", backgroundColor: "#5B4FCF", color: "#fff", padding: "14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, border: "none", cursor: "pointer", marginBottom: "10px" }}>
+            style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", width: "100%", backgroundColor: "#3B35B5", color: "#fff", padding: "14px", borderRadius: "10px", fontSize: "14px", fontWeight: 600, border: "none", cursor: "pointer", marginBottom: "10px" }}>
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Télécharger ma carte
           </button>
@@ -401,7 +401,7 @@ export default function FrResultsContent() {
               WhatsApp
             </a>
             <button onClick={copyLink}
-              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", backgroundColor: copied ? "#EDE9FF" : "#F7F6F2", color: copied ? "#5B4FCF" : "#1A1825", padding: "11px 8px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: `1px solid ${copied ? "#C4BBFF" : "#E8E5DC"}`, cursor: "pointer", transition: "all 0.15s" }}>
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", backgroundColor: copied ? "#ECEBF8" : "#F4F2EC", color: copied ? "#3B35B5" : "#1C1B13", padding: "11px 8px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: `1px solid ${copied ? "#B9B8E4" : "#DDD9CF"}`, cursor: "pointer", transition: "all 0.15s" }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
               {copied ? "Copié" : "Copier"}
             </button>
@@ -410,88 +410,88 @@ export default function FrResultsContent() {
 
         {/* EMAIL CAPTURE */}
         {!submitted && !skipped ? (
-          <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "16px", padding: "32px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "11px", color: "#5B4FCF", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px" }}>
+          <div style={{ backgroundColor: "#ECEBF8", border: "1px solid #B9B8E4", borderRadius: "16px", padding: "32px", marginBottom: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "11px", color: "#3B35B5", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "10px" }}>
               Plan d&apos;amélioration gratuit
             </p>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "8px", lineHeight: 1.4 }}>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "8px", lineHeight: 1.4 }}>
               Recevez votre plan de progression personnalisé
             </h3>
-            <p style={{ fontSize: "14px", color: "#5C5A6E", marginBottom: "24px", maxWidth: "360px", margin: "0 auto 24px", lineHeight: 1.6 }}>
+            <p style={{ fontSize: "14px", color: "#5A5849", marginBottom: "24px", maxWidth: "360px", margin: "0 auto 24px", lineHeight: 1.6 }}>
               Score + plan sur 7 jours pour renforcer vos points faibles cognitifs.
             </p>
             <form onSubmit={handleSubscribe} style={{ display: "flex", gap: "10px", maxWidth: "440px", margin: "0 auto", flexWrap: "wrap", justifyContent: "center" }}>
               <input type="email" placeholder="votre@email.com" value={email} onChange={(e) => setEmail(e.target.value)}
                 aria-label="Adresse email"
-                style={{ flex: 1, minWidth: "200px", padding: "13px 18px", borderRadius: "8px", border: "1.5px solid #C4BBFF", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1A1825" }} />
+                style={{ flex: 1, minWidth: "200px", padding: "13px 18px", borderRadius: "8px", border: "1.5px solid #B9B8E4", fontSize: "14px", outline: "none", backgroundColor: "#fff", color: "#1C1B13" }} />
               <button type="submit" disabled={loading}
-                style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "13px 24px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}>
+                style={{ backgroundColor: "#3B35B5", color: "#fff", padding: "13px 24px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, border: "none", cursor: loading ? "not-allowed" : "pointer", opacity: loading ? 0.7 : 1, whiteSpace: "nowrap" }}>
                 {loading ? "Envoi…" : "Recevoir →"}
               </button>
             </form>
             <div style={{ display: "flex", alignItems: "flex-start", gap: "10px", maxWidth: "440px", margin: "12px auto 0", textAlign: "left" }}>
-              <input type="checkbox" id="gdpr-fr" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#5B4FCF", flexShrink: 0, cursor: "pointer" }} />
-              <label htmlFor="gdpr-fr" style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 1.5, cursor: "pointer" }}>
+              <input type="checkbox" id="gdpr-fr" checked={gdprConsent} onChange={(e) => setGdprConsent(e.target.checked)} style={{ marginTop: "2px", accentColor: "#3B35B5", flexShrink: 0, cursor: "pointer" }} />
+              <label htmlFor="gdpr-fr" style={{ fontSize: "12px", color: "#5A5849", lineHeight: 1.5, cursor: "pointer" }}>
                 J&apos;accepte de recevoir mes résultats par email. Désinscription possible à tout moment.{" "}
-                <a href="/fr/privacy" style={{ color: "#5B4FCF", textDecoration: "underline" }}>Politique de confidentialité</a>.
+                <a href="/fr/privacy" style={{ color: "#3B35B5", textDecoration: "underline" }}>Politique de confidentialité</a>.
               </label>
             </div>
             {emailError && <p style={{ color: "#E53E3E", fontSize: "13px", marginTop: "10px" }}>{emailError}</p>}
-            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#9896A8", fontSize: "13px", marginTop: "8px", cursor: "pointer", textDecoration: "underline", padding: "10px 16px", display: "inline-block" }}>
+            <button onClick={() => setSkipped(true)} style={{ background: "none", border: "none", color: "#978F80", fontSize: "13px", marginTop: "8px", cursor: "pointer", textDecoration: "underline", padding: "10px 16px", display: "inline-block" }}>
               Ignorer
             </button>
           </div>
         ) : submitted ? (
-          <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "12px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
-            <p style={{ fontSize: "14px", color: "#5B4FCF", fontWeight: 600 }}>Rapport envoyé — vérifiez votre boîte mail.</p>
+          <div style={{ backgroundColor: "#ECEBF8", border: "1px solid #B9B8E4", borderRadius: "12px", padding: "16px 24px", marginBottom: "20px", textAlign: "center" }}>
+            <p style={{ fontSize: "14px", color: "#3B35B5", fontWeight: 600 }}>Rapport envoyé — vérifiez votre boîte mail.</p>
           </div>
         ) : null}
 
         {/* GAUGE */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1A1825" }}>Position sur l&apos;échelle QI</span>
-            <span style={{ fontSize: "12px", color: "#9896A8" }}>75 – 145</span>
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1C1B13" }}>Position sur l&apos;échelle QI</span>
+            <span style={{ fontSize: "12px", color: "#978F80" }}>75 – 145</span>
           </div>
-          <div style={{ height: "8px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
-            <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #C4BBFF, #5B4FCF)", transition: "width 1s ease" }} />
+          <div style={{ height: "8px", backgroundColor: "#E9E6DC", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
+            <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #B9B8E4, #3B35B5)", transition: "width 1s ease" }} />
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#B8B4A8" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#A8A49A" }}>
             <span>75</span><span>90</span><span>100</span><span>115</span><span>130</span><span>145</span>
           </div>
         </div>
 
         {/* STATS STRIP — différencié, pas de grille identique */}
-        <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #E8E5DC", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>
-          <div style={{ flex: "1.5", padding: "20px 20px", borderRight: "1px solid #E8E5DC", backgroundColor: "#EDE9FF" }}>
-            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 500, color: "#5B4FCF", lineHeight: 1 }}>{percentile}%</div>
-            <div style={{ fontSize: "12px", color: "#5B4FCF", fontWeight: 600, marginTop: "5px" }}>Percentile</div>
-            <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>mondial</div>
+        <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #DDD9CF", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>
+          <div style={{ flex: "1.5", padding: "20px 20px", borderRight: "1px solid #DDD9CF", backgroundColor: "#ECEBF8" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "30px", fontWeight: 500, color: "#3B35B5", lineHeight: 1 }}>{percentile}%</div>
+            <div style={{ fontSize: "12px", color: "#3B35B5", fontWeight: 600, marginTop: "5px" }}>Percentile</div>
+            <div style={{ fontSize: "11px", color: "#978F80", marginTop: "2px" }}>mondial</div>
           </div>
-          <div style={{ flex: "1", padding: "20px 14px", borderRight: "1px solid #E8E5DC" }}>
-            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1A1825", lineHeight: 1 }}>{correct}/{total}</div>
-            <div style={{ fontSize: "12px", color: "#1A1825", fontWeight: 600, marginTop: "5px" }}>Correct</div>
-            <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>{accuracy}%</div>
+          <div style={{ flex: "1", padding: "20px 14px", borderRight: "1px solid #DDD9CF" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#1C1B13", lineHeight: 1 }}>{correct}/{total}</div>
+            <div style={{ fontSize: "12px", color: "#1C1B13", fontWeight: 600, marginTop: "5px" }}>Correct</div>
+            <div style={{ fontSize: "11px", color: "#978F80", marginTop: "2px" }}>{accuracy}%</div>
           </div>
           <div style={{ flex: "1", padding: "20px 14px" }}>
-            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", lineHeight: 1.1 }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1C1B13", lineHeight: 1.1 }}>
               {score >= 130 ? "Top 2%" : score >= 120 ? "Top 9%" : score >= 115 ? "Top 16%" : score >= 110 ? "Top 25%" : score >= 100 ? "Top 50%" : score >= 90 ? "Bot. 25%" : "Bot. 16%"}
             </div>
-            <div style={{ fontSize: "12px", color: "#1A1825", fontWeight: 600, marginTop: "5px" }}>Rang mondial</div>
+            <div style={{ fontSize: "12px", color: "#1C1B13", fontWeight: 600, marginTop: "5px" }}>Rang mondial</div>
           </div>
         </div>
 
         {/* BREAKDOWN */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
-          <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1A1825", marginBottom: "24px" }}>Performance par catégorie</h3>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
+          <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1C1B13", marginBottom: "24px" }}>Performance par catégorie</h3>
           {breakdown.map((b) => (
             <div key={b.label} style={{ marginBottom: "18px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", marginBottom: "8px" }}>
-                <span style={{ color: "#1A1825", fontWeight: 500 }}>{b.label}</span>
-                <span style={{ color: "#5B4FCF", fontWeight: 600 }}>{b.score}e percentile</span>
+                <span style={{ color: "#1C1B13", fontWeight: 500 }}>{b.label}</span>
+                <span style={{ color: "#3B35B5", fontWeight: 600 }}>{b.score}e percentile</span>
               </div>
-              <div style={{ height: "6px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden" }}>
-                <div style={{ height: "100%", width: `${b.score}%`, backgroundColor: "#5B4FCF", borderRadius: "999px" }} />
+              <div style={{ height: "6px", backgroundColor: "#E9E6DC", borderRadius: "999px", overflow: "hidden" }}>
+                <div style={{ height: "100%", width: `${b.score}%`, backgroundColor: "#3B35B5", borderRadius: "999px" }} />
               </div>
             </div>
           ))}
@@ -499,40 +499,40 @@ export default function FrResultsContent() {
 
         {/* IQ SCORE SEO LINK */}
         <div style={{ textAlign: "center", marginBottom: "16px" }}>
-          <Link href={`/fr/iq-score/${score}`} style={{ fontSize: "13px", color: "#5B4FCF", textDecoration: "none", fontWeight: 600 }}>
+          <Link href={`/fr/iq-score/${score}`} style={{ fontSize: "13px", color: "#3B35B5", textDecoration: "none", fontWeight: 600 }}>
             En savoir plus sur le QI {score} — percentile, classification et signification →
           </Link>
         </div>
 
         {/* PREMIUM TEASER */}
         <div style={{ position: "relative", borderRadius: "16px", overflow: "hidden", marginBottom: "28px" }}>
-          <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", padding: "32px", opacity: 0.12, userSelect: "none", pointerEvents: "none" }} aria-hidden="true">
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", color: "#1A1825", marginBottom: "16px" }}>Profil cognitif détaillé</h3>
+          <div className="bs-blur-bg" style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", padding: "32px", opacity: 0.12, userSelect: "none", pointerEvents: "none" }} aria-hidden="true">
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", color: "#1C1B13", marginBottom: "16px" }}>Profil cognitif détaillé</h3>
             {["Mémoire de travail : 94e percentile", "Traitement visuo-spatial : 87e percentile", "Raisonnement fluide : 96e percentile", "Vitesse de traitement : 79e percentile", "Attention soutenue : 88e percentile"].map((item) => (
-              <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #E8E5DC", fontSize: "13px", color: "#5C5A6E" }}>{item}</div>
+              <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #DDD9CF", fontSize: "13px", color: "#5A5849" }}>{item}</div>
             ))}
           </div>
-          <div className="bs-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "#F7F6F2", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 24px", overflowY: "auto" }}>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#5B4FCF", textTransform: "uppercase", marginBottom: "8px" }}>Débloquer vos résultats</p>
-            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1A1825", marginBottom: "24px", textAlign: "center", lineHeight: 1.4 }}>
+          <div className="bs-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "#F4F2EC", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 24px", overflowY: "auto" }}>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#3B35B5", textTransform: "uppercase", marginBottom: "8px" }}>Débloquer vos résultats</p>
+            <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1C1B13", marginBottom: "24px", textAlign: "center", lineHeight: 1.4 }}>
               Rapport cognitif complet — 8 pages
             </h3>
             <div style={{ display: "flex", gap: "12px", width: "100%", maxWidth: "480px", flexWrap: "wrap", justifyContent: "center" }}>
-              <div style={{ flex: "1 1 170px", backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
-                <p style={{ fontSize: "10px", fontWeight: 700, color: "#9896A8", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Essentiel</p>
-                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 600, color: "#1A1825", marginBottom: "16px" }}>14,99 $</p>
-                <div style={{ fontSize: "12px", color: "#5C5A6E", lineHeight: 2, marginBottom: "16px", textAlign: "left" }}>
+              <div style={{ flex: "1 1 170px", backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
+                <p style={{ fontSize: "10px", fontWeight: 700, color: "#978F80", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Essentiel</p>
+                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 600, color: "#1C1B13", marginBottom: "16px" }}>14,99 $</p>
+                <div style={{ fontSize: "12px", color: "#5A5849", lineHeight: 2, marginBottom: "16px", textAlign: "left" }}>
                   <div>✓ Rapport PDF 8 pages</div>
                   <div>✓ Certificat cognitif</div>
                   <div>✓ Livraison instantanée</div>
                 </div>
                 <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
-                  style={{ width: "100%", backgroundColor: "#F0EEF8", color: "#5B4FCF", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "1.5px solid #C4BBFF", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
+                  style={{ width: "100%", backgroundColor: "#EEEAF5", color: "#3B35B5", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "1.5px solid #B9B8E4", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
                   {checkoutLoading === 'basic' ? "Redirection…" : "Obtenir l'Essentiel"}
                 </button>
               </div>
-              <div style={{ flex: "1 1 170px", backgroundColor: "#5B4FCF", borderRadius: "12px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
-                <div style={{ position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#1A1825", color: "#fff", fontSize: "10px", fontWeight: 800, padding: "4px 12px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
+              <div style={{ flex: "1 1 170px", backgroundColor: "#3B35B5", borderRadius: "12px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
+                <div style={{ position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#1C1B13", color: "#fff", fontSize: "10px", fontWeight: 800, padding: "4px 12px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
                   LE PLUS POPULAIRE
                 </div>
                 <p style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.55)", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Premium</p>
@@ -541,25 +541,25 @@ export default function FrResultsContent() {
                   <div>✓ Rapport PDF 8 pages</div>
                   <div>✓ Certificat cognitif</div>
                   <div>✓ Livraison instantanée</div>
-                  <div style={{ color: "#C4BBFF" }}>✓ Protocole 30 jours</div>
-                  <div style={{ color: "#C4BBFF" }}>✓ Badge LinkedIn</div>
+                  <div style={{ color: "#B9B8E4" }}>✓ Protocole 30 jours</div>
+                  <div style={{ color: "#B9B8E4" }}>✓ Badge LinkedIn</div>
                 </div>
                 <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
-                  style={{ width: "100%", backgroundColor: "#fff", color: "#5B4FCF", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'premium' ? 0.6 : 1 }}>
+                  style={{ width: "100%", backgroundColor: "#fff", color: "#3B35B5", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'premium' ? 0.6 : 1 }}>
                   {checkoutLoading === 'premium' ? "Redirection…" : "Obtenir Premium →"}
                 </button>
               </div>
             </div>
-            <p style={{ fontSize: "11px", color: "#9896A8", marginTop: "14px" }}>Paiement sécurisé · Livraison instantanée</p>
+            <p style={{ fontSize: "11px", color: "#978F80", marginTop: "14px" }}>Paiement sécurisé · Livraison instantanée</p>
           </div>
         </div>
 
         {/* ACTIONS */}
         <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", paddingTop: "4px" }}>
-          <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 32px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/fr/test" style={{ backgroundColor: "#3B35B5", color: "#fff", padding: "14px 32px", borderRadius: "8px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
             Refaire le test
           </Link>
-          <Link href="/fr" style={{ backgroundColor: "#fff", color: "#5C5A6E", padding: "14px 32px", borderRadius: "8px", fontSize: "14px", fontWeight: 500, textDecoration: "none", border: "1px solid #E8E5DC" }}>
+          <Link href="/fr" style={{ backgroundColor: "#fff", color: "#5A5849", padding: "14px 32px", borderRadius: "8px", fontSize: "14px", fontWeight: 500, textDecoration: "none", border: "1px solid #DDD9CF" }}>
             Accueil
           </Link>
         </div>
@@ -575,18 +575,18 @@ export default function FrResultsContent() {
           .bs-overlay { justify-content: flex-start !important; padding-top: 32px !important; }
         }
         .bs-sticky { display:flex; align-items:center; justify-content:center; gap:10px; max-width:680px; margin:0 auto; }
-        .bs-sticky-label { font-size:13px; color:#5C5A6E; font-weight:500; white-space:nowrap; }
-        .bs-btn-basic { background:#F0EEF8; color:#5B4FCF; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #C4BBFF; white-space:nowrap; cursor:pointer; transition:all .15s; }
-        .bs-btn-premium { background:#5B4FCF; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(91,79,207,.4); transition:all .15s; }
+        .bs-sticky-label { font-size:13px; color:#5A5849; font-weight:500; white-space:nowrap; }
+        .bs-btn-basic { background:#EEEAF5; color:#3B35B5; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #B9B8E4; white-space:nowrap; cursor:pointer; transition:all .15s; }
+        .bs-btn-premium { background:#3B35B5; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(59,53,181,.4); transition:all .15s; }
         @media (max-width:480px) {
           .bs-sticky { flex-wrap:nowrap; }
           .bs-sticky-label { display:none; }
           .bs-btn-basic, .bs-btn-premium { flex:1; text-align:center; font-size:12px; padding:12px 10px; }
         }
       `}</style>
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#F7F6F2", borderTop: "1px solid #E8E5DC", padding: "12px 16px", zIndex: 100 }}>
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#F4F2EC", borderTop: "1px solid #DDD9CF", padding: "12px 16px", zIndex: 100 }}>
         <div className="bs-sticky">
-          <span className="bs-sticky-label"><strong style={{ color: "#1A1825" }}>Débloquer votre rapport</strong></span>
+          <span className="bs-sticky-label"><strong style={{ color: "#1C1B13" }}>Débloquer votre rapport</strong></span>
           <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null} className="bs-btn-basic"
             style={{ opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
             {checkoutLoading === 'basic' ? "…" : "Essentiel — 14,99 $"}

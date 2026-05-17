@@ -111,32 +111,32 @@ export default function FrTestPage() {
   }
 
   return (
-    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
-      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+      <header style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", padding: "0 24px" }}>
         <div style={{ maxWidth: "760px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
-            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1C1B13", textDecoration: "none" }}>
+            Brain<span style={{ color: "#3B35B5" }}>Scale</span>
           </Link>
-          <span style={{ fontSize: "13px", color: "#9896A8", fontWeight: 500 }}>
+          <span style={{ fontSize: "13px", color: "#978F80", fontWeight: 500 }}>
             Question {current + 1} sur {questions.length}
           </span>
         </div>
       </header>
 
-      <div style={{ height: "3px", backgroundColor: "#E8E5DC" }}>
-        <div style={{ height: "100%", backgroundColor: "#5B4FCF", width: `${progress}%`, transition: "width 0.4s ease" }} />
+      <div style={{ height: "3px", backgroundColor: "#DDD9CF" }}>
+        <div style={{ height: "100%", backgroundColor: "#3B35B5", width: `${progress}%`, transition: "width 0.4s ease" }} />
       </div>
 
       <main style={{ maxWidth: "760px", margin: "0 auto", padding: "48px 24px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "28px" }}>
-          <div style={{ backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "4px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "1px" }}>
+          <div style={{ backgroundColor: "#ECEBF8", color: "#3B35B5", padding: "4px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 700, letterSpacing: "1px" }}>
             Q{current + 1}
           </div>
-          <div style={{ flex: 1, height: "1px", backgroundColor: "#E8E5DC" }} />
-          <span style={{ fontSize: "12px", color: "#9896A8" }}>{Math.round(progress)}% complété</span>
+          <div style={{ flex: 1, height: "1px", backgroundColor: "#DDD9CF" }} />
+          <span style={{ fontSize: "12px", color: "#978F80" }}>{Math.round(progress)}% complété</span>
         </div>
 
-        <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(20px, 3vw, 28px)", fontWeight: 400, color: "#1A1825", lineHeight: 1.4, marginBottom: "40px" }}>
+        <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(20px, 3vw, 28px)", fontWeight: 400, color: "#1C1B13", lineHeight: 1.4, marginBottom: "40px" }}>
           {q.question}
         </h2>
 
@@ -147,21 +147,21 @@ export default function FrTestPage() {
               onClick={() => setSelected(i)}
               style={{
                 width: "100%", textAlign: "left", padding: "20px 24px", borderRadius: "16px",
-                border: selected === i ? "2px solid #5B4FCF" : "1px solid #E8E5DC",
-                backgroundColor: selected === i ? "#EDE9FF" : "#fff",
-                color: selected === i ? "#3D2FA8" : "#1A1825",
+                border: selected === i ? "2px solid #3B35B5" : "1px solid #DDD9CF",
+                backgroundColor: selected === i ? "#ECEBF8" : "#fff",
+                color: selected === i ? "#2620A0" : "#1C1B13",
                 fontSize: "15px", fontWeight: selected === i ? 600 : 400,
                 cursor: "pointer", display: "flex", alignItems: "center", gap: "16px",
                 transition: "all 0.15s ease",
-                boxShadow: selected === i ? "0 0 0 1px #5B4FCF" : "0 1px 4px rgba(26,24,37,0.05)",
+                boxShadow: selected === i ? "0 0 0 1px #3B35B5" : "0 1px 4px rgba(28,27,19,0.05)",
               }}
             >
               <span style={{
                 width: "32px", height: "32px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: "13px", fontWeight: 700, flexShrink: 0,
-                backgroundColor: selected === i ? "#5B4FCF" : "#F7F6F2",
-                color: selected === i ? "#fff" : "#9896A8",
-                border: selected === i ? "none" : "1px solid #E8E5DC",
+                backgroundColor: selected === i ? "#3B35B5" : "#F4F2EC",
+                color: selected === i ? "#fff" : "#978F80",
+                border: selected === i ? "none" : "1px solid #DDD9CF",
               }}>
                 {["A", "B", "C", "D"][i]}
               </span>
@@ -175,11 +175,11 @@ export default function FrTestPage() {
             onClick={handleNext}
             disabled={selected === null || submitting}
             style={{
-              backgroundColor: selected !== null && !submitting ? "#5B4FCF" : "#D4D0C8",
+              backgroundColor: selected !== null && !submitting ? "#3B35B5" : "#C8C4B8",
               color: "#fff", padding: "16px 40px", borderRadius: "999px", fontSize: "15px", fontWeight: 600,
               border: "none", cursor: selected !== null && !submitting ? "pointer" : "not-allowed",
               transition: "all 0.15s ease",
-              boxShadow: selected !== null && !submitting ? "0 4px 20px rgba(91,79,207,0.35)" : "none",
+              boxShadow: selected !== null && !submitting ? "0 4px 20px rgba(59,53,181,0.35)" : "none",
             }}
           >
             {submitting ? "Calcul en cours…" : current + 1 === questions.length ? "Voir mes résultats →" : "Question suivante →"}
@@ -199,14 +199,14 @@ export default function FrTestPage() {
                 flex: 1,
                 maxWidth: "48px",
                 borderRadius: "2px",
-                backgroundColor: isDone ? "#5B4FCF" : isActive ? "#8B7FE8" : "#D4D0C8",
+                backgroundColor: isDone ? "#3B35B5" : isActive ? "#7068D8" : "#C8C4B8",
                 opacity: isDone ? 0.65 : 1,
                 transition: "all 0.3s ease",
               }} />
             );
           })}
         </div>
-        <p style={{ textAlign: "center", fontSize: "11px", color: "#9896A8", marginTop: "10px", letterSpacing: "0.5px" }}>
+        <p style={{ textAlign: "center", fontSize: "11px", color: "#978F80", marginTop: "10px", letterSpacing: "0.5px" }}>
           {current + 1} / {questions.length}
         </p>
       </main>

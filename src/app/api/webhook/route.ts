@@ -37,7 +37,7 @@ async function removeFromDripList(email: string, isFr: boolean) {
 }
 
 function trainingProtocolHtml(score: number, isFr: boolean): string {
-  const accent = isFr ? '#5B4FCF' : '#4F46E5';
+  const accent = isFr ? '#3B35B5' : '#4F46E5';
 
   // Determine weak areas based on score for personalisation hint
   const level = score >= 130 ? 'elite' : score >= 115 ? 'high' : score >= 100 ? 'average' : 'developing';
@@ -160,7 +160,7 @@ function trainingProtocolHtml(score: number, isFr: boolean): string {
     : `Starting score: ${score} · Level: ${level} · brainscale.app`;
 
   return `
-<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;background:#F7F6F2">
+<div style="font-family:sans-serif;max-width:600px;margin:0 auto;padding:32px 24px;background:#F4F2EC">
   <div style="background:${accent};border-radius:16px;padding:32px;text-align:center;margin-bottom:32px">
     <h1 style="color:#fff;font-size:22px;margin:0 0 8px">${title}</h1>
     <p style="color:rgba(255,255,255,0.8);font-size:14px;margin:0">${subtitle}</p>
@@ -175,7 +175,7 @@ function trainingProtocolHtml(score: number, isFr: boolean): string {
 
   ${weeks.map(w => `
   <div style="margin-bottom:24px">
-    <h2 style="font-size:16px;font-weight:700;color:#1A1825;background:#EDE9FF;padding:12px 16px;border-radius:8px;margin:0 0 12px">${w.week}</h2>
+    <h2 style="font-size:16px;font-weight:700;color:#1C1B13;background:#ECEBF8;padding:12px 16px;border-radius:8px;margin:0 0 12px">${w.week}</h2>
     ${w.days.map(d => `
     <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #F1F0ED">
       <span style="color:${accent};font-weight:700;font-size:13px;white-space:nowrap;min-width:52px">${d.split(':')[0]}</span>
@@ -252,7 +252,7 @@ export async function POST(request: NextRequest) {
             ${isPremium ? '<br/><br/><strong>Votre accès Premium :</strong> votre protocole d&apos;entraînement cognitif 30 jours vous sera envoyé dans les prochaines minutes.' : ''}
           </p>
           <p style="color:#475569;line-height:1.6">
-            Votre score QI : <strong style="color:#5B4FCF">${score}</strong>
+            Votre score QI : <strong style="color:#3B35B5">${score}</strong>
           </p>
           <hr style="border:none;border-top:1px solid #E2E8F0;margin:24px 0"/>
           <p style="font-size:12px;color:#94A3B8">

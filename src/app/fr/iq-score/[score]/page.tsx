@@ -29,11 +29,11 @@ function getPercentile(iq: number): number {
 }
 
 function getClassification(iq: number): { label: string; color: string; band: string } {
-  if (iq >= 130) return { label: "Surdoué", color: "#5B4FCF", band: "Top 2 %" };
-  if (iq >= 120) return { label: "Supérieur", color: "#4A3EBE", band: "Top 9 %" };
-  if (iq >= 110) return { label: "Au-dessus de la moyenne", color: "#6B5FD9", band: "Top 25 %" };
-  if (iq >= 90)  return { label: "Moyen", color: "#8B7FE8", band: "Milieu 50 %" };
-  if (iq >= 80)  return { label: "Sous la moyenne", color: "#9896A8", band: "Bas 25 %" };
+  if (iq >= 130) return { label: "Surdoué", color: "#3B35B5", band: "Top 2 %" };
+  if (iq >= 120) return { label: "Supérieur", color: "#3028A8", band: "Top 9 %" };
+  if (iq >= 110) return { label: "Au-dessus de la moyenne", color: "#5248D0", band: "Top 25 %" };
+  if (iq >= 90)  return { label: "Moyen", color: "#7068D8", band: "Milieu 50 %" };
+  if (iq >= 80)  return { label: "Sous la moyenne", color: "#978F80", band: "Bas 25 %" };
   return { label: "Faible", color: "#B0AEC0", band: "Bas 9 %" };
 }
 
@@ -198,17 +198,17 @@ export default async function IQScorePageFr({ params }: Props) {
   };
 
   return (
-    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
       {/* HEADER */}
-      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+      <header style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", padding: "0 24px" }}>
         <div style={{ maxWidth: "720px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
-            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          <Link href="/fr" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1C1B13", textDecoration: "none" }}>
+            Brain<span style={{ color: "#3B35B5" }}>Scale</span>
           </Link>
-          <Link href="/fr/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "8px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/fr/test" style={{ backgroundColor: "#3B35B5", color: "#fff", padding: "8px 18px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
             Passer le test →
           </Link>
         </div>
@@ -217,40 +217,40 @@ export default async function IQScorePageFr({ params }: Props) {
       <main style={{ maxWidth: "720px", margin: "0 auto", padding: "48px 24px 80px" }}>
 
         {/* BREADCRUMB */}
-        <nav style={{ fontSize: "12px", color: "#9896A8", marginBottom: "32px" }}>
-          <Link href="/fr" style={{ color: "#9896A8", textDecoration: "none" }}>Accueil</Link>
+        <nav style={{ fontSize: "12px", color: "#978F80", marginBottom: "32px" }}>
+          <Link href="/fr" style={{ color: "#978F80", textDecoration: "none" }}>Accueil</Link>
           <span style={{ margin: "0 8px" }}>›</span>
-          <Link href="/fr/iq-score/100" style={{ color: "#9896A8", textDecoration: "none" }}>Scores QI</Link>
+          <Link href="/fr/iq-score/100" style={{ color: "#978F80", textDecoration: "none" }}>Scores QI</Link>
           <span style={{ margin: "0 8px" }}>›</span>
-          <span style={{ color: "#1A1825" }}>QI {iq}</span>
+          <span style={{ color: "#1C1B13" }}>QI {iq}</span>
         </nav>
 
         {/* HERO */}
         <div style={{ textAlign: "center", marginBottom: "48px" }}>
-          <p style={{ fontSize: "11px", color: "#9896A8", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "16px" }}>
+          <p style={{ fontSize: "11px", color: "#978F80", fontWeight: 700, letterSpacing: "2.5px", textTransform: "uppercase", marginBottom: "16px" }}>
             Analyse du score QI
           </p>
-          <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(80px, 15vw, 112px)", fontWeight: 300, color: "#5B4FCF", lineHeight: 1, marginBottom: "16px" }}>
+          <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(80px, 15vw, 112px)", fontWeight: 300, color: "#3B35B5", lineHeight: 1, marginBottom: "16px" }}>
             {iq}
           </div>
           <div style={{ display: "inline-block", backgroundColor: cls.color, color: "#fff", padding: "8px 24px", borderRadius: "999px", fontSize: "14px", fontWeight: 700, letterSpacing: "0.5px", marginBottom: "12px" }}>
             {cls.label}
           </div>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", margin: "0 auto", lineHeight: 1.6 }}>
+          <p style={{ fontSize: "15px", color: "#5A5849", margin: "0 auto", lineHeight: 1.6 }}>
             {pct}e percentile · {cls.band} dans le monde
           </p>
         </div>
 
         {/* GAUGE */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1A1825" }}>Position sur l'échelle de QI</span>
-            <span style={{ fontSize: "12px", color: "#9896A8" }}>70 — 145</span>
+            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1C1B13" }}>Position sur l'échelle de QI</span>
+            <span style={{ fontSize: "12px", color: "#978F80" }}>70 — 145</span>
           </div>
-          <div style={{ height: "8px", backgroundColor: "#EFEDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "8px" }}>
-            <div style={{ height: "100%", width: `${gauge}%`, borderRadius: "999px", background: "linear-gradient(90deg, #C4BBFF, #5B4FCF)" }} />
+          <div style={{ height: "8px", backgroundColor: "#E9E6DC", borderRadius: "999px", overflow: "hidden", marginBottom: "8px" }}>
+            <div style={{ height: "100%", width: `${gauge}%`, borderRadius: "999px", background: "linear-gradient(90deg, #B9B8E4, #3B35B5)" }} />
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#C4BBFF" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#B9B8E4" }}>
             <span>70</span><span>85</span><span>100</span><span>115</span><span>130</span><span>145</span>
           </div>
         </div>
@@ -262,39 +262,39 @@ export default async function IQScorePageFr({ params }: Props) {
             { value: cls.label, label: "Classification", sub: cls.band },
             { value: `${100 - pct} %`, label: "Scorent plus haut", sub: "que vous" },
           ].map((s) => (
-            <div key={s.label} style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
-              <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#5B4FCF" }}>{s.value}</div>
-              <div style={{ fontSize: "11px", fontWeight: 600, color: "#1A1825", marginTop: "4px" }}>{s.label}</div>
-              <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "2px" }}>{s.sub}</div>
+            <div key={s.label} style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
+              <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "22px", fontWeight: 500, color: "#3B35B5" }}>{s.value}</div>
+              <div style={{ fontSize: "11px", fontWeight: 600, color: "#1C1B13", marginTop: "4px" }}>{s.label}</div>
+              <div style={{ fontSize: "11px", color: "#978F80", marginTop: "2px" }}>{s.sub}</div>
             </div>
           ))}
         </div>
 
         {/* WHAT IT MEANS */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "16px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "16px" }}>
             Que signifie un QI de {iq} ?
           </h2>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.8, marginBottom: "16px" }}>{content.intro}</p>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.8 }}>{content.profile}</p>
+          <p style={{ fontSize: "15px", color: "#5A5849", lineHeight: 1.8, marginBottom: "16px" }}>{content.intro}</p>
+          <p style={{ fontSize: "15px", color: "#5A5849", lineHeight: 1.8 }}>{content.profile}</p>
         </div>
 
         {/* POPULATION CONTEXT */}
-        <div style={{ backgroundColor: "#EDE9FF", border: "1px solid #C4BBFF", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "16px" }}>
+        <div style={{ backgroundColor: "#ECEBF8", border: "1px solid #B9B8E4", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "16px" }}>
             Contexte populationnel
           </h2>
-          <p style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.8, marginBottom: "20px" }}>{content.context}</p>
+          <p style={{ fontSize: "15px", color: "#5A5849", lineHeight: 1.8, marginBottom: "20px" }}>{content.context}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {content.fields.map(f => (
-              <span key={f} style={{ backgroundColor: "#fff", border: "1px solid #C4BBFF", color: "#5B4FCF", padding: "5px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 600 }}>{f}</span>
+              <span key={f} style={{ backgroundColor: "#fff", border: "1px solid #B9B8E4", color: "#3B35B5", padding: "5px 14px", borderRadius: "999px", fontSize: "12px", fontWeight: 600 }}>{f}</span>
             ))}
           </div>
         </div>
 
         {/* IQ CLASSIFICATION TABLE */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "20px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "20px" }}>
             Échelle de classification du QI
           </h2>
           {[
@@ -305,36 +305,36 @@ export default async function IQScorePageFr({ params }: Props) {
             { range: "80–89", label: "Sous la moyenne", band: "Bas 25 %", current: iq >= 80 && iq < 90 },
             { range: "70–79", label: "Faible", band: "Bas 9 %", current: iq < 80 },
           ].map((row) => (
-            <div key={row.range} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderRadius: "8px", marginBottom: "4px", backgroundColor: row.current ? "#EDE9FF" : "transparent", border: row.current ? "1px solid #C4BBFF" : "1px solid transparent" }}>
-              <span style={{ fontSize: "13px", fontWeight: row.current ? 700 : 400, color: row.current ? "#5B4FCF" : "#5C5A6E", minWidth: "80px" }}>{row.range}</span>
-              <span style={{ fontSize: "13px", fontWeight: row.current ? 700 : 500, color: row.current ? "#5B4FCF" : "#1A1825", flex: 1, textAlign: "center" }}>{row.label}</span>
-              <span style={{ fontSize: "12px", color: row.current ? "#5B4FCF" : "#9896A8", minWidth: "80px", textAlign: "right" }}>{row.band}</span>
-              {row.current && <span style={{ marginLeft: "8px", fontSize: "11px", fontWeight: 700, color: "#5B4FCF" }}>← Vous</span>}
+            <div key={row.range} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 16px", borderRadius: "8px", marginBottom: "4px", backgroundColor: row.current ? "#ECEBF8" : "transparent", border: row.current ? "1px solid #B9B8E4" : "1px solid transparent" }}>
+              <span style={{ fontSize: "13px", fontWeight: row.current ? 700 : 400, color: row.current ? "#3B35B5" : "#5A5849", minWidth: "80px" }}>{row.range}</span>
+              <span style={{ fontSize: "13px", fontWeight: row.current ? 700 : 500, color: row.current ? "#3B35B5" : "#1C1B13", flex: 1, textAlign: "center" }}>{row.label}</span>
+              <span style={{ fontSize: "12px", color: row.current ? "#3B35B5" : "#978F80", minWidth: "80px", textAlign: "right" }}>{row.band}</span>
+              {row.current && <span style={{ marginLeft: "8px", fontSize: "11px", fontWeight: 700, color: "#3B35B5" }}>← Vous</span>}
             </div>
           ))}
         </div>
 
         {/* FAQ */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "24px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "32px", marginBottom: "16px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "24px" }}>
             Questions fréquentes
           </h2>
           {faq.map(({ q, a }, i) => (
             <div key={i} style={{ marginBottom: "20px", paddingBottom: "20px", borderBottom: i < faq.length - 1 ? "1px solid #F0EEE8" : "none" }}>
-              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#1A1825", marginBottom: "8px" }}>{q}</h3>
-              <p style={{ fontSize: "14px", color: "#5C5A6E", lineHeight: 1.7, margin: 0 }}>{a}</p>
+              <h3 style={{ fontSize: "14px", fontWeight: 700, color: "#1C1B13", marginBottom: "8px" }}>{q}</h3>
+              <p style={{ fontSize: "14px", color: "#5A5849", lineHeight: 1.7, margin: 0 }}>{a}</p>
             </div>
           ))}
         </div>
 
         {/* RELATED SCORES */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DC", borderRadius: "16px", padding: "28px 32px", marginBottom: "32px" }}>
-          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1A1825", marginBottom: "16px" }}>
+        <div style={{ backgroundColor: "#fff", border: "1px solid #DDD9CF", borderRadius: "16px", padding: "28px 32px", marginBottom: "32px" }}>
+          <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1C1B13", marginBottom: "16px" }}>
             Scores QI proches
           </h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "8px" }}>
             {related.map(s => (
-              <Link key={s} href={`/fr/iq-score/${s}`} style={{ backgroundColor: "#F7F6F2", border: "1px solid #E8E5DC", color: "#5B4FCF", padding: "8px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
+              <Link key={s} href={`/fr/iq-score/${s}`} style={{ backgroundColor: "#F4F2EC", border: "1px solid #DDD9CF", color: "#3B35B5", padding: "8px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, textDecoration: "none" }}>
                 QI {s}
               </Link>
             ))}
@@ -342,7 +342,7 @@ export default async function IQScorePageFr({ params }: Props) {
         </div>
 
         {/* CTA */}
-        <div style={{ backgroundColor: "#1A1825", borderRadius: "16px", padding: "40px 32px", textAlign: "center" }}>
+        <div style={{ backgroundColor: "#1C1B13", borderRadius: "16px", padding: "40px 32px", textAlign: "center" }}>
           <p style={{ fontSize: "11px", color: "rgba(185,172,255,0.7)", fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", marginBottom: "12px" }}>
             Découvrez votre score
           </p>
@@ -352,7 +352,7 @@ export default async function IQScorePageFr({ params }: Props) {
           <p style={{ fontSize: "14px", color: "rgba(255,255,255,0.55)", marginBottom: "28px", lineHeight: 1.6 }}>
             40 questions · ~20 minutes · Résultats instantanés · Gratuit
           </p>
-          <Link href="/fr/test" style={{ display: "inline-block", backgroundColor: "#5B4FCF", color: "#fff", padding: "16px 40px", borderRadius: "8px", fontSize: "15px", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/fr/test" style={{ display: "inline-block", backgroundColor: "#3B35B5", color: "#fff", padding: "16px 40px", borderRadius: "8px", fontSize: "15px", fontWeight: 600, textDecoration: "none" }}>
             Passer le test QI gratuit →
           </Link>
         </div>
@@ -360,13 +360,13 @@ export default async function IQScorePageFr({ params }: Props) {
       </main>
 
       {/* FOOTER */}
-      <footer style={{ borderTop: "1px solid #E8E5DC", padding: "24px", textAlign: "center" }}>
-        <p style={{ fontSize: "12px", color: "#9896A8" }}>
-          <Link href="/fr" style={{ color: "#9896A8", textDecoration: "none" }}>BrainScale</Link>
+      <footer style={{ borderTop: "1px solid #DDD9CF", padding: "24px", textAlign: "center" }}>
+        <p style={{ fontSize: "12px", color: "#978F80" }}>
+          <Link href="/fr" style={{ color: "#978F80", textDecoration: "none" }}>BrainScale</Link>
           {" · "}
-          <Link href="/privacy" style={{ color: "#9896A8", textDecoration: "none" }}>Confidentialité</Link>
+          <Link href="/privacy" style={{ color: "#978F80", textDecoration: "none" }}>Confidentialité</Link>
           {" · "}
-          <Link href="/terms" style={{ color: "#9896A8", textDecoration: "none" }}>Conditions</Link>
+          <Link href="/terms" style={{ color: "#978F80", textDecoration: "none" }}>Conditions</Link>
           {" · Pas une évaluation clinique"}
         </p>
       </footer>

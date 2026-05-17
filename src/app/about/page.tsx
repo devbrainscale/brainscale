@@ -8,20 +8,20 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div style={{ backgroundColor: "#F7F6F2", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
-      <header style={{ backgroundColor: "#F7F6F2", borderBottom: "1px solid #E8E5DC", padding: "0 24px" }}>
+    <div style={{ backgroundColor: "#F4F2EC", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
+      <header style={{ backgroundColor: "#F4F2EC", borderBottom: "1px solid #DDD9CF", padding: "0 24px" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1A1825", textDecoration: "none" }}>
-            Brain<span style={{ color: "#5B4FCF" }}>Scale</span>
+          <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#1C1B13", textDecoration: "none" }}>
+            Brain<span style={{ color: "#3B35B5" }}>Scale</span>
           </Link>
-          <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+          <Link href="/test" style={{ backgroundColor: "#3B35B5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
             Start Test
           </Link>
         </div>
       </header>
 
       <main style={{ maxWidth: "720px", margin: "0 auto", padding: "64px 24px 96px" }}>
-        <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1A1825", marginBottom: "48px" }}>
+        <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "42px", fontWeight: 300, color: "#1C1B13", marginBottom: "48px" }}>
           About BrainScale
         </h1>
 
@@ -48,31 +48,31 @@ export default function AboutPage() {
           },
         ].map((section) => (
           <div key={section.title} style={{ marginBottom: "36px" }}>
-            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1A1825", marginBottom: "12px" }}>
+            <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 500, color: "#1C1B13", marginBottom: "12px" }}>
               {section.title}
             </h2>
-            <p style={{ fontSize: "15px", color: "#5C5A6E", lineHeight: 1.8 }}>
+            <p style={{ fontSize: "15px", color: "#5A5849", lineHeight: 1.8 }}>
               {section.content}
             </p>
           </div>
         ))}
 
-        <div style={{ borderTop: "1px solid #E8E5DC", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
-          <Link href="/privacy" style={{ fontSize: "14px", color: "#5B4FCF", textDecoration: "none", fontWeight: 500 }}>Privacy Policy</Link>
-          <Link href="/terms" style={{ fontSize: "14px", color: "#5B4FCF", textDecoration: "none", fontWeight: 500 }}>Terms of Service</Link>
-          <Link href="/" style={{ fontSize: "14px", color: "#9896A8", textDecoration: "none" }}>← Back to home</Link>
+        <div style={{ borderTop: "1px solid #DDD9CF", paddingTop: "32px", display: "flex", gap: "24px", flexWrap: "wrap" }}>
+          <Link href="/privacy" style={{ fontSize: "14px", color: "#3B35B5", textDecoration: "none", fontWeight: 500 }}>Privacy Policy</Link>
+          <Link href="/terms" style={{ fontSize: "14px", color: "#3B35B5", textDecoration: "none", fontWeight: 500 }}>Terms of Service</Link>
+          <Link href="/" style={{ fontSize: "14px", color: "#978F80", textDecoration: "none" }}>← Back to home</Link>
         </div>
       </main>
 
-      <footer style={{ padding: "32px 24px", textAlign: "center", borderTop: "1px solid #E8E5DC" }}>
+      <footer style={{ padding: "32px 24px", textAlign: "center", borderTop: "1px solid #DDD9CF" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: "24px", marginBottom: "10px", flexWrap: "wrap" }}>
-          <Link href="/" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Home</Link>
-          <Link href="/blog" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Blog</Link>
-          <Link href="/test" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>IQ Test</Link>
-          <Link href="/privacy" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Privacy</Link>
-          <Link href="/terms" style={{ fontSize: "12px", color: "#9896A8", textDecoration: "none" }}>Terms</Link>
+          <Link href="/" style={{ fontSize: "12px", color: "#978F80", textDecoration: "none" }}>Home</Link>
+          <Link href="/blog" style={{ fontSize: "12px", color: "#978F80", textDecoration: "none" }}>Blog</Link>
+          <Link href="/test" style={{ fontSize: "12px", color: "#978F80", textDecoration: "none" }}>IQ Test</Link>
+          <Link href="/privacy" style={{ fontSize: "12px", color: "#978F80", textDecoration: "none" }}>Privacy</Link>
+          <Link href="/terms" style={{ fontSize: "12px", color: "#978F80", textDecoration: "none" }}>Terms</Link>
         </div>
-        <p style={{ fontSize: "12px", color: "#9896A8" }}>© 2026 BrainScale · All rights reserved</p>
+        <p style={{ fontSize: "12px", color: "#978F80" }}>© 2026 BrainScale · All rights reserved</p>
       </footer>
     </div>
   );
