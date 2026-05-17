@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 };
 
 const categoryColors: Record<string, string> = {
-  Guide: "#4F46E5",
-  Science: "#0369A1",
-  Training: "#059669",
-  Data: "#B45309",
+  Guide: "#C96442",
+  Science: "#4A7EBE",
+  Training: "#2E9E6B",
+  Data: "#C47A1E",
 };
 
 export default function BlogPage() {
   return (
     <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh", fontFamily: "var(--font-body, sans-serif)" }}>
       <style>{`
-        .blog-featured:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,70,229,0.15); }
+        .blog-featured:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,100,66,0.15); }
         .blog-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(26,25,22,0.1); }
       `}</style>
 
@@ -30,11 +30,11 @@ export default function BlogPage() {
       <nav style={{ backgroundColor: "#FAF8F5", borderBottom: "1px solid #E8E5DF", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1916", textDecoration: "none" }}>
-            Brain<span style={{ color: "#4F46E5" }}>Scale</span>
+            Brain<span style={{ color: "#C96442" }}>Scale</span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <Link href="/blog" style={{ fontSize: "14px", color: "#4F46E5", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
-            <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+            <Link href="/blog" style={{ fontSize: "14px", color: "#C96442", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
+            <Link href="/test" style={{ backgroundColor: "#C96442", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
               Take the test →
             </Link>
           </div>
@@ -47,7 +47,7 @@ export default function BlogPage() {
         <div style={{ textAlign: "center", marginBottom: "64px" }}>
           <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 5vw, 56px)", fontWeight: 300, color: "#1A1916", lineHeight: 1.1, marginBottom: "16px" }}>
             IQ &amp;{" "}
-            <em style={{ color: "#4F46E5", fontStyle: "italic" }}>Cognition</em>
+            <em style={{ color: "#C96442", fontStyle: "italic" }}>Cognition</em>
           </h1>
           <p style={{ fontSize: "18px", color: "#99958C", maxWidth: "480px", margin: "0 auto" }}>
             Science-backed guides on intelligence testing, cognitive improvement, and what the research actually says.
@@ -56,9 +56,9 @@ export default function BlogPage() {
 
         {/* FEATURED ARTICLE */}
         <Link href={`/blog/${articles[0].slug}`} style={{ textDecoration: "none", display: "block", marginBottom: "32px" }}>
-          <div className="blog-featured" style={{ backgroundColor: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: "24px", padding: "48px", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
+          <div className="blog-featured" style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "24px", padding: "48px", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
             <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-              <span style={{ backgroundColor: categoryColors[articles[0].category] || "#4F46E5", color: "#fff", padding: "4px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
+              <span style={{ backgroundColor: categoryColors[articles[0].category] || "#C96442", color: "#fff", padding: "4px 12px", borderRadius: "999px", fontSize: "12px", fontWeight: 700 }}>
                 {articles[0].category}
               </span>
               <span style={{ fontSize: "13px", color: "#99958C" }}>{articles[0].readingTime} read</span>
@@ -69,7 +69,7 @@ export default function BlogPage() {
             <p style={{ fontSize: "16px", color: "#5C5A52", lineHeight: 1.6, marginBottom: "24px" }}>
               {articles[0].excerpt}
             </p>
-            <span style={{ color: "#4F46E5", fontWeight: 600, fontSize: "14px" }}>Read article →</span>
+            <span style={{ color: "#C96442", fontWeight: 600, fontSize: "14px" }}>Read article →</span>
           </div>
         </Link>
 
@@ -79,7 +79,7 @@ export default function BlogPage() {
             <Link key={article.slug} href={`/blog/${article.slug}`} style={{ textDecoration: "none" }}>
               <div className="blog-card" style={{ backgroundColor: "#fff", border: "1px solid #E8E5DF", borderRadius: "20px", padding: "28px", height: "100%", transition: "transform 0.15s ease, box-shadow 0.15s ease" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
-                  <span style={{ backgroundColor: (categoryColors[article.category] || "#4F46E5") + "18", color: categoryColors[article.category] || "#4F46E5", padding: "3px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>
+                  <span style={{ backgroundColor: (categoryColors[article.category] || "#C96442") + "18", color: categoryColors[article.category] || "#C96442", padding: "3px 10px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>
                     {article.category}
                   </span>
                   <span style={{ fontSize: "12px", color: "#99958C" }}>{article.readingTime}</span>
@@ -90,7 +90,7 @@ export default function BlogPage() {
                 <p style={{ fontSize: "14px", color: "#99958C", lineHeight: 1.6, marginBottom: "20px" }}>
                   {article.excerpt}
                 </p>
-                <span style={{ color: "#4F46E5", fontWeight: 600, fontSize: "13px" }}>Read →</span>
+                <span style={{ color: "#C96442", fontWeight: 600, fontSize: "13px" }}>Read →</span>
               </div>
             </Link>
           ))}
@@ -102,7 +102,7 @@ export default function BlogPage() {
             Ready to find your score?
           </h2>
           <p style={{ fontSize: "15px", color: "#99958C", marginBottom: "24px" }}>40 questions · Instant results · 100% free</p>
-          <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "16px 40px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", boxShadow: "0 6px 24px rgba(79,70,229,0.35)", display: "inline-block" }}>
+          <Link href="/test" style={{ backgroundColor: "#C96442", color: "#fff", padding: "16px 40px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", boxShadow: "0 6px 24px rgba(201,100,66,0.35)", display: "inline-block" }}>
             Start the free IQ test →
           </Link>
         </div>

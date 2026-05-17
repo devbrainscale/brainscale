@@ -30,10 +30,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const categoryColors: Record<string, string> = {
-  Guide: "#4F46E5",
-  Science: "#0369A1",
-  Training: "#059669",
-  Data: "#B45309",
+  Guide: "#C96442",
+  Science: "#4A7EBE",
+  Training: "#2E9E6B",
+  Data: "#C47A1E",
 };
 
 export default async function ArticlePage({ params }: Props) {
@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: Props) {
   if (!article) notFound();
 
   const otherArticles = articles.filter((a) => a.slug !== slug).slice(0, 3);
-  const color = categoryColors[article.category] || "#4F46E5";
+  const color = categoryColors[article.category] || "#C96442";
 
   const articleSchema = {
     "@context": "https://schema.org",
@@ -70,11 +70,11 @@ export default async function ArticlePage({ params }: Props) {
       <nav style={{ backgroundColor: "#FAF8F5", borderBottom: "1px solid #E8E5DF", position: "sticky", top: 0, zIndex: 50 }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "64px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Link href="/" style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#1A1916", textDecoration: "none" }}>
-            Brain<span style={{ color: "#4F46E5" }}>Scale</span>
+            Brain<span style={{ color: "#C96442" }}>Scale</span>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <Link href="/blog" style={{ fontSize: "14px", color: "#4F46E5", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
-            <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
+            <Link href="/blog" style={{ fontSize: "14px", color: "#C96442", fontWeight: 600, textDecoration: "none" }}>Blog</Link>
+            <Link href="/test" style={{ backgroundColor: "#C96442", color: "#fff", padding: "10px 22px", borderRadius: "999px", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}>
               Take the test →
             </Link>
           </div>
@@ -112,12 +112,12 @@ export default async function ArticlePage({ params }: Props) {
         </div>
 
         {/* INLINE CTA */}
-        <div style={{ backgroundColor: "#EEF2FF", border: "1px solid #C7D2FE", borderRadius: "16px", padding: "20px 24px", marginBottom: "40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
+        <div style={{ backgroundColor: "#FBF0EB", border: "1px solid #E8C4B4", borderRadius: "16px", padding: "20px 24px", marginBottom: "40px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "16px" }}>
           <div>
-            <p style={{ fontSize: "13px", fontWeight: 700, color: "#4F46E5", margin: 0 }}>Find your IQ score</p>
+            <p style={{ fontSize: "13px", fontWeight: 700, color: "#C96442", margin: 0 }}>Find your IQ score</p>
             <p style={{ fontSize: "13px", color: "#5C5A52", margin: 0 }}>Free IQ test · 40 questions · Instant results</p>
           </div>
-          <Link href="/test" style={{ backgroundColor: "#4F46E5", color: "#fff", padding: "12px 24px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
+          <Link href="/test" style={{ backgroundColor: "#C96442", color: "#fff", padding: "12px 24px", borderRadius: "999px", fontSize: "13px", fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}>
             Take the test →
           </Link>
         </div>
@@ -130,14 +130,14 @@ export default async function ArticlePage({ params }: Props) {
         />
 
         {/* BOTTOM CTA */}
-        <div style={{ backgroundColor: "#4F46E5", borderRadius: "24px", padding: "40px", textAlign: "center", marginTop: "64px" }}>
+        <div style={{ backgroundColor: "#C96442", borderRadius: "24px", padding: "40px", textAlign: "center", marginTop: "64px" }}>
           <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "26px", fontWeight: 300, color: "#fff", marginBottom: "12px" }}>
             Ready to test your IQ?
           </h2>
           <p style={{ fontSize: "15px", color: "rgba(255,255,255,0.75)", marginBottom: "24px" }}>
             40 calibrated questions · Instant score · 100% free
           </p>
-          <Link href="/test" style={{ backgroundColor: "#fff", color: "#4F46E5", padding: "14px 36px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", display: "inline-block" }}>
+          <Link href="/test" style={{ backgroundColor: "#fff", color: "#C96442", padding: "14px 36px", borderRadius: "999px", fontSize: "15px", fontWeight: 700, textDecoration: "none", display: "inline-block" }}>
             Start the free IQ test →
           </Link>
         </div>
@@ -155,7 +155,7 @@ export default async function ArticlePage({ params }: Props) {
                     <p style={{ fontSize: "15px", fontWeight: 500, color: "#1A1916", marginBottom: "4px" }}>{a.title}</p>
                     <p style={{ fontSize: "13px", color: "#99958C" }}>{a.readingTime} read</p>
                   </div>
-                  <span style={{ color: "#4F46E5", fontSize: "18px", flexShrink: 0 }}>→</span>
+                  <span style={{ color: "#C96442", fontSize: "18px", flexShrink: 0 }}>→</span>
                 </Link>
               ))}
             </div>
@@ -185,7 +185,7 @@ export default async function ArticlePage({ params }: Props) {
         .article-content ul, .article-content ol { padding-left: 24px; margin-bottom: 20px; }
         .article-content li { margin-bottom: 10px; }
         .article-content strong { color: #1A1916; font-weight: 600; }
-        .article-content a { color: #4F46E5; text-decoration: underline; }
+        .article-content a { color: #C96442; text-decoration: underline; }
         .article-content a:hover { opacity: 0.8; }
         .article-content table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 15px; }
         .article-content th, .article-content td { padding: 10px 14px; border: 1px solid #E8E5DF; text-align: left; }
