@@ -138,16 +138,16 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Stats — inline */}
-            <div style={{ display: "flex", gap: "28px", marginTop: "40px", paddingTop: "32px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
+            {/* Stats — 3-column grid, never wraps */}
+            <div className="bs-hero-stats" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0", marginTop: "40px", paddingTop: "28px", borderTop: "1px solid #E8E5DC" }}>
               {[
                 { value: "847,000+", label: "tests" },
-                { value: "4.8/5", label: "satisfaction" },
+                { value: "4.8 / 5", label: "satisfaction" },
                 { value: "r = 0.87", label: "reliability" },
-              ].map((s) => (
-                <div key={s.label}>
-                  <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</span>
-                  {" "}<span style={{ fontSize: "13px", color: "#9896A8" }}>{s.label}</span>
+              ].map((s, i) => (
+                <div key={s.label} style={{ paddingRight: i < 2 ? "16px" : "0", borderRight: i < 2 ? "1px solid #E8E5DC" : "none", paddingLeft: i > 0 ? "16px" : "0" }}>
+                  <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "18px", fontWeight: 600, color: "#5B4FCF", lineHeight: 1 }}>{s.value}</div>
+                  <div style={{ fontSize: "11px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
                 </div>
               ))}
             </div>
