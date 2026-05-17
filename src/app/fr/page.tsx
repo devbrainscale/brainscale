@@ -153,41 +153,40 @@ export default function FrHomePage() {
             </div>
           </div>
 
-          {/* RIGHT — result preview card */}
-          <div style={{ backgroundColor: "#0F0E17", borderRadius: "24px", padding: "36px 32px", position: "relative", overflow: "hidden" }}>
-            <div style={{ position: "absolute", top: "35%", left: "50%", transform: "translate(-50%, -50%)", width: "280px", height: "280px", background: "radial-gradient(circle, rgba(91,79,207,0.13) 0%, transparent 70%)", pointerEvents: "none" }} />
+          {/* RIGHT — result preview card (hidden on mobile) */}
+          <div className="bs-hero-card" style={{ backgroundColor: "#EFEDE6", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px 32px", boxShadow: "0 4px 24px rgba(26,24,37,0.06)" }}>
 
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", backgroundColor: "rgba(91,79,207,0.18)", color: "#B4ABFF", padding: "5px 12px", borderRadius: "999px", fontSize: "10px", fontWeight: 700, letterSpacing: "0.8px", marginBottom: "24px", border: "1px solid rgba(91,79,207,0.25)", textTransform: "uppercase" as const }}>
-              <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#7B6FE8", display: "inline-block" }} />
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "5px 12px", borderRadius: "999px", fontSize: "10px", fontWeight: 700, letterSpacing: "0.8px", marginBottom: "24px", border: "1px solid #C4BBFF", textTransform: "uppercase" as const }}>
+              <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
               Votre résultat
             </div>
 
-            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "88px", fontWeight: 400, color: "#fff", lineHeight: 1, marginBottom: "10px" }}>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "88px", fontWeight: 400, color: "#5B4FCF", lineHeight: 1, marginBottom: "10px" }}>
               127
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
-              <span style={{ display: "inline-block", backgroundColor: "#4A3EBE", color: "#fff", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>Supérieur</span>
-              <span style={{ fontSize: "12px", color: "rgba(255,255,255,0.32)" }}>Top 9%</span>
+              <span style={{ display: "inline-block", backgroundColor: "#5B4FCF", color: "#fff", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>Supérieur</span>
+              <span style={{ fontSize: "12px", color: "#9896A8" }}>Top 9%</span>
             </div>
 
             {[
-              { label: "Raisonnement logique",   pct: 88 },
-              { label: "Intelligence spatiale",  pct: 74 },
-              { label: "Vitesse de traitement",  pct: 91 },
+              { label: "Raisonnement logique",  pct: 88 },
+              { label: "Intelligence spatiale", pct: 74 },
+              { label: "Vitesse de traitement", pct: 91 },
             ].map((bar) => (
-              <div key={bar.label} style={{ marginBottom: "13px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "rgba(255,255,255,0.38)", marginBottom: "5px" }}>
+              <div key={bar.label} style={{ marginBottom: "14px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#9896A8", marginBottom: "6px" }}>
                   <span>{bar.label}</span>
                   <span>{bar.pct}e pct.</span>
                 </div>
-                <div style={{ height: "3px", backgroundColor: "rgba(255,255,255,0.07)", borderRadius: "2px" }}>
-                  <div style={{ height: "100%", width: `${bar.pct}%`, backgroundColor: "#6B5FD9", borderRadius: "2px" }} />
+                <div style={{ height: "4px", borderRadius: "999px", backgroundColor: "#D4D0C8", overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${bar.pct}%`, backgroundColor: "#5B4FCF", borderRadius: "999px" }} />
                 </div>
               </div>
             ))}
 
-            <div style={{ marginTop: "20px", paddingTop: "18px", borderTop: "1px solid rgba(255,255,255,0.06)", fontSize: "10px", color: "rgba(255,255,255,0.2)", letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
+            <div style={{ marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #E8E5DC", fontSize: "10px", color: "#B8B4A8", letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
               Exemple · votre résultat réel sera différent
             </div>
           </div>
@@ -485,8 +484,10 @@ export default function FrHomePage() {
       {/* Responsive styles */}
       <style>{`
         .bs-hero-grid { grid-template-columns: 1fr 1fr; }
+        .bs-hero-card { display: block; }
         @media (max-width: 768px) {
           .bs-hero-grid { grid-template-columns: 1fr !important; }
+          .bs-hero-card { display: none !important; }
         }
         @media (max-width: 380px) {
           .fr-nav-blog { display: none !important; }

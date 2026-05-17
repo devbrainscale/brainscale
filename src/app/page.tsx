@@ -108,61 +108,106 @@ export default function HomePage() {
         </div>
       </nav>
 
-      {/* HERO */}
-      <section style={{ padding: "80px 24px 60px", textAlign: "center" }}>
-        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "8px 18px", borderRadius: "999px", fontSize: "13px", fontWeight: 600, marginBottom: "32px" }}>
-            <span style={{ width: "7px", height: "7px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
-            Validated Test · 40 Questions · Instant Results
+      {/* HERO — asymmetric 2-column */}
+      <section style={{ padding: "72px 24px 56px" }}>
+        <div className="bs-hero-grid" style={{ maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "56px", alignItems: "center" }}>
+
+          {/* LEFT — text */}
+          <div>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "7px 16px", borderRadius: "999px", fontSize: "12px", fontWeight: 600, marginBottom: "28px", whiteSpace: "nowrap" }}>
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#5B4FCF", flexShrink: 0, display: "inline-block" }} />
+              Validated Test · 40 Questions · Instant Results
+            </div>
+
+            <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(36px, 4vw, 58px)", fontWeight: 400, lineHeight: 1.1, color: "#1A1825", marginBottom: "20px" }}>
+              Discover your{" "}
+              <em style={{ color: "#5B4FCF", fontStyle: "italic" }}>IQ score</em>
+              {" "}in 40 minutes
+            </h1>
+
+            <p style={{ fontSize: "17px", color: "#5C5A6E", lineHeight: 1.75, marginBottom: "36px", maxWidth: "440px" }}>
+              A rigorous psychometric test, completely free, measuring your logical, spatial, and analytical reasoning.
+            </p>
+
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
+              <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "14px 30px", borderRadius: "999px", fontSize: "15px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 20px rgba(91,79,207,0.35)" }}>
+                Test My IQ — Free
+              </Link>
+              <a href="#how-it-works" style={{ color: "#5C5A6E", padding: "14px 26px", borderRadius: "999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #D4D0C8" }}>
+                How it works →
+              </a>
+            </div>
+
+            {/* Stats — inline */}
+            <div style={{ display: "flex", gap: "28px", marginTop: "40px", paddingTop: "32px", borderTop: "1px solid #E8E5DC", flexWrap: "wrap" }}>
+              {[
+                { value: "847,000+", label: "tests" },
+                { value: "4.8/5", label: "satisfaction" },
+                { value: "r = 0.87", label: "reliability" },
+              ].map((s) => (
+                <div key={s.label}>
+                  <span style={{ fontFamily: "var(--font-display, serif)", fontSize: "20px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</span>
+                  {" "}<span style={{ fontSize: "13px", color: "#9896A8" }}>{s.label}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <h1 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(40px, 6vw, 64px)", fontWeight: 300, lineHeight: 1.15, color: "#1A1825", marginBottom: "24px" }}>
-            Discover your{" "}
-            <em style={{ color: "#5B4FCF", fontStyle: "italic", whiteSpace: "nowrap" }}>IQ score</em>
-            <br />in 40 minutes
-          </h1>
+          {/* RIGHT — result preview card (hidden on mobile) */}
+          <div className="bs-hero-card" style={{ backgroundColor: "#EFEDE6", border: "1px solid #E8E5DC", borderRadius: "24px", padding: "36px 32px", boxShadow: "0 4px 24px rgba(26,24,37,0.06)" }}>
 
-          <p style={{ fontSize: "18px", color: "#5C5A6E", lineHeight: 1.7, marginBottom: "40px", maxWidth: "520px", margin: "0 auto 40px" }}>
-            A rigorous psychometric test — completely free — measuring your logical, spatial, and analytical reasoning.
-          </p>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", backgroundColor: "#EDE9FF", color: "#5B4FCF", padding: "5px 12px", borderRadius: "999px", fontSize: "10px", fontWeight: 700, letterSpacing: "0.8px", marginBottom: "24px", border: "1px solid #C4BBFF", textTransform: "uppercase" as const }}>
+              <span style={{ width: "5px", height: "5px", borderRadius: "50%", backgroundColor: "#5B4FCF", display: "inline-block" }} />
+              Your result
+            </div>
 
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/test" style={{ backgroundColor: "#5B4FCF", color: "#fff", padding: "16px 36px", borderRadius: "999px", fontSize: "16px", fontWeight: 600, textDecoration: "none", boxShadow: "0 4px 24px rgba(91,79,207,0.35)" }}>
-              Test My IQ — Free
-            </Link>
-            <a href="#how-it-works" style={{ color: "#5C5A6E", padding: "16px 32px", borderRadius: "999px", fontSize: "16px", fontWeight: 500, textDecoration: "none", border: "1px solid #D4D0C8" }}>
-              How it works →
-            </a>
-          </div>
+            <div style={{ fontFamily: "var(--font-display, serif)", fontSize: "88px", fontWeight: 400, color: "#5B4FCF", lineHeight: 1, marginBottom: "10px" }}>
+              127
+            </div>
 
-          <div className="bs-stats-row" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "16px", marginTop: "64px", paddingTop: "40px", borderTop: "1px solid #E8E5DC" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
+              <span style={{ display: "inline-block", backgroundColor: "#5B4FCF", color: "#fff", padding: "4px 14px", borderRadius: "999px", fontSize: "11px", fontWeight: 700 }}>Superior</span>
+              <span style={{ fontSize: "12px", color: "#9896A8" }}>Top 9%</span>
+            </div>
+
             {[
-              { value: "847,000+", label: "Tests completed" },
-              { value: "4.8 / 5", label: "Satisfaction" },
-              { value: "r = 0.87", label: "Reliability correlation" },
-            ].map((s) => (
-              <div key={s.label} style={{ textAlign: "center" }}>
-                <div className="bs-stat-value" style={{ fontFamily: "var(--font-display, serif)", fontSize: "32px", fontWeight: 600, color: "#5B4FCF" }}>{s.value}</div>
-                <div className="bs-stat-label" style={{ fontSize: "13px", color: "#9896A8", marginTop: "4px" }}>{s.label}</div>
+              { label: "Logical Reasoning",    pct: 88 },
+              { label: "Spatial Intelligence", pct: 74 },
+              { label: "Processing Speed",      pct: 91 },
+            ].map((bar) => (
+              <div key={bar.label} style={{ marginBottom: "14px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#9896A8", marginBottom: "6px" }}>
+                  <span>{bar.label}</span>
+                  <span>{bar.pct}th pct.</span>
+                </div>
+                <div style={{ height: "4px", borderRadius: "999px", backgroundColor: "#D4D0C8", overflow: "hidden" }}>
+                  <div style={{ height: "100%", width: `${bar.pct}%`, backgroundColor: "#5B4FCF", borderRadius: "999px" }} />
+                </div>
               </div>
             ))}
+
+            <div style={{ marginTop: "20px", paddingTop: "18px", borderTop: "1px solid #E8E5DC", fontSize: "10px", color: "#B8B4A8", letterSpacing: "0.5px", textTransform: "uppercase" as const }}>
+              Example · your actual result will vary
+            </div>
           </div>
-          <style>{`
-            @media (max-width: 500px) {
-              .bs-stat-value { font-size: 22px !important; }
-              .bs-stat-label { font-size: 11px !important; }
-              .bs-stats-row { gap: 8px !important; }
-            }
-            .en-mobile-br { display: none; }
-            @media (max-width: 540px) {
-              .bs-bell-legend { gap: 3px !important; }
-              .bs-bell-range { font-size: 8px !important; }
-              .bs-bell-label { font-size: 7px !important; }
-              .bs-bell-pct   { font-size: 11px !important; }
-              .en-mobile-br { display: block; }
-            }
-          `}</style>
         </div>
+
+        <style>{`
+          .bs-hero-grid { grid-template-columns: 1fr 1fr; }
+          .bs-hero-card { display: block; }
+          @media (max-width: 768px) {
+            .bs-hero-grid { grid-template-columns: 1fr !important; }
+            .bs-hero-card { display: none !important; }
+          }
+          .en-mobile-br { display: none; }
+          @media (max-width: 540px) {
+            .bs-bell-legend { gap: 3px !important; }
+            .bs-bell-range { font-size: 8px !important; }
+            .bs-bell-label { font-size: 7px !important; }
+            .bs-bell-pct   { font-size: 11px !important; }
+            .en-mobile-br { display: block; }
+          }
+        `}</style>
       </section>
 
       {/* BELL CURVE */}
