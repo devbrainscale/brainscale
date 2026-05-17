@@ -449,11 +449,11 @@ export default function FrHomePage() {
           .bs-stat-label { font-size: 11px !important; }
           .bs-stats-row { gap: 8px !important; }
         }
-        @media (max-width: 420px) {
+        @media (max-width: 540px) {
           .bs-bell-legend { gap: 3px !important; }
-          .bs-bell-range { font-size: 9px !important; }
-          .bs-bell-label { font-size: 8px !important; }
-          .bs-bell-pct   { font-size: 13px !important; }
+          .bs-bell-range { font-size: 8px !important; }
+          .bs-bell-label { font-size: 7px !important; }
+          .bs-bell-pct   { font-size: 11px !important; }
         }
       `}</style>
 
