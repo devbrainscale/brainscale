@@ -121,11 +121,11 @@ export default function FrResultsContent() {
     }
 
     // ── Background ──────────────────────────────────────────
-    ctx.fillStyle = "#1A1916";
+    ctx.fillStyle = "#FAF8F5";
     ctx.fillRect(0, 0, W, H);
     const bgGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 440);
     bgGlow.addColorStop(0, "rgba(201,100,66,0.05)");
-    bgGlow.addColorStop(1, "rgba(0,0,0,0)");
+    bgGlow.addColorStop(1, "rgba(201,100,66,0)");
     ctx.fillStyle = bgGlow;
     ctx.fillRect(0, 0, W, H);
 
@@ -143,7 +143,7 @@ export default function FrResultsContent() {
     ctx.lineWidth = 1;
     rr(badgeX, badgeY, badgeW, badgeH, 19);
     ctx.stroke();
-    ctx.fillStyle = "rgba(250,248,245,0.88)";
+    ctx.fillStyle = "#C96442";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillText(badgeText, cx, badgeY + badgeH / 2);
@@ -161,7 +161,7 @@ export default function FrResultsContent() {
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, R, toRad(ARC_START), toRad(32), false);
-    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    ctx.strokeStyle = "rgba(26,25,22,0.08)";
     ctx.lineWidth = 6;
     ctx.lineCap = "butt";
     ctx.stroke();
@@ -191,7 +191,7 @@ export default function FrResultsContent() {
       ctx.beginPath();
       ctx.moveTo(cx + (R - (maj ? 9 : 5)) * Math.cos(a), cy + (R - (maj ? 9 : 5)) * Math.sin(a));
       ctx.lineTo(cx + (R + (maj ? 15 : 8)) * Math.cos(a), cy + (R + (maj ? 15 : 8)) * Math.sin(a));
-      ctx.strokeStyle = maj ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.08)";
+      ctx.strokeStyle = maj ? "rgba(26,25,22,0.18)" : "rgba(26,25,22,0.07)";
       ctx.lineWidth = maj ? 1.5 : 1;
       ctx.stroke();
       ctx.restore();
@@ -203,7 +203,7 @@ export default function FrResultsContent() {
     ctx.textBaseline = "middle";
     [70, 85, 100, 115, 130].forEach(iq => {
       const a = toRad(ARC_START + ((iq - IQ_MIN) / (IQ_MAX - IQ_MIN)) * ARC_SPAN);
-      ctx.fillStyle = "rgba(255,255,255,0.20)";
+      ctx.fillStyle = "rgba(26,25,22,0.28)";
       ctx.fillText(iq.toString(), cx + (R + 42) * Math.cos(a), cy + (R + 42) * Math.sin(a));
     });
 
@@ -219,14 +219,14 @@ export default function FrResultsContent() {
     ctx.fill();
     ctx.beginPath();
     ctx.arc(dotX, dotY, 8, 0, Math.PI * 2);
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#C96442";
     ctx.fill();
 
     // ── Score number ─────────────────────────────────────────
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.font = "200 160px Georgia,'Times New Roman',serif";
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#1A1916";
     ctx.fillText(score.toString(), cx, cy + 14);
 
     // ── Label pill ────────────────────────────────────────────
@@ -248,12 +248,12 @@ export default function FrResultsContent() {
     const percY = cy + R + 68;
     ctx.textBaseline = "alphabetic";
     ctx.font = "300 17px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.42)";
+    ctx.fillStyle = "#5C5A52";
     ctx.fillText(`${percentile}e percentile mondial`, cx, percY);
 
     // ── Description text (word-wrapped, \n-aware) ─────────────
     ctx.font = "300 15px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.26)";
+    ctx.fillStyle = "#AAA69E";
     const maxW = 500;
     const lines: string[] = [];
     for (const segment of label.desc.split("\n")) {
@@ -280,7 +280,7 @@ export default function FrResultsContent() {
 
     // ── Divider ───────────────────────────────────────────────
     const divY = dotsY + 44;
-    ctx.strokeStyle = "rgba(255,255,255,0.07)";
+    ctx.strokeStyle = "rgba(26,25,22,0.07)";
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(cx - 180, divY);
@@ -291,15 +291,15 @@ export default function FrResultsContent() {
     const brandY = divY + 60;
     ctx.textAlign = "center";
     ctx.textBaseline = "alphabetic";
-    ctx.strokeStyle = "rgba(255,255,255,0.18)";
+    ctx.strokeStyle = "rgba(26,25,22,0.12)";
     ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(cx - 160, brandY - 12); ctx.lineTo(cx - 80, brandY - 12); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx + 80,  brandY - 12); ctx.lineTo(cx + 160, brandY - 12); ctx.stroke();
     ctx.font = "600 28px Georgia,'Times New Roman',serif";
-    ctx.fillStyle = "rgba(255,255,255,0.80)";
+    ctx.fillStyle = "#1A1916";
     ctx.fillText("BrainScale", cx, brandY);
     ctx.font = "400 13px system-ui,sans-serif";
-    ctx.fillStyle = "rgba(255,255,255,0.18)";
+    ctx.fillStyle = "#AAA69E";
     ctx.fillText("brainscale.app", cx, brandY + 28);
 
     // ── Download ──────────────────────────────────────────────
