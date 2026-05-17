@@ -305,8 +305,10 @@ export default function FrHomePage() {
           @media (max-width: 640px) {
             .bs-testi-pair { grid-template-columns: 1fr !important; }
           }
+          .bs-domains-header { flex-direction: row; }
           .bs-domains-grid { grid-template-columns: repeat(2, 1fr); }
-          @media (max-width: 480px) {
+          @media (max-width: 580px) {
+            .bs-domains-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
             .bs-domains-grid { grid-template-columns: 1fr !important; }
           }
         `}</style>
@@ -407,11 +409,11 @@ export default function FrHomePage() {
       <section style={{ padding: "108px 24px", backgroundColor: "#F0EDE6" }}>
         <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
 
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "52px", flexWrap: "wrap", gap: "20px" }}>
+          <div className="bs-domains-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "52px", gap: "16px" }}>
             <h2 style={{ fontFamily: "var(--font-display, serif)", fontSize: "clamp(26px, 3.5vw, 42px)", fontWeight: 300, letterSpacing: "-0.02em", color: "#1A1916" }}>
               Ce que le test <em style={{ color: "#C96442", fontStyle: "italic" }}>mesure</em>
             </h2>
-            <Link href="/fr/test" style={{ fontSize: "14px", color: "#C96442", fontWeight: 600, textDecoration: "none", letterSpacing: "0.01em", flexShrink: 0 }}>
+            <Link href="/fr/test" style={{ fontSize: "14px", color: "#C96442", fontWeight: 600, textDecoration: "none", letterSpacing: "0.01em", flexShrink: 0, alignSelf: "flex-end" }}>
               Passer le test →
             </Link>
           </div>
