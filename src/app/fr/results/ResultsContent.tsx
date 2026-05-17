@@ -59,19 +59,18 @@ export default function FrResultsContent() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function handleUnlock(tier: 'basic' | 'premium') {
-    // Fire InitiateCheckout before redirecting to Stripe
+  async function handleUnlock() {
     trackFbq('track', 'InitiateCheckout', {
-      content_name: tier === 'premium' ? 'Rapport Cognitif — Premium' : 'Rapport Cognitif — Essentiel',
-      value: tier === 'premium' ? 22.99 : 13.99,
+      content_name: 'Rapport Cognitif',
+      value: 5,
       currency: 'EUR',
     });
-    setCheckoutLoading(tier);
+    setCheckoutLoading('basic');
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr", tier }),
+        body: JSON.stringify({ score, correct, total, email: submitted ? email : undefined, lang: "fr" }),
       });
       const data = await res.json();
       if (data.url) window.location.href = data.url;
@@ -85,7 +84,6 @@ export default function FrResultsContent() {
   const percentile = getPercentile(score);
   const label = getLabel(score);
   const accuracy = Math.round((correct / total) * 100);
-  const gaugePercent = Math.min(100, Math.max(0, ((score - 75) / 70) * 100));
 
   const logicalPct = Math.min(99, Math.round(percentile * 1.05));
   const spatialPct = Math.min(99, Math.round(percentile * 0.92));
@@ -455,20 +453,6 @@ export default function FrResultsContent() {
           </div>
         ) : null}
 
-        {/* GAUGE */}
-        <div style={{ backgroundColor: "#fff", border: "1px solid #E8E5DF", borderRadius: "16px", padding: "28px 32px", marginBottom: "16px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-            <span style={{ fontSize: "13px", fontWeight: 600, color: "#1A1916" }}>Position sur l&apos;échelle QI</span>
-            <span style={{ fontSize: "12px", color: "#99958C" }}>75 – 145</span>
-          </div>
-          <div style={{ height: "8px", backgroundColor: "#F0EDE6", borderRadius: "999px", overflow: "hidden", marginBottom: "10px" }}>
-            <div style={{ height: "100%", width: `${gaugePercent}%`, borderRadius: "999px", background: "linear-gradient(90deg, #E8C4B4, #C96442)", transition: "width 1s ease" }} />
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", color: "#AAA69E" }}>
-            <span>75</span><span>90</span><span>100</span><span>115</span><span>130</span><span>145</span>
-          </div>
-        </div>
-
         {/* STATS STRIP — différencié, pas de grille identique */}
         <div style={{ display: "flex", borderRadius: "12px", border: "1px solid #E8E5DF", backgroundColor: "#fff", overflow: "hidden", marginBottom: "16px" }}>
           <div style={{ flex: "1.5", padding: "20px 20px", borderRight: "1px solid #E8E5DF", backgroundColor: "#FBF0EB" }}>
@@ -520,45 +504,25 @@ export default function FrResultsContent() {
               <div key={item} style={{ padding: "12px 0", borderBottom: "1px solid #E8E5DF", fontSize: "13px", color: "#5C5A52" }}>{item}</div>
             ))}
           </div>
-          <div className="bs-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "#FAF8F5", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "28px 24px", overflowY: "auto" }}>
-            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#C96442", textTransform: "uppercase", marginBottom: "8px" }}>Débloquer vos résultats</p>
+          <div className="bs-overlay" style={{ position: "absolute", inset: 0, backgroundColor: "#FAF8F5", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "flex-start", padding: "28px 24px", overflowY: "auto" }}>
+            <p style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "2px", color: "#C96442", textTransform: "uppercase", marginBottom: "8px" }}>Débloquer votre rapport</p>
             <h3 style={{ fontFamily: "var(--font-display, serif)", fontSize: "17px", fontWeight: 500, color: "#1A1916", marginBottom: "24px", textAlign: "center", lineHeight: 1.4 }}>
-              Rapport cognitif complet — 8 pages
+              Rapport cognitif complet — 5 €
             </h3>
-            <div style={{ display: "flex", gap: "12px", width: "100%", maxWidth: "480px", flexWrap: "wrap", justifyContent: "center" }}>
-              <div style={{ flex: "1 1 170px", backgroundColor: "#fff", border: "1px solid #E8E5DF", borderRadius: "12px", padding: "20px 16px", textAlign: "center" }}>
-                <p style={{ fontSize: "10px", fontWeight: 700, color: "#99958C", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Essentiel</p>
-                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 600, color: "#1A1916", marginBottom: "16px" }}>14,99 €</p>
-                <div style={{ fontSize: "12px", color: "#5C5A52", lineHeight: 2, marginBottom: "16px", textAlign: "left" }}>
-                  <div>✓ Rapport PDF 8 pages</div>
-                  <div>✓ Certificat cognitif</div>
-                  <div>✓ Livraison instantanée</div>
-                </div>
-                <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null}
-                  style={{ width: "100%", backgroundColor: "#FBF0EB", color: "#C96442", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "1.5px solid #E8C4B4", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
-                  {checkoutLoading === 'basic' ? "Redirection…" : "Obtenir l'Essentiel"}
-                </button>
+            <div style={{ width: "100%", maxWidth: "360px" }}>
+              <div style={{ fontSize: "12px", color: "#5C5A52", lineHeight: 2, marginBottom: "20px", textAlign: "left" }}>
+                <div>✓ Rapport cognitif complet</div>
+                <div>✓ Analyse en 4 dimensions cognitives</div>
+                <div>✓ Profil cognitif &amp; points forts</div>
+                <div>✓ Protocole de développement personnalisé</div>
+                <div>✓ Certificat · Lien partageable</div>
               </div>
-              <div style={{ flex: "1 1 170px", backgroundColor: "#C96442", borderRadius: "12px", padding: "20px 16px", textAlign: "center", position: "relative" }}>
-                <div style={{ position: "absolute", top: "-12px", left: "50%", transform: "translateX(-50%)", backgroundColor: "#1A1916", color: "#fff", fontSize: "10px", fontWeight: 800, padding: "4px 12px", borderRadius: "999px", whiteSpace: "nowrap", letterSpacing: "0.5px" }}>
-                  LE PLUS POPULAIRE
-                </div>
-                <p style={{ fontSize: "10px", fontWeight: 700, color: "rgba(255,255,255,0.55)", letterSpacing: "1.5px", textTransform: "uppercase", marginBottom: "8px" }}>Premium</p>
-                <p style={{ fontFamily: "var(--font-display, serif)", fontSize: "28px", fontWeight: 600, color: "#fff", marginBottom: "16px" }}>24,99 €</p>
-                <div style={{ fontSize: "12px", color: "rgba(255,255,255,0.82)", lineHeight: 2, marginBottom: "16px", textAlign: "left" }}>
-                  <div>✓ Rapport PDF 8 pages</div>
-                  <div>✓ Certificat cognitif</div>
-                  <div>✓ Livraison instantanée</div>
-                  <div style={{ color: "#E8C4B4" }}>✓ Protocole 30 jours</div>
-                  <div style={{ color: "#E8C4B4" }}>✓ Badge LinkedIn</div>
-                </div>
-                <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null}
-                  style={{ width: "100%", backgroundColor: "#fff", color: "#C96442", padding: "11px 16px", borderRadius: "8px", fontSize: "13px", fontWeight: 600, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading === 'premium' ? 0.6 : 1 }}>
-                  {checkoutLoading === 'premium' ? "Redirection…" : "Obtenir Premium →"}
-                </button>
-              </div>
+              <button onClick={handleUnlock} disabled={checkoutLoading !== null}
+                style={{ width: "100%", backgroundColor: "#C96442", color: "#fff", padding: "14px 16px", borderRadius: "8px", fontSize: "15px", fontWeight: 700, border: "none", cursor: checkoutLoading !== null ? "not-allowed" : "pointer", opacity: checkoutLoading !== null ? 0.6 : 1 }}>
+                {checkoutLoading !== null ? "Redirection…" : "Obtenir mon rapport — 5 €"}
+              </button>
+              <p style={{ fontSize: "11px", color: "#99958C", marginTop: "10px", textAlign: "center" }}>Paiement sécurisé · Accès instantané</p>
             </div>
-            <p style={{ fontSize: "11px", color: "#99958C", marginTop: "14px" }}>Paiement sécurisé · Livraison instantanée</p>
           </div>
         </div>
 
@@ -584,24 +548,18 @@ export default function FrResultsContent() {
         }
         .bs-sticky { display:flex; align-items:center; justify-content:center; gap:10px; max-width:680px; margin:0 auto; }
         .bs-sticky-label { font-size:13px; color:#5C5A52; font-weight:500; white-space:nowrap; }
-        .bs-btn-basic { background:#FBF0EB; color:#C96442; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:1.5px solid #E8C4B4; white-space:nowrap; cursor:pointer; transition:all .15s; }
-        .bs-btn-premium { background:#C96442; color:#fff; padding:12px 20px; border-radius:999px; font-size:13px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(201,100,66,0.4); transition:all .15s; }
+        .bs-btn-premium { background:#C96442; color:#fff; padding:12px 28px; border-radius:999px; font-size:14px; font-weight:700; border:none; white-space:nowrap; cursor:pointer; box-shadow:0 4px 16px rgba(201,100,66,0.4); transition:all .15s; }
         @media (max-width:480px) {
-          .bs-sticky { flex-wrap:nowrap; }
           .bs-sticky-label { display:none; }
-          .bs-btn-basic, .bs-btn-premium { flex:1; text-align:center; font-size:12px; padding:12px 10px; }
+          .bs-btn-premium { flex:1; text-align:center; }
         }
       `}</style>
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, backgroundColor: "#FAF8F5", borderTop: "1px solid #E8E5DF", padding: "12px 16px", zIndex: 100 }}>
         <div className="bs-sticky">
-          <span className="bs-sticky-label"><strong style={{ color: "#1A1916" }}>Débloquer votre rapport</strong></span>
-          <button onClick={() => handleUnlock('basic')} disabled={checkoutLoading !== null} className="bs-btn-basic"
-            style={{ opacity: checkoutLoading === 'basic' ? 0.6 : 1 }}>
-            {checkoutLoading === 'basic' ? "…" : "Essentiel — 14,99 €"}
-          </button>
-          <button onClick={() => handleUnlock('premium')} disabled={checkoutLoading !== null} className="bs-btn-premium"
-            style={{ opacity: checkoutLoading === 'premium' ? 0.6 : 1 }}>
-            {checkoutLoading === 'premium' ? "…" : "Premium — 24,99 €"}
+          <span className="bs-sticky-label"><strong style={{ color: "#1A1916" }}>Débloquer votre rapport complet</strong></span>
+          <button onClick={handleUnlock} disabled={checkoutLoading !== null} className="bs-btn-premium"
+            style={{ opacity: checkoutLoading !== null ? 0.6 : 1 }}>
+            {checkoutLoading !== null ? "…" : "Obtenir mon rapport — 5 €"}
           </button>
         </div>
       </div>
