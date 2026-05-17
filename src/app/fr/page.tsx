@@ -366,10 +366,10 @@ export default function FrHomePage() {
               {
                 name: "Mehdi B.",
                 location: "Bruxelles, Belgique",
-                score: 136,
-                label: "Surdoué",
-                labelColor: "#5B4FCF",
-                text: "J'ai utilisé le rapport premium pour une candidature demandant une évaluation cognitive. Le PDF est professionnel et la décomposition par domaine est suffisamment détaillée pour être crédible.",
+                score: 114,
+                label: "Au-dessus",
+                labelColor: "#4A3EBE",
+                text: "J'étais sceptique au départ mais les questions m'ont vraiment mis à l'épreuve. Mon score de 114 m'a semblé juste — je suis fort en logique mais plus lent en spatial, et la décomposition par domaine l'a montré clairement.",
                 initials: "MB",
               },
             ].map((t) => (

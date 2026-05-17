@@ -374,10 +374,10 @@ export default function HomePage() {
               {
                 name: "Aryan K.",
                 location: "Toronto, Canada",
-                score: 136,
-                label: "Gifted",
-                labelColor: "#5B4FCF",
-                text: "Used the premium report for a job application requiring cognitive assessment. The PDF looks professional and the breakdown by domain is detailed enough to be credible.",
+                score: 114,
+                label: "Above Avg",
+                labelColor: "#4A3EBE",
+                text: "I was skeptical at first but the questions genuinely challenged me. My 114 score felt accurate — I'm strong at logic but slower on spatial tasks, and the domain breakdown showed exactly that.",
                 initials: "AK",
               },
             ].map((t) => (
