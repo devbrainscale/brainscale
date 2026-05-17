@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
+import { Bitter, Manrope } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
 import CookieConsent from "./CookieConsent";
 import { FB_PIXEL_ID } from "@/lib/fbq";
 
-const fraunces = Fraunces({
+const bitter = Bitter({
   subsets: ["latin"],
-  variable: "--font-fraunces",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-bitter",
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-jakarta",
-  weight: ["400", "500", "600", "700"],
+  variable: "--font-manrope",
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -93,7 +93,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${jakarta.variable} h-full`}
+      className={`${bitter.variable} ${manrope.variable} h-full`}
     >
       <head>
         <script

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @theme inline {
-  --font-sans: var(--font-jakarta);
-  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-bitter);
 }
 
 /* ============================================
@@ -39,8 +39,8 @@
   --shadow-lg: 0 8px 32px rgba(26,24,37,0.10), 0 2px 8px rgba(26,24,37,0.05);
 
   /* Fonts */
-  --font-display: var(--font-fraunces);
-  --font-body:    var(--font-jakarta);
+  --font-display: var(--font-bitter);
+  --font-body:    var(--font-manrope);
 
   /* Spacing */
   --section-py-desktop: 120px;
@@ -65,7 +65,7 @@ html {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-body), 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-body), 'Manrope', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.65;
 }
@@ -138,11 +138,11 @@ body {
    ============================================ */
 
 .font-display {
-  font-family: var(--font-display), 'Fraunces', Georgia, serif;
+  font-family: var(--font-display), 'Bitter', Georgia, serif;
 }
 
 .font-body {
-  font-family: var(--font-body), 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: var(--font-body), 'Manrope', system-ui, sans-serif;
 }
 
 /* Display sizes */
